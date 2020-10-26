@@ -1,0 +1,12 @@
+.nav-bar-ul {
+  display: flex;
+}
+
+.nav-bar-div {
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-item-li {
+  padding: 8px;
+}
