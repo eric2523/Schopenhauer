@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { App } from './components/app'
+import { Root } from './components/root'
+import { configureStore } from './store/store'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+document.addEventListener("DOMContentLoaded", () => {
+  // currently no preloaded state 
+  let store = configureStore()
+  const root = document.getElementById("root")
+  ReactDOM.render(<Root store={ store }/>, root)
+})
+
 
 
