@@ -3,9 +3,9 @@ import song from "../../audio_files/bensound-goinghigher.mp3";
 
 export class Canvas extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.audio = new Audio(song);
-    this.togglePlay = this.togglePlay.bind(this)
+    this.togglePlay = this.togglePlay.bind(this);
   }
 
   togglePlay() {
