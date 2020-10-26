@@ -8,3 +8,5 @@ const User = require("../../models/User");
 
 const validateSignUpInput = require('../../validation/signup');
 const validateLoginInput = require('../../validation/login');
+
+module.exports = router;
