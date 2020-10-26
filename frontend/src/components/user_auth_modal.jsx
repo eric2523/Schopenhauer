@@ -7,29 +7,22 @@ import { clearErrors } from '../actions/session_actions';
 const mSTP = (state) => {
   return {
     modal: state.ui.modal,
-    errors: state.errors,
+    errors: state.errors.session,
   };
 };
 
-const mDTPSignup = (dispatch) => {
+const mDTP = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
-    processForm: (user) => dispatch(signup(user)),
+    signup: (user) => dispatch(signup(user)),
+    login: (user) => dispatch(login(user)),
     clearErrors: () => dispatch(clearErrors()),
-    openModal: () => dispatch(openModal('login'))
+    openModal: (type) => dispatch(openModal(type))
   };
 };
 
-const mDTPLogin = (dispatch) => {
-  return {
-    closeModal: () => dispatch(closeModal()),
-    processForm: (user) => dispatch(login(user)),
-    clearErrors: () => dispatch(clearErrors()),
-    openModal: () => dispatch(openModal('signup'))
-  };
-};
 
-class Modal extends React.Component {
+class ModalComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,15 +32,32 @@ class Modal extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleModalClose = this.handleModalClose.bind(this);
-    this.toggleLogin = this.toggleLogin(this);
-    this.toggleSignup = this.toggleSignup(this);
+    this.toggleLogin = this.toggleLogin.bind(this);
+    this.toggleSignup = this.toggleSignup.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    // this.props.clearErrors();
+    this.props.clearErrors();
     const user = Object.assign({}, this.state);
-    this.props.processForm(user).then(this.handleModalClose);
+    if(this.props.modal === 'login'){
+      this.props.login(user).then(()=>{
+        if(this.props.errors.length){
+          return
+        } else {
+          this.handleModalClose();
+        }
+      });
+    }
+    else {
+      this.props.signup(user).then(()=>{
+        if(this.props.errors.length){
+          return
+        } else {
+          this.handleModalClose();
+        }
+      });
+    }
   }
 
   handleInput(type) {
@@ -62,7 +72,7 @@ class Modal extends React.Component {
 
   toggleLogin(){
     this.props.clearErrors();
-    this.props.openModal();
+    this.props.openModal('login');
     this.setState({
       email: "",
       password: "",
@@ -71,7 +81,7 @@ class Modal extends React.Component {
 
   toggleSignup(){
     this.props.clearErrors();
-    this.props.openModal();
+    this.props.openModal('signup');
     this.setState({
       email: "",
       password: "",
@@ -86,14 +96,16 @@ class Modal extends React.Component {
       password: "",
     });
   }
+  
+  
 
   render() {
-    if (this.props.modal !== "signup" || this.props.modal !== "login") {
+    if (this.props.modal !== "signup" && this.props.modal !== "login") {
       return null;
     }
 
-    const errorArr = this.props.errors.session.length
-    ? this.props.errors.session.map((error) => {
+    const errorArr = this.props.errors ? 
+    Object.values(this.props.errors).map((error) => {
         return <li>{error}</li>;
       })
     : [];
@@ -106,7 +118,7 @@ class Modal extends React.Component {
               &#10006;
             </div>
             <div className="sign-up-text">
-              <h2>Login</h2>
+              <h2>{this.props.modal === 'login' ? "Login" : "Sign Up"}</h2>
             </div>
             <form>
               <input
@@ -132,14 +144,12 @@ class Modal extends React.Component {
             <ul className="error">{errorArr}</ul> 
             : <></>}
           </div>
-          <button disabled={this.props.modal === 'login' ? true : false} onClick={this.toggleLogin}></button>
-          <button disabled={this.props.modal === 'signup' ? true : false} onClick={this.toggleSignup}></button>
+          <button disabled={this.props.modal === 'login' ? true : false} onClick={this.toggleLogin}>Log in</button>
+          <button disabled={this.props.modal === 'signup' ? true : false} onClick={this.toggleSignup}>Sign Up</button>
         </div>
       </div>
     );
   }
 }
 
-export const LoginModal = connect(mSTP, mDTPLogin)(Modal);
-
-export const SignUpModal = connect(mSTP, mDTPSignup)(Modal);
+export const Modal = connect(mSTP, mDTP)(ModalComponent);
