@@ -31,6 +31,7 @@
     "mongoose": "^5.10.10",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
+    "semantic-ui": "^2.4.2",
     "validator": "^13.1.17"
   },
   "devDependencies": {
