@@ -1,5 +1,4 @@
-
-
+// For production, non-dual build code should be inserted
 
 // create Express server in app
 const express = require("express");
@@ -19,3 +18,15 @@ mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => console.log("Connected to MongoDB successfully"))
   .catch(err => console.log(err));
+
+// Let's hook up our /users routes and configure passport
+
+const users = require("./routes/api/users");
+const passport = require('passport');
+require('./config/passport')(passport);
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(passport.initialize());
+
+app.use("/api/users", users);
