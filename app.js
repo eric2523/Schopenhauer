@@ -23,6 +23,7 @@ mongoose
 
 const users = require("./routes/api/users");
 const passport = require('passport');
+const bodyParser = require('body-parser');
 require('./config/passport')(passport);
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -30,3 +31,9 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 
 app.use("/api/users", users);
+
+// Test code for json web tokens
+
+// app.get('/protected', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+//   res.status(200).send('If you get this data, you have been authenticated via JWT!');
+// });
