@@ -15,12 +15,19 @@ export class NavBarIndex extends React.Component {
 
       navListItems.push(
         <NavBarItem 
+          key={name}
           name={name} 
           path={path} 
         />
       );
     }
 
-    return <div>We are in Nav Bar Index</div>;
+    return (
+      <div>
+        <ul>
+          {navListItems}
+        </ul>
+      </div>
+    );
   }
 }

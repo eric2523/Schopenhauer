@@ -1,15 +1,16 @@
-import React from 'react'
+import React from "react";
+import { NavLink } from "react-router-dom";
 
 export class NavBarItem extends React.Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
   }
 
-  render(){
-    return(
-      <div>
-        NavBarItem
-      </div>
-    )
+  render() {
+    return (
+      <NavLink to={this.props.path}>
+        <li>{this.props.name}</li>
+      </NavLink>
+    );
   }
 }
