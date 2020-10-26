@@ -1,6 +1,8 @@
 ## Background and Overview
 
-<A few sentences about Schopenhauer>
+The philosopher Arthur Schopenhauer held that the “world” consists of lawfully repeating patterns of “representations” beneath which surges an unrepresentable, violent “will” which cannot be captured by law or representation. Against this metaphysical background, he accorded music a special status in comparison with the other arts. Whereas other forms of art sought to elevate by means of idealizing from representations to yet more general representations, music sought to express this will directly “in itself” without representing it.
+
+Our app pays homage to this conflict between music and visual representation by allowing users to engage in creative free play by making their own visualizers for music they upload. We encourage the spirit of music as Schopenhauer saw it, but in the realm of the visual, and over the medium of technology.
 
 ## Functionality and MVP
 
@@ -32,9 +34,15 @@
 - User can save the interactive visualizers they created
 - User can share
 
-Technologies and Technical Challenges
 
-Buffer for the song and serving up data
+### 6. User Profile Page
+
+ - User can follow and like other users
+ - User can view user information
+ - User can edit user information
+
+ ### 7. Production README
+
 
 ## Technologies and Technical Challenges
 
