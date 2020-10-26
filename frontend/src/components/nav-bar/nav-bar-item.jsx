@@ -9,7 +9,7 @@ export class NavBarItem extends React.Component {
   render() {
     return (
       <NavLink to={this.props.path}>
-        <li>{this.props.name}</li>
+        <li className="navbar-item-li">{this.props.name}</li>
       </NavLink>
     );
   }

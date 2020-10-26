@@ -23,8 +23,8 @@ export class NavBarIndex extends React.Component {
     }
 
     return (
-      <div>
-        <ul>
+      <div className="nav-bar-div">
+        <ul className="nav-bar-ul">
           {navListItems}
         </ul>
       </div>
