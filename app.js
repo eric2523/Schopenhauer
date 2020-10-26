@@ -19,3 +19,12 @@ mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => console.log("Connected to MongoDB successfully"))
   .catch(err => console.log(err));
+
+// Let's test validations for users
+
+const bodyParser = require('body-parser');
+const users = require("./routes/api/users");
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use("/api/users", users);
+
