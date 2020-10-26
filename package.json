@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "backend-start" : "node app.js",
-    "backend-cont" : "nodemon app.js"
+    "backend-cont" : "nodemon app.js",
+    "server:debug": "nodemon --inspect app.js",
+    "dev": "concurrently \"npm run server:debug\" \"npm run frontend\""
   },
   "repository": {
     "type": "git",
