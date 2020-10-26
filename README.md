@@ -43,6 +43,13 @@ Our app pays homage to this conflict between music and visual representation by 
 
  ### 7. Production README
 
+## Wireframe
+### Landing page 
+![landing-page-demo](https://github.com/eric2523/Schopenhauer/blob/main/demo-images/landing-page-wireframe.jpg?raw=true)
+### Signup/Login Modal 
+![sign-up-login-demo](https://github.com/eric2523/Schopenhauer/blob/main/demo-images/signup-login-wireframe.jpg?raw=true)
+### Visualizer
+![visualizer-demo](https://github.com/eric2523/Schopenhauer/blob/main/demo-images/visualizer-wireframe.jpg?raw=true)
 
 ## Technologies and Technical Challenges
 
