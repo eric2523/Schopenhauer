@@ -8,6 +8,7 @@ export class NavBarIndex extends React.Component {
   }
 
   render(){
+    const navPaths = mainNavPaths()
     return(
       <div>
         We are in Nav Bar Index

@@ -1,14 +1,14 @@
-export const mainNavPaths = {
+export const mainNavPaths = () => ({
   about: {
     name: "about",
-    path: "/about"
+    path: "/about",
   },
   templates: {
     name: "templates",
-    path: "/templates"
+    path: "/templates",
   },
   profile: {
     name: "profile",
-    path: "/profile"
-  }
-}
+    path: "/profile",
+  },
+});
