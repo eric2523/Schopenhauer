@@ -36,6 +36,7 @@
     "validator": "^13.1.17"
   },
   "devDependencies": {
+    "eslint-plugin-jest": "^24.1.0",
     "nodemon": "^2.0.6"
   }
 }

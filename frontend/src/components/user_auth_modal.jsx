@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { login, signup } from "../actions/session_actions";
 import { openModal, closeModal } from '../actions/modal_actions';
+import { clearErrors } from '../actions/session_actions';
 
 const mSTP = (state) => {
   return {
