@@ -1,0 +1,32 @@
+{
+  "name": "schopenhauer",
+  "version": "1.0.0",
+  "description": "The philosopher Arthur Schopenhauer held that the “world” consists of lawfully repeating patterns of “representations” beneath which surges an unrepresentable, violent “will” which cannot be captured by law or representation. Against this metaphysical background, he accorded music a special status in comparison with the other arts. Whereas other forms of art sought to elevate by means of idealizing from representations to yet more general representations, music sought to express this will directly “in itself” without representing it.",
+  "main": "app.js",
+  "scripts": {
+    "backend-start" : "node app.js",
+    "backend-cont" : "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eric2523/Schopenhauer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eric2523/Schopenhauer/issues"
+  },
+  "homepage": "https://github.com/eric2523/Schopenhauer#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.10",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "validator": "^13.1.17"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
