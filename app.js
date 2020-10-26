@@ -1,5 +1,4 @@
-
-
+// For production, non-dual build code should be inserted
 
 // create Express server in app
 const express = require("express");
@@ -20,11 +19,21 @@ mongoose
   .then(() => console.log("Connected to MongoDB successfully"))
   .catch(err => console.log(err));
 
-// Let's test validations for users
+// Let's hook up our /users routes and configure passport
 
-const bodyParser = require('body-parser');
 const users = require("./routes/api/users");
+const passport = require('passport');
+const bodyParser = require('body-parser');
+require('./config/passport')(passport);
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(passport.initialize());
+
 app.use("/api/users", users);
 
+// Test code for json web tokens
+
+// app.get('/protected', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+//   res.status(200).send('If you get this data, you have been authenticated via JWT!');
+// });
