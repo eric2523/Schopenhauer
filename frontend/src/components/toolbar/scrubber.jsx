@@ -6,7 +6,6 @@ export class Scrubber extends React.Component {
     this.state = {
       origin: 0,
       positionX: 0,
-      positionY: 0,
       mouseDown: false,
     }
     this.handleMouseDown = this.handleMouseDown.bind(this)
