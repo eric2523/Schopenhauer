@@ -18,7 +18,7 @@ const mDTP = (dispatch) => {
 const SongUploadModalComponent = (props) => {
   return props.modal !== 'upload' ? null :
     <div className="modal-background" onClick={props.closeModal}>
-    <div className="modal-child" onClick={(e) => e.stopPropagation()}>
+    <div id="upload-modal" className="modal-child" onClick={(e) => e.stopPropagation()}>
       <div className="modal-form">
         <div className="x">
           <div onClick={props.closeModal}>&#10006;</div>

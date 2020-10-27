@@ -1,0 +1,56 @@
+#upload-modal{
+  top: 50%;
+  width: 400px;
+}
+
+.ui.button input{
+  display: none; 
+}
+
+.song-upload-form{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.song-upload-form form.ui.form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.song-upload-form form.ui.form input[type=text]{
+  margin-bottom: 0;
+  width: 280px;
+}
+
+.song-upload-form form.ui.form .field{
+  display: flex;
+  padding: 0 10px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+div#form-upload-btn{
+  margin-bottom: 0;
+  width: 340px;
+}
+
+.fa-record-vinyl, .fa-user, .fa-music{
+  font-size: 30px;
+  margin-right: 15px;
+}
+
+.song-upload-form audio{
+  margin-bottom: 30px;
+  width: 340px;
+}
+
+.song-upload-form button:last-child{
+  margin-bottom: 20px;
+  width: 340px;
+}

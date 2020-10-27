@@ -82,31 +82,42 @@ class UploadFormComponent extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="song-upload-form">
         <form className="ui form">
-          <label>Title</label>
-          <input 
-            type="text" 
-            placeholder="Title" 
-            onChange={this.handleInput("title")}/>
-          <label>Artist</label>
-          <input 
-            type="text" 
-            placeholder="Artist" 
-            onChange={this.handleInput("artist")}/>
-          <label>Genre</label>
-          <input 
-            type="text" 
-            placeholder="Genre" 
-            onChange={this.handleInput("genre")}/>
-          <label className="ui button">
-          Upload a file
-          <input
-            onChange={this.handleUpload}
-            type="file"
-            accept=".mp3"
-          ></input>
-          </label>
+          <div className="field">
+            <i className="fas fa-record-vinyl"></i>
+            {/* <label>Title</label> */}
+            <input 
+              type="text" 
+              placeholder="Title" 
+              onChange={this.handleInput("title")}/>
+          </div>
+          <div className="field">
+            <i className="far fa-user"></i>
+            {/* <label>Artist</label> */}
+            <input 
+              type="text" 
+              placeholder="Artist" 
+              onChange={this.handleInput("artist")}/>
+          </div>
+          <div className="field">
+            <i className="fas fa-music"></i>
+            {/* <label>Genre</label> */}
+            <input 
+              type="text" 
+              placeholder="Genre" 
+              onChange={this.handleInput("genre")}/>
+          </div>
+          <div id="form-upload-btn" className="field">
+            <label className="ui button">
+            Choose a File
+            <input
+              onChange={this.handleUpload}
+              type="file"
+              accept=".mp3"
+              ></input>
+            </label>
+          </div>
         </form>
         <audio 
           controls
