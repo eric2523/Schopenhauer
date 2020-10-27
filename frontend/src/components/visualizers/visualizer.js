@@ -1,5 +1,5 @@
 import React from "react";
-import { Canvas } from "./canvas"
+import { Canvas } from "./canvas";
 import { ToolbarIndex } from "../toolbar/toolbar-index";
 import { Scrubber } from "../toolbar/scrubber";
 
@@ -12,7 +12,6 @@ export const Visualizer = () => {
       <div className="visualizer">
         <Canvas />
       </div>
-        <Scrubber />
-      </div>
+    </div>
   );
 };
