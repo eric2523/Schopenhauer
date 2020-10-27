@@ -12,51 +12,77 @@ const heightAmplifier = 2;
 export class Canvas extends React.Component {
   constructor(props) {
     super(props);
-    this.audio = new Audio(song);
+    this.state = {
+      play: false,
+      audio: new Audio(song),
+      context: {},
+      source: null,
+      analyser: null,
+      frequencyArray: [],
+      freqCount: null,
+      radians: null,
+      rafId: null,
+      canvas: React.createRef(),
+    };
     this.togglePlay = this.togglePlay.bind(this);
-    this.canvas = React.createRef();
-  }
-
-  componentDidMount() {
-    this.context = new (window.AudioContext || window.webkitAudioContext)();
-    this.source = this.context.createMediaElementSource(this.audio);
-    this.analyser = this.context.createAnalyser();
-    this.source.connect(this.analyser);
-    this.analyser.connect(this.context.destination);
-    this.frequencyArray = new Uint8Array(this.analyser.frequencyBinCount);
-    this.freqCount = this.frequencyArray.length;
-    this.radians = (2 * Math.PI) / this.freqCount;
   }
 
   togglePlay() {
-    if (this.audio.paused) {
-      this.audio.play();
-      this.rafId = requestAnimationFrame(this.tick);
+    // checks if audio input is in (can change second conditional later to be more specific. Currently just a placeholder until I figure out a better flag )
+    if (this.state.audio instanceof Audio && !this.state.source) {
+      let context = new (window.AudioContext || window.webkitAudioContext)();
+      let source = context.createMediaElementSource(this.state.audio);
+      let analyser = context.createAnalyser();
+      let frequencyArray = new Uint8Array(analyser.frequencyBinCount);
+      let freqCount = frequencyArray.length;
+      let radians = (2 * Math.PI) / freqCount;
+      this.setState({
+        context,
+        source,
+        analyser,
+        frequencyArray,
+        freqCount,
+        radians,
+      });
+    }
+
+    if (!this.state.play) {
+      this.state.audio.play();
+      let rafId = requestAnimationFrame(this.tick);
+      this.setState({
+        rafId,
+        play: true,
+      });
     } else {
-      this.audio.pause();
-      cancelAnimationFrame(this.rafId);
+      this.state.audio.pause();
+      cancelAnimationFrame(this.state.rafId);
+      this.setState({
+        play: false,
+      });
     }
   }
 
   animation(canvas) {
     canvas.width = width;
     canvas.height = height;
-    this.ctx = canvas.getContext("2d");
-    for (let i = 0; i < this.freqCount; i++) {
-      let height = this.frequencyArray[i] * heightAmplifier;
+    this.state.ctx = canvas.getContext("2d");
+    for (let i = 0; i < this.state.freqCount; i++) {
+      let height = this.state.frequencyArray[i] * heightAmplifier;
 
-      const xStart = centerX + Math.cos(this.radians * i) * radius;
-      const yStart = centerY + Math.sin(this.radians * i) * radius;
-      const xEnd = centerX + Math.cos(this.radians * i) * (radius + height);
-      const yEnd = centerY + Math.sin(this.radians * i) * (radius + height);
+      const xStart = centerX + Math.cos(this.state.radians * i) * radius;
+      const yStart = centerY + Math.sin(this.state.radians * i) * radius;
+      const xEnd =
+        centerX + Math.cos(this.state.radians * i) * (radius + height);
+      const yEnd =
+        centerY + Math.sin(this.state.radians * i) * (radius + height);
 
       this.drawBar(
         xStart,
         yStart,
         xEnd,
         yEnd,
-        this.frequencyArray[i],
-        this.ctx,
+        this.state.frequencyArray[i],
+        this.state.ctx,
         canvas
       );
     }
@@ -85,18 +111,27 @@ export class Canvas extends React.Component {
   }
 
   tick = () => {
-    this.animation(this.canvas.current);
-    this.analyser.getByteTimeDomainData(this.frequencyArray);
-    this.rafId = requestAnimationFrame(this.tick);
+    this.animation(this.state.canvas.current);
+    this.state.analyser.getByteTimeDomainData(this.state.frequencyArray);
+    this.setState({ rafId: requestAnimationFrame(this.tick) });
   };
 
   render() {
-    const buttonText = this.audio.paused ? "Play" : "Pause";
+    if (this.state.source && this.state.analyser) {
+      this.state.source.connect(this.state.analyser);
+      this.state.analyser.connect(this.state.context.destination);
+    }
+    const buttonText = !this.state.play ? "Play" : "Pause";
     return (
+<<<<<<< HEAD
       <div className="canvas-main-div">
         <div className="canvas-div">
           <canvas ref={this.canvas} />
         </div>
+=======
+      <div>
+        <canvas ref={this.state.canvas} />
+>>>>>>> 66bffd7496ae5179c06647316cc35f2d24daec2e
         <button onClick={this.togglePlay}>{buttonText}</button>
       </div>
     );
