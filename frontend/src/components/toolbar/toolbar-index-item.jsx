@@ -10,6 +10,7 @@ export class ToolbarIndexItem extends React.Component{
     return(
       <li onClick={this.props.handleHeightAmp} className="toolbar-item">
         <i className="fas fa-snowflake"></i>
+        {/* <Scrubber /> */}
       </li>
     )
   }

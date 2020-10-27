@@ -12,7 +12,7 @@ export const Visualizer = () => {
       <div className="visualizer">
         <Canvas />
       </div>
-      {/* <Scrubber /> */}
+      <Scrubber />
     </div>
   );
 };

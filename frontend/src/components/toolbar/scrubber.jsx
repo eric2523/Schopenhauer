@@ -4,6 +4,7 @@ export class Scrubber extends React.Component {
   constructor(props){
     super(props)
     this.state = {
+      origin: 0,
       positionX: 0,
       positionY: 0,
       mouseDown: false,
@@ -14,7 +15,10 @@ export class Scrubber extends React.Component {
   }
 
   handleMouseDown(){
-    this.setState({ mouseDown: true })
+    let mouseDown = true;
+    let origin = document.getElementsByClassName("scrubber-timeline")[0].offsetLeft
+    let positionX = document.getElementsByClassName("scrub")[0].offsetLeft
+    this.setState({ mouseDown, origin, positionX})
   }
 
   handleMouseUp(){
@@ -22,15 +26,36 @@ export class Scrubber extends React.Component {
   }
 
   handleMouseMove(e){
-    if (this.state.mouseDown === true){
-      debugger
-      let offsetWidth = e.target.offsetWidth
+    let scrubStyle;
+    let scrubOffset;
+    let position;
+    let newPosition;
+    let timeline = document.getElementsByClassName("scrubber-timeline")[0]
+    let timeStyle;
+    let timeWidth;
+   
+    if (this.state.mouseDown){
+      scrubStyle  = getComputedStyle(e.target)
+      scrubOffset = parseInt(scrubStyle.width,10)/2
+
+      position    = parseInt(scrubStyle.left, 10)
+      // clientX gives position at which event occured 
+      // subtracting clientX with prev position 
+      newPosition = position + (e.clientX - this.state.positionX)
+      // prob dont need all the styles in the future 
+      timeStyle   = getComputedStyle(timeline, 10)
+      timeWidth   = parseInt(timeStyle.width,10)
+      // checking if scrub is outside left/right range of timeline 
+      if (e.clientX < timeline.offsetLeft) {
+        newPosition = timeline.offsetLeft - (scrubOffset*2);
+      } else if (e.clientX > timeWidth + timeline.offsetLeft) {
+        newPosition = timeWidth - (scrubOffset);
+      }
+
     }
-    // scrubOffset = parseInt(scrubStyle.width,10)/2,
-    // position    = parseInt(scrubStyle.left, 10),
-    // newPosition = position + (e.clientX - scrub.last.x),
-    // timeStyle   = getComputedStyle(timeline, 10),
-    // timeWidth   = parseInt(timeStyle.width,10);
+    
+    e.target.style.left = newPosition + 'px';
+    this.setState({ positionX: e.clientX})
   }
 
   render(){
@@ -46,42 +71,3 @@ export class Scrubber extends React.Component {
     )
   }
 }
-
-// var scrub      = {
-//   el: document.getElementById('scrub'),
-//   current: {
-//     x: 0
-//   },
-//   last: {
-//     x: 0
-//   }
-// },
-// timeline   = document.getElementById('timeline'),
-// mouseDown  = false;
-
-// scrub.el.onmousedown = function () {
-// mouseDown    = true;
-// scrub.origin = timeline.offsetLeft;
-// scrub.last.x = scrub.el.offsetLeft;
-// return false;
-// };
-
-// document.onmousemove = function(e) {
-
-// if (mouseDown === true) {
-// var scrubStyle  = getComputedStyle(scrub.el),
-//     scrubOffset = parseInt(scrubStyle.width,10)/2,
-//     position    = parseInt(scrubStyle.left, 10),
-//     newPosition = position + (e.clientX - scrub.last.x),
-//     timeStyle   = getComputedStyle(timeline, 10),
-//     timeWidth   = parseInt(timeStyle.width,10);
-
-// if (e.clientX < timeline.offsetLeft) {
-//   newPosition = scrub.origin - (scrubOffset*2);
-// } else if (e.clientX > timeWidth + timeline.offsetLeft) {
-//   newPosition = timeWidth - (scrubOffset);
-// }
-
-// document.onmouseup = function() {
-// mouseDown = false;
-// };
