@@ -4,13 +4,14 @@
   bottom: 0;
   right: 0;
   left: 0;
-  background: rgba(255, 255, 255, .8);
+  background: rgba(141, 140, 140, 0.8);
   z-index: 99;
   overflow-y: initial;
 }
 
 .modal-child {
-  background-color: #fff;
+  background-color:#313030;
+  width: 40%;
   text-align: left;
   border-radius: 8px;
   position: absolute;
@@ -23,6 +24,8 @@
 .modal-form{
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  padding: 5px 20px;
 }
 
 .modal-form form{
@@ -30,4 +33,63 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
+}
+
+.error{
+  color: red;
+  justify-self: center;
+}
+
+.x{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.x div{
+  cursor: pointer;
+  padding: 10px 10px;
+}
+
+#modal-header{
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  color: rgb(236, 236, 236);
+}
+
+form.ui.form input[type=text], form.ui.form input[type=password]{
+  margin-bottom: 20px;
+}
+
+.modal-toggle{
+  display: flex; 
+  margin-top: 20px;
+}
+
+.modal-toggle button.ui.button{
+  margin: 0;
+  width: 50%;
+  border-radius: 0;
+  background-color: rgb(236, 236, 236);
+  /* color: #a7a7a7; */
+  opacity: .45;
+  border-bottom-right-radius: 8px;
+  /* border-top: .2px solid #b9b9b9; */
+  /* color: #fff; */
+  box-shadow: inset 1px 1px 5px #616161;
+}
+
+.modal-toggle button.ui.button:disabled{
+  color: #5a5a5a;
+  opacity: 1 !important;
+  border-top: none;
+  background-color: #313030;
+  color: rgb(236, 236, 236);
+}
+
+.modal-toggle button.ui.button:first-child{
+  /* border-right: .2px solid #b9b9b9; */
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 0px;
 }
