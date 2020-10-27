@@ -5,6 +5,7 @@
 
 .viz-outer-div {
   position: relative;
+  background: #313030;
 }
 
 .viz-toolb-div {
@@ -32,4 +33,5 @@
 
 .toolbar-item {
   padding: 30px 0 30px 0;
+  cursor: pointer;
 }
