@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { login, signup } from "../actions/session_actions";
-import { openModal, closeModal } from '../actions/modal_actions';
-import { clearErrors } from '../actions/session_actions';
+import { login, signup } from "../../actions/session_actions";
+import { openModal, closeModal } from '../../actions/modal_actions';
+import { clearErrors } from '../../actions/session_actions';
 
 const mSTP = (state) => {
   return {
@@ -135,7 +135,7 @@ class ModalComponent extends React.Component {
               </input>
               <button
                 onClick={this.handleSubmit}
-                className="btn sign-up"
+                className="ui button"
                 type="submit">
                 {this.props.modal === 'login' ? "Login" : "Sign Up"}
               </button>
@@ -144,8 +144,8 @@ class ModalComponent extends React.Component {
             <ul className="error">{errorArr}</ul> 
             : <></>}
           </div>
-          <button disabled={this.props.modal === 'login' ? true : false} onClick={this.toggleLogin}>Log in</button>
-          <button disabled={this.props.modal === 'signup' ? true : false} onClick={this.toggleSignup}>Sign Up</button>
+          <button className="ui button" disabled={this.props.modal === 'login' ? true : false} onClick={this.toggleLogin}>Log in</button>
+          <button className="ui button" disabled={this.props.modal === 'signup' ? true : false} onClick={this.toggleSignup}>Sign Up</button>
         </div>
       </div>
     );
