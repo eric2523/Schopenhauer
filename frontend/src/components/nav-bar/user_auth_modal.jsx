@@ -41,7 +41,7 @@ class ModalComponent extends React.Component {
     const user = Object.assign({}, this.state);
     if(this.props.modal === 'login'){
       this.props.login(user).then(()=>{
-        if(this.props.errors){
+        if(Object.values(this.props.errors).length){
           return
         } else {
           this.handleModalClose();
@@ -50,7 +50,7 @@ class ModalComponent extends React.Component {
     }
     else {
       this.props.signup(user).then(()=>{
-        if(this.props.errors){
+        if(Object.values(this.props.errors).length){
           return
         } else {
           this.handleModalClose();
@@ -104,8 +104,8 @@ class ModalComponent extends React.Component {
     }
 
     const errorArr = this.props.errors ? 
-    Object.values(this.props.errors).map((error) => {
-        return <li>{error}</li>;
+    Object.values(this.props.errors).map((error, i) => {
+        return <li key={i}>{error}</li>;
       })
     : [];
 
