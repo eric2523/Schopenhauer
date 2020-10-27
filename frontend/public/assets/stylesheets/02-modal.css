@@ -11,11 +11,11 @@
 
 .modal-child {
   background-color:#313030;
-  width: 40%;
+  width: 350px;
   text-align: left;
   border-radius: 8px;
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
