@@ -38,11 +38,10 @@ class ModalComponent extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.clearErrors();
     const user = Object.assign({}, this.state);
     if(this.props.modal === 'login'){
       this.props.login(user).then(()=>{
-        if(this.props.errors.length){
+        if(this.props.errors){
           return
         } else {
           this.handleModalClose();
@@ -51,7 +50,7 @@ class ModalComponent extends React.Component {
     }
     else {
       this.props.signup(user).then(()=>{
-        if(this.props.errors.length){
+        if(this.props.errors){
           return
         } else {
           this.handleModalClose();
@@ -114,13 +113,11 @@ class ModalComponent extends React.Component {
       <div className="modal-background" onClick={this.handleModalClose}>
         <div className="modal-child" onClick={(e) => e.stopPropagation()}>
           <div className="modal-form">
-            <div className="x" onClick={this.handleModalClose}>
-              &#10006;
+            <div className="x">
+              <div onClick={this.handleModalClose}>&#10006;</div>
             </div>
-            <div className="sign-up-text">
-              <h2>{this.props.modal === 'login' ? "Login" : "Sign Up"}</h2>
-            </div>
-            <form>
+            <h2 id="modal-header" className="ui header">{this.props.modal === 'login' ? "Login" : "Sign Up"}</h2>
+            <form className="ui form">
               <input
                 type="text"
                 onChange={this.handleInput("email")}
@@ -144,8 +141,10 @@ class ModalComponent extends React.Component {
             <ul className="error">{errorArr}</ul> 
             : <></>}
           </div>
-          <button className="ui button" disabled={this.props.modal === 'login' ? true : false} onClick={this.toggleLogin}>Log in</button>
-          <button className="ui button" disabled={this.props.modal === 'signup' ? true : false} onClick={this.toggleSignup}>Sign Up</button>
+          <div className="modal-toggle">
+            <button className="ui button" disabled={this.props.modal === 'login' ? true : false} onClick={this.toggleLogin}>Log in</button>
+            <button className="ui button" disabled={this.props.modal === 'signup' ? true : false} onClick={this.toggleSignup}>Sign Up</button>
+          </div>
         </div>
       </div>
     );
