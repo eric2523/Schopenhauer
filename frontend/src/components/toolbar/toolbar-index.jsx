@@ -11,9 +11,11 @@ export class ToolbarIndex extends React.Component {
       <div>
         <ul className="toolb-ul">
           {/* eventually map through all controls and link to actions */}
-          <ToolbarIndexItem />
-          <ToolbarIndexItem />
-          <ToolbarIndexItem />
+          <ToolbarIndexItem
+            handleHeightAmp={this.props.handleHeightAmp}
+          />
+          {/* <ToolbarIndexItem />
+          <ToolbarIndexItem /> */}
         </ul>
       </div>
     )
