@@ -8,7 +8,7 @@ const barWidth = 1;
 const radius = 0;
 const centerX = width / 2;
 const centerY = height / 2;
-const heightAmplifier = 2;
+// const heightAmplifier = 2;
 
 export class Canvas extends React.Component {
   constructor(props) {
@@ -134,7 +134,8 @@ export class Canvas extends React.Component {
   };
 
   handleHeightAmp() {
-    let heightAmplifier = 3;
+    let heightAmplifier = JSON.parse(window.localStorage.visualizerSettings).heightAmplifier
+    // debugger
     this.setState({ visualizerSettings: { heightAmplifier } });
   }
 

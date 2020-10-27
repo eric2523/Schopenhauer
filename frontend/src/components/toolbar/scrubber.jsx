@@ -7,6 +7,9 @@ export class Scrubber extends React.Component {
       origin: 0,
       positionX: 0,
       mouseDown: false,
+      defaultSettings: {
+        heightAmplifier: 2
+      }
     };
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleMouseUp = this.handleMouseUp.bind(this);
@@ -15,17 +18,33 @@ export class Scrubber extends React.Component {
 
   handleMouseDown(e) {
     let mouseDown = true;
-    // parent node of this is current .viz-outer-div. Possibly why it can't move left 
+    // parent node of this is current .viz-outer-div. Possibly why it can't move left
     let origin = e.target.parentNode.offsetLeft;
-    // offsetLeft (read-only) gives offsetLeft pos of parentNode 
+    // offsetLeft (read-only) gives offsetLeft pos of parentNode
     let positionX = e.target.offsetLeft;
-    debugger
-    // state saves the position at which event occured 
+    // state saves the position at which event occured
     this.setState({ mouseDown, origin, positionX });
   }
 
-  handleMouseUp() {
+  handleMouseUp(e) {
+    let currVisualizerSettings = JSON.parse(
+      window.localStorage.visualizerSettings
+    );
+    // debugger;
     this.setState({ mouseDown: false });
+    // ex ratio: 0.5 for halfway in between
+    let ratio = this.state.positionX / e.target.parentNode.offsetWidth;
+
+    if (this.props.type === "heightAmplifier") {
+      currVisualizerSettings.heightAmplifier = this.state.defaultSettings.heightAmplifier * ratio;
+      window.localStorage.visualizerSettings = JSON.stringify(currVisualizerSettings)
+    }
+
+    this.props.processEffect()
+    // currVisualizerSettings.heightAmplifier;
+    // window.localStorage.setItem
+    // max height of scrubber should be max height of canvas
+    //
   }
 
   handleMouseMove(e) {
@@ -70,8 +89,7 @@ export class Scrubber extends React.Component {
               onMouseDown={this.handleMouseDown}
               onMouseMove={this.handleMouseMove}
               className="scrub"
-            >
-          </div>
+            ></div>
           </div>
         </div>
       </div>
