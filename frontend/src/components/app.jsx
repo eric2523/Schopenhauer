@@ -6,7 +6,7 @@ import { Modal } from "./nav-bar/user_auth_modal";
 
 export const App = () => {
   return (
-    <div>
+    <div className="main-div">
       <header>
         <NavBarIndex />
       </header>
