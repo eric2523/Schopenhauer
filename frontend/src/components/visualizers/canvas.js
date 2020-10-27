@@ -125,7 +125,7 @@ export class Canvas extends React.Component {
     return (
       <div className="canvas-main-div">
         <div className="canvas-div">
-          <canvas ref={this.canvas} />
+          <canvas ref={this.state.canvas} />
         </div>
         <button onClick={this.togglePlay}>{buttonText}</button>
       </div>

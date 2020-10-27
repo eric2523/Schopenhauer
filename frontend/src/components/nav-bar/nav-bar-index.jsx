@@ -2,22 +2,23 @@ import React from "react";
 import { NavBarItem } from "./nav-bar-item";
 import { mainNavPaths } from "./nav-paths";
 import { openModal } from "../../actions/modal_actions";
-import { connect } from 'react-redux'
-import { logout } from '../../actions/session_actions';
+import { connect } from "react-redux";
+import { logout } from "../../actions/session_actions";
+// const logo = require("../../../public/assets/images/small-logo.png")
 
 const mSTP = (state) => {
   return {
-    loggedIn: state.session.isAuthenticated
-  }
-}
+    loggedIn: state.session.isAuthenticated,
+  };
+};
 
 const mDTP = (dispatch) => {
   return {
-    openLogin: () => dispatch(openModal('login')),
-    openSignup: () => dispatch(openModal('signup')),
-    logout: () => dispatch(logout())
-  }
-}
+    openLogin: () => dispatch(openModal("login")),
+    openSignup: () => dispatch(openModal("signup")),
+    logout: () => dispatch(logout()),
+  };
+};
 
 class NavBarIndexComponent extends React.Component {
   constructor(props) {
@@ -30,26 +31,36 @@ class NavBarIndexComponent extends React.Component {
     for (const keys in navPaths) {
       let { name, path } = navPaths[keys];
 
-      navListItems.push(
-        <NavBarItem 
-          key={name}
-          name={name} 
-          path={path} 
-        />
+      navListItems.push(<NavBarItem key={name} name={name} path={path} />);
+    }
+
+    let btn = null;
+    if (!this.props.loggedIn) {
+      btn = (
+        <div className="login-signup-btn-div">
+          <button className="session-btns" onClick={this.props.openSignup}>
+            <span className="btn-ctx">Sign Up</span>
+          </button>
+          <button className="session-btns" onClick={this.props.openLogin}>
+            <span className="btn-ctx">Log in</span>
+          </button>
+        </div>
+      );
+    } else {
+      btn = (
+        <div className="login-signup-btn-div">
+          <button className="session-btns" onClick={this.props.logout}>
+            <span className="btn-ctx">Log Out</span>
+          </button>
+        </div>
       );
     }
 
     return (
       <div className="nav-bar-div">
-        <ul className="nav-bar-ul">
-          {navListItems}
-        </ul>
-        {!this.props.loggedIn ? 
-        <>
-        <button onClick={this.props.openSignup}>Sign Up</button>
-        <button onClick={this.props.openLogin}>Log in</button>
-        </>
-        : <button onClick={this.props.logout}>Log Out</button>}
+        <div className="small-icon"></div>
+        <ul className="nav-bar-ul">{navListItems}</ul>
+        {btn}
       </div>
     );
   }
