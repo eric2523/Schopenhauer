@@ -9,7 +9,7 @@ import { UploadButton } from './music_player/upload_button';
 
 export const App = () => {
   return (
-    <div>
+    <div className="main-div">
       <header>
         <NavBarIndex />
       </header>

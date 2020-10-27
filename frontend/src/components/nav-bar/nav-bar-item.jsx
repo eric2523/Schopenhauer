@@ -8,7 +8,7 @@ export class NavBarItem extends React.Component {
 
   render() {
     return (
-      <NavLink to={this.props.path}>
+      <NavLink className="nav-link-li" activeClassName="ui inverted button" to={this.props.path}>
         <li className="navbar-item-li">{this.props.name}</li>
       </NavLink>
     );
