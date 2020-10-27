@@ -11,23 +11,6 @@
   align-items: center;
 }
 
-.scrub {
-  width: 30px;
-  height: 30px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 50%;
-  display: inline-block;
-  cursor: grab;
-  position: relative;
-  bottom: 10px;
-  left: -10px;
-  z-index: 1;
-}
-
-.scrub:active {
-  cursor: grabbing
-}
-
 .scrubber-timeline {
   width: 100%;
   height: 10px;

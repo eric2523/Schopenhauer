@@ -8,12 +8,13 @@ export class Scrubber extends React.Component {
       positionX: 0,
       mouseDown: false,
       defaultSettings: {
-        heightAmplifier: 2
-      }
+        heightAmplifier: 2,
+      },
     };
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleMouseUp = this.handleMouseUp.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
+    // this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
   handleMouseDown(e) {
@@ -34,17 +35,17 @@ export class Scrubber extends React.Component {
     this.setState({ mouseDown: false });
     // ex ratio: 0.5 for halfway in between
     let ratio = this.state.positionX / e.target.parentNode.offsetWidth;
-
+    // currently just using default settings in state until figure out better mathemtical operation
+    // ideally should be based on canvas height
     if (this.props.type === "heightAmplifier") {
-      currVisualizerSettings.heightAmplifier = this.state.defaultSettings.heightAmplifier * ratio;
-      window.localStorage.visualizerSettings = JSON.stringify(currVisualizerSettings)
+      currVisualizerSettings.heightAmplifier =
+        this.state.defaultSettings.heightAmplifier * ratio;
+      window.localStorage.visualizerSettings = JSON.stringify(
+        currVisualizerSettings
+      );
     }
 
-    this.props.processEffect()
-    // currVisualizerSettings.heightAmplifier;
-    // window.localStorage.setItem
-    // max height of scrubber should be max height of canvas
-    //
+    this.props.processEffect();
   }
 
   handleMouseMove(e) {
@@ -55,14 +56,15 @@ export class Scrubber extends React.Component {
     let timeline = document.getElementsByClassName("scrubber-timeline")[0];
     let timeStyle;
     let timeWidth;
+    let target = document.getElementsByClassName("scrub")[0];
 
     if (this.state.mouseDown) {
-      scrubStyle = getComputedStyle(e.target);
+      scrubStyle = getComputedStyle(target);
       scrubOffset = parseInt(scrubStyle.width, 10) / 2;
 
       position = parseInt(scrubStyle.left, 10);
       // clientX gives position at which event occured
-      // subtracting clientX with prev position
+      // subtracting clientX with prev position gives us new posLeft to move circle
       newPosition = position + (e.clientX - this.state.positionX);
       // prob dont need all the styles in the future
       timeStyle = getComputedStyle(timeline, 10);
@@ -74,23 +76,27 @@ export class Scrubber extends React.Component {
         newPosition = timeWidth - scrubOffset;
       }
     }
-
-    e.target.style.left = newPosition + "px";
+    // let target = document.getElementsByClassName("scrub")[0]
+    target.style.left = newPosition + "px";
     this.setState({ positionX: e.clientX });
   }
 
   render() {
     return (
       <div className="scrub-outer-div">
+        <div
+          onMouseUp={this.handleMouseUp}
+          onMouseDown={this.handleMouseDown}
+          onMouseMove={this.handleMouseMove}
+          className="scrub-div"
+        ></div>
         <div className="scrubber-timeline">
-          <div className="scrub-div">
-            <div
-              onMouseUp={this.handleMouseUp}
-              onMouseDown={this.handleMouseDown}
-              onMouseMove={this.handleMouseMove}
-              className="scrub"
-            ></div>
-          </div>
+          <div
+            //onMouseUp={this.handleMouseUp}
+            //onMouseDown={this.handleMouseDown}
+            // onMouseMove={this.handleMouseMove}
+            className="scrub"
+          ></div>
         </div>
       </div>
     );
