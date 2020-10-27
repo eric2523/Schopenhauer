@@ -38,16 +38,22 @@ class NavBarIndexComponent extends React.Component {
     if (!this.props.loggedIn) {
       btn = (
         <div className="login-signup-btn-div">
-          <button onClick={this.props.openSignup}>Sign Up</button>
-          <button onClick={this.props.openLogin}>Log in</button>
+          <button className="session-btns" onClick={this.props.openSignup}>
+            <span className="btn-ctx">Sign Up</span>
+          </button>
+          <button className="session-btns" onClick={this.props.openLogin}>
+            <span className="btn-ctx">Log in</span>
+          </button>
         </div>
       );
     } else {
       btn = (
         <div className="login-signup-btn-div">
-          <button onClick={this.props.logout}>Log Out</button>
+          <button className="session-btns" onClick={this.props.logout}>
+            <span className="btn-ctx">Log Out</span>
+          </button>
         </div>
-      )
+      );
     }
 
     return (
