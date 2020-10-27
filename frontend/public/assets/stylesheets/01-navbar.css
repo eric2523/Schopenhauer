@@ -5,8 +5,28 @@
 .nav-bar-div {
   display: flex;
   justify-content: center;
+  background: #171717;
+  padding: 10px 0 10px 0;
 }
 
 .navbar-item-li {
   padding: 8px;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 100;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* transition: background-color 600ms ease-in-out; */
+}
+
+.nav-link-li {
+  transition: background-color 300ms ease-in-out;
+  margin: 0 10px 0 10px;
+  border-radius: 5px;
+}
+
+.nav-link-li:hover {
+  background: rgba(93, 93, 93, 0.5);
 }

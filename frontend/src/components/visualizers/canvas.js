@@ -1,8 +1,8 @@
 import React from "react";
 import song from "../../audio_files/bensound-goinghigher.mp3";
 
-const width = window.innerWidth;
-const height = window.innerHeight;
+const width = 500;
+const height = 500;
 const barWidth = 1;
 const radius = 0;
 const centerX = width / 2;
@@ -93,8 +93,10 @@ export class Canvas extends React.Component {
   render() {
     const buttonText = this.audio.paused ? "Play" : "Pause";
     return (
-      <div>
-        <canvas ref={this.canvas} />
+      <div className="canvas-main-div">
+        <div className="canvas-div">
+          <canvas ref={this.canvas} />
+        </div>
         <button onClick={this.togglePlay}>{buttonText}</button>
       </div>
     );

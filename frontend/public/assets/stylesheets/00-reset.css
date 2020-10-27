@@ -22,6 +22,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font-family: 'Noto Sans TC', sans-serif;
 	vertical-align: baseline;
+	color: rgb(255, 255, 255);
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -103,4 +104,8 @@ select:-webkit-autofill:focus {
   border: none;
 	-webkit-text-fill-color: rgb(255, 255, 255);
   transition: background-color 5000s ease-in-out 0s;
+}
+
+.main-div {
+	background-color: rgb(90, 100, 116);
 }
