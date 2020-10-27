@@ -123,15 +123,10 @@ export class Canvas extends React.Component {
     }
     const buttonText = !this.state.play ? "Play" : "Pause";
     return (
-<<<<<<< HEAD
       <div className="canvas-main-div">
         <div className="canvas-div">
-          <canvas ref={this.canvas} />
+          <canvas ref={this.state.canvas} />
         </div>
-=======
-      <div>
-        <canvas ref={this.state.canvas} />
->>>>>>> 66bffd7496ae5179c06647316cc35f2d24daec2e
         <button onClick={this.togglePlay}>{buttonText}</button>
       </div>
     );
