@@ -2,7 +2,7 @@ const AWS = require("aws-sdk");
 const multer = require("multer");
 const multerS3 = require("multer-s3");
 const keys = require("../../config/keys");
-const BUCKET_NAME = "schopenhauer-dev";
+const BUCKET_NAME = "schopenhauer-dev"; // put this in config_keys at some point
 
 const s3 = new AWS.S3({
   accessKeyId: keys.AWSaccessKeyId,
@@ -34,4 +34,4 @@ const upload = multer({
   })
 });
 
-module.exports = upload;  
+module.exports = upload;

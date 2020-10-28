@@ -32,9 +32,8 @@ app.use(passport.initialize());
 
 app.use("/api/users", users);
 
-/// EXPERIMENT TIME
+// Let's get rudimentary songs AWS-uploading and URL-fetching 
 
 const songs = require("./routes/api/songs");
-
 app.use("/api/songs", songs);
 

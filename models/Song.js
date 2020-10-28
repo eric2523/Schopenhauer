@@ -4,12 +4,16 @@ const Schema = mongoose.Schema;
 const SongSchema = new Schema({
   userId: {
     type: Schema.Types.ObjectId,
-    ref: "user"
+    ref: "User"
+  },
+  date: {
+    type: Date,
+    default: Date.now
   },
   title: {
     type: String,
   },
-  url: {
+  songUrl: {
     type: String,
     required: true
   },

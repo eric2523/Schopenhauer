@@ -5,11 +5,14 @@ const Song = require("../../models/Song");
 const upload = require("./song_upload_aws");
 const singleUpload = upload.single("song");
 
-// get route here for songs
-// something like /songs/:user_id
+router.get('/users', (req, res) => {
+  Song.find({userId: req.query.user_id})
+      .then( songs => res.json(songs))
+      .catch(err => restart.status(400).json(err));
+});
+
 
 router.post('/uploadSong', passport.authenticate("jwt", { session: false }), singleUpload, (req, res) => {
-
   singleUpload(req, res, function(err) {
     if(err) {
       return res.status(422).json({errors: err.message});
@@ -21,13 +24,13 @@ router.post('/uploadSong', passport.authenticate("jwt", { session: false }), sin
 
 router.post('/uploadSongDB', (req, res) => {
   const newSong = new Song({
-      userId: req.body.data.userId,
-      fileName: req.body.data.fileName,
-      url: req.body.data.songUrl
+      userId: req.body.userId,
+      title: req.body.title,
+      fileName: req.body.fileName,
+      songUrl: req.body.songUrl
   });
   newSong.save()
       .then(song => res.json(song));
-    
 });
 
 module.exports = router;
