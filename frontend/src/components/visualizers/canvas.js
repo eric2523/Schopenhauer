@@ -2,8 +2,8 @@ import React from "react";
 import song from "../../audio_files/bensound-goinghigher.mp3";
 import { ToolbarIndex } from "../toolbar/toolbar-index";
 
-const width = 500;
-const height = 500;
+const width = 700;
+const height = 700;
 const barWidth = 1;
 const radius = 0;
 const centerX = width / 2;
@@ -24,8 +24,8 @@ export class Canvas extends React.Component {
       rafId: null,
       canvas: React.createRef(),
       visualizerSettings: {
-        width: 500,
-        height: 500,
+        width: 700,
+        height: 700,
         barWidth: 1,
         radius: 0,
         centerX: 250,
