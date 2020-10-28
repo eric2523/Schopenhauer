@@ -32,8 +32,8 @@ app.use(passport.initialize());
 
 app.use("/api/users", users);
 
-// Test code for json web tokens
+// Let's get rudimentary songs AWS-uploading and URL-fetching 
 
-// app.get('/protected', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-//   res.status(200).send('If you get this data, you have been authenticated via JWT!');
-// });
+const songs = require("./routes/api/songs");
+app.use("/api/songs", songs);
+
