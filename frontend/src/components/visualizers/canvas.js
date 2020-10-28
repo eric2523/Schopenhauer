@@ -15,14 +15,6 @@ export class Canvas extends React.Component {
     this.state = {
       play: false,
       audio: new Audio(song),
-      context: {},
-      source: null,
-      analyser: null,
-      frequencyArray: [],
-      freqCount: null,
-      radians: null,
-      rafId: null,
-      canvas: React.createRef(),
       visualizerSettings: {
         width: 700,
         height: 700,
@@ -30,8 +22,17 @@ export class Canvas extends React.Component {
         radius: 0,
         centerX: 250,
         centerY: 250,
+        // finished controls 
         heightAmplifier: 2,
       },
+      source: null,
+      context: {},
+      analyser: null,
+      frequencyArray: [],
+      freqCount: null,
+      radians: null,
+      rafId: null,
+      canvas: React.createRef(),
     };
     this.togglePlay = this.togglePlay.bind(this);
     this.handleHeightAmp = this.handleHeightAmp.bind(this);

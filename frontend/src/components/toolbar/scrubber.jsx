@@ -28,7 +28,6 @@ export class Scrubber extends React.Component {
     let currVisualizerSettings = JSON.parse(
       window.localStorage.visualizerSettings
     );
-    // debugger;
     this.setState({ mouseDown: false });
     // ex ratio: 0.5 for halfway in between
     let ratio = this.state.positionX / e.target.parentNode.offsetWidth;
