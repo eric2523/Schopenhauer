@@ -12,7 +12,7 @@ const mSTP = (state) => {
 
 const mDTP = (dispatch) => {
   return {
-    uploadSong: (song) => dispatch(uploadSong(song)),
+    uploadSong: (song, metaData) => dispatch(uploadSong(song, metaData)),
     clearErrors: () => dispatch(clearErrors()),
     closeModal: () => dispatch(closeModal())
   };
@@ -51,17 +51,16 @@ class UploadFormComponent extends React.Component {
 
   handleSubmit(){
     const formData = new FormData();
-    formData.append('song[user_id]', this.props.userId);
-    this.state.title.length ? formData.append('song[title]', this.state.title) :
-    formData.append('song[title]', 'Unknown');
-    this.state.artist.length ? formData.append('song[artist]', this.state.artist) :
-    formData.appened('song[artist]', 'Unknown');
-    this.state.genre.length ? formData.append('song[genre]', this.state.genre) :
-    formData.append('song[genre]', 'Unknown');
+    const metaData = {
+      userId: this.props.userId,
+      title: this.state.title.length ? this.state.title : "Unknown",
+      genre: this.state.genre.length ? this.state.genre : "Unknown",
+      artist: this.state.artist.length ? this.state.artist : "Unknown"
+    };
     if (this.state.soundFile){
-        formData.append('song[file]', this.state.soundFile);
+        formData.append('song', this.state.soundFile);
     }
-    this.props.uploadSong(formData).then(this.handleCloseModal);
+    this.props.uploadSong(formData, metaData).then(this.handleCloseModal);
   }
 
   handleCloseModal(){

@@ -34,6 +34,7 @@ class UserAuthModalComponent extends React.Component {
     this.handleModalClose = this.handleModalClose.bind(this);
     this.toggleLogin = this.toggleLogin.bind(this);
     this.toggleSignup = this.toggleSignup.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
   }
 
   handleSubmit(e) {
@@ -57,6 +58,14 @@ class UserAuthModalComponent extends React.Component {
         }
       });
     }
+  }
+
+  handleDemo(){
+    const demo = {
+      email: "demo@demo.com",
+      password: "demodemo"
+    }
+    this.props.login(demo).then(this.handleModalClose);
   }
 
   handleInput(type) {
@@ -135,6 +144,11 @@ class UserAuthModalComponent extends React.Component {
                 className="ui button"
                 type="submit">
                 {this.props.modal === 'login' ? "Login" : "Sign Up"}
+              </button>
+              <button
+                onClick={this.handleDemo}
+                className="ui button">
+                Demo User
               </button>
             </form>
             {errorArr.length ? 
