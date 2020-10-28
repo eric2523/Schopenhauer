@@ -2,13 +2,18 @@ import React from "react";
 import song from "../../audio_files/bensound-goinghigher.mp3";
 import { BeatDetection } from "./beat_detection";
 import { ToolbarIndex } from "../toolbar/toolbar-index";
+import hal_visualizer_1 from "./hal_visualizer_1";
+import yuehan_visualizer_1 from "./yuehan_visualizer_1"
 
-const width = 700;
-const height = 700;
-const barWidth = 1;
-const radius = 0;
-const centerX = width / 2;
-const centerY = height / 2;
+const canvasDimensions = {
+  width: 700,
+  height: 700,
+  barWidth: 1,
+  radius: 0,
+  centerX: 350,
+  centerY: 350
+};
+
 
 export class Canvas extends React.Component {
   constructor(props) {
@@ -51,8 +56,12 @@ export class Canvas extends React.Component {
       let context = new (window.AudioContext || window.webkitAudioContext)();
       let source = context.createMediaElementSource(this.state.audio);
       let analyser = context.createAnalyser();
+      console.log(analyser.fftSize);
       let frequencyArray = new Uint8Array(analyser.frequencyBinCount);
+      console.log(frequencyArray);
       let timeArray = new Uint8Array(analyser.frequencyBinCount);
+      console.log(timeArray);
+      
       let beatDetection = new BeatDetection();
       let freqCount = frequencyArray.length;
       let radians = (2 * Math.PI) / freqCount;
@@ -85,71 +94,7 @@ export class Canvas extends React.Component {
   };
 
   animation(canvas) {
-    canvas.width = width;
-    canvas.height = height;
-    const ctx = canvas.getContext("2d");
-    for (let i = 0; i < this.state.freqCount; i++) {
-      let height =
-        this.state.frequencyArray[i] *
-        this.state.visualizerSettings.heightAmplifier;
-
-      const xStart = centerX + Math.cos(this.state.radians * i) * radius;
-      const yStart = centerY + Math.sin(this.state.radians * i) * radius;
-      const xEnd =
-        centerX + Math.cos(this.state.radians * i) * (radius + height);
-      const yEnd =
-        centerY + Math.sin(this.state.radians * i) * (radius + height);
-
-      this.drawBar(
-        xStart,
-        yStart,
-        xEnd,
-        yEnd,
-        this.state.frequencyArray[i],
-        ctx,
-        canvas
-      );
-      this.drawBeatInCircle(ctx);
-    }
-  }
-  drawBeatInCircle = (ctx) => {
-    if (this.state.beatDetection.detected) {
-      this.beatRadius = 100;
-    } else {
-      this.beatRadius *= 0.9;
-    }
-    ctx.beginPath();
-    ctx.ellipse(
-      width / 2,
-      height / 2,
-      this.beatRadius,
-      this.beatRadius,
-      0,
-      0,
-      Math.PI * 2
-    );
-    ctx.stroke();
-  };
-  drawBar(xStart, yStart, xEnd, yEnd, frequencyAmplitude, ctx, canvas) {
-    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-    gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
-    gradient.addColorStop(1, "rgba(204, 83, 51, 1)");
-    ctx.fillStyle = gradient;
-
-    const lineColor =
-      "rgb(" +
-      frequencyAmplitude +
-      ", " +
-      frequencyAmplitude +
-      ", " +
-      205 +
-      ")";
-    ctx.strokeStyle = lineColor;
-    ctx.lineWidth = barWidth;
-    ctx.beginPath();
-    ctx.moveTo(xStart, yStart);
-    ctx.lineTo(xEnd, yEnd);
-    ctx.stroke();
+    yuehan_visualizer_1(canvas, canvasDimensions, this.state);
   }
 
   tick = () => {
