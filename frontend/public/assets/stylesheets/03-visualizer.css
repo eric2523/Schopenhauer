@@ -1,6 +1,6 @@
 .canvas-main-div {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
 }
 
 .canvas-div {
@@ -9,4 +9,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.scrubber-timeline {
+  width: 100%;
+  height: 10px;
+  background-color: grey;
 }

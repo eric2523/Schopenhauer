@@ -4,7 +4,6 @@ import { mainNavPaths } from "./nav-paths";
 import { openModal } from "../../actions/modal_actions";
 import { connect } from "react-redux";
 import { logout } from "../../actions/session_actions";
-// const logo = require("../../../public/assets/images/small-logo.png")
 
 const mSTP = (state) => {
   return {
