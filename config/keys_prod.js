@@ -3,5 +3,5 @@ module.exports = {
   secretOrKey: process.env.SECRET_OR_KEY,
   AWSaccessKeyId: process.env.AWS_KEY_ID,
   AWSsecretAccessKey: process.env.AWS_KEY,
-  BUCKET_NAME: "schopenhauer-pro"
-}
+  BUCKET_NAME: "schopenhauer-pro",
+};

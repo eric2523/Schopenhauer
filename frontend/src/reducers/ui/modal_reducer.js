@@ -1,4 +1,4 @@
-import { OPEN_MODAL, CLOSE_MODAL } from '../../actions/modal_actions';
+import { OPEN_MODAL, CLOSE_MODAL } from "../../actions/modal_actions";
 
 export const ModalReducer = (state = null, action) => {
   switch (action.type) {
@@ -9,4 +9,4 @@ export const ModalReducer = (state = null, action) => {
     default:
       return state;
   }
-}
+};
