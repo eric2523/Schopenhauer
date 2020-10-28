@@ -64,12 +64,14 @@
 }
 
 .carousel-header {
-  margin: 20px 0 10px 0;
+  margin: 30px 0 30px 0;
+  display: flex;
+  justify-content: center;
 }
 
 .carousel-title {
   font-weight: 100;
-  letter-spacing: 0.1rem;
+  letter-spacing: 0.15rem;
 }
 
 .carousel-item-div {
@@ -122,4 +124,8 @@
 
 .carousel-item-visualizer > .ui.button {
   padding: 5px 10px 5px 10px;
+}
+
+.carousel-template-name {
+  font-weight: 100;
 }
