@@ -2,6 +2,7 @@ import React from "react";
 import song from "../../audio_files/bensound-goinghigher.mp3";
 import { BeatDetection } from "./beat_detection";
 import { ToolbarIndex } from "../toolbar/toolbar-index";
+
 import { octave } from "./octave";
 import {
   averageArray,
@@ -9,12 +10,19 @@ import {
   stdevArray,
 } from "../../util/visualizer_util";
 
-const width = 700;
-const height = 700;
-const barWidth = 1;
-const radius = 0;
-const centerX = width / 2;
-const centerY = height / 2;
+import hal_visualizer_1 from "./hal_visualizer_1";
+import yuehan_visualizer_1 from "./yuehan_visualizer_1"
+
+const canvasDimensions = {
+  width: 700,
+  height: 700,
+  barWidth: 1,
+  radius: 0,
+  centerX: 350,
+  centerY: 350
+};
+
+
 
 export class Canvas extends React.Component {
   constructor(props) {
@@ -61,8 +69,12 @@ export class Canvas extends React.Component {
       let context = new (window.AudioContext || window.webkitAudioContext)();
       let source = context.createMediaElementSource(this.state.audio);
       let analyser = context.createAnalyser();
+      console.log(analyser.fftSize);
       let frequencyArray = new Uint8Array(analyser.frequencyBinCount);
+      console.log(frequencyArray);
       let timeArray = new Uint8Array(analyser.frequencyBinCount);
+      console.log(timeArray);
+      
       let beatDetection = new BeatDetection();
       let freqCount = frequencyArray.length;
       let radians = (2 * Math.PI) / freqCount;
@@ -97,6 +109,7 @@ export class Canvas extends React.Component {
   }
 
   animation(canvas) {
+
     canvas.width = width;
     canvas.height = height;
     const ctx = canvas.getContext("2d");
@@ -188,6 +201,9 @@ export class Canvas extends React.Component {
     ctx.moveTo(xStart, yStart);
     ctx.lineTo(xEnd, yEnd);
     ctx.stroke();
+
+    yuehan_visualizer_1(canvas, canvasDimensions, this.state);
+
   }
 
   drawOctaves(xStart, yStart, xEnd, yEnd, frequencyAmplitude, ctx, canvas) {
