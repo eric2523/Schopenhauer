@@ -10,7 +10,7 @@ export const Visualizer = () => {
         <ToolbarIndex />
       </div> */}
       <div className="visualizer">
-        <Canvas />
+        <Canvas canvasWidth={700} canvasHeight={700}/>
       </div>
     </div>
   );

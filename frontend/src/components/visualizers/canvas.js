@@ -2,12 +2,8 @@ import React from "react";
 import song from "../../audio_files/bensound-goinghigher.mp3";
 import { ToolbarIndex } from "../toolbar/toolbar-index";
 
-const width = 700;
-const height = 700;
 const barWidth = 1;
 const radius = 0;
-const centerX = width / 2;
-const centerY = height / 2;
 
 export class Canvas extends React.Component {
   constructor(props) {
@@ -16,8 +12,6 @@ export class Canvas extends React.Component {
       play: false,
       audio: new Audio(song),
       visualizerSettings: {
-        width: 700,
-        height: 700,
         barWidth: 1,
         radius: 0,
         centerX: 250,
@@ -79,12 +73,15 @@ export class Canvas extends React.Component {
   }
 
   animation(canvas) {
-    canvas.width = width;
-    canvas.height = height;
+    canvas.width = this.props.canvasWidth;
+    canvas.height = this.props.canvasHeight;
     this.state.ctx = canvas.getContext("2d");
     for (let i = 0; i < this.state.freqCount; i++) {
       let height =
         this.state.frequencyArray[i] * this.state.visualizerSettings.heightAmplifier;
+      
+      let centerX = this.props.canvasWidth / 2
+      let centerY = this.props.canvasHeight / 2
 
       const xStart = centerX + Math.cos(this.state.radians * i) * radius;
       const yStart = centerY + Math.sin(this.state.radians * i) * radius;

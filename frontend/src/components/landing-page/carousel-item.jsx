@@ -1,4 +1,5 @@
 import React from 'react'
+import { Canvas } from '../visualizers/canvas'
 
 export const CarouselItem = (props) => {
   // need to figure out what vars we want in the template
@@ -9,6 +10,9 @@ export const CarouselItem = (props) => {
          <h1 className="carousel-template-name">
            template name 
          </h1>
+      </div>
+      <div className="carousel-item-visualizer">
+        
       </div>
       <div className="carousel-template-btn">
         <button className="carousel-item-btn">
