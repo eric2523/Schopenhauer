@@ -21,10 +21,7 @@ export class Scrubber extends React.Component {
     let mouseDown = true;
     // parent node of this is current .viz-outer-div. Possibly why it can't move left
     let origin = e.target.parentNode.offsetLeft;
-    // offsetLeft (read-only) gives offsetLeft pos of parentNode
-    let positionX = e.target.offsetLeft;
-    // state saves the position at which event occured
-    this.setState({ mouseDown, origin, positionX });
+    this.setState({ mouseDown, origin });
   }
 
   handleMouseUp(e) {
@@ -65,7 +62,7 @@ export class Scrubber extends React.Component {
       position = parseInt(scrubStyle.left, 10);
       // clientX gives position at which event occured
       // subtracting clientX with prev position gives us new posLeft to move circle
-      newPosition = position + (e.clientX - this.state.positionX);
+      newPosition = position + (e.clientX - this.state.positionX)
       // prob dont need all the styles in the future
       timeStyle = getComputedStyle(timeline, 10);
       timeWidth = parseInt(timeStyle.width, 10);
@@ -84,17 +81,11 @@ export class Scrubber extends React.Component {
   render() {
     return (
       <div className="scrub-outer-div">
-        <div
-          onMouseUp={this.handleMouseUp}
-          onMouseDown={this.handleMouseDown}
-          onMouseMove={this.handleMouseMove}
-          className="scrub-div"
-        ></div>
         <div className="scrubber-timeline">
           <div
-            //onMouseUp={this.handleMouseUp}
-            //onMouseDown={this.handleMouseDown}
-            // onMouseMove={this.handleMouseMove}
+            onMouseUp={this.handleMouseUp}
+            onMouseDown={this.handleMouseDown}
+            onMouseMove={this.handleMouseMove}
             className="scrub"
           ></div>
         </div>
