@@ -1,10 +1,31 @@
 import React from "react";
 import song from "../../audio_files/bensound-goinghigher.mp3";
+import { BeatDetection } from "./beat_detection";
 import { ToolbarIndex } from "../toolbar/toolbar-index";
 import { withRouter } from "react-router-dom";
 
 const barWidth = 1;
 const radius = 0;
+import { octave } from "./octave";
+import {
+  averageArray,
+  detectPitch,
+  stdevArray,
+} from "../../util/visualizer_util";
+
+import hal_visualizer_1 from "./hal_visualizer_1";
+import yuehan_visualizer_1 from "./yuehan_visualizer_1"
+
+const canvasDimensions = {
+  width: 700,
+  height: 700,
+  barWidth: 1,
+  radius: 0,
+  centerX: 350,
+  centerY: 350
+};
+
+
 
 class Canvas extends React.Component {
   constructor(props) {
@@ -20,10 +41,12 @@ class Canvas extends React.Component {
         // finished controls
         heightAmplifier: 0.5,
       },
-      source: null,
+      beatDetection: null,
       context: {},
+      source: null,
       analyser: null,
       frequencyArray: [],
+      timeArray: [],
       freqCount: null,
       radians: null,
       rafId: null,
@@ -31,6 +54,10 @@ class Canvas extends React.Component {
     };
     this.togglePlay = this.togglePlay.bind(this);
     this.handleHeightAmp = this.handleHeightAmp.bind(this);
+    this.tick = this.tick.bind(this);
+    this.updateFrequencyData = this.updateFrequencyData.bind(this);
+    this.updateWaveformData = this.updateWaveformData.bind(this);
+    this.updateAllData = this.updateAllData.bind(this);
   }
 
   componentDidMount() {
@@ -44,16 +71,26 @@ class Canvas extends React.Component {
       let context = new (window.AudioContext || window.webkitAudioContext)();
       let source = context.createMediaElementSource(this.state.audio);
       let analyser = context.createAnalyser();
+      console.log(analyser.fftSize);
       let frequencyArray = new Uint8Array(analyser.frequencyBinCount);
+      console.log(frequencyArray);
+      let timeArray = new Uint8Array(analyser.frequencyBinCount);
+      console.log(timeArray);
+      
+      let beatDetection = new BeatDetection();
       let freqCount = frequencyArray.length;
       let radians = (2 * Math.PI) / freqCount;
+      let octaveRadians = (2 * Math.PI) / 12;
       this.setState({
         context,
         source,
         analyser,
         frequencyArray,
+        timeArray,
+        beatDetection,
         freqCount,
         radians,
+        octaveRadians,
       });
     }
 
@@ -77,6 +114,33 @@ class Canvas extends React.Component {
     canvas.width = this.props.canvasWidth;
     canvas.height = this.props.canvasHeight;
     this.state.ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d");
+    const octaveAmp = octave(this.state.frequencyArray, this.state.context);
+    const pitch = detectPitch(octaveAmp);
+    console.table(pitch);
+    for (let i = 0; i < 12; i++) {
+      let height = octaveAmp[i] * this.state.visualizerSettings.heightAmplifier;
+
+      const xStart = centerX + Math.cos(this.state.octaveRadians * i) * radius;
+      const yStart = centerY + Math.sin(this.state.octaveRadians * i) * radius;
+      const xEnd =
+        centerX + Math.cos(this.state.octaveRadians * i) * (radius + height);
+      const yEnd =
+        centerY + Math.sin(this.state.octaveRadians * i) * (radius + height);
+
+      // this.drawBar(
+      //   xStart,
+      //   yStart,
+      //   xEnd,
+      //   yEnd,
+      //   this.state.frequencyArray[i],
+      //   ctx,
+      //   canvas
+      // );
+
+      this.drawOctaves(xStart, yStart, xEnd, yEnd, octaveAmp, ctx, canvas);
+    }
+
     for (let i = 0; i < this.state.freqCount; i++) {
       let height =
         this.state.frequencyArray[i] *
@@ -98,13 +162,56 @@ class Canvas extends React.Component {
         xEnd,
         yEnd,
         this.state.frequencyArray[i],
-        this.state.ctx,
+        ctx,
         canvas
       );
     }
+    this.drawBeatInCircle(ctx);
+  }
+  drawBeatInCircle = (ctx) => {
+    if (this.state.beatDetection.detected) {
+      this.beatRadius = 100;
+    } else {
+      this.beatRadius *= 0.9;
+    }
+    ctx.beginPath();
+    ctx.ellipse(
+      width / 2,
+      height / 2,
+      this.beatRadius,
+      this.beatRadius,
+      0,
+      0,
+      Math.PI * 2
+    );
+    ctx.stroke();
+  };
+  drawBar(xStart, yStart, xEnd, yEnd, frequencyAmplitude, ctx, canvas) {
+    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
+    gradient.addColorStop(1, "rgba(204, 83, 51, 1)");
+    ctx.fillStyle = gradient;
+
+    const lineColor =
+      "rgb(" +
+      frequencyAmplitude +
+      ", " +
+      frequencyAmplitude +
+      ", " +
+      205 +
+      ")";
+    ctx.strokeStyle = lineColor;
+    ctx.lineWidth = barWidth;
+    ctx.beginPath();
+    ctx.moveTo(xStart, yStart);
+    ctx.lineTo(xEnd, yEnd);
+    ctx.stroke();
+
+    yuehan_visualizer_1(canvas, canvasDimensions, this.state);
+
   }
 
-  drawBar(xStart, yStart, xEnd, yEnd, frequencyAmplitude, ctx, canvas) {
+  drawOctaves(xStart, yStart, xEnd, yEnd, frequencyAmplitude, ctx, canvas) {
     const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
     gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
     gradient.addColorStop(1, "rgba(204, 83, 51, 1)");
@@ -126,12 +233,25 @@ class Canvas extends React.Component {
     ctx.stroke();
   }
 
-  tick = () => {
+  tick() {
     this.animation(this.state.canvas.current);
-    this.state.analyser.getByteTimeDomainData(this.state.frequencyArray);
+    this.updateFrequencyData();
     this.setState({ rafId: requestAnimationFrame(this.tick) });
-  };
+  }
 
+  updateFrequencyData() {
+    this.state.analyser.getByteFrequencyData(this.state.frequencyArray);
+    this.state.beatDetection.update(this.state.frequencyArray);
+  }
+
+  updateWaveformData() {
+    this.state.analyser.getByteTimeDomainData(this.state.timeArray);
+  }
+
+  updateAllData() {
+    this.updateFrequencyData();
+    this.updateWaveformData();
+  }
   handleHeightAmp() {
     let heightAmplifier = JSON.parse(window.localStorage.visualizerSettings)
       .heightAmplifier;
