@@ -3,6 +3,7 @@ import song from "../../audio_files/bensound-goinghigher.mp3";
 import { BeatDetection } from "./beat_detection";
 import { ToolbarIndex } from "../toolbar/toolbar-index";
 import { octave } from "./octave";
+import { averageArray, stdevArray } from "../../util/visualizer_util";
 
 const width = 700;
 const height = 700;
@@ -42,6 +43,7 @@ export class Canvas extends React.Component {
     this.tick = this.tick.bind(this);
     this.updateFrequencyData = this.updateFrequencyData.bind(this);
     this.updateWaveformData = this.updateWaveformData.bind(this);
+    this.updateAllData = this.updateAllData.bind(this);
   }
 
   componentDidMount() {
@@ -95,7 +97,7 @@ export class Canvas extends React.Component {
     canvas.height = height;
     const ctx = canvas.getContext("2d");
     const octaveAmp = octave(this.state.frequencyArray, this.state.context);
-    console.log(octaveAmp);
+
     for (let i = 0; i < 12; i++) {
       let height = octaveAmp[i] * this.state.visualizerSettings.heightAmplifier;
 
@@ -218,6 +220,11 @@ export class Canvas extends React.Component {
 
   updateWaveformData() {
     this.state.analyser.getByteTimeDomainData(this.state.timeArray);
+  }
+
+  updateAllData() {
+    this.updateFrequencyData();
+    this.updateWaveformData();
   }
   handleHeightAmp() {
     let heightAmplifier = JSON.parse(window.localStorage.visualizerSettings)
