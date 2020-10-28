@@ -1,14 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { CarouselItem } from "./carousel-item";
-import {
-  CarouselProvider,
-  Slider,
-  Slide,
-  ButtonBack,
-  ButtonNext,
-} from "pure-react-carousel";
-import 'pure-react-carousel/dist/react-carousel.es.css';
+import "pure-react-carousel/dist/react-carousel.es.css";
+import { CarouselProviderIndex } from "../carousel/carousel-provider";
 
 class Carousel extends React.Component {
   constructor(props) {
@@ -26,39 +19,7 @@ class Carousel extends React.Component {
         <div className="carousel-header">
           <h1 className="carousel-title">{carouselTitle}</h1>
         </div>
-
-        {/* <div className="carousel-items"> */}
-          <CarouselProvider
-            naturalSlideWidth={50}
-            naturalSlideHeight={1}
-            totalSlides={6}
-            visibleSlides={3}
-            isIntrinsicHeight={true}
-          >
-            <Slider>
-              <Slide className="carousel-slide" index={0}>
-                <CarouselItem />
-              </Slide>
-              <Slide className="carousel-slide" index={1}>
-                <CarouselItem />
-              </Slide>
-              <Slide className="carousel-slide" index={2}>
-                <CarouselItem />
-              </Slide>
-              <Slide className="carousel-slide" index={3}>
-                <CarouselItem />
-              </Slide>
-              <Slide className="carousel-slide" index={4}>
-                <CarouselItem />
-              </Slide>
-              <Slide className="carousel-slide" index={5}>
-                <CarouselItem />
-              </Slide>
-            </Slider>
-            <ButtonBack>Back</ButtonBack>
-            <ButtonNext>Next</ButtonNext>
-          </CarouselProvider>
-        {/* </div> */}
+        <CarouselProviderIndex />
       </div>
     );
   }

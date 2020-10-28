@@ -18,7 +18,7 @@ class Canvas extends React.Component {
         centerX: 250,
         centerY: 250,
         // finished controls
-        heightAmplifier: 2,
+        heightAmplifier: 0.5,
       },
       source: null,
       context: {},
@@ -155,6 +155,12 @@ class Canvas extends React.Component {
           />
         </div>
       );
+    } else {
+      toolbarIndex = (
+        <button onClick={this.togglePlay}>
+          <i class="play icon"></i>
+        </button>
+      );
     }
 
     const buttonText = !this.state.play ? "Play" : "Pause";
@@ -167,4 +173,4 @@ class Canvas extends React.Component {
   }
 }
 
-export const CanvasWithRouter = withRouter(Canvas)
+export const CanvasWithRouter = withRouter(Canvas);

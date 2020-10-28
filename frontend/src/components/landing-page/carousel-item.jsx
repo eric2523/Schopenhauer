@@ -12,7 +12,7 @@ export const CarouselItem = (props) => {
          </h1>
       </div>
       <div className="carousel-item-visualizer">
-        <CanvasWithRouter canvasWidth={200} canvasHeight={200} />
+          <CanvasWithRouter canvasWidth={250} canvasHeight={250} />
       </div>
       <div className="carousel-template-btn">
         <button className="carousel-item-btn">
