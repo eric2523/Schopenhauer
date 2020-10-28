@@ -22,7 +22,7 @@ const mDTP = (dispatch) => {
 };
 
 
-class ModalComponent extends React.Component {
+class UserAuthModalComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,6 +34,7 @@ class ModalComponent extends React.Component {
     this.handleModalClose = this.handleModalClose.bind(this);
     this.toggleLogin = this.toggleLogin.bind(this);
     this.toggleSignup = this.toggleSignup.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
   }
 
   handleSubmit(e) {
@@ -57,6 +58,14 @@ class ModalComponent extends React.Component {
         }
       });
     }
+  }
+
+  handleDemo(){
+    const demo = {
+      email: "demo@demo.com",
+      password: "demodemo"
+    }
+    this.props.login(demo).then(this.handleModalClose);
   }
 
   handleInput(type) {
@@ -136,6 +145,11 @@ class ModalComponent extends React.Component {
                 type="submit">
                 {this.props.modal === 'login' ? "Login" : "Sign Up"}
               </button>
+              <button
+                onClick={this.handleDemo}
+                className="ui button">
+                Demo User
+              </button>
             </form>
             {errorArr.length ? 
             <ul className="error">{errorArr}</ul> 
@@ -151,4 +165,4 @@ class ModalComponent extends React.Component {
   }
 }
 
-export const Modal = connect(mSTP, mDTP)(ModalComponent);
+export const UserAuthModal = connect(mSTP, mDTP)(UserAuthModalComponent);
