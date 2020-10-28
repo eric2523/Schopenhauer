@@ -22,7 +22,7 @@ const mDTP = (dispatch) => {
 };
 
 
-class ModalComponent extends React.Component {
+class UserAuthModalComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -151,4 +151,4 @@ class ModalComponent extends React.Component {
   }
 }
 
-export const Modal = connect(mSTP, mDTP)(ModalComponent);
+export const UserAuthModal = connect(mSTP, mDTP)(UserAuthModalComponent);
