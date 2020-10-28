@@ -1,5 +1,5 @@
 import React from "react";
-import { Canvas } from "./canvas";
+import { CanvasWithRouter } from "./canvas";
 import { ToolbarIndex } from "../toolbar/toolbar-index";
 import { Scrubber } from "../toolbar/scrubber";
 
@@ -12,7 +12,7 @@ export const Visualizer = (props) => {
       <div className="visualizer">
         <div className="canvas-main-div">
           <div className="canvas-div">
-            <Canvas match={props.match} canvasWidth={700} canvasHeight={700} />
+            <CanvasWithRouter canvasWidth={700} canvasHeight={700} />
           </div>
         </div>
       </div>

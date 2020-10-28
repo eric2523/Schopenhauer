@@ -1,11 +1,12 @@
 import React from "react";
 import song from "../../audio_files/bensound-goinghigher.mp3";
 import { ToolbarIndex } from "../toolbar/toolbar-index";
+import { withRouter } from "react-router-dom";
 
 const barWidth = 1;
 const radius = 0;
 
-export class Canvas extends React.Component {
+class Canvas extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -165,3 +166,5 @@ export class Canvas extends React.Component {
     );
   }
 }
+
+export const CanvasWithRouter = withRouter(Canvas)
