@@ -2,6 +2,7 @@ import React from "react";
 import song from "../../audio_files/bensound-goinghigher.mp3";
 import { BeatDetection } from "./beat_detection";
 import { ToolbarIndex } from "../toolbar/toolbar-index";
+import { octave } from "./octave";
 
 const width = 700;
 const height = 700;
@@ -36,8 +37,11 @@ export class Canvas extends React.Component {
         heightAmplifier: 2,
       },
     };
-    // this.togglePlay = this.togglePlay.bind(this);
-    // this.handleHeightAmp = this.handleHeightAmp.bind(this);
+    this.togglePlay = this.togglePlay.bind(this);
+    this.handleHeightAmp = this.handleHeightAmp.bind(this);
+    this.tick = this.tick.bind(this);
+    this.updateFrequencyData = this.updateFrequencyData.bind(this);
+    this.updateWaveformData = this.updateWaveformData.bind(this);
   }
 
   componentDidMount() {
@@ -45,7 +49,7 @@ export class Canvas extends React.Component {
     window.localStorage.setItem("visualizerSettings", visualizerSettings);
   }
 
-  togglePlay = () => {
+  togglePlay() {
     // checks if audio input is in (can change second conditional later to be more specific. Currently just a placeholder until I figure out a better flag )
     if (this.state.audio instanceof Audio && !this.state.source) {
       let context = new (window.AudioContext || window.webkitAudioContext)();
@@ -56,6 +60,7 @@ export class Canvas extends React.Component {
       let beatDetection = new BeatDetection();
       let freqCount = frequencyArray.length;
       let radians = (2 * Math.PI) / freqCount;
+      let octaveRadians = (2 * Math.PI) / 12;
       this.setState({
         context,
         source,
@@ -65,6 +70,7 @@ export class Canvas extends React.Component {
         beatDetection,
         freqCount,
         radians,
+        octaveRadians,
       });
     }
 
@@ -82,12 +88,37 @@ export class Canvas extends React.Component {
         play: false,
       });
     }
-  };
+  }
 
   animation(canvas) {
     canvas.width = width;
     canvas.height = height;
     const ctx = canvas.getContext("2d");
+    const octaveAmp = octave(this.state.frequencyArray, this.state.context);
+    console.log(octaveAmp);
+    for (let i = 0; i < 12; i++) {
+      let height = octaveAmp[i] * this.state.visualizerSettings.heightAmplifier;
+
+      const xStart = centerX + Math.cos(this.state.octaveRadians * i) * radius;
+      const yStart = centerY + Math.sin(this.state.octaveRadians * i) * radius;
+      const xEnd =
+        centerX + Math.cos(this.state.octaveRadians * i) * (radius + height);
+      const yEnd =
+        centerY + Math.sin(this.state.octaveRadians * i) * (radius + height);
+
+      // this.drawBar(
+      //   xStart,
+      //   yStart,
+      //   xEnd,
+      //   yEnd,
+      //   this.state.frequencyArray[i],
+      //   ctx,
+      //   canvas
+      // );
+
+      this.drawOctaves(xStart, yStart, xEnd, yEnd, octaveAmp, ctx, canvas);
+    }
+
     for (let i = 0; i < this.state.freqCount; i++) {
       let height =
         this.state.frequencyArray[i] *
@@ -109,8 +140,8 @@ export class Canvas extends React.Component {
         ctx,
         canvas
       );
-      this.drawBeatInCircle(ctx);
     }
+    this.drawBeatInCircle(ctx);
   }
   drawBeatInCircle = (ctx) => {
     if (this.state.beatDetection.detected) {
@@ -152,25 +183,47 @@ export class Canvas extends React.Component {
     ctx.stroke();
   }
 
-  tick = () => {
+  drawOctaves(xStart, yStart, xEnd, yEnd, frequencyAmplitude, ctx, canvas) {
+    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
+    gradient.addColorStop(1, "rgba(204, 83, 51, 1)");
+    ctx.fillStyle = gradient;
+
+    const lineColor =
+      "rgb(" +
+      frequencyAmplitude +
+      ", " +
+      frequencyAmplitude +
+      ", " +
+      205 +
+      ")";
+    ctx.strokeStyle = lineColor;
+    ctx.lineWidth = barWidth;
+    ctx.beginPath();
+    ctx.moveTo(xStart, yStart);
+    ctx.lineTo(xEnd, yEnd);
+    ctx.stroke();
+  }
+
+  tick() {
     this.animation(this.state.canvas.current);
     this.updateFrequencyData();
     this.setState({ rafId: requestAnimationFrame(this.tick) });
-  };
+  }
 
-  updateFrequencyData = () => {
+  updateFrequencyData() {
     this.state.analyser.getByteFrequencyData(this.state.frequencyArray);
     this.state.beatDetection.update(this.state.frequencyArray);
-  };
+  }
 
-  updateWaveFormData = () => {
+  updateWaveformData() {
     this.state.analyser.getByteTimeDomainData(this.state.timeArray);
-  };
-  handleHeightAmp = () => {
+  }
+  handleHeightAmp() {
     let heightAmplifier = JSON.parse(window.localStorage.visualizerSettings)
       .heightAmplifier;
     this.setState({ visualizerSettings: { heightAmplifier } });
-  };
+  }
 
   render() {
     if (this.state.source && this.state.analyser) {
