@@ -68,3 +68,6 @@
   cursor: grabbing;
 }
 
+.play, .pause {
+  color: black;
+}

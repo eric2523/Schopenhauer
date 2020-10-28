@@ -153,9 +153,9 @@ export class Canvas extends React.Component {
           <ToolbarIndex
             settings={this.state.settings}
             handleHeightAmp={this.handleHeightAmp}
+            togglePlay={this.togglePlay}
           />
         </div>
-        <button onClick={this.togglePlay}>{buttonText}</button>
       </div>
     );
   }
