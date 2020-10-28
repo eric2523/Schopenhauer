@@ -1,0 +1,131 @@
+.main-div {
+  background-color: #313030;
+}
+
+.splash-outer-div {
+  background-image: url("https://media0.giphy.com/media/14urQKQOKld6CQiiMB/giphy.gif?cid=ecf05e47h2mr9mromzan4s3zv4watc5a5d006ejc2w6hjf4p&rid=giphy.gif");
+  background-color: black;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  fill: black;
+  position: relative;
+}
+
+.splash-img-overlay {
+  position: absolute;
+  height: 50vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.main-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.subtitle {
+  margin: 10px 0 10px 0;
+}
+
+.splash-title {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 80px;
+  text-shadow: 2px 2px 8px black;
+  font-weight: 500;
+  z-index: 1;
+}
+
+.splash-subtitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0.5rem;
+}
+
+.splash-btn {
+  z-index: 1;
+  margin: 10px 0 10px 0;
+}
+
+.carousel-main-div {
+  border-top: 2px solid rgba(0, 0, 0, 0.4);
+}
+
+.carousel-header {
+  margin: 30px 0 30px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.carousel-title {
+  font-weight: 100;
+  letter-spacing: 0.15rem;
+}
+
+.carousel-item-div {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  margin: 0 5px 0 5px;
+  display: flex;
+  height: 50vh;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel-item-visualizer {
+  width: 300px;
+  display: flex;
+  height: 300px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.carousel {
+  display: flex;
+  flex-direction: column;
+  height: 60vh;
+  position: relative;
+}
+
+.carousel-btns {
+  display: flex;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.carousel-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chevron {
+  color: black;
+}
+
+.carousel-play {
+  position: absolute;
+  bottom: 10px;
+}
+
+.carousel-item-visualizer > .ui.button {
+  padding: 5px 10px 5px 10px;
+}
+
+.carousel-template-name {
+  font-weight: 100;
+}

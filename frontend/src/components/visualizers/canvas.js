@@ -2,7 +2,10 @@ import React from "react";
 import song from "../../audio_files/bensound-goinghigher.mp3";
 import { BeatDetection } from "./beat_detection";
 import { ToolbarIndex } from "../toolbar/toolbar-index";
+import { withRouter } from "react-router-dom";
 
+const barWidth = 1;
+const radius = 0;
 import { octave } from "./octave";
 import {
   averageArray,
@@ -24,12 +27,20 @@ const canvasDimensions = {
 
 
 
-export class Canvas extends React.Component {
+class Canvas extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       play: false,
       audio: new Audio(song),
+      visualizerSettings: {
+        barWidth: 1,
+        radius: 0,
+        centerX: 250,
+        centerY: 250,
+        // finished controls
+        heightAmplifier: 0.5,
+      },
       beatDetection: null,
       context: {},
       source: null,
@@ -40,15 +51,6 @@ export class Canvas extends React.Component {
       radians: null,
       rafId: null,
       canvas: React.createRef(),
-      visualizerSettings: {
-        width: 700,
-        height: 700,
-        barWidth: 1,
-        radius: 0,
-        centerX: 250,
-        centerY: 250,
-        heightAmplifier: 2,
-      },
     };
     this.togglePlay = this.togglePlay.bind(this);
     this.handleHeightAmp = this.handleHeightAmp.bind(this);
@@ -109,9 +111,9 @@ export class Canvas extends React.Component {
   }
 
   animation(canvas) {
-
-    canvas.width = width;
-    canvas.height = height;
+    canvas.width = this.props.canvasWidth;
+    canvas.height = this.props.canvasHeight;
+    this.state.ctx = canvas.getContext("2d");
     const ctx = canvas.getContext("2d");
     const octaveAmp = octave(this.state.frequencyArray, this.state.context);
     const pitch = detectPitch(octaveAmp);
@@ -143,6 +145,9 @@ export class Canvas extends React.Component {
       let height =
         this.state.frequencyArray[i] *
         this.state.visualizerSettings.heightAmplifier;
+
+      let centerX = this.props.canvasWidth / 2;
+      let centerY = this.props.canvasHeight / 2;
 
       const xStart = centerX + Math.cos(this.state.radians * i) * radius;
       const yStart = centerY + Math.sin(this.state.radians * i) * radius;
@@ -258,13 +263,11 @@ export class Canvas extends React.Component {
       this.state.source.connect(this.state.analyser);
       this.state.analyser.connect(this.state.context.destination);
     }
+    const buttonText = !this.state.play ? <i class="play icon"></i> : <i class="pause icon"></i>;
 
-    const buttonText = !this.state.play ? "Play" : "Pause";
-    return (
-      <div className="canvas-main-div">
-        <div className="canvas-div">
-          <canvas ref={this.state.canvas} />
-        </div>
+    let toolbarIndex = null;
+    if (this.props.match.path === "/visualizer") {
+      toolbarIndex = (
         <div className="viz-toolb-div">
           <ToolbarIndex
             settings={this.state.settings}
@@ -272,7 +275,22 @@ export class Canvas extends React.Component {
             togglePlay={this.togglePlay}
           />
         </div>
-      </div>
+      );
+    } else {
+      toolbarIndex = (
+        <button className="ui button carousel-play" onClick={this.togglePlay}>
+          {buttonText}
+        </button>
+      );
+    }
+
+    return (
+      <>
+        <canvas ref={this.state.canvas} />
+        {toolbarIndex}
+      </>
     );
   }
 }
+
+export const CanvasWithRouter = withRouter(Canvas);
