@@ -1,5 +1,6 @@
 import React from "react";
 import song from "../../audio_files/bensound-goinghigher.mp3";
+import { BeatDetection } from "./beat_detection";
 import { ToolbarIndex } from "../toolbar/toolbar-index";
 
 const width = 700;
@@ -15,10 +16,12 @@ export class Canvas extends React.Component {
     this.state = {
       play: false,
       audio: new Audio(song),
+      beatDetection: null,
       context: {},
       source: null,
       analyser: null,
       frequencyArray: [],
+      timeArray: [],
       freqCount: null,
       radians: null,
       rafId: null,
@@ -33,8 +36,8 @@ export class Canvas extends React.Component {
         heightAmplifier: 2,
       },
     };
-    this.togglePlay = this.togglePlay.bind(this);
-    this.handleHeightAmp = this.handleHeightAmp.bind(this);
+    // this.togglePlay = this.togglePlay.bind(this);
+    // this.handleHeightAmp = this.handleHeightAmp.bind(this);
   }
 
   componentDidMount() {
@@ -42,13 +45,15 @@ export class Canvas extends React.Component {
     window.localStorage.setItem("visualizerSettings", visualizerSettings);
   }
 
-  togglePlay() {
+  togglePlay = () => {
     // checks if audio input is in (can change second conditional later to be more specific. Currently just a placeholder until I figure out a better flag )
     if (this.state.audio instanceof Audio && !this.state.source) {
       let context = new (window.AudioContext || window.webkitAudioContext)();
       let source = context.createMediaElementSource(this.state.audio);
       let analyser = context.createAnalyser();
       let frequencyArray = new Uint8Array(analyser.frequencyBinCount);
+      let timeArray = new Uint8Array(analyser.frequencyBinCount);
+      let beatDetection = new BeatDetection();
       let freqCount = frequencyArray.length;
       let radians = (2 * Math.PI) / freqCount;
       this.setState({
@@ -56,6 +61,8 @@ export class Canvas extends React.Component {
         source,
         analyser,
         frequencyArray,
+        timeArray,
+        beatDetection,
         freqCount,
         radians,
       });
@@ -75,15 +82,16 @@ export class Canvas extends React.Component {
         play: false,
       });
     }
-  }
+  };
 
   animation(canvas) {
     canvas.width = width;
     canvas.height = height;
-    this.state.ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d");
     for (let i = 0; i < this.state.freqCount; i++) {
       let height =
-        this.state.frequencyArray[i] * this.state.visualizerSettings.heightAmplifier;
+        this.state.frequencyArray[i] *
+        this.state.visualizerSettings.heightAmplifier;
 
       const xStart = centerX + Math.cos(this.state.radians * i) * radius;
       const yStart = centerY + Math.sin(this.state.radians * i) * radius;
@@ -98,12 +106,30 @@ export class Canvas extends React.Component {
         xEnd,
         yEnd,
         this.state.frequencyArray[i],
-        this.state.ctx,
+        ctx,
         canvas
       );
+      this.drawBeatInCircle(ctx);
     }
   }
-
+  drawBeatInCircle = (ctx) => {
+    if (this.state.beatDetection.detected) {
+      this.beatRadius = 100;
+    } else {
+      this.beatRadius *= 0.9;
+    }
+    ctx.beginPath();
+    ctx.ellipse(
+      width / 2,
+      height / 2,
+      this.beatRadius,
+      this.beatRadius,
+      0,
+      0,
+      Math.PI * 2
+    );
+    ctx.stroke();
+  };
   drawBar(xStart, yStart, xEnd, yEnd, frequencyAmplitude, ctx, canvas) {
     const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
     gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
@@ -128,14 +154,23 @@ export class Canvas extends React.Component {
 
   tick = () => {
     this.animation(this.state.canvas.current);
-    this.state.analyser.getByteTimeDomainData(this.state.frequencyArray);
+    this.updateFrequencyData();
     this.setState({ rafId: requestAnimationFrame(this.tick) });
   };
 
-  handleHeightAmp() {
-    let heightAmplifier = JSON.parse(window.localStorage.visualizerSettings).heightAmplifier
+  updateFrequencyData = () => {
+    this.state.analyser.getByteFrequencyData(this.state.frequencyArray);
+    this.state.beatDetection.update(this.state.frequencyArray);
+  };
+
+  updateWaveFormData = () => {
+    this.state.analyser.getByteTimeDomainData(this.state.timeArray);
+  };
+  handleHeightAmp = () => {
+    let heightAmplifier = JSON.parse(window.localStorage.visualizerSettings)
+      .heightAmplifier;
     this.setState({ visualizerSettings: { heightAmplifier } });
-  }
+  };
 
   render() {
     if (this.state.source && this.state.analyser) {
