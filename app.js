@@ -1,18 +1,14 @@
-// For production, non-dual build code should be inserted
-
 // create Express server in app
 const express = require("express");
 const app = express();
-
-//path for deployment
-const path = require('path');
 
 // Run locally on 5000, on variable if deployed
 const port = process.env.PORT || 5000
 app.listen(port, () => console.log(`Server is running on port ${port}`));
 
 
-//index route for deployment
+// Let's build differently for deployment
+const path = require('path');
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('frontend/build'));
   app.get('/', (req, res) => {

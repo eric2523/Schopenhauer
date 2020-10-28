@@ -30,7 +30,7 @@ router.post('/uploadSongDB', (req, res) => {
       songUrl: req.body.songUrl
   });
   newSong.save()
-      .then(song => res.json(song));
+      .then(song => res.json({userId: song.userId, title: song.title, fileName: song.fileName, songUrl: song.songUrl}));
 });
 
 module.exports = router;
