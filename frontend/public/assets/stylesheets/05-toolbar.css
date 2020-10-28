@@ -11,7 +11,7 @@
 .viz-toolb-div {
   margin-left: -5%;
   position: absolute;
-  width: 100px;
+  width: 200px;
   height: 100vh;
   background: rgba(24, 24, 24, 0.3);
   border-top-left-radius: 0;
@@ -34,4 +34,40 @@
 .toolbar-item {
   padding: 30px 0 30px 0;
   cursor: pointer;
+  width: 90%;
+}
+
+.toolbar-item-outer-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.toolbar-item-scrub-div {
+  width: 100px;
+}
+
+.scrub-outer-div {
+  padding: 15px 0 15px 0;
+}
+
+.scrub {
+  width: 30px;
+  height: 30px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  display: inline-block;
+  cursor: grab;
+  position: relative;
+  bottom: 10px;
+  left: -10px;
+  z-index: 1;
+}
+
+.scrub:active {
+  cursor: grabbing;
+}
+
+.play, .pause {
+  color: black;
 }
