@@ -89,6 +89,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .carousel {
@@ -112,4 +113,13 @@
 
 .chevron {
   color: black;
+}
+
+.carousel-play {
+  position: absolute;
+  bottom: 10px;
+}
+
+.carousel-item-visualizer > .ui.button {
+  padding: 5px 10px 5px 10px;
 }

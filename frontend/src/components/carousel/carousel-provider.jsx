@@ -21,6 +21,7 @@ class Carousel extends React.Component {
         visibleSlides={3}
         naturalSlideWidth={300}
         naturalSlideHeight={250}
+        infinite={true}
       >
         <Slider>
           <Slide className="carousel-slide" index={0}>

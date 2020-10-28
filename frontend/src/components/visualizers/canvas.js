@@ -143,6 +143,7 @@ class Canvas extends React.Component {
       this.state.source.connect(this.state.analyser);
       this.state.analyser.connect(this.state.context.destination);
     }
+    const buttonText = !this.state.play ? <i class="play icon"></i> : <i class="pause icon"></i>;
 
     let toolbarIndex = null;
     if (this.props.match.path === "/visualizer") {
@@ -157,13 +158,12 @@ class Canvas extends React.Component {
       );
     } else {
       toolbarIndex = (
-        <button onClick={this.togglePlay}>
-          <i class="play icon"></i>
+        <button className="ui button carousel-play" onClick={this.togglePlay}>
+          {buttonText}
         </button>
       );
     }
 
-    const buttonText = !this.state.play ? "Play" : "Pause";
     return (
       <>
         <canvas ref={this.state.canvas} />

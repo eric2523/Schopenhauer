@@ -15,7 +15,7 @@ export const CarouselItem = (props) => {
           <CanvasWithRouter canvasWidth={250} canvasHeight={250} />
       </div>
       <div className="carousel-template-btn">
-        <button className="carousel-item-btn">
+        <button className="ui primary button">
           go to creation 
         </button>
       </div>
