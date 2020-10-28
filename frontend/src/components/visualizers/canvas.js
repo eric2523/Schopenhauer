@@ -1,14 +1,14 @@
 import React from "react";
 import song from "../../audio_files/bensound-goinghigher.mp3";
 import { BeatDetection } from "./beat_detection";
+import { ToolbarIndex } from "../toolbar/toolbar-index";
 
-const width = 500;
-const height = 500;
+const width = 700;
+const height = 700;
 const barWidth = 1;
 const radius = 0;
 const centerX = width / 2;
 const centerY = height / 2;
-const heightAmplifier = 2;
 
 export class Canvas extends React.Component {
   constructor(props) {
@@ -26,7 +26,23 @@ export class Canvas extends React.Component {
       radians: null,
       rafId: null,
       canvas: React.createRef(),
+      visualizerSettings: {
+        width: 700,
+        height: 700,
+        barWidth: 1,
+        radius: 0,
+        centerX: 250,
+        centerY: 250,
+        heightAmplifier: 2,
+      },
     };
+    // this.togglePlay = this.togglePlay.bind(this);
+    // this.handleHeightAmp = this.handleHeightAmp.bind(this);
+  }
+
+  componentDidMount() {
+    let visualizerSettings = JSON.stringify(this.state.visualizerSettings);
+    window.localStorage.setItem("visualizerSettings", visualizerSettings);
   }
 
   togglePlay = () => {
@@ -73,7 +89,9 @@ export class Canvas extends React.Component {
     canvas.height = height;
     const ctx = canvas.getContext("2d");
     for (let i = 0; i < this.state.freqCount; i++) {
-      let height = this.state.frequencyArray[i] * heightAmplifier;
+      let height =
+        this.state.frequencyArray[i] *
+        this.state.visualizerSettings.heightAmplifier;
 
       const xStart = centerX + Math.cos(this.state.radians * i) * radius;
       const yStart = centerY + Math.sin(this.state.radians * i) * radius;
@@ -148,19 +166,31 @@ export class Canvas extends React.Component {
   updateWaveFormData = () => {
     this.state.analyser.getByteTimeDomainData(this.state.timeArray);
   };
+  handleHeightAmp = () => {
+    let heightAmplifier = JSON.parse(window.localStorage.visualizerSettings)
+      .heightAmplifier;
+    this.setState({ visualizerSettings: { heightAmplifier } });
+  };
 
   render() {
     if (this.state.source && this.state.analyser) {
       this.state.source.connect(this.state.analyser);
       this.state.analyser.connect(this.state.context.destination);
     }
+
     const buttonText = !this.state.play ? "Play" : "Pause";
     return (
       <div className="canvas-main-div">
         <div className="canvas-div">
           <canvas ref={this.state.canvas} />
         </div>
-        <button onClick={this.togglePlay}>{buttonText}</button>
+        <div className="viz-toolb-div">
+          <ToolbarIndex
+            settings={this.state.settings}
+            handleHeightAmp={this.handleHeightAmp}
+            togglePlay={this.togglePlay}
+          />
+        </div>
       </div>
     );
   }
