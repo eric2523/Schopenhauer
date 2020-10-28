@@ -27,27 +27,38 @@ class Carousel extends React.Component {
           <h1 className="carousel-title">{carouselTitle}</h1>
         </div>
 
-        <div className="carousel-items">
+        {/* <div className="carousel-items"> */}
           <CarouselProvider
-            naturalSlideWidth={100}
-            naturalSlideHeight={125}
-            totalSlides={3}
+            naturalSlideWidth={50}
+            naturalSlideHeight={1}
+            totalSlides={6}
+            visibleSlides={3}
+            isIntrinsicHeight={true}
           >
             <Slider>
-              <Slide index={0}>
+              <Slide className="carousel-slide" index={0}>
                 <CarouselItem />
               </Slide>
-              <Slide index={1}>
+              <Slide className="carousel-slide" index={1}>
                 <CarouselItem />
               </Slide>
-              <Slide index={2}>
+              <Slide className="carousel-slide" index={2}>
+                <CarouselItem />
+              </Slide>
+              <Slide className="carousel-slide" index={3}>
+                <CarouselItem />
+              </Slide>
+              <Slide className="carousel-slide" index={4}>
+                <CarouselItem />
+              </Slide>
+              <Slide className="carousel-slide" index={5}>
                 <CarouselItem />
               </Slide>
             </Slider>
             <ButtonBack>Back</ButtonBack>
             <ButtonNext>Next</ButtonNext>
           </CarouselProvider>
-        </div>
+        {/* </div> */}
       </div>
     );
   }

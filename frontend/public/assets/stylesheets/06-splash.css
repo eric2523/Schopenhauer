@@ -64,6 +64,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 60vh;
 }
 
 .carousel-header {
@@ -73,4 +74,14 @@
 .carousel-title {
   font-weight: 100;
   letter-spacing: 0.1rem;
+}
+
+.carousel-item-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.25);
+  height: 50vh;
+  border-radius: 5px;
+  margin: 0 5px 0 5px;
 }
