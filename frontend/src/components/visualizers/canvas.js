@@ -3,7 +3,11 @@ import song from "../../audio_files/bensound-goinghigher.mp3";
 import { BeatDetection } from "./beat_detection";
 import { ToolbarIndex } from "../toolbar/toolbar-index";
 import { octave } from "./octave";
-import { averageArray, stdevArray } from "../../util/visualizer_util";
+import {
+  averageArray,
+  detectPitch,
+  stdevArray,
+} from "../../util/visualizer_util";
 
 const width = 700;
 const height = 700;
@@ -97,7 +101,8 @@ export class Canvas extends React.Component {
     canvas.height = height;
     const ctx = canvas.getContext("2d");
     const octaveAmp = octave(this.state.frequencyArray, this.state.context);
-
+    const pitch = detectPitch(octaveAmp);
+    console.table(pitch);
     for (let i = 0; i < 12; i++) {
       let height = octaveAmp[i] * this.state.visualizerSettings.heightAmplifier;
 
