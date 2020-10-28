@@ -1,9 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export const Creations = (props) => {
-  return(
-    <div>
-      Creations
-    </div>
-  )
-}
+  return <div>Creations</div>;
+};

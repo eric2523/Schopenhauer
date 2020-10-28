@@ -1,20 +1,24 @@
 function animation(canvas, canvasDimensions, state) {
-
   canvas.width = canvasDimensions.width;
   canvas.height = canvasDimensions.height;
   const ctx = canvas.getContext("2d");
-  
+
   for (let i = 0; i < state.freqCount; i++) {
     let height =
-      state.frequencyArray[i] *
-      state.visualizerSettings.heightAmplifier;
+      state.frequencyArray[i] * state.visualizerSettings.heightAmplifier;
 
-    const xStart = canvasDimensions.centerX + Math.cos(state.radians * i) * canvasDimensions.radius;
-    const yStart = canvasDimensions.centerY + Math.sin(state.radians * i) * canvasDimensions.radius;
+    const xStart =
+      canvasDimensions.centerX +
+      Math.cos(state.radians * i) * canvasDimensions.radius;
+    const yStart =
+      canvasDimensions.centerY +
+      Math.sin(state.radians * i) * canvasDimensions.radius;
     const xEnd =
-      canvasDimensions.centerX + Math.cos(state.radians * i) * (canvasDimensions.radius + height);
+      canvasDimensions.centerX +
+      Math.cos(state.radians * i) * (canvasDimensions.radius + height);
     const yEnd =
-      canvasDimensions.centerY + Math.sin(state.radians * i) * (canvasDimensions.radius + height);
+      canvasDimensions.centerY +
+      Math.sin(state.radians * i) * (canvasDimensions.radius + height);
 
     drawBar(
       xStart,
@@ -31,7 +35,7 @@ function animation(canvas, canvasDimensions, state) {
   }
 }
 
-function drawBeatInCircle (ctx, canvasDimensions, state) {
+function drawBeatInCircle(ctx, canvasDimensions, state) {
   var beatRadius;
   if (state.beatDetection.detected) {
     beatRadius = 100;
@@ -51,26 +55,29 @@ function drawBeatInCircle (ctx, canvasDimensions, state) {
   ctx.stroke();
 }
 
-function drawBar(xStart, yStart, xEnd, yEnd, frequencyAmplitude, ctx, canvas, canvasDimensions) {
+function drawBar(
+  xStart,
+  yStart,
+  xEnd,
+  yEnd,
+  frequencyAmplitude,
+  ctx,
+  canvas,
+  canvasDimensions
+) {
   const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
   gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
   gradient.addColorStop(1, "rgba(204, 83, 51, 1)");
   ctx.fillStyle = gradient;
 
   const lineColor =
-    "rgb(" +
-    frequencyAmplitude +
-    ", " +
-    frequencyAmplitude +
-    ", " +
-    205 +
-    ")";
+    "rgb(" + frequencyAmplitude + ", " + frequencyAmplitude + ", " + 205 + ")";
   ctx.strokeStyle = lineColor;
   ctx.lineWidth = canvasDimensions.barWidth;
   ctx.beginPath();
   ctx.moveTo(xStart, yStart);
   ctx.lineTo(xEnd, yEnd);
   ctx.stroke();
-};
+}
 
 export default animation;

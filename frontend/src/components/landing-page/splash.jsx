@@ -1,11 +1,10 @@
-import React from 'react'
-import {Link} from "react-router-dom"
+import React from "react";
+import { Link } from "react-router-dom";
 
 export const Splash = (props) => {
   return (
     <div className="splash-outer-div">
-      <div className="splash-img-overlay">
-      </div>
+      <div className="splash-img-overlay"></div>
       <div className="splash-title">
         <div className="main-title">
           <h1 className="splash-title">Schopenhauer</h1>
@@ -16,11 +15,9 @@ export const Splash = (props) => {
       </div>
       <div className="splash-btn">
         <Link to="/visualizer">
-          <button className="ui primary button">
-            GET STARTED NOW
-          </button>
+          <button className="ui primary button">GET STARTED NOW</button>
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};

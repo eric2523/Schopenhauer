@@ -69,6 +69,7 @@
   cursor: grabbing;
 }
 
-.play, .pause {
+.play,
+.pause {
   color: black;
 }

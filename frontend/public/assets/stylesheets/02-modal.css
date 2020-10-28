@@ -10,7 +10,7 @@
 }
 
 .modal-child {
-  background-color:#313030;
+  background-color: #313030;
   width: 350px;
   text-align: left;
   border-radius: 8px;
@@ -18,17 +18,17 @@
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.modal-form{
+.modal-form {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 5px 20px;
 }
 
-.modal-form form{
+.modal-form form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,56 +36,57 @@
   margin-bottom: 20px;
 }
 
-.error{
+.error {
   color: red;
   justify-self: center;
 }
 
-.x{
+.x {
   display: flex;
   justify-content: flex-end;
 }
 
-.x div{
+.x div {
   cursor: pointer;
   padding: 10px 10px;
 }
 
-#modal-header{
+#modal-header {
   display: flex;
   justify-content: center;
   margin-top: 5px;
   color: rgb(236, 236, 236);
 }
 
-form.ui.form input[type=text], form.ui.form input[type=password]{
+form.ui.form input[type="text"],
+form.ui.form input[type="password"] {
   margin-bottom: 20px;
 }
 
-form.ui.form button[type=submit]{
+form.ui.form button[type="submit"] {
   margin-bottom: 20px;
   width: 111px;
 }
 
-.modal-toggle{
-  display: flex; 
+.modal-toggle {
+  display: flex;
   margin-top: 20px;
 }
 
-.modal-toggle button.ui.button{
+.modal-toggle button.ui.button {
   margin: 0;
   width: 50%;
   border-radius: 0;
   background-color: rgb(236, 236, 236);
   /* color: #a7a7a7; */
-  opacity: .45;
+  opacity: 0.45;
   border-bottom-right-radius: 8px;
   /* border-top: .2px solid #b9b9b9; */
   /* color: #fff; */
   box-shadow: inset 1px 1px 5px #616161;
 }
 
-.modal-toggle button.ui.button:disabled{
+.modal-toggle button.ui.button:disabled {
   color: #5a5a5a;
   opacity: 1 !important;
   border-top: none;
@@ -93,7 +94,7 @@ form.ui.form button[type=submit]{
   color: rgb(236, 236, 236);
 }
 
-.modal-toggle button.ui.button:first-child{
+.modal-toggle button.ui.button:first-child {
   /* border-right: .2px solid #b9b9b9; */
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 0px;
