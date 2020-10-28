@@ -4,28 +4,25 @@ import { BeatDetection } from "./beat_detection";
 import { ToolbarIndex } from "../toolbar/toolbar-index";
 import { withRouter } from "react-router-dom";
 
-const barWidth = 1;
-const radius = 0;
 import { octave } from "./octave";
 import {
   averageArray,
   detectPitch,
   stdevArray,
 } from "../../util/visualizer_util";
-
 import hal_visualizer_1 from "./hal_visualizer_1";
-import yuehan_visualizer_1 from "./yuehan_visualizer_1"
+import yuehan_visualizer_1 from "./yuehan_visualizer_1";
 
+const barWidth = 1;
+const radius = 0;
 const canvasDimensions = {
   width: 700,
   height: 700,
   barWidth: 1,
   radius: 0,
   centerX: 350,
-  centerY: 350
+  centerY: 350,
 };
-
-
 
 class Canvas extends React.Component {
   constructor(props) {
@@ -76,7 +73,7 @@ class Canvas extends React.Component {
       console.log(frequencyArray);
       let timeArray = new Uint8Array(analyser.frequencyBinCount);
       console.log(timeArray);
-      
+
       let beatDetection = new BeatDetection();
       let freqCount = frequencyArray.length;
       let radians = (2 * Math.PI) / freqCount;
@@ -113,62 +110,15 @@ class Canvas extends React.Component {
   animation(canvas) {
     canvas.width = this.props.canvasWidth;
     canvas.height = this.props.canvasHeight;
-    this.state.ctx = canvas.getContext("2d");
     const ctx = canvas.getContext("2d");
     const octaveAmp = octave(this.state.frequencyArray, this.state.context);
     const pitch = detectPitch(octaveAmp);
     console.table(pitch);
-    for (let i = 0; i < 12; i++) {
-      let height = octaveAmp[i] * this.state.visualizerSettings.heightAmplifier;
 
-      const xStart = centerX + Math.cos(this.state.octaveRadians * i) * radius;
-      const yStart = centerY + Math.sin(this.state.octaveRadians * i) * radius;
-      const xEnd =
-        centerX + Math.cos(this.state.octaveRadians * i) * (radius + height);
-      const yEnd =
-        centerY + Math.sin(this.state.octaveRadians * i) * (radius + height);
-
-      // this.drawBar(
-      //   xStart,
-      //   yStart,
-      //   xEnd,
-      //   yEnd,
-      //   this.state.frequencyArray[i],
-      //   ctx,
-      //   canvas
-      // );
-
-      this.drawOctaves(xStart, yStart, xEnd, yEnd, octaveAmp, ctx, canvas);
-    }
-
-    for (let i = 0; i < this.state.freqCount; i++) {
-      let height =
-        this.state.frequencyArray[i] *
-        this.state.visualizerSettings.heightAmplifier;
-
-      let centerX = this.props.canvasWidth / 2;
-      let centerY = this.props.canvasHeight / 2;
-
-      const xStart = centerX + Math.cos(this.state.radians * i) * radius;
-      const yStart = centerY + Math.sin(this.state.radians * i) * radius;
-      const xEnd =
-        centerX + Math.cos(this.state.radians * i) * (radius + height);
-      const yEnd =
-        centerY + Math.sin(this.state.radians * i) * (radius + height);
-
-      this.drawBar(
-        xStart,
-        yStart,
-        xEnd,
-        yEnd,
-        this.state.frequencyArray[i],
-        ctx,
-        canvas
-      );
-    }
     this.drawBeatInCircle(ctx);
   }
   drawBeatInCircle = (ctx) => {
+    const { width, height } = this.state.visualizerSettings;
     if (this.state.beatDetection.detected) {
       this.beatRadius = 100;
     } else {
@@ -208,7 +158,6 @@ class Canvas extends React.Component {
     ctx.stroke();
 
     yuehan_visualizer_1(canvas, canvasDimensions, this.state);
-
   }
 
   drawOctaves(xStart, yStart, xEnd, yEnd, frequencyAmplitude, ctx, canvas) {
@@ -263,7 +212,11 @@ class Canvas extends React.Component {
       this.state.source.connect(this.state.analyser);
       this.state.analyser.connect(this.state.context.destination);
     }
-    const buttonText = !this.state.play ? <i class="play icon"></i> : <i class="pause icon"></i>;
+    const buttonText = !this.state.play ? (
+      <i class="play icon"></i>
+    ) : (
+      <i class="pause icon"></i>
+    );
 
     let toolbarIndex = null;
     if (this.props.match.path === "/visualizer") {

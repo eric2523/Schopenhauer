@@ -1,6 +1,6 @@
-import React from 'react'
-import {CarouselIndex} from "./carousel"
-import { Splash } from './splash'
+import React from "react";
+import { CarouselIndex } from "./carousel";
+import { Splash } from "./splash";
 
 export const LandingPageIndex = (props) => {
   return (
@@ -8,5 +8,5 @@ export const LandingPageIndex = (props) => {
       <Splash />
       <CarouselIndex />
     </div>
-  )
-}
+  );
+};
