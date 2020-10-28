@@ -16,7 +16,7 @@ export class Canvas extends React.Component {
         radius: 0,
         centerX: 250,
         centerY: 250,
-        // finished controls 
+        // finished controls
         heightAmplifier: 2,
       },
       source: null,
@@ -78,10 +78,11 @@ export class Canvas extends React.Component {
     this.state.ctx = canvas.getContext("2d");
     for (let i = 0; i < this.state.freqCount; i++) {
       let height =
-        this.state.frequencyArray[i] * this.state.visualizerSettings.heightAmplifier;
-      
-      let centerX = this.props.canvasWidth / 2
-      let centerY = this.props.canvasHeight / 2
+        this.state.frequencyArray[i] *
+        this.state.visualizerSettings.heightAmplifier;
+
+      let centerX = this.props.canvasWidth / 2;
+      let centerY = this.props.canvasHeight / 2;
 
       const xStart = centerX + Math.cos(this.state.radians * i) * radius;
       const yStart = centerY + Math.sin(this.state.radians * i) * radius;
@@ -131,7 +132,8 @@ export class Canvas extends React.Component {
   };
 
   handleHeightAmp() {
-    let heightAmplifier = JSON.parse(window.localStorage.visualizerSettings).heightAmplifier
+    let heightAmplifier = JSON.parse(window.localStorage.visualizerSettings)
+      .heightAmplifier;
     this.setState({ visualizerSettings: { heightAmplifier } });
   }
 
@@ -141,12 +143,9 @@ export class Canvas extends React.Component {
       this.state.analyser.connect(this.state.context.destination);
     }
 
-    const buttonText = !this.state.play ? "Play" : "Pause";
-    return (
-      <div className="canvas-main-div">
-        <div className="canvas-div">
-          <canvas ref={this.state.canvas} />
-        </div>
+    let toolbarIndex = null;
+    if (this.props.match.path === "/visualizer") {
+      toolbarIndex = (
         <div className="viz-toolb-div">
           <ToolbarIndex
             settings={this.state.settings}
@@ -154,7 +153,15 @@ export class Canvas extends React.Component {
             togglePlay={this.togglePlay}
           />
         </div>
-      </div>
+      );
+    }
+
+    const buttonText = !this.state.play ? "Play" : "Pause";
+    return (
+      <>
+        <canvas ref={this.state.canvas} />
+        {toolbarIndex}
+      </>
     );
   }
 }
