@@ -1,3 +1,60 @@
 .main-div {
   background-color: #313030;
 }
+
+.splash-outer-div {
+  background-image: url("https://media0.giphy.com/media/14urQKQOKld6CQiiMB/giphy.gif?cid=ecf05e47h2mr9mromzan4s3zv4watc5a5d006ejc2w6hjf4p&rid=giphy.gif");
+  background-color: black;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  fill: black;
+  position: relative;
+}
+
+.splash-img-overlay {
+  position: absolute;
+  height: 50vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.main-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.subtitle {
+  margin: 10px 0 10px 0;
+}
+
+.splash-title {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 80px;
+  text-shadow: 2px 2px 8px black;
+  font-weight: 500;
+  z-index: 1;
+}
+
+.splash-subtitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0.5rem;
+}
+
+.splash-btn {
+  z-index: 1;
+  margin: 10px 0 10px 0;
+}
