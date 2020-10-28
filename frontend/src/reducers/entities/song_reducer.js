@@ -7,7 +7,7 @@ export const SongReducer = (state = _nullSong, action) => {
   let newState = Object.assign({}, state);
   switch(action.type){
     case RECEIVE_CURRENT_SONG:
-      newState.currentSong = action.song;
+      newState.currentSong = action.song.data;
       return newState;
     case CLEAR_SONG:
       return _nullSong;

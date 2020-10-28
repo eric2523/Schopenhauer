@@ -6,8 +6,6 @@ export const RECEIVE_SONG_UPLOAD_ERROR = "RECEIVE_SONG_UPLOAD_ERROR";
 export const RECEIVE_SONG_DELETE_ERROR = "RECEIVE_SONG_DELETE_ERROR"
 
 const receiveCurrentSong = (song) => {
-  debugger;
-  console.log(song);
   return {
     type: RECEIVE_CURRENT_SONG,
     song
