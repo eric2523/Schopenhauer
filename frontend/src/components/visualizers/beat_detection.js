@@ -4,6 +4,13 @@
 // Wait for the Hold Time before detecting for the next beat. This can help reduce false positives.
 // Inspired by p5 sound library and Felix Turner
 
+// using float32 will provide actual deicbel , the range is close enough to use linear average to achieve the same effect
+// const averageAmp = Math.log10(
+//   frequencyArray.reduce((acc, amp) => {
+//     return acc + 10 ** (amp / 10);
+//   }, 0) / frequencyArray.length
+// );
+
 import { averageArray } from "../../util/visualizer_util";
 
 export class BeatDetection {
@@ -28,13 +35,6 @@ export class BeatDetection {
 
   update(frequencyArray) {
     const averageAmp = averageArray(frequencyArray);
-
-    // using float32 will provide actual deicbel , the range is close enough to use linear average to achieve the same effect
-    // const averageAmp = Math.log10(
-    //   frequencyArray.reduce((acc, amp) => {
-    //     return acc + 10 ** (amp / 10);
-    //   }, 0) / frequencyArray.length
-    // );
 
     this.currentAmp = averageAmp;
     if (averageAmp > this.dynamicThreshold && averageAmp - this.prevAmp > 0) {
