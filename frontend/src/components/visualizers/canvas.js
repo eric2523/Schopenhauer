@@ -12,10 +12,10 @@ class Canvas extends React.Component {
     let visualizer;
     const binCount = 1024;
     this.canvas = React.createRef();
-    switch (props.visualizer.type) {
+    switch (this.props.match.params.id) {
       case "frequency":
-      default:
         visualizer = new FrequencyVisualizer();
+      default:
         break;
     }
     this.state = {
