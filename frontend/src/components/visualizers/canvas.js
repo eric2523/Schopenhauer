@@ -4,25 +4,21 @@ import { BeatDetection } from "./beat_detection";
 import { ToolbarIndex } from "../toolbar/toolbar-index";
 import { withRouter } from "react-router-dom";
 
-import { octave } from "./octave";
-import { detectPitch } from "../../util/visualizer_util";
+import { frequencyVisualizer } from "./basic_frequency_visualizer";
 
-import hal_visualizer_1 from "./hal_visualizer_1";
-import { frequencyVisualizer } from "./yuehan_visualizer_1";
-
-const binCount = 1024;
 class Canvas extends React.Component {
   constructor(props) {
     // props contain canvasWidth & canvasHeight
-
     super(props);
+    let visualizer;
+    const binCount = 1024;
     switch (props.visualizerType) {
       case "frequency":
       default:
-        this.state.visualizer = new frequencyVisualizer();
+        visualizer = new frequencyVisualizer({ binCount });
         break;
     }
-
+    this.canvas = React.createRef();
     this.state = {
       //needed
       // width: this.props.canvasWidth,
@@ -53,9 +49,11 @@ class Canvas extends React.Component {
       analyser: null,
       frequencyArray: new Uint8Array(binCount),
       waveformArray: new Uint8Array(binCount),
+      binCount,
       rafId: null,
-      canvas: React.createRef(),
+      visualizer,
     };
+
     this.togglePlay = this.togglePlay.bind(this);
     this.handleHeightAmp = this.handleHeightAmp.bind(this);
     this.tick = this.tick.bind(this);
@@ -77,19 +75,10 @@ class Canvas extends React.Component {
       const source = audioContext.createMediaElementSource(this.state.audio);
       const analyser = audioContext.createAnalyser();
 
-      // let freqCount = frequencyArray.length;
-      // let radians = (2 * Math.PI) / freqCount;
-      // let octaveRadians = (2 * Math.PI) / 12;
       this.setState({
         audioContext,
         source,
         analyser,
-        // frequencyArray,
-        // waveformArray,
-        // beatDetection,
-        // freqCount,
-        // radians,
-        // octaveRadians,
       });
     }
 
@@ -110,18 +99,14 @@ class Canvas extends React.Component {
   }
 
   animation(canvas) {
-    // const animationContext = canvas.getContext("2d");
-    // const octaveAmp = octave(
-    //   this.state.frequencyArray,
-    //   this.state.audioContext
-    // );
-    // const pitch = detectPitch(octaveAmp);
-    this.state.visualizer.update(canvas, this.state);
+    canvas.width = this.props.canvasWidth;
+    canvas.height = this.props.canvasHeight;
+    this.state.visualizer.animate(canvas, this.state);
   }
 
   tick() {
-    this.animation(this.state.canvas.current);
-    this.updateFrequencyData();
+    this.animation(this.canvas.current);
+    this.updateAllData();
     this.setState({ rafId: requestAnimationFrame(this.tick) });
   }
 
@@ -177,7 +162,7 @@ class Canvas extends React.Component {
 
     return (
       <>
-        <canvas ref={this.state.canvas} />
+        <canvas ref={this.canvas} />
         {toolbarIndex}
       </>
     );
