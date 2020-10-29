@@ -28,19 +28,35 @@ router.post(
   }
 );
 
+router.get("/", (req, res) => {
+  Visualizer.find({ userId: req.query.user_id })
+    .then((visualizers) => res.json(visualizers))
+    .catch((err) => restart.status(404).json(err));
+});
 
 router.patch(
   "/update",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const query = { _id: req.visualizer.id };
-    Visualizer.findOneAndUpdate(query, {
+    const filter = { _id: req.visualizer.id };
+    const update = {
       name: req.body.name,
       typeSettings: req.body.typeSettings,
       generalSettings: req.body.generalSettings,
       songId: req.body.songId,
-    })
+    };
+    Visualizer.findOneAndUpdate(filter, update, { new: true })
       .then((visualizer) => res.json(visualizer))
       .catch((err) => res.status(422).json(err));
+  }
+);
+
+router.delete(
+  "/delete",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Visualizer.findByIdAndDelete(req.visualizerId)
+      .then(() => res.status(200))
+      .catch((err) => res.status(404).json(err));
   }
 );
