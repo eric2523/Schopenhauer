@@ -2,7 +2,7 @@ export class FrequencyVisualizer {
   animate(canvas, state) {
     const radians = (Math.PI * 2) / state.typeSettings.binCount;
     const ctx = canvas.getContext("2d");
-
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < state.binCount; i++) {
       let height =
         state.waveformArray[i] * state.generalSettings.heightAmplifier;
