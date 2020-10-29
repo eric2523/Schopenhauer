@@ -1,83 +1,109 @@
-function animation(canvas, canvasDimensions, state) {
-  canvas.width = canvasDimensions.width;
-  canvas.height = canvasDimensions.height;
-  const ctx = canvas.getContext("2d");
-
-  for (let i = 0; i < state.freqCount; i++) {
-    let height =
-      state.frequencyArray[i] * state.visualizerSettings.heightAmplifier;
-
-    const xStart =
-      canvasDimensions.centerX +
-      Math.cos(state.radians * i) * canvasDimensions.radius;
-    const yStart =
-      canvasDimensions.centerY +
-      Math.sin(state.radians * i) * canvasDimensions.radius;
-    const xEnd =
-      canvasDimensions.centerX +
-      Math.cos(state.radians * i) * (canvasDimensions.radius + height);
-    const yEnd =
-      canvasDimensions.centerY +
-      Math.sin(state.radians * i) * (canvasDimensions.radius + height);
-
-    drawBar(
-      xStart,
-      yStart,
-      xEnd,
-      yEnd,
-      state.frequencyArray[i],
-      ctx,
-      canvas,
-      canvasDimensions
-    );
-
-    drawBeatInCircle(ctx, canvasDimensions, state);
-  }
+export class frequencyVisualizer {
+  constructor(props) {}
 }
 
-function drawBeatInCircle(ctx, canvasDimensions, state) {
-  var beatRadius;
-  if (state.beatDetection.detected) {
-    beatRadius = 100;
-  } else {
-    beatRadius *= 0.9;
-  }
-  ctx.beginPath();
-  ctx.ellipse(
-    canvasDimensions.width / 2,
-    canvasDimensions.height / 2,
-    beatRadius,
-    beatRadius,
-    0,
-    0,
-    Math.PI * 2
-  );
-  ctx.stroke();
-}
+// function animation(canvas, state) {
+//   debugger;
+//   // canvas.width = state.visualizerSettings.width;
+//   // canvas.height = state.visualizerSettings.height;
+//   const ctx = canvas.getContext("2d");
 
-function drawBar(
-  xStart,
-  yStart,
-  xEnd,
-  yEnd,
-  frequencyAmplitude,
-  ctx,
-  canvas,
-  canvasDimensions
-) {
-  const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-  gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
-  gradient.addColorStop(1, "rgba(204, 83, 51, 1)");
-  ctx.fillStyle = gradient;
+//   for (let i = 0; i < state.freqCount; i++) {
+//     let height =
+//       state.frequencyArray[i] * state.visualizerSettings.heightAmplifier;
 
-  const lineColor =
-    "rgb(" + frequencyAmplitude + ", " + frequencyAmplitude + ", " + 205 + ")";
-  ctx.strokeStyle = lineColor;
-  ctx.lineWidth = canvasDimensions.barWidth;
-  ctx.beginPath();
-  ctx.moveTo(xStart, yStart);
-  ctx.lineTo(xEnd, yEnd);
-  ctx.stroke();
-}
+//     const xStart =
+//       state.visualizerSettings.centerX +
+//       Math.cos(state.radians * i) * state.visualizerSettings.radius;
+//     const yStart =
+//       state.visualizerSettings.centerY +
+//       Math.sin(state.radians * i) * state.visualizerSettings.radius;
+//     const xEnd =
+//       state.visualizerSettings.centerX +
+//       Math.cos(state.radians * i) * (state.visualizerSettings.radius + height);
+//     const yEnd =
+//       state.visualizerSettings.centerY +
+//       Math.sin(state.radians * i) * (state.visualizerSettings.radius + height);
 
-export default animation;
+//     drawBar(
+//       xStart,
+//       yStart,
+//       xEnd,
+//       yEnd,
+//       state.frequencyArray[i],
+//       ctx,
+//       canvas,
+//       state.visualizerSettings
+//     );
+
+//     drawBeatInCircle(ctx, state.visualizerSettings, state);
+//   }
+// }
+
+// function drawBeatInCircle(ctx, state.visualizerSettings, state) {
+//   const beatRadius;
+//   if (state.beatDetection.detected) {
+//     beatRadius = 100;
+//   } else {
+//     beatRadius *= 0.9;
+//   }
+//   ctx.beginPath();
+//   ctx.ellipse(
+//     state.visualizerSettings.width / 2,
+//     state.visualizerSettings.height / 2,
+//     beatRadius,
+//     beatRadius,
+//     0,
+//     0,
+//     Math.PI * 2
+//   );
+//   ctx.stroke();
+// }
+
+// function drawBar(
+//   xStart,
+//   yStart,
+//   xEnd,
+//   yEnd,
+//   frequencyAmplitude,
+//   ctx,
+//   canvas,
+//   state.visualizerSettings
+// ) {
+//   const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+//   gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
+//   gradient.addColorStop(1, "rgba(204, 83, 51, 1)");
+//   ctx.fillStyle = gradient;
+
+//   const lineColor =
+//     "rgb(" + frequencyAmplitude + ", " + frequencyAmplitude + ", " + 205 + ")";
+//   ctx.strokeStyle = lineColor;
+//   ctx.lineWidth = state.visualizerSettings.barWidth;
+//   ctx.beginPath();
+//   ctx.moveTo(xStart, yStart);
+//   ctx.lineTo(xEnd, yEnd);
+//   ctx.stroke();
+// }
+
+// drawOctaves(xStart, yStart, xEnd, yEnd, frequencyAmplitude, ctx, canvas) {
+//   const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+//   gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
+//   gradient.addColorStop(1, "rgba(204, 83, 51, 1)");
+//   ctx.fillStyle = gradient;
+
+//   const lineColor =
+//     "rgb(" +
+//     frequencyAmplitude +
+//     ", " +
+//     frequencyAmplitude +
+//     ", " +
+//     205 +
+//     ")";
+//   ctx.strokeStyle = lineColor;
+//   ctx.lineWidth = barWidth;
+//   ctx.beginPath();
+//   ctx.moveTo(xStart, yStart);
+//   ctx.lineTo(xEnd, yEnd);
+//   ctx.stroke();
+// }
+// export default animation;
