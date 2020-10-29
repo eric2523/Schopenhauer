@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import {ProfileBio} from "./profile-bio"
 
 class ProfileIndex extends React.Component {
   constructor(props){
@@ -10,6 +11,7 @@ class ProfileIndex extends React.Component {
     return(
       <div>
         Profile index
+        <ProfileBio />
       </div>
     )
   }
