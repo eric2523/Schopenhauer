@@ -136,11 +136,9 @@
 }
 
 .slick-prev {
-  left: 3% !important;
   z-index: 1;
 }
 .slick-next {
-  right: 3% !important;
   z-index: 1;
 }
 
@@ -149,5 +147,10 @@
 }
 
 .slick-slide {
-  padding: 0 15px 0 15px;
+  padding: 0 35px 0 35px;
+}
+
+.slide-wrap {
+  width: 85%;
+  margin: 0 auto;
 }

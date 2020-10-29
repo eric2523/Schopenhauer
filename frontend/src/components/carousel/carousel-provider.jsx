@@ -15,7 +15,7 @@ export const Carousel = (props) => {
     dots: true,
   };
   return (
-    <div>
+    <div className="slide-wrap">
       <Slider {...settings}>
         <div className="div-test">
           <h3>test</h3>
