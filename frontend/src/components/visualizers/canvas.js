@@ -4,7 +4,7 @@ import { BeatDetection } from "./beat_detection";
 import { ToolbarIndex } from "../toolbar/toolbar-index";
 import { withRouter } from "react-router-dom";
 
-import { frequencyVisualizer } from "./basic_frequency_visualizer";
+import { FrequencyVisualizer } from "./basic_frequency_visualizer";
 import { SphereVisualizer } from "./nate_visualizer_1";
 
 class Canvas extends React.Component {
@@ -17,35 +17,17 @@ class Canvas extends React.Component {
     switch (props.visualizer.type) {
       case "frequency":
       default:
-        // visualizer = new SphereVisualizer()
-        visualizer = new frequencyVisualizer(props.visualizer.settings);
+        visualizer = new FrequencyVisualizer();
         break;
     }
     this.state = {
       //needed
-      // width: this.props.canvasWidth,
-      // height: this.props.canvasHeight,
-      visualizerSettings: props.visualizer.settings,
-      globalSettings: {
-        //for canvas settings
-
-        centerX: this.props.canvasWidth / 2,
-        centerY: this.props.canvasHeight / 2,
-
-        //for any bar
-        barWidth: 1,
-
-        //for any circular object
-        radius: 0,
-
-        // finished controls
-        heightAmplifier: 0.5,
-      },
+      typeSettings: props.visualizer.typeSettings,
+      generalSettings: props.visualizer.generalSettings,
 
       //tbd
       play: false,
       audio: new Audio(song),
-
       beatDetection: new BeatDetection(),
       audioContext: null,
       source: null,
@@ -102,8 +84,8 @@ class Canvas extends React.Component {
   }
 
   animation(canvas) {
-    canvas.width = this.props.canvasWidth;
-    canvas.height = this.props.canvasHeight;
+    // canvas.width = this.props.canvasWidth;
+    // canvas.height = this.props.canvasHeight;
     this.state.visualizer.animate(canvas, this.state);
   }
 
@@ -130,7 +112,7 @@ class Canvas extends React.Component {
   handleHeightAmp() {
     let heightAmplifier = JSON.parse(window.localStorage.visualizerSettings)
       .heightAmplifier;
-    this.setState({ visualizerSettings: { heightAmplifier } });
+    this.setState({ generalSettings: { heightAmplifier } });
   }
 
   render() {
@@ -165,7 +147,11 @@ class Canvas extends React.Component {
 
     return (
       <>
-        <canvas ref={this.canvas} />
+        <canvas
+          ref={this.canvas}
+          height={this.props.canvasHeight}
+          width={this.props.canvasWidth}
+        />
         {toolbarIndex}
       </>
     );
