@@ -56,9 +56,8 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     console.log("in delete");
-    console.log(req.body.id);
-
-    Visualizer.findByIdAndDelete(req.body.id)
+    console.log(req.query.id);
+    Visualizer.findByIdAndDelete(req.query.id)
       .then(() => res.status(200).json("success!"))
       .catch((err) => res.status(404).json(err));
   }
