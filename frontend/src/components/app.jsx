@@ -20,7 +20,7 @@ export const App = () => {
       <SongUploadModal />
       <UserAuthModal />
       <Switch>
-        <Route exact path="/visualizer" component={Visualizer} />
+        <Route exact path="/visualizer/:id" component={Visualizer} />
         <Route exact path="/profile" component={ProfilePage} />
         <Route path="/" component={LandingPageIndex} />
         <Redirect to="/" />
