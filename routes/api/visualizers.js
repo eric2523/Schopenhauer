@@ -28,3 +28,19 @@ router.post(
   }
 );
 
+
+router.patch(
+  "/update",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const query = { _id: req.visualizer.id };
+    Visualizer.findOneAndUpdate(query, {
+      name: req.body.name,
+      typeSettings: req.body.typeSettings,
+      generalSettings: req.body.generalSettings,
+      songId: req.body.songId,
+    })
+      .then((visualizer) => res.json(visualizer))
+      .catch((err) => res.status(422).json(err));
+  }
+);
