@@ -18,9 +18,9 @@ export class ToolbarIndex extends React.Component {
 
   render() {
     const buttonText = !this.state.play ? (
-      <i class="play icon"></i>
+      <i className="play icon"></i>
     ) : (
-      <i class="pause icon"></i>
+      <i className="pause icon"></i>
     );
 
     return (
@@ -31,7 +31,7 @@ export class ToolbarIndex extends React.Component {
             type="heightAmplifier"
             handleHeightAmp={this.props.handleHeightAmp}
           />
-          <button onClick={this.handleClick} class="ui button">
+          <button onClick={this.handleClick} className="ui button">
             {buttonText}
           </button>
         </ul>

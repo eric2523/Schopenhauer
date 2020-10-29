@@ -45,10 +45,10 @@ class Carousel extends React.Component {
         </Slider>
         <div className="carousel-btns">
           <ButtonBack className="ui button carousel-btn">
-            <i class="left chevron icon"></i>
+            <i className="left chevron icon"></i>
           </ButtonBack>
           <ButtonNext className="ui button carousel-btn">
-            <i class="right chevron icon"></i>
+            <i className="right chevron icon"></i>
           </ButtonNext>
         </div>
       </CarouselProvider>
