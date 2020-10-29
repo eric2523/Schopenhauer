@@ -1,6 +1,8 @@
 import { SongReducer } from "./song_reducer";
 import { combineReducers } from "redux";
+import { usersReducer } from "./users_reducer";
 
 export const EntitiesReducer = combineReducers({
-  songs: SongReducer,
+  song: SongReducer,
+  users: usersReducer
 });

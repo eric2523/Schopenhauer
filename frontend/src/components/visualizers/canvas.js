@@ -1,9 +1,8 @@
 import React from "react";
 import song from "../../audio_files/bensound-goinghigher.mp3";
 import { BeatDetection } from "./beat_detection";
-import { ToolbarIndex } from "../toolbar/toolbar-index";
 import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 
 
 import { FrequencyVisualizer } from "./basic_frequency_visualizer";
@@ -18,10 +17,11 @@ class Canvas extends React.Component {
     let visualizer;
     const binCount = 1024;
     this.canvas = React.createRef();
-    switch (props.visualizer.type) {
+    switch (this.props.match.params.id) {
       case "frequency":
-      default:
         visualizer = new FrequencyVisualizer();
+        break;
+      default:
         break;
     }
 
@@ -30,6 +30,8 @@ class Canvas extends React.Component {
     this.audio.src = this.props.song.songUrl
 
     this.state = {
+      // visualizer: {}
+
       //needed
       typeSettings: props.visualizer.typeSettings,
       generalSettings: props.visualizer.generalSettings,
@@ -50,7 +52,7 @@ class Canvas extends React.Component {
     };
 
     this.togglePlay = this.togglePlay.bind(this);
-    this.handleHeightAmp = this.handleHeightAmp.bind(this);
+    // this.handleHeightAmp = this.handleHeightAmp.bind(this);
     this.tick = this.tick.bind(this);
     this.updateFrequencyData = this.updateFrequencyData.bind(this);
     this.updateWaveformData = this.updateWaveformData.bind(this);
@@ -74,12 +76,6 @@ class Canvas extends React.Component {
     }
   }
 
-  componentDidMount() {
-    let visualizerSettings = JSON.stringify(this.state.visualizerSettings);
-    window.localStorage.setItem("visualizerSettings", visualizerSettings);
-  }
-
-
   togglePlay() {
 
     // checks if audio input is in (can change second conditional later to be more specific. Currently just a placeholder until I figure out a better flag )
@@ -96,7 +92,7 @@ class Canvas extends React.Component {
         analyser,
       });
     }
-
+    console.log(this.state.frequencyArray);
     if (!this.state.play) {
       this.audio.play();
       let rafId = requestAnimationFrame(this.tick);
@@ -139,46 +135,18 @@ class Canvas extends React.Component {
     this.updateWaveformData();
   }
 
-  handleHeightAmp() {
-    let heightAmplifier = JSON.parse(window.localStorage.visualizerSettings)
-      .heightAmplifier;
-    this.setState({ generalSettings: { heightAmplifier } });
-  }
-
   render() {
     
     if (this.state.source && this.state.analyser) {
       this.state.source.connect(this.state.analyser);
       this.state.analyser.connect(this.state.audioContext.destination);
     }
+
     const buttonText = !this.state.play ? (
-      <i className="play icon"></i>
+      <i className="play icon white-audio-icon"></i>
     ) : (
-      <i className="pause icon"></i>
+      <i className="pause icon white-audio-icon"></i>
     );
-    if(!this.state.play){
-      console.log(this.state.play)
-    }
-    let toolbarIndex = null;
-    if (this.props.match.path === "/visualizer") {
-      debugger;
-      toolbarIndex = (
-        <div className="viz-toolb-div">
-          <ToolbarIndex
-            settings={this.state.settings}
-            handleHeightAmp={this.handleHeightAmp}
-            togglePlay={this.togglePlay}
-          />
-        </div>
-      );
-    } else {
-      debugger;
-      toolbarIndex = (
-        <button className="ui button carousel-play" onClick={this.togglePlay}>
-          {buttonText}
-        </button>
-      );
-    }
 
     return (
       <>
@@ -187,7 +155,9 @@ class Canvas extends React.Component {
           height={this.props.canvasHeight}
           width={this.props.canvasWidth}
         />
-        {toolbarIndex}
+        <button className="carousel-play" onClick={this.togglePlay}>
+          {buttonText}
+        </button>
       </>
     );
   }
