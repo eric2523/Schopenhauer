@@ -3,6 +3,7 @@ import { CanvasWithRouter } from "./canvas";
 import { ToolbarIndex } from "../toolbar/toolbar-index";
 import { Scrubber } from "../toolbar/scrubber";
 import { testVisualizer } from "./test_visualizer_object";
+import { SongToolBar } from '../music_player/song_tool_bar';
 
 export const Visualizer = (props) => {
   return (
@@ -20,6 +21,7 @@ export const Visualizer = (props) => {
             />
           </div>
         </div>
+        <SongToolBar />
       </div>
     </div>
   );

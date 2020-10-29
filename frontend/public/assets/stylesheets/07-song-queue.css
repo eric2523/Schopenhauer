@@ -1,0 +1,8 @@
+.current-song-item{
+  color: red;
+  cursor: pointer;
+}
+
+.song-item{
+  cursor: pointer;
+}

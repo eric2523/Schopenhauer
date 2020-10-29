@@ -21,7 +21,7 @@ export const SessionReducer = (state = initialState, action) => {
         user: action.currentUser,
       };
     case RECEIVE_CURRENT_SONG:
-      newState.song = action.song.data;
+      newState.song = action.song;
       return newState;
     case CLEAR_SONG:
       newState.song = {};
