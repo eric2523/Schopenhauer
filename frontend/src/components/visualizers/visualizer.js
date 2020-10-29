@@ -12,7 +12,11 @@ export const Visualizer = (props) => {
       <div className="visualizer">
         <div className="canvas-main-div">
           <div className="canvas-div">
-            <CanvasWithRouter canvasWidth={700} canvasHeight={700} />
+            <CanvasWithRouter
+              canvasWidth={700}
+              canvasHeight={700}
+              visualizer={{ type: "", settings: { binCount: 1025 } }}
+            />
           </div>
         </div>
       </div>

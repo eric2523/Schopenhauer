@@ -10,7 +10,11 @@ export const CarouselItem = (props) => {
         <h1 className="carousel-template-name">template name</h1>
       </div>
       <div className="carousel-item-visualizer">
-        <CanvasWithRouter canvasWidth={250} canvasHeight={250} />
+        <CanvasWithRouter
+          canvasWidth={250}
+          canvasHeight={250}
+          visualizer={{ type: "", settings: { binCount: 1025 } }}
+        />
       </div>
       <div className="carousel-template-btn">
         <button className="ui primary button">go to creation</button>
