@@ -121,9 +121,9 @@ class Canvas extends React.Component {
       this.state.analyser.connect(this.state.audioContext.destination);
     }
     const buttonText = !this.state.play ? (
-      <i class="play icon"></i>
+      <i className="play icon"></i>
     ) : (
-      <i class="pause icon"></i>
+      <i className="pause icon"></i>
     );
 
     let toolbarIndex = null;
