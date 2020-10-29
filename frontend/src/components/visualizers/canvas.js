@@ -83,8 +83,8 @@ class Canvas extends React.Component {
   }
 
   animation(canvas) {
-    canvas.width = this.props.canvasWidth;
-    canvas.height = this.props.canvasHeight;
+    // canvas.width = this.props.canvasWidth;
+    // canvas.height = this.props.canvasHeight;
     this.state.visualizer.animate(canvas, this.state);
   }
 
@@ -146,7 +146,11 @@ class Canvas extends React.Component {
 
     return (
       <>
-        <canvas ref={this.canvas} />
+        <canvas
+          ref={this.canvas}
+          height={this.props.canvasHeight}
+          width={this.props.canvasWidth}
+        />
         {toolbarIndex}
       </>
     );
