@@ -4,7 +4,7 @@ import { BeatDetection } from "./beat_detection";
 import { ToolbarIndex } from "../toolbar/toolbar-index";
 import { withRouter } from "react-router-dom";
 
-import { frequencyVisualizer } from "./basic_frequency_visualizer";
+import { FrequencyVisualizer } from "./basic_frequency_visualizer";
 import { SphereVisualizer } from "./nate_visualizer_1";
 
 class Canvas extends React.Component {
