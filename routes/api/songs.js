@@ -8,7 +8,7 @@ const singleUpload = upload.single("song");
 router.get("/users", (req, res) => {
   Song.find({ userId: req.query.user_id })
     .then((songs) => res.json(songs))
-    .catch((err) => restart.status(400).json(err));
+    .catch((err) => res.status(400).json(err));
 });
 
 router.post(
@@ -37,16 +37,14 @@ router.post("/uploadSongDB", (req, res) => {
     fileName: req.body.fileName,
     songUrl: req.body.songUrl,
   });
-  newSong
-    .save()
-    .then((song) =>
-      res.json({
-        userId: song.userId,
-        title: song.title,
-        fileName: song.fileName,
-        songUrl: song.songUrl,
-      })
-    );
+  newSong.save().then((song) =>
+    res.json({
+      userId: song.userId,
+      title: song.title,
+      fileName: song.fileName,
+      songUrl: song.songUrl,
+    })
+  );
 });
 
 module.exports = router;

@@ -43,3 +43,6 @@ app.use("/api/users", users);
 
 const songs = require("./routes/api/songs");
 app.use("/api/songs", songs);
+
+const visualizers = require("./routes/api/visualizers");
+app.use("/api/visualizers", visualizers);
