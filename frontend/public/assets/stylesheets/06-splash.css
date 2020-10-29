@@ -61,6 +61,7 @@
 
 .carousel-main-div {
   border-top: 2px solid rgba(0, 0, 0, 0.4);
+  height: 50vh;
 }
 
 .carousel-header {
@@ -74,7 +75,7 @@
   letter-spacing: 0.15rem;
 }
 
-.carousel-item-div {
+/* .carousel-item-div {
   background: rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   margin: 0 5px 0 5px;
@@ -128,4 +129,25 @@
 
 .carousel-template-name {
   font-weight: 100;
+} */
+
+.div-test {
+  background-color: cadetblue;
+}
+
+.slick-prev {
+  left: 3% !important;
+  z-index: 1;
+}
+.slick-next {
+  right: 3% !important;
+  z-index: 1;
+}
+
+.slick-track {
+  width: 8450px !important;
+}
+
+.slick-slide {
+  padding: 0 15px 0 15px;
 }

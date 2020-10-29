@@ -5,6 +5,7 @@ import { ToolbarIndex } from "../toolbar/toolbar-index";
 import { withRouter } from "react-router-dom";
 
 import { frequencyVisualizer } from "./basic_frequency_visualizer";
+// import { ezeVisualizer } from "./eze_visualizer"
 
 class Canvas extends React.Component {
   constructor(props) {

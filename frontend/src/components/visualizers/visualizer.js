@@ -15,7 +15,7 @@ export const Visualizer = (props) => {
             <CanvasWithRouter
               canvasWidth={700}
               canvasHeight={700}
-              visualizer={{ type: "", settings: { binCount: 1025 } }}
+              visualizer={{ type: "frequency", settings: { binCount: 1025 } }}
             />
           </div>
         </div>
