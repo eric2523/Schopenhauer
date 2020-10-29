@@ -4,51 +4,40 @@ import { BeatDetection } from "./beat_detection";
 import { ToolbarIndex } from "../toolbar/toolbar-index";
 import { withRouter } from "react-router-dom";
 
-import { octave } from "./octave";
-import {
-  averageArray,
-  detectPitch,
-  stdevArray,
-} from "../../util/visualizer_util";
-import hal_visualizer_1 from "./hal_visualizer_1";
-import yuehan_visualizer_1 from "./yuehan_visualizer_1";
-
-const barWidth = 1;
-const radius = 0;
-const canvasDimensions = {
-  width: 700,
-  height: 700,
-  barWidth: 1,
-  radius: 0,
-  centerX: 350,
-  centerY: 350,
-};
+import { FrequencyVisualizer } from "./basic_frequency_visualizer";
 
 class Canvas extends React.Component {
   constructor(props) {
+    // props contain canvasWidth & canvasHeight
     super(props);
+    let visualizer;
+    const binCount = 1024;
+    this.canvas = React.createRef();
+    switch (props.visualizer.type) {
+      case "frequency":
+      default:
+        visualizer = new FrequencyVisualizer();
+        break;
+    }
     this.state = {
+      //needed
+      typeSettings: props.visualizer.typeSettings,
+      generalSettings: props.visualizer.generalSettings,
+
+      //tbd
       play: false,
       audio: new Audio(song),
-      visualizerSettings: {
-        barWidth: 1,
-        radius: 0,
-        centerX: 250,
-        centerY: 250,
-        // finished controls
-        heightAmplifier: 0.5,
-      },
-      beatDetection: null,
-      context: {},
+      beatDetection: new BeatDetection(),
+      audioContext: null,
       source: null,
       analyser: null,
-      frequencyArray: [],
-      timeArray: [],
-      freqCount: null,
-      radians: null,
+      frequencyArray: new Uint8Array(binCount),
+      waveformArray: new Uint8Array(binCount),
+      binCount,
       rafId: null,
-      canvas: React.createRef(),
+      visualizer,
     };
+
     this.togglePlay = this.togglePlay.bind(this);
     this.handleHeightAmp = this.handleHeightAmp.bind(this);
     this.tick = this.tick.bind(this);
@@ -65,29 +54,15 @@ class Canvas extends React.Component {
   togglePlay() {
     // checks if audio input is in (can change second conditional later to be more specific. Currently just a placeholder until I figure out a better flag )
     if (this.state.audio instanceof Audio && !this.state.source) {
-      let context = new (window.AudioContext || window.webkitAudioContext)();
-      let source = context.createMediaElementSource(this.state.audio);
-      let analyser = context.createAnalyser();
-      console.log(analyser.fftSize);
-      let frequencyArray = new Uint8Array(analyser.frequencyBinCount);
-      console.log(frequencyArray);
-      let timeArray = new Uint8Array(analyser.frequencyBinCount);
-      console.log(timeArray);
+      const audioContext = new (window.AudioContext ||
+        window.webkitAudioContext)();
+      const source = audioContext.createMediaElementSource(this.state.audio);
+      const analyser = audioContext.createAnalyser();
 
-      let beatDetection = new BeatDetection();
-      let freqCount = frequencyArray.length;
-      let radians = (2 * Math.PI) / freqCount;
-      let octaveRadians = (2 * Math.PI) / 12;
       this.setState({
-        context,
+        audioContext,
         source,
         analyser,
-        frequencyArray,
-        timeArray,
-        beatDetection,
-        freqCount,
-        radians,
-        octaveRadians,
       });
     }
 
@@ -108,83 +83,14 @@ class Canvas extends React.Component {
   }
 
   animation(canvas) {
-    canvas.width = this.props.canvasWidth;
-    canvas.height = this.props.canvasHeight;
-    const ctx = canvas.getContext("2d");
-    const octaveAmp = octave(this.state.frequencyArray, this.state.context);
-    const pitch = detectPitch(octaveAmp);
-    console.table(pitch);
-
-    this.drawBeatInCircle(ctx);
-  }
-  drawBeatInCircle = (ctx) => {
-    const { width, height } = this.state.visualizerSettings;
-    if (this.state.beatDetection.detected) {
-      this.beatRadius = 100;
-    } else {
-      this.beatRadius *= 0.9;
-    }
-    ctx.beginPath();
-    ctx.ellipse(
-      width / 2,
-      height / 2,
-      this.beatRadius,
-      this.beatRadius,
-      0,
-      0,
-      Math.PI * 2
-    );
-    ctx.stroke();
-  };
-  drawBar(xStart, yStart, xEnd, yEnd, frequencyAmplitude, ctx, canvas) {
-    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-    gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
-    gradient.addColorStop(1, "rgba(204, 83, 51, 1)");
-    ctx.fillStyle = gradient;
-
-    const lineColor =
-      "rgb(" +
-      frequencyAmplitude +
-      ", " +
-      frequencyAmplitude +
-      ", " +
-      205 +
-      ")";
-    ctx.strokeStyle = lineColor;
-    ctx.lineWidth = barWidth;
-    ctx.beginPath();
-    ctx.moveTo(xStart, yStart);
-    ctx.lineTo(xEnd, yEnd);
-    ctx.stroke();
-
-    yuehan_visualizer_1(canvas, canvasDimensions, this.state);
-  }
-
-  drawOctaves(xStart, yStart, xEnd, yEnd, frequencyAmplitude, ctx, canvas) {
-    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-    gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
-    gradient.addColorStop(1, "rgba(204, 83, 51, 1)");
-    ctx.fillStyle = gradient;
-
-    const lineColor =
-      "rgb(" +
-      frequencyAmplitude +
-      ", " +
-      frequencyAmplitude +
-      ", " +
-      205 +
-      ")";
-    ctx.strokeStyle = lineColor;
-    ctx.lineWidth = barWidth;
-    ctx.beginPath();
-    ctx.moveTo(xStart, yStart);
-    ctx.lineTo(xEnd, yEnd);
-    ctx.stroke();
+    // canvas.width = this.props.canvasWidth;
+    // canvas.height = this.props.canvasHeight;
+    this.state.visualizer.animate(canvas, this.state);
   }
 
   tick() {
-    this.animation(this.state.canvas.current);
-    this.updateFrequencyData();
+    this.animation(this.canvas.current);
+    this.updateAllData();
     this.setState({ rafId: requestAnimationFrame(this.tick) });
   }
 
@@ -194,23 +100,24 @@ class Canvas extends React.Component {
   }
 
   updateWaveformData() {
-    this.state.analyser.getByteTimeDomainData(this.state.timeArray);
+    this.state.analyser.getByteTimeDomainData(this.state.waveformArray);
   }
 
   updateAllData() {
     this.updateFrequencyData();
     this.updateWaveformData();
   }
+
   handleHeightAmp() {
     let heightAmplifier = JSON.parse(window.localStorage.visualizerSettings)
       .heightAmplifier;
-    this.setState({ visualizerSettings: { heightAmplifier } });
+    this.setState({ generalSettings: { heightAmplifier } });
   }
 
   render() {
     if (this.state.source && this.state.analyser) {
       this.state.source.connect(this.state.analyser);
-      this.state.analyser.connect(this.state.context.destination);
+      this.state.analyser.connect(this.state.audioContext.destination);
     }
     const buttonText = !this.state.play ? (
       <i class="play icon"></i>
@@ -239,7 +146,11 @@ class Canvas extends React.Component {
 
     return (
       <>
-        <canvas ref={this.state.canvas} />
+        <canvas
+          ref={this.canvas}
+          height={this.props.canvasHeight}
+          width={this.props.canvasWidth}
+        />
         {toolbarIndex}
       </>
     );
