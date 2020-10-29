@@ -19,9 +19,11 @@ export class SphereVisualizer{
 
   animate = (canvas, state) => {
     // let collection;
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     for ( let i = 0; i < numDots; i++ ){
       let particle = new SphereParticle(canvas);
-      particle.draw(state.frequencyArray[i] * state.globalSettings.heightAmplifier)
+      particle.draw(state.frequencyArray[i] * state.generalSettings.heightAmplifier)
       // collection.push(new SphereParticle(canvas));
     }
     // collection.forEach((particle, i) => {
