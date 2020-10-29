@@ -127,7 +127,7 @@ class Canvas extends React.Component {
     );
 
     let toolbarIndex = null;
-    if (this.props.match.path === "/visualizer") {
+    if (this.props.match.path === "/visualizer/:id") {
       toolbarIndex = (
         <div className="viz-toolb-div">
           <ToolbarIndex
