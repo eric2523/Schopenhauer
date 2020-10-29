@@ -1,5 +1,6 @@
 import React from "react";
 import { CanvasWithRouter } from "../visualizers/canvas";
+import { testVisualizer } from "../visualizers/test_visualizer_object";
 
 export const CarouselItem = (props) => {
   // need to figure out what vars we want in the template
@@ -15,7 +16,7 @@ export const CarouselItem = (props) => {
         <CanvasWithRouter
           canvasWidth={250}
           canvasHeight={250}
-          visualizer={{ type: "", settings: { binCount: 1025 } }}
+          visualizer={testVisualizer}
         />
       </div>
       <div className="carousel-template-btn">
