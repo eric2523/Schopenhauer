@@ -1,5 +1,5 @@
 import React from "react";
-import { CarouselItem } from "../landing-page/carousel-item";
+// import { CarouselItem } from "../landing-page/carousel-item";
 import {
   CarouselProvider,
   Slider,
@@ -23,7 +23,7 @@ class Carousel extends React.Component {
         naturalSlideHeight={250}
         infinite={true}
       >
-        <Slider>
+        {/* <Slider>
           <Slide className="carousel-slide" index={0}>
             <CarouselItem />
           </Slide>
@@ -42,7 +42,7 @@ class Carousel extends React.Component {
           <Slide className="carousel-slide" index={5}>
             <CarouselItem />
           </Slide>
-        </Slider>
+        </Slider> */}
         <div className="carousel-btns">
           <ButtonBack className="ui button carousel-btn">
             <i className="left chevron icon"></i>

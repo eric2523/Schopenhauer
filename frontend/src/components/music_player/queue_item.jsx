@@ -32,7 +32,7 @@ class QueueItemComponent extends React.Component {
         className={
         this.props.currentSong && (this.props.song._id === this.props.currentSong._id) ? 
         'current-song-item' : 'song-item'}>
-          I am a song
+          {this.props.song.title}
         </div>
       </li>
     )
