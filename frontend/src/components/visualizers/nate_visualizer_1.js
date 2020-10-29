@@ -1,9 +1,41 @@
+const numDots = 1024;
+
+export class SphereVisualizer{
+  constructor(canvas){
+    // this.state = state;
+    // this.canvas = canvas;
+    // this.collection = [];
+    // for ( let i = 0; i < numDots; i++ ){
+    //   this.collection.push(new SphereParticle(canvas));
+    // }
+  }
+
+  //will need to call window.requestAnimationFrame(renderDots)
+  // renderParticles = (state) => {
+  //   this.collection.forEach((particle, i) => {
+  //     particle.draw(state.frequencyArray[i] * state.visualizerSettings.heightAmplifier)
+  //   })
+  // }
+
+  animate = (canvas, state) => {
+    // let collection;
+    for ( let i = 0; i < numDots; i++ ){
+      let particle = new SphereParticle(canvas);
+      particle.draw(state.frequencyArray[i] * state.globalSettings.heightAmplifier)
+      // collection.push(new SphereParticle(canvas));
+    }
+    // collection.forEach((particle, i) => {
+    //   particle.draw(state.frequencyArray[i] * state.visualizerSettings.heightAmplifier)
+    // })
+    // this.renderParticles(state);
+  }
+}
 
 //represents one particle in sphere. Code inspired by Louis Hoebregts
 class SphereParticle {
   constructor(canvas){
 
-    this.particleRadius = 4;
+    this.particleRadius = 7;
     this.color = '#' + Math.floor(Math.random()*16777215).toString(16);
     //canvas properties
     this.canvas = canvas;
@@ -13,7 +45,7 @@ class SphereParticle {
     this.ctx = canvas.getContext('2d');
 
     //polar coordinates
-    this.sphereRadius = canvas.width/3;
+    this.sphereRadius = canvas.width/2;
     this.theta = Math.random() * 2 * Math.PI; //polar angle
     this.phi = Math.acos((Math.random() * 2) -1); //azimuth angle
 
@@ -46,9 +78,10 @@ class SphereParticle {
   }
 
   draw = (multiplier) => {
-    this.project3DTo2D(multiplier*.002); //get 2D position
+    this.project3DTo2D(multiplier*.007); //get 2D position
     this.ctx.globalAlpha = Math.abs(1 - this.z / this.canvas.width); //set opacity
     this.ctx.fillStyle = this.color;
+    this.ctx.strokeStyle = this.color;
     //draw particle on canvas
     this.ctx.beginPath();
     // this.ctx.strokeStyle = '#39FF14'
@@ -68,32 +101,3 @@ class SphereParticle {
   }
 }
 
-const numDots = 1024;
-
-export class SphereVisualizer{
-  constructor(canvas){
-    // this.state = state;
-    // this.canvas = canvas;
-    this.collection = [];
-    for ( let i = 0; i < numDots; i++ ){
-      this.collection.push(new SphereParticle(canvas));
-    }
-  }
-
-  //will need to call window.requestAnimationFrame(renderDots)
-  renderParticles = (state) => {
-    this.collection.forEach((particle, i) => {
-      particle.draw(state.frequencyArray[i] * state.visualizerSettings.heightAmplifier)
-    })
-  }
-
-  animate = (canvas, state) => {
-    // for ( let i = 0; i < numDots; i++ ){
-    //   this.collection.push(new SphereParticle(canvas));
-    // }
-    this.collection.forEach((particle, i) => {
-      particle.draw(state.frequencyArray[i] * state.visualizerSettings.heightAmplifier)
-    })
-    // this.renderParticles(state);
-  }
-}

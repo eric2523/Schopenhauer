@@ -5,6 +5,7 @@ import { ToolbarIndex } from "../toolbar/toolbar-index";
 import { withRouter } from "react-router-dom";
 
 import { frequencyVisualizer } from "./basic_frequency_visualizer";
+import { SphereVisualizer } from "./nate_visualizer_1";
 
 class Canvas extends React.Component {
   constructor(props) {
@@ -16,11 +17,11 @@ class Canvas extends React.Component {
     switch (props.visualizer.type) {
       case "frequency":
       default:
+        // visualizer = new SphereVisualizer()
         visualizer = new frequencyVisualizer(props.visualizer.settings);
         break;
     }
     this.state = {
-      visualizer: visualizer,
       //needed
       // width: this.props.canvasWidth,
       // height: this.props.canvasHeight,
