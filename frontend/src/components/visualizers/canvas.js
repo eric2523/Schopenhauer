@@ -3,6 +3,7 @@ import song from "../../audio_files/bensound-goinghigher.mp3";
 import { BeatDetection } from "./beat_detection";
 import { withRouter } from "react-router-dom";
 import { FrequencyVisualizer } from "./basic_frequency_visualizer";
+import { SphereVisualizer } from "./nate_visualizer_1";
 
 class Canvas extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class Canvas extends React.Component {
     switch (this.props.match.params.id) {
       case "frequency":
         visualizer = new FrequencyVisualizer();
+        break;
       default:
         break;
     }
