@@ -1,27 +1,23 @@
-export class frequencyVisualizer {
-  constructor(props) {
-    this.settings = props;
-  }
-
+export class FrequencyVisualizer {
   animate(canvas, state) {
-    const radians = (Math.PI * 2) / state.visualizerSettings.binCount;
+    const radians = (Math.PI * 2) / state.typeSettings.binCount;
     const ctx = canvas.getContext("2d");
 
     for (let i = 0; i < state.binCount; i++) {
       let height =
-        state.waveformArray[i] * state.globalSettings.heightAmplifier;
+        state.waveformArray[i] * state.generalSettings.heightAmplifier;
       const xStart =
-        state.globalSettings.centerX +
-        Math.cos(radians * i) * state.globalSettings.radius;
+        state.generalSettings.centerX +
+        Math.cos(radians * i) * state.generalSettings.radius;
       const yStart =
-        state.globalSettings.centerY +
-        Math.sin(radians * i) * state.globalSettings.radius;
+        state.generalSettings.centerY +
+        Math.sin(radians * i) * state.generalSettings.radius;
       const xEnd =
-        state.globalSettings.centerX +
-        Math.cos(radians * i) * (state.globalSettings.radius + height);
+        state.generalSettings.centerX +
+        Math.cos(radians * i) * (state.generalSettings.radius + height);
       const yEnd =
-        state.globalSettings.centerY +
-        Math.sin(radians * i) * (state.globalSettings.radius + height);
+        state.generalSettings.centerY +
+        Math.sin(radians * i) * (state.generalSettings.radius + height);
       this.drawBar(
         xStart,
         yStart,
@@ -30,7 +26,7 @@ export class frequencyVisualizer {
         state.waveformArray[i],
         ctx,
         canvas,
-        state.globalSettings
+        state.generalSettings
       );
     }
   }
@@ -43,7 +39,7 @@ export class frequencyVisualizer {
     frequencyAmplitude,
     ctx,
     canvas,
-    visualizerSettings
+    typeSettings
   ) {
     const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
     gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
@@ -59,7 +55,7 @@ export class frequencyVisualizer {
       205 +
       ")";
     ctx.strokeStyle = lineColor;
-    ctx.lineWidth = visualizerSettings.barWidth;
+    ctx.lineWidth = typeSettings.barWidth;
     ctx.beginPath();
     ctx.moveTo(xStart, yStart);
     ctx.lineTo(xEnd, yEnd);
@@ -69,26 +65,26 @@ export class frequencyVisualizer {
 
 // function animation(canvas, state) {
 //   ;
-//   // canvas.width = state.globalSettings.width;
-//   // canvas.height = state.globalSettings.height;
+//   // canvas.width = state.generalSettings.width;
+//   // canvas.height = state.generalSettings.height;
 //   const ctx = canvas.getContext("2d");
 
 //   for (let i = 0; i < state.freqCount; i++) {
 //     let height =
-//       state.frequencyArray[i] * state.globalSettings.heightAmplifier;
+//       state.frequencyArray[i] * state.generalSettings.heightAmplifier;
 
 //     const xStart =
-//       state.globalSettings.centerX +
-//       Math.cos(radians * i) * state.globalSettings.radius;
+//       state.generalSettings.centerX +
+//       Math.cos(radians * i) * state.generalSettings.radius;
 //     const yStart =
-//       state.globalSettings.centerY +
-//       Math.sin(radians * i) * state.globalSettings.radius;
+//       state.generalSettings.centerY +
+//       Math.sin(radians * i) * state.generalSettings.radius;
 //     const xEnd =
-//       state.globalSettings.centerX +
-//       Math.cos(radians * i) * (state.globalSettings.radius + height);
+//       state.generalSettings.centerX +
+//       Math.cos(radians * i) * (state.generalSettings.radius + height);
 //     const yEnd =
-//       state.globalSettings.centerY +
-//       Math.sin(radians * i) * (state.globalSettings.radius + height);
+//       state.generalSettings.centerY +
+//       Math.sin(radians * i) * (state.generalSettings.radius + height);
 
 //     drawBar(
 //       xStart,
@@ -98,14 +94,14 @@ export class frequencyVisualizer {
 //       state.frequencyArray[i],
 //       ctx,
 //       canvas,
-//       state.globalSettings
+//       state.generalSettings
 //     );
 
-//     drawBeatInCircle(ctx, state.globalSettings, state);
+//     drawBeatInCircle(ctx, state.generalSettings, state);
 //   }
 // }
 
-// function drawBeatInCircle(ctx, state.globalSettings, state) {
+// function drawBeatInCircle(ctx, state.generalSettings, state) {
 //   const beatRadius;
 //   if (state.beatDetection.detected) {
 //     beatRadius = 100;
@@ -114,8 +110,8 @@ export class frequencyVisualizer {
 //   }
 //   ctx.beginPath();
 //   ctx.ellipse(
-//     state.globalSettings.width / 2,
-//     state.globalSettings.height / 2,
+//     state.generalSettings.width / 2,
+//     state.generalSettings.height / 2,
 //     beatRadius,
 //     beatRadius,
 //     0,
@@ -133,7 +129,7 @@ export class frequencyVisualizer {
 //   frequencyAmplitude,
 //   ctx,
 //   canvas,
-//   state.globalSettings
+//   state.generalSettings
 // ) {
 //   const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
 //   gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
@@ -143,7 +139,7 @@ export class frequencyVisualizer {
 //   const lineColor =
 //     "rgb(" + frequencyAmplitude + ", " + frequencyAmplitude + ", " + 205 + ")";
 //   ctx.strokeStyle = lineColor;
-//   ctx.lineWidth = state.globalSettings.barWidth;
+//   ctx.lineWidth = state.generalSettings.barWidth;
 //   ctx.beginPath();
 //   ctx.moveTo(xStart, yStart);
 //   ctx.lineTo(xEnd, yEnd);
