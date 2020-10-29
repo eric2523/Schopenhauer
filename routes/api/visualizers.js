@@ -4,7 +4,7 @@ const passport = require("passport");
 const Visualizer = require("../../models/Visualizer");
 
 router.post(
-  "/create",
+  "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const newVisualizer = new Visualizer({
@@ -29,16 +29,16 @@ router.post(
 );
 
 router.get("/", (req, res) => {
-  Visualizer.find({ userId: req.query.user_id })
+  Visualizer.find({ userId: req.body.userId })
     .then((visualizers) => res.json(visualizers))
-    .catch((err) => restart.status(404).json(err));
+    .catch((err) => res.status(404).json(err));
 });
 
 router.patch(
-  "/update",
+  "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const filter = { _id: req.visualizer.id };
+    const filter = { _id: req.body.id };
     const update = {
       name: req.body.name,
       typeSettings: req.body.typeSettings,
@@ -52,11 +52,16 @@ router.patch(
 );
 
 router.delete(
-  "/delete",
+  "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Visualizer.findByIdAndDelete(req.visualizerId)
-      .then(() => res.status(200))
+    console.log("in delete");
+    console.log(req.body.id);
+
+    Visualizer.findByIdAndDelete(req.body.id)
+      .then(() => res.status(200).json("success!"))
       .catch((err) => res.status(404).json(err));
   }
 );
+
+module.exports = router;
