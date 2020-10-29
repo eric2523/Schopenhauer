@@ -23,7 +23,7 @@ export const App = () => {
         <Route path="/" component={LandingPageIndex} />
         <Redirect to="/" />
       </Switch>
-      {/* <UploadButton /> */}
+      <UploadButton />
     </div>
   );
 };

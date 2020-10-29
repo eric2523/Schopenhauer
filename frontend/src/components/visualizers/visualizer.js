@@ -2,6 +2,7 @@ import React from "react";
 import { CanvasWithRouter } from "./canvas";
 import { ToolbarIndex } from "../toolbar/toolbar-index";
 import { Scrubber } from "../toolbar/scrubber";
+import { testVisualizer } from "./test_visualizer_object";
 
 export const Visualizer = (props) => {
   return (
@@ -15,7 +16,7 @@ export const Visualizer = (props) => {
             <CanvasWithRouter
               canvasWidth={700}
               canvasHeight={700}
-              visualizer={{ type: "", settings: { binCount: 1025 } }}
+              visualizer={testVisualizer}
             />
           </div>
         </div>

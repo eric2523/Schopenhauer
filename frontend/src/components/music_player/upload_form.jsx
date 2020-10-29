@@ -70,6 +70,7 @@ class UploadFormComponent extends React.Component {
       genre: "",
       title: "",
     });
+    this.props.closeModal();
   }
 
   handleInput(type) {
