@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { login, signup } from "../../actions/session_actions";
-import { openModal, closeModal } from '../../actions/modal_actions';
-import { clearErrors } from '../../actions/session_actions';
+import { openModal, closeModal } from "../../actions/modal_actions";
+import { clearErrors } from "../../actions/session_actions";
 
 const mSTP = (state) => {
   return {
@@ -17,10 +17,9 @@ const mDTP = (dispatch) => {
     signup: (user) => dispatch(signup(user)),
     login: (user) => dispatch(login(user)),
     clearErrors: () => dispatch(clearErrors()),
-    openModal: (type) => dispatch(openModal(type))
+    openModal: (type) => dispatch(openModal(type)),
   };
 };
-
 
 class UserAuthModalComponent extends React.Component {
   constructor(props) {
@@ -40,19 +39,18 @@ class UserAuthModalComponent extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    if(this.props.modal === 'login'){
-      this.props.login(user).then(()=>{
-        if(Object.values(this.props.errors).length){
-          return
+    if (this.props.modal === "login") {
+      this.props.login(user).then(() => {
+        if (Object.values(this.props.errors).length) {
+          return;
         } else {
           this.handleModalClose();
         }
       });
-    }
-    else {
-      this.props.signup(user).then(()=>{
-        if(Object.values(this.props.errors).length){
-          return
+    } else {
+      this.props.signup(user).then(() => {
+        if (Object.values(this.props.errors).length) {
+          return;
         } else {
           this.handleModalClose();
         }
@@ -60,11 +58,11 @@ class UserAuthModalComponent extends React.Component {
     }
   }
 
-  handleDemo(){
+  handleDemo() {
     const demo = {
       email: "demo@demo.com",
-      password: "demodemo"
-    }
+      password: "demodemo",
+    };
     this.props.login(demo).then(this.handleModalClose);
   }
 
@@ -78,22 +76,22 @@ class UserAuthModalComponent extends React.Component {
     this.props.clearErrors();
   }
 
-  toggleLogin(){
+  toggleLogin() {
     this.props.clearErrors();
-    this.props.openModal('login');
+    this.props.openModal("login");
     this.setState({
       email: "",
       password: "",
-    })
+    });
   }
 
-  toggleSignup(){
+  toggleSignup() {
     this.props.clearErrors();
-    this.props.openModal('signup');
+    this.props.openModal("signup");
     this.setState({
       email: "",
       password: "",
-    })
+    });
   }
 
   handleModalClose() {
@@ -104,19 +102,17 @@ class UserAuthModalComponent extends React.Component {
       password: "",
     });
   }
-  
-  
 
   render() {
     if (this.props.modal !== "signup" && this.props.modal !== "login") {
       return null;
     }
 
-    const errorArr = this.props.errors ? 
-    Object.values(this.props.errors).map((error, i) => {
-        return <li key={i}>{error}</li>;
-      })
-    : [];
+    const errorArr = this.props.errors
+      ? Object.values(this.props.errors).map((error, i) => {
+          return <li key={i}>{error}</li>;
+        })
+      : [];
 
     return (
       <div className="modal-background" onClick={this.handleModalClose}>
@@ -125,39 +121,50 @@ class UserAuthModalComponent extends React.Component {
             <div className="x">
               <div onClick={this.handleModalClose}>&#10006;</div>
             </div>
-            <h2 id="modal-header" className="ui header">{this.props.modal === 'login' ? "Login" : "Sign Up"}</h2>
+            <h2 id="modal-header" className="ui header">
+              {this.props.modal === "login" ? "Login" : "Sign Up"}
+            </h2>
             <form className="ui form">
               <input
                 type="text"
                 onChange={this.handleInput("email")}
                 value={this.state.email}
-                placeholder="Email">
-              </input>
+                placeholder="Email"
+              ></input>
               <input
                 type="password"
                 onChange={this.handleInput("password")}
                 value={this.state.password}
-                placeholder="Password">
-              </input>
+                placeholder="Password"
+              ></input>
               <button
                 onClick={this.handleSubmit}
                 className="ui button"
-                type="submit">
-                {this.props.modal === 'login' ? "Login" : "Sign Up"}
+                type="submit"
+              >
+                {this.props.modal === "login" ? "Login" : "Sign Up"}
               </button>
-              <button
-                onClick={this.handleDemo}
-                className="ui button">
+              <button onClick={this.handleDemo} className="ui button">
                 Demo User
               </button>
             </form>
-            {errorArr.length ? 
-            <ul className="error">{errorArr}</ul> 
-            : <></>}
+            {errorArr.length ? <ul className="error">{errorArr}</ul> : <></>}
           </div>
           <div className="modal-toggle">
-            <button className="ui button" disabled={this.props.modal === 'login' ? true : false} onClick={this.toggleLogin}>Log in</button>
-            <button className="ui button" disabled={this.props.modal === 'signup' ? true : false} onClick={this.toggleSignup}>Sign Up</button>
+            <button
+              className="ui button"
+              disabled={this.props.modal === "login" ? true : false}
+              onClick={this.toggleLogin}
+            >
+              Log in
+            </button>
+            <button
+              className="ui button"
+              disabled={this.props.modal === "signup" ? true : false}
+              onClick={this.toggleSignup}
+            >
+              Sign Up
+            </button>
           </div>
         </div>
       </div>

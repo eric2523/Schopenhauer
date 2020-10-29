@@ -17,7 +17,11 @@ export class ToolbarIndex extends React.Component {
   }
 
   render() {
-    const buttonText = !this.state.play ? <i class="play icon"></i> : <i class="pause icon"></i>;
+    const buttonText = !this.state.play ? (
+      <i class="play icon"></i>
+    ) : (
+      <i class="pause icon"></i>
+    );
 
     return (
       <div>

@@ -34,21 +34,26 @@ Our app pays homage to this conflict between music and visual representation by 
 - User can save the interactive visualizers they created
 - User can share
 
-
 ### 6. User Profile Page
 
- - User can follow and like other users
- - User can view user information
- - User can edit user information
+- User can follow and like other users
+- User can view user information
+- User can edit user information
 
- ### 7. Production README
+### 7. Production README
 
 ## Wireframe
-### Landing page 
+
+### Landing page
+
 ![landing-page-demo](https://github.com/eric2523/Schopenhauer/blob/main/demo-images/landing-page-wireframe.jpg?raw=true)
-### Signup/Login Modal 
+
+### Signup/Login Modal
+
 ![sign-up-login-demo](https://github.com/eric2523/Schopenhauer/blob/main/demo-images/signup-login-wireframe.jpg?raw=true)
+
 ### Visualizer
+
 ![visualizer-demo](https://github.com/eric2523/Schopenhauer/blob/main/demo-images/visualizer-wireframe.jpg?raw=true)
 
 ## Technologies and Technical Challenges

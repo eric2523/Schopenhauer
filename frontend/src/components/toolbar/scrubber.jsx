@@ -28,7 +28,6 @@ export class Scrubber extends React.Component {
     let currVisualizerSettings = JSON.parse(
       window.localStorage.visualizerSettings
     );
-    // debugger;
     this.setState({ mouseDown: false });
     // ex ratio: 0.5 for halfway in between
     let ratio = this.state.positionX / e.target.parentNode.offsetWidth;
@@ -62,7 +61,7 @@ export class Scrubber extends React.Component {
       position = parseInt(scrubStyle.left, 10);
       // clientX gives position at which event occured
       // subtracting clientX with prev position gives us new posLeft to move circle
-      newPosition = position + (e.clientX - this.state.positionX)
+      newPosition = position + (e.clientX - this.state.positionX);
       // prob dont need all the styles in the future
       timeStyle = getComputedStyle(timeline, 10);
       timeWidth = parseInt(timeStyle.width, 10);
