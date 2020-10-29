@@ -24,6 +24,8 @@ class Canvas extends React.Component {
     }
 
     this.state = {
+      // visualizer: {}
+      
       //needed
       // width: this.props.canvasWidth,
       // height: this.props.canvasHeight,
@@ -46,7 +48,6 @@ class Canvas extends React.Component {
       //tbd
       play: false,
       audio: new Audio(song),
-
       beatDetection: new BeatDetection(),
       audioContext: null,
       source: null,
@@ -92,7 +93,7 @@ class Canvas extends React.Component {
         // octaveRadians,
       });
     }
-
+    console.log(this.state.frequencyArray)
     if (!this.state.play) {
       this.state.audio.play();
       let rafId = requestAnimationFrame(this.tick);
