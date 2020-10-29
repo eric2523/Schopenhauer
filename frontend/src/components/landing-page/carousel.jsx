@@ -1,9 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import "pure-react-carousel/dist/react-carousel.es.css";
-import { CarouselProviderIndex } from "../carousel/carousel-provider";
+import {Carousel} from "../carousel/carousel-provider"
 
-class Carousel extends React.Component {
+class CarouselContainer extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -19,7 +18,8 @@ class Carousel extends React.Component {
         <div className="carousel-header">
           <h1 className="carousel-title">{carouselTitle}</h1>
         </div>
-        <CarouselProviderIndex />
+        {/* <SimpleSlider /> */}
+        <Carousel />
       </div>
     );
   }
@@ -33,4 +33,4 @@ const mSTP = (state) => ({
 // map fetching of recent/ user templates
 const mDTP = (dispatch) => ({});
 
-export const CarouselIndex = connect(mSTP, mDTP)(Carousel);
+export const CarouselIndex = connect(mSTP, mDTP)(CarouselContainer);
