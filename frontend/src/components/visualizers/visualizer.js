@@ -36,9 +36,9 @@ export class Visualizer extends React.Component {
               />
             </div>
           </div>
-        </div>
         <div className="toolbar">
           <ul>{items}</ul>
+        </div>
         </div>
       </div>
     );
