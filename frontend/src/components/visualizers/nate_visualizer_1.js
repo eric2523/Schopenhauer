@@ -68,13 +68,15 @@ class SphereParticle {
   }
 }
 
+const numDots = 1024;
 
 export class SphereVisualizer{
-  constructor(canvas, numDots, multiplier){
-    this.canvas = canvas;
+  constructor(canvas){
+    // this.state = state;
+    // this.canvas = canvas;
     this.collection = [];
     for ( let i = 0; i < numDots; i++ ){
-      this.collection.push(new SphereParticle(canvas, multiplier));
+      this.collection.push(new SphereParticle(canvas));
     }
   }
 
@@ -85,9 +87,13 @@ export class SphereVisualizer{
     })
   }
 
-}
-
-export const drawSphere = (state, sphere) => {
-    // let sphere = new SphereVisualizer(canvas, 1000, multiplier);
-    sphere.renderParticles(state);
+  animate = (canvas, state) => {
+    // for ( let i = 0; i < numDots; i++ ){
+    //   this.collection.push(new SphereParticle(canvas));
+    // }
+    this.collection.forEach((particle, i) => {
+      particle.draw(state.frequencyArray[i] * state.visualizerSettings.heightAmplifier)
+    })
+    // this.renderParticles(state);
+  }
 }

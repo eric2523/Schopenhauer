@@ -9,21 +9,24 @@ import { detectPitch } from "../../util/visualizer_util";
 
 import hal_visualizer_1 from "./hal_visualizer_1";
 import { frequencyVisualizer } from "./yuehan_visualizer_1";
+import { SphereVisualizer } from './nate_visualizer_1'
 
 const binCount = 1024;
 class Canvas extends React.Component {
   constructor(props) {
     // props contain canvasWidth & canvasHeight
-
     super(props);
+    this.canvas = React.createRef();
+    let visualizer;
     switch (props.visualizerType) {
       case "frequency":
       default:
-        this.state.visualizer = new frequencyVisualizer();
+        visualizer = new SphereVisualizer(this.canvas.current);
         break;
     }
 
     this.state = {
+      visualizer: visualizer,
       //needed
       // width: this.props.canvasWidth,
       // height: this.props.canvasHeight,
@@ -54,7 +57,6 @@ class Canvas extends React.Component {
       frequencyArray: new Uint8Array(binCount),
       waveformArray: new Uint8Array(binCount),
       rafId: null,
-      canvas: React.createRef(),
     };
     this.togglePlay = this.togglePlay.bind(this);
     this.handleHeightAmp = this.handleHeightAmp.bind(this);
@@ -110,17 +112,21 @@ class Canvas extends React.Component {
   }
 
   animation(canvas) {
+    canvas.width = this.props.canvasWidth;
+    canvas.height = this.props.canvasHeight;
     // const animationContext = canvas.getContext("2d");
     // const octaveAmp = octave(
     //   this.state.frequencyArray,
     //   this.state.audioContext
     // );
     // const pitch = detectPitch(octaveAmp);
-    this.state.visualizer.update(canvas, this.state);
+    let visualizer = new SphereVisualizer(canvas);
+    visualizer.animate(canvas, this.state);
+    // this.state.visualizer.animate(this.canvas.current, this.state);
   }
 
   tick() {
-    this.animation(this.state.canvas.current);
+    this.animation(this.canvas.current);
     this.updateFrequencyData();
     this.setState({ rafId: requestAnimationFrame(this.tick) });
   }
@@ -177,7 +183,7 @@ class Canvas extends React.Component {
 
     return (
       <>
-        <canvas ref={this.state.canvas} />
+        <canvas ref={this.canvas} />
         {toolbarIndex}
       </>
     );
