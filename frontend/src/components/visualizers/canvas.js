@@ -139,9 +139,9 @@ class Canvas extends React.Component {
       this.state.analyser.connect(this.state.audioContext.destination);
     }
     const buttonText = !this.state.play ? (
-      <i class="play icon"></i>
+      <i className="play icon white-audio-icon"></i>
     ) : (
-      <i class="pause icon"></i>
+      <i className="pause icon white-audio-icon"></i>
     );
 
     let toolbarIndex = null;
@@ -157,7 +157,7 @@ class Canvas extends React.Component {
       );
     } else {
       toolbarIndex = (
-        <button className="ui button carousel-play" onClick={this.togglePlay}>
+        <button className="carousel-play" onClick={this.togglePlay}>
           {buttonText}
         </button>
       );

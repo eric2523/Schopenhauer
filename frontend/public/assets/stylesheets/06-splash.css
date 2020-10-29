@@ -76,7 +76,8 @@
 }
 
 .slide-item-div {
-  background-color: cadetblue;
+  border-radius: 5px;
+  background: linear-gradient(137deg, rgba(252,253,253,0) 0%, rgba(0,0,0,0.75) 75%);
 }
 
 .slick-prev {
@@ -117,5 +118,13 @@
 
 .carousel-play {
   position: absolute;
-    bottom: 0;
+  top: 30px;
+}
+
+.white-audio-icon {
+  color: rgb(255,255,255)
+}
+
+.carousel-template-btn > .creation-temp-btn {
+  margin-bottom: 15px;
 }

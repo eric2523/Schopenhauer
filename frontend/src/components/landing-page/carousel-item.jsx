@@ -19,7 +19,7 @@ export const CarouselItem = (props) => {
         />
       </div>
       <div className="carousel-template-btn">
-        <button className="ui primary button">go to creation</button>
+        <button className="ui primary button creation-temp-btn">go to creation</button>
       </div>
     </div>
   );
