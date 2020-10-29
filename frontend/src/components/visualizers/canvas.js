@@ -12,18 +12,19 @@ class Canvas extends React.Component {
     super(props);
     let visualizer;
     const binCount = 1024;
-    switch (props.visualizerType) {
+    this.canvas = React.createRef();
+    switch (props.visualizer.type) {
       case "frequency":
       default:
-        visualizer = new frequencyVisualizer({ binCount });
+        visualizer = new frequencyVisualizer(props.visualizer.settings);
         break;
     }
-    this.canvas = React.createRef();
     this.state = {
       //needed
       // width: this.props.canvasWidth,
       // height: this.props.canvasHeight,
-      visualizerSettings: {
+      visualizerSettings: props.visualizer.settings,
+      globalSettings: {
         //for canvas settings
 
         centerX: this.props.canvasWidth / 2,

@@ -1,33 +1,27 @@
 export class frequencyVisualizer {
   constructor(props) {
-    debugger;
-    this.settings = {
-      radians: (2 * Math.PI) / props.binCount,
-    };
+    this.settings = props;
   }
 
   animate(canvas, state) {
-    debugger;
+    const radians = (Math.PI * 2) / state.visualizerSettings.binCount;
     const ctx = canvas.getContext("2d");
 
     for (let i = 0; i < state.binCount; i++) {
       let height =
-        state.waveformArray[i] * state.visualizerSettings.heightAmplifier;
+        state.waveformArray[i] * state.globalSettings.heightAmplifier;
       const xStart =
-        state.visualizerSettings.centerX +
-        Math.cos(this.settings.radians * i) * state.visualizerSettings.radius;
+        state.globalSettings.centerX +
+        Math.cos(radians * i) * state.globalSettings.radius;
       const yStart =
-        state.visualizerSettings.centerY +
-        Math.sin(this.settings.radians * i) * state.visualizerSettings.radius;
+        state.globalSettings.centerY +
+        Math.sin(radians * i) * state.globalSettings.radius;
       const xEnd =
-        state.visualizerSettings.centerX +
-        Math.cos(this.settings.radians * i) *
-          (state.visualizerSettings.radius + height);
+        state.globalSettings.centerX +
+        Math.cos(radians * i) * (state.globalSettings.radius + height);
       const yEnd =
-        state.visualizerSettings.centerY +
-        Math.sin(this.settings.radians * i) *
-          (state.visualizerSettings.radius + height);
-      debugger;
+        state.globalSettings.centerY +
+        Math.sin(radians * i) * (state.globalSettings.radius + height);
       this.drawBar(
         xStart,
         yStart,
@@ -36,7 +30,7 @@ export class frequencyVisualizer {
         state.waveformArray[i],
         ctx,
         canvas,
-        state.visualizerSettings
+        state.globalSettings
       );
     }
   }
@@ -74,27 +68,27 @@ export class frequencyVisualizer {
 }
 
 // function animation(canvas, state) {
-//   debugger;
-//   // canvas.width = state.visualizerSettings.width;
-//   // canvas.height = state.visualizerSettings.height;
+//   ;
+//   // canvas.width = state.globalSettings.width;
+//   // canvas.height = state.globalSettings.height;
 //   const ctx = canvas.getContext("2d");
 
 //   for (let i = 0; i < state.freqCount; i++) {
 //     let height =
-//       state.frequencyArray[i] * state.visualizerSettings.heightAmplifier;
+//       state.frequencyArray[i] * state.globalSettings.heightAmplifier;
 
 //     const xStart =
-//       state.visualizerSettings.centerX +
-//       Math.cos(this.settings.radians * i) * state.visualizerSettings.radius;
+//       state.globalSettings.centerX +
+//       Math.cos(radians * i) * state.globalSettings.radius;
 //     const yStart =
-//       state.visualizerSettings.centerY +
-//       Math.sin(this.settings.radians * i) * state.visualizerSettings.radius;
+//       state.globalSettings.centerY +
+//       Math.sin(radians * i) * state.globalSettings.radius;
 //     const xEnd =
-//       state.visualizerSettings.centerX +
-//       Math.cos(this.settings.radians * i) * (state.visualizerSettings.radius + height);
+//       state.globalSettings.centerX +
+//       Math.cos(radians * i) * (state.globalSettings.radius + height);
 //     const yEnd =
-//       state.visualizerSettings.centerY +
-//       Math.sin(this.settings.radians * i) * (state.visualizerSettings.radius + height);
+//       state.globalSettings.centerY +
+//       Math.sin(radians * i) * (state.globalSettings.radius + height);
 
 //     drawBar(
 //       xStart,
@@ -104,14 +98,14 @@ export class frequencyVisualizer {
 //       state.frequencyArray[i],
 //       ctx,
 //       canvas,
-//       state.visualizerSettings
+//       state.globalSettings
 //     );
 
-//     drawBeatInCircle(ctx, state.visualizerSettings, state);
+//     drawBeatInCircle(ctx, state.globalSettings, state);
 //   }
 // }
 
-// function drawBeatInCircle(ctx, state.visualizerSettings, state) {
+// function drawBeatInCircle(ctx, state.globalSettings, state) {
 //   const beatRadius;
 //   if (state.beatDetection.detected) {
 //     beatRadius = 100;
@@ -120,8 +114,8 @@ export class frequencyVisualizer {
 //   }
 //   ctx.beginPath();
 //   ctx.ellipse(
-//     state.visualizerSettings.width / 2,
-//     state.visualizerSettings.height / 2,
+//     state.globalSettings.width / 2,
+//     state.globalSettings.height / 2,
 //     beatRadius,
 //     beatRadius,
 //     0,
@@ -139,7 +133,7 @@ export class frequencyVisualizer {
 //   frequencyAmplitude,
 //   ctx,
 //   canvas,
-//   state.visualizerSettings
+//   state.globalSettings
 // ) {
 //   const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
 //   gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
@@ -149,7 +143,7 @@ export class frequencyVisualizer {
 //   const lineColor =
 //     "rgb(" + frequencyAmplitude + ", " + frequencyAmplitude + ", " + 205 + ")";
 //   ctx.strokeStyle = lineColor;
-//   ctx.lineWidth = state.visualizerSettings.barWidth;
+//   ctx.lineWidth = state.globalSettings.barWidth;
 //   ctx.beginPath();
 //   ctx.moveTo(xStart, yStart);
 //   ctx.lineTo(xEnd, yEnd);
