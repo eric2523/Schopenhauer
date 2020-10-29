@@ -13,5 +13,9 @@ export const uploadSongDB = (payload) => {
 };
 
 export const deleteSong = (songId) => {
-  return axios.delete(`api/songs/${songId}`);
+  return axios.delete(`/api/songs/${songId}`);
+};
+
+export const getSongs = (userId) => {
+  return axios.get(`/api/songs/users/?${userId}`)
 };
