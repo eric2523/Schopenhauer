@@ -8,7 +8,7 @@ const singleUpload = upload.single("song");
 router.get("/users", (req, res) => {
   Song.find({ userId: req.query.user_id })
     .then((songs) => res.json(songs))
-    .catch((err) => restart.status(400).json(err));
+    .catch((err) => res.status(400).json(err));
 });
 
 router.post(

@@ -11,6 +11,8 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    followers: [{type: mongoose.Types.ObjectId, ref: 'User'}],
+    follows: [{type: mongoose.Types.ObjectId, ref: 'User'}]
   },
   {
     timestamps: true,
