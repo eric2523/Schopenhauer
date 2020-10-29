@@ -17,23 +17,23 @@ export const Carousel = (props) => {
   return (
     <div className="slide-wrap">
       <Slider {...settings}>
-        <div className="div-test">
-          <h3>test</h3>
+        <div className="slide-item-div">
+          <CarouselItem />
         </div>
-        <div className="div-test">
-          <h3>test</h3>
+        <div className="slide-item-div">
+          <CarouselItem />
         </div>
-        <div className="div-test">
-          <h3>test</h3>
+        <div className="slide-item-div">
+          <CarouselItem />
         </div>
-        <div className="div-test">
-          <h3>test</h3>
+        <div className="slide-item-div">
+          <CarouselItem />
         </div>
-        <div className="div-test">
-          <h3>test</h3>
+        <div className="slide-item-div">
+          <CarouselItem />
         </div>
-        <div className="div-test">
-          <h3>test</h3>
+        <div className="slide-item-div">
+          <CarouselItem />
         </div>
       </Slider>
     </div>
