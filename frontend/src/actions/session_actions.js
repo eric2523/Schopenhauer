@@ -1,5 +1,6 @@
 import * as APIUtil from "../util/session_api_util";
 import jwt_decode from "jwt-decode";
+import { receiveUserSongs } from "./song_actions";
 
 export const RECEIVE_USER_LOGOUT = "RECEIVE_USER_LOGOUT";
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
@@ -45,7 +46,7 @@ export const signup = (user) => (dispatch) =>
       dispatch(receiveErrors(err.response.data));
     });
 
-export const login = (user) => (dispatch) =>
+export const login = (user) => (dispatch, getState) =>
   APIUtil.login(user)
     .then((res) => {
       console.log(res);
@@ -54,13 +55,19 @@ export const login = (user) => (dispatch) =>
       APIUtil.setAuthToken(token);
       const decoded = jwt_decode(token);
       dispatch(receiveCurrentUser(decoded));
+      return receiveUserSongs(getState().session.user.id)(dispatch);
     })
     .catch((err) => {
       dispatch(receiveErrors(err.response.data));
-    });
+    })
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem("jwtToken");
   APIUtil.setAuthToken(false);
   dispatch(logoutUser());
 };
+
+// export const loginAndGetSongs = (user) => (dispatch, getState) => {
+//   dispatch(login(user))
+//   return receiveUserSongs(getState().session.user.id)(dispatch);
+// }

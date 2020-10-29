@@ -4,6 +4,7 @@ export const RECEIVE_CURRENT_SONG = "RECEIVE_CURRENT_SONG";
 export const CLEAR_SONG = "CLEAR_SONG";
 export const RECEIVE_SONG_UPLOAD_ERROR = "RECEIVE_SONG_UPLOAD_ERROR";
 export const RECEIVE_SONG_DELETE_ERROR = "RECEIVE_SONG_DELETE_ERROR";
+export const RECEIVE_USER_SONGS = "RECEIVE_USER_SONGS";
 
 const receiveCurrentSong = (song) => {
   return {
@@ -32,10 +33,17 @@ const receiveSongDeleteError = (err) => {
   };
 };
 
+const receiveUserSongsObj = (songs) => {
+  return {
+    type: RECEIVE_USER_SONGS,
+    songs
+  }
+}
+
 //ADD GENRE AND ARTIST TO uploadSong RETURN OBJECT
 export const uploadSong = (songFile, metaData) => (dispatch) => {
-  return SongAPIUtil.uploadSong(songFile).then(
-    (payload) => {
+  return SongAPIUtil.uploadSong(songFile)
+  .then((payload) => {
       const DBEntry = {
         fileName: payload.data.fileName,
         songUrl: payload.data.songUrl,
@@ -57,3 +65,11 @@ export const deleteSong = (song) => (dispatch) => {
     (err) => dispatch(receiveSongDeleteError(err))
   );
 };
+
+
+export const receiveUserSongs = (userId) => (dispatch) => {
+  return SongAPIUtil.getSongs(userId).then(
+    songs => dispatch(receiveUserSongsObj(songs)),
+    err => dispatch(receiveSongUploadError(err))
+  )
+}

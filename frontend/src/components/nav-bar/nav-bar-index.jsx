@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { logout } from "../../actions/session_actions";
 import { Link } from "react-router-dom";
 
+
 const mSTP = (state) => {
   return {
     loggedIn: state.session.isAuthenticated,
