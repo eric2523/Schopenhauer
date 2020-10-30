@@ -37,10 +37,8 @@ class Carousel extends React.Component {
 
     let visualizerKeys = Object.keys(this.props.visualizers);
     let carouselItems = [];
-    // debugger
     if (visualizerKeys.length) {
       carouselItems = visualizerKeys.map((key) => {
-        debugger;
         return (
           <div className="slide-item-div">
             <CarouselItem

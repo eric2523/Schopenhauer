@@ -13,15 +13,18 @@ const VisualizerEdit = (props) => {
   const visualizerSettings = props.visualizerSettings;
   const width = window.innerWidth
   const height = window.innerHeight
-  debugger
-  return (
-    <VisualizerItemContainer
-      toolbox={true}
-      canvasWidth={width}
-      canvasHeight={height}
-      visualizerSettings={visualizerSettings}
-    />
-  );
+  if (visualizerSettings) {
+    return (
+      <VisualizerItemContainer
+        toolbox={true}
+        canvasWidth={width}
+        canvasHeight={height}
+        visualizerSettings={visualizerSettings}
+      />
+    );
+  } else {
+    return null
+  }
 };
 
 export const VisualizerEditContainer = connect(mSTP, null)(VisualizerEdit);

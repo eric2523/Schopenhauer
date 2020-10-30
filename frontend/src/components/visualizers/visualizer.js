@@ -19,7 +19,6 @@ const mSTP = (state) => {
 class VisualizerItem extends React.Component {
   constructor(props) {
     super(props);
-    debugger
     switch (props.visualizerSettings.type) {
       case "frequency":
         this.visualizer = new FrequencyVisualizer();
