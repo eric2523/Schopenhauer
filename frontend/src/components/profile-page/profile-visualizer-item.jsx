@@ -12,10 +12,9 @@ export class ProfileVisualizerItem extends React.Component {
   }
 
   render() {
-    var width = isNaN(window.innerWidth)
+    const width = isNaN(window.innerWidth)
       ? window.clientWidth
       : window.innerWidth;
-    // var height = isNaN(window.innerHeight) ? window.clientHeight : window.innerHeight;
     return (
       <li className="column">
         <div className="visualizer-title">{this.props.visualizer.name}</div>
