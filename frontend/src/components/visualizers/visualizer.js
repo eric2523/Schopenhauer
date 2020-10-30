@@ -34,6 +34,7 @@ class VisualizerComponent extends React.Component {
       };
       items.push(
         <ToolbarItem
+          key={handle}
           generalSettings={this.visualizerSettings.settings.generalSettings}
           setting={setting}
         />

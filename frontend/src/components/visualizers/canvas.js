@@ -23,6 +23,7 @@ class Canvas extends React.Component {
         break;
       case "sphere":
         visualizer = new SphereVisualizer();
+        break;
       default:
         break;
     }

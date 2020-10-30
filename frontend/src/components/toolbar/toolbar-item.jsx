@@ -14,7 +14,7 @@ export class ToolbarItem extends React.Component {
   render() {
     return (
       <div>
-        <div class="ui input">
+        <div className="ui input">
           <input onChange={this.handleChange} type="number" placeholder={this.props.setting.name} />
         </div>
       </div>

@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/User");
 
-// Users has two routes /signin and /signup
+// Users has four routes /signin, /signup, /follow, and /unfollow
 
 const validateSignUpInput = require("../../validation/signup");
 const validateLoginInput = require("../../validation/login");
@@ -61,6 +61,8 @@ router.post("/signup", (req, res) => {
   });
 });
 
+// Login
+
 router.post("/login", (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
 
@@ -98,6 +100,44 @@ router.post("/login", (req, res) => {
       }
     });
   });
+});
+
+// Follow route
+
+router.post("/follow", (req, res) => {
+  const followerId = req.body.followerId;
+  const followedId = req.body.followedId;
+  console.log(`Fielding request that ${followerId} follow ${followedId}`);
+
+  let errors = {};
+
+  User.findById(followerId, function (err, follower) { 
+    if (err) { 
+      errors.follow = "No such follower id";
+      console.log(errors); 
+      return res.status(400).json(errors);
+    }
+    console.log(follower)
+    User.findById(followedId, function (err, followed) {
+      if (err) {
+        errors.follow = "No such user to follow";
+        console.log(errors);
+        return res.status(400).json(errors);
+      }
+      console.log(followed);
+      if (followed.followers.includes(followerId)) {
+        errors.follow = "User already follows that user";
+        return res.status(400).json(errors);
+      }
+
+      followed.followers.push(followerId);
+      followed.save();
+      follower.follows.push(followedId);
+      follower.save();
+
+      return res.json(follower.follows);
+    }); 
+  }); 
 });
 
 module.exports = router;
