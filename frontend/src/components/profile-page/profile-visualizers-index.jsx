@@ -58,7 +58,6 @@ class ProfileVisualizerIndexComponent extends React.Component {
   }
 
   handleDelete(id){
-    // debugger
     return () => {
       this.props.deleteVisualizer(id)
     }
