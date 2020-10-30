@@ -5,16 +5,31 @@ export const defaultSphereSettings = {
   typeSettings: { binCount: 1024 },
   generalSettings: {
     //for canvas settings
-    centerX: 350,
-    centerY: 350,
+    // centerX: 350,
+    // centerY: 350,
     //for any bar
-    barWidth: 1,
+    barWidth: 2,
     //for any circular object
-    radius: 0,
+    // radius: 1,
     // finished controls
-    heightAmplifier: 0.5,
+    heightAmplifier: 1,
   },
 }
+
+const incrementColor = function(color, step){
+  let colorToInt = parseInt(color.slice(1), 16),                     // Convert HEX color to integer
+      nstep = parseInt(step);                                         // Convert step to integer
+  if(!isNaN(colorToInt) && !isNaN(nstep)){                            // Make sure that color has been converted to integer
+      colorToInt += nstep;                                            // Increment integer with step
+      let ncolor = colorToInt.toString(16);                           // Convert back integer to HEX
+      ncolor = '#' + (new Array(7-ncolor.length).join(0)) + ncolor;   // Left pad "0" to make HEX look like a color
+      if(/^#[0-9a-f]{6}$/i.test(ncolor)){                             // Make sure that HEX is a valid color
+          return ncolor;
+      }
+  }
+  return color;
+};
+
 
 export class SphereVisualizer{
   constructor(canvas){
@@ -42,7 +57,7 @@ export class SphereVisualizer{
     // }
     for ( let i = 0; i < numDots; i++ ){
       let particle = new SphereParticle(canvas, state, i);
-      particle.draw(state.frequencyArray[i] * state.generalSettings.heightAmplifier)
+      particle.draw()
       // collection.push(new SphereParticle(canvas));
     }
     // collection.forEach((particle, i) => {
@@ -54,13 +69,26 @@ export class SphereVisualizer{
 
 //represents one particle in sphere. Code inspired by Louis Hoebregts
 class SphereParticle {
-  constructor(canvas, state){
+  constructor(canvas, state, i){
 
-    this.particleRadius = 7;
+    this.radius = state.generalSettings.radius > 0 ? 
+      state.generalSettings.radius : 1;
 
-    this.color = state.generalSettings.color ? 
-    state.generalSettings.color :
-    '#' + Math.floor(Math.random()*16777215).toString(16);
+    this.particleRadius = state.generalSettings.barWidth > 0 ?
+      state.generalSettings.barWidth : 2;
+
+    this.multiplier = state.frequencyArray[i] * state.generalSettings.heightAmplifier > 0 ? 
+    state.frequencyArray[i] * state.generalSettings.heightAmplifier : 1;
+
+
+    if(state.generalSettings.color){
+      // let colorHex = state.generalSettings.color;
+      // let colorInt = parseInt(colorHex.slice(1), 16) + (100*i);
+      // this.color = '#' + colorInt.toString(16);
+      this.color = incrementColor(state.generalSettings.color, (i));
+    } else {
+      this.color = '#' + Math.floor(Math.random()*16777215).toString(16);
+    }
     //canvas properties
     this.canvas = canvas;
     this.perspective = canvas.width * 0.8;
@@ -69,7 +97,7 @@ class SphereParticle {
     this.ctx = canvas.getContext('2d');
 
     //polar coordinates
-    this.sphereRadius = canvas.width/3;
+    this.sphereRadius = canvas.width/7;
     this.theta = Math.random() * 2 * Math.PI; //polar angle
     this.phi = Math.acos((Math.random() * 2) -1); //azimuth angle
 
@@ -86,10 +114,10 @@ class SphereParticle {
   }
 
   //project 3D position to 2D canvas
-  project3DTo2D = (multiplier) => {
-    this.xPos = multiplier * this.sphereRadius * Math.sin(this.phi) * Math.cos(this.theta);
-    this.yPos = multiplier * this.sphereRadius * Math.cos(this.phi);
-    this.zPos = multiplier * this.sphereRadius * Math.sin(this.phi) * Math.sin(this.theta) + this.sphereRadius;
+  project3DTo2D = () => {
+    this.xPos = this.multiplier*.001 * this.sphereRadius * Math.sin(this.phi) * Math.cos(this.theta);
+    this.yPos = this.multiplier*.001 * this.sphereRadius * Math.cos(this.phi) ;
+    this.zPos = this.multiplier*.001 * this.sphereRadius * Math.sin(this.phi) * Math.sin(this.theta) + this.sphereRadius;
     
       
     //2D position of particle
@@ -101,8 +129,8 @@ class SphereParticle {
     }
   }
 
-  draw = (multiplier) => {
-    this.project3DTo2D(multiplier*.01); //get 2D position
+  draw = () => {
+    this.project3DTo2D(); //get 2D position
     this.ctx.globalAlpha = Math.abs(1 - this.z / this.canvas.width); //set opacity
     this.ctx.fillStyle = this.color;
     this.ctx.strokeStyle = this.color;
