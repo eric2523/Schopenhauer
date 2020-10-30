@@ -15,8 +15,7 @@ class ProfileIndex extends React.Component {
       return null
     }
     return(
-      <div>
-        Profile index
+      <div className="profile-index">
         <ProfileBio user={this.props.user}/>
         <ProfileVisualizerIndex userId={this.props.user.id}/>
       </div>

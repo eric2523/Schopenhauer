@@ -32,7 +32,7 @@ class ProfileVisualizerIndexComponent extends React.Component {
     })
     : [];
     return (
-      <ul>
+      <ul className="ui three column grid">
         {usersVisualizers}
       </ul>
     )

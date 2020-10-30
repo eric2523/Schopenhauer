@@ -20,7 +20,8 @@ export class ProfileBio extends React.Component {
 
   render(){
     return(
-      <div>
+      <div className="profile-bio">
+        <i className="fas fa-user"></i>
         {this.props.user.email}
         {this.props.user.username}
       </div>

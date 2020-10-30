@@ -9,10 +9,10 @@ export class ProfileVisualizerItem extends React.Component {
   }
 
   render(){
-    this.props.visualizer.width = 200;
-    this.props.visualizer.height = 200;
+    this.props.visualizer.width = window.innderWidth/4;
+    this.props.visualizer.height = window.innderHeight/4;
     return (
-      <li>
+      <li className="column">
         <div>
           {this.props.visualizer.name}
         </div>
