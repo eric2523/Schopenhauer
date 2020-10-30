@@ -1,8 +1,6 @@
 import React from "react";
 import { CanvasWithRouter } from "./canvas";
-import { VisualizerSettings } from "./visualizer-settings";
 import { ToolbarItem } from "../toolbar/toolbar-item";
-import { testVisualizer } from "./test_visualizer_object";
 import { SongToolBar } from "../music_player/song_tool_bar";
 import { connect } from "react-redux";
 import { FrequencyVisualizer } from "./basic_frequency_visualizer";
@@ -32,16 +30,18 @@ class VisualizerItem extends React.Component {
         this.visualizer = new SphereVisualizer();
         break;
     }
-    this.visualizerSettings = props.visualizerSettings;
+    this.visualizerSettings = Object.assign({}, this.props.visualizerSettings);
   }
 
   render() {
-    if (
-      !this.props.currentSong ||
-      !Object.keys(this.props.currentSong).length
-    ) {
-      return null;
-    }
+    // debugger;
+    // if (
+    //   !this.props.currentSong ||
+    //   !Object.keys(this.props.currentSong).length
+    // ) {
+    //   debugger;
+    //   return null;
+    // }
 
     let toolbar = null;
     if (this.props.toolbox) {
@@ -69,19 +69,19 @@ class VisualizerItem extends React.Component {
         </>
       );
     }
-
     return (
       <div className="viz-outer-div">
         <div className="visualizer">
           <div className="canvas-main-div">
             <div className={this.props.onHover ? "hover-canvas" : "canvas-div"}>
               <CanvasWithRouter
-                canvasWidth={this.visualizerSettings.width}
-                canvasHeight={this.visualizerSettings.height}
+                canvasWidth={this.props.canvasWidth}
+                canvasHeight={this.props.canvasHeight}
                 visualizer={this.visualizer}
                 visualizerSettings={this.visualizerSettings}
                 song={this.props.currentSong}
                 onHover={this.props.onHover}
+                onTemplate={this.props.onTemplate}
               />
             </div>
           </div>
