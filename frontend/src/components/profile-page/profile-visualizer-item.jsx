@@ -6,7 +6,16 @@ import { VisualizerSettings } from '../visualizers/visualizer-settings';
 export class ProfileVisualizerItem extends React.Component { 
   constructor(props){
     super(props);
+    this.state = {
+      connectMusic: false
+    }
+    this.toggleMusic = this.toggleMusic.bind(this);
   }
+
+  toggleMusic(){
+    this.setState({connectMusic: !this.state.connectMusic});
+  }
+
   render(){
     var width = isNaN(window.innerWidth) ? window.clientWidth : window.innerWidth;
     // var height = isNaN(window.innerHeight) ? window.clientHeight : window.innerHeight;
@@ -17,7 +26,13 @@ export class ProfileVisualizerItem extends React.Component {
         <div className="visualizer-title">
           {this.props.visualizer.name}
         </div>
-        <VisualizerItemContainer onHover={true} visualizerSettings={this.props.visualizer}/>
+        <div onClick={this.toggleMusic}>
+        <VisualizerItemContainer
+          connectMusic={this.state.connectMusic}
+          onHover={true} 
+          visualizerSettings={this.props.visualizer}
+          />
+        </div>
       </li>
     )
   }
