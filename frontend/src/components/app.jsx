@@ -1,5 +1,4 @@
 import React from "react";
-import { VisualizerItemContainer } from "./visualizers/visualizer";
 import { NavBarIndex } from "./nav-bar/nav-bar-index";
 import { Route, Redirect } from "react-router-dom";
 import { UserAuthModal } from "./nav-bar/user_auth_modal";
@@ -10,6 +9,7 @@ import { LandingPageIndex } from "./landing-page/landing-page-index";
 import { SongUploadModal } from "./music_player/upload_modal";
 import { ProfilePage } from "./profile-page/profile-index";
 import { TemplatesIndex } from "./templates/templates-index";
+import { VisualizerEdit } from "./visualizers/visualizer-edit-page";
 
 export const App = () => {
   return (
@@ -21,7 +21,7 @@ export const App = () => {
       <UserAuthModal />
       <Switch>
         <Route exact path="/templates" component={TemplatesIndex} />
-        {/* <Route exact path="/visualizer" component={} /> */}
+        <Route exact path="/visualizer/edit" component={VisualizerEdit} />
         <Route exact path="/profile" component={ProfilePage} />
         <Route path="/" component={LandingPageIndex} />
         <Redirect to="/" />
