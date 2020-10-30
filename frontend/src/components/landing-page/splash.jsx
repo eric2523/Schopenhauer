@@ -20,13 +20,18 @@ export class Splash extends React.Component {
     this.tick = this.tick.bind(this);
   }
 
-  componentDidMount(prevProps, prevState, snapshot) {
+  componentDidMount() {
+   
     this.setState(
       {
         visualizer: new ConnectedFloatingDotsVisualizer(this.canvas.current),
       },
       () => this.tick()
     );
+  }
+
+  componentWillUnmount() {
+    cancelAnimationFrame(this.state.rafId);
   }
   onMouseMove(e) {
     this.setState({ mouse: { x: e.clientX, y: e.clientY } });
