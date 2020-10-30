@@ -6,3 +6,8 @@
 .song-item{
   cursor: pointer;
 }
+
+.song-toolbar{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

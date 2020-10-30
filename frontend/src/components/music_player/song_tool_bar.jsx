@@ -25,7 +25,7 @@ class SongToolBarComponent extends React.Component {
     this.props.currentSong.songUrl : ''
 
     return (
-      <div>
+      <div className="song-toolbar">
         Your Songs
         <Queue />
         <UploadButton />
