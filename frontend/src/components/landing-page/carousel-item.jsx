@@ -1,6 +1,7 @@
 import React from "react";
 import { CanvasWithRouter } from "../visualizers/canvas";
 import { testVisualizer } from "../visualizers/test_visualizer_object";
+import { VisualizerItemContainer } from "../visualizers/visualizer";
 
 export const CarouselItem = (props) => {
   // need to figure out what vars we want in the template
@@ -9,7 +10,7 @@ export const CarouselItem = (props) => {
   // if (props.visualizerSettings.name){
   //   templateName = props.visualizerSettings.name
   // }
-
+  debugger
   return (
     <div className="carousel-item-div">
       <div className="carousel-item-title">
@@ -18,12 +19,13 @@ export const CarouselItem = (props) => {
         </h1>
       </div>
       <div className="carousel-item-visualizer">
-        <CanvasWithRouter
+        <VisualizerItemContainer
           canvasWidth={250}
           canvasHeight={250}
-          toolbox={false}
+          // toolbox={false}
           // onHover={true}
           visualizerSettings={props.visualizerSettings}
+          onTemplate={true}
         />
       </div>
       <div className="carousel-template-btn">
