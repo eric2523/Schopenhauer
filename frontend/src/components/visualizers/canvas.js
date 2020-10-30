@@ -122,8 +122,15 @@ class Canvas extends React.Component {
 
   render() {
     if (this.state.source && this.state.analyser) {
-      this.state.source.connect(this.state.analyser);
-      this.state.analyser.connect(this.state.audioContext.destination);
+      if(this.props.disconnectMusic){
+        this.state.source.connect(this.state.analyser);
+        this.state.analyser.connect(this.state.audioContext.destination);
+        this.state.analyser.disconnect(this.state.audioContext.destination);
+      }
+      else{
+        this.state.source.connect(this.state.analyser);
+        this.state.analyser.connect(this.state.audioContext.destination);
+      }
     }
 
     const buttonText = !this.state.play ? (
@@ -134,7 +141,7 @@ class Canvas extends React.Component {
 
     if (this.props.onHover){
       return (
-        <div>
+        <div onMouseEnter={this.togglePlay} onMouseLeave={this.togglePlay}>
           <canvas
           ref={this.canvas}
           height={this.props.canvasHeight}

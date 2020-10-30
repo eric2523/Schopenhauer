@@ -38,12 +38,15 @@ export class ProfileVisualizerItem extends React.Component {
       //   <div className="visualizer-title">
       //     {this.props.visualizer.name}
       //   </div>
+
         <VisualizerItemContainer
           connectMusic={this.props.connectMusic}
           startPlaying={this.props.startPlaying} 
           visualizerSettings={this.props.visualizer}
           canvasWidth={width/4}
           canvasHeight={width/4}
+          onHover={this.props.onHover}
+          disconnectMusic={this.props.disconnectMusic}
           />
           )
         {/* <button 

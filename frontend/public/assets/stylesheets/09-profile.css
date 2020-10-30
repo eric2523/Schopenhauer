@@ -33,3 +33,36 @@
 i.trash.icon{
   color: #313030;
 }
+
+.item-overlay{
+  position:relative;
+}
+
+.item-overlay:hover{
+  opacity: 0.5; 
+  cursor: pointer;
+}
+
+#profile-play{
+  position: absolute;
+  display: none;
+  color: #e0e1e2;
+  /* top: 50%;
+  right: 50%; */
+  top: 5%;
+  right: 5%;
+  z-index: 9;
+}
+
+.item-overlay:hover #profile-play{
+  display: flex;
+}
+#vis-playing{
+  opacity: 1;
+}
+
+.item-overlay{
+  border: 1px solid #b3b4b6;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
