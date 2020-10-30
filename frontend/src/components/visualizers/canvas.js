@@ -12,7 +12,7 @@ class Canvas extends React.Component {
     this.audio = new Audio();
     this.audio.crossOrigin = "anonymous";
     this.audio.src = this.props.song ? this.props.song.songUrl : song;
-
+    debugger
     this.state = {
       // visualizer: {}
 
@@ -62,7 +62,7 @@ class Canvas extends React.Component {
 
   togglePlay() {
     // checks if audio input is in (can change second conditional later to be more specific. Currently just a placeholder until I figure out a better flag )
-    debugger;
+    // debugger;
     if (
       (this.audio instanceof Audio && !this.state.source) ||
       this.state.songId !== this.props.song._id
