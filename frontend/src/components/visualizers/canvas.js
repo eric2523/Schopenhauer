@@ -62,7 +62,6 @@ class Canvas extends React.Component {
 
   togglePlay() {
     // checks if audio input is in (can change second conditional later to be more specific. Currently just a placeholder until I figure out a better flag )
-    debugger;
     if (
       (this.audio instanceof Audio && !this.state.source) ||
       this.state.songId !== this.props.song._id
@@ -133,7 +132,7 @@ class Canvas extends React.Component {
 
     if (this.props.onHover || this.props.onTemplate) {
       return (
-        <div>
+        <div onMouseEnter={this.togglePlay} onMouseLeave={this.togglePlay}>
           <canvas
             ref={this.canvas}
             height={this.props.canvasHeight}
