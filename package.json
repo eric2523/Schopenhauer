@@ -37,7 +37,6 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "path": "^0.12.7",
-    "react-scripts": "^4.0.0",
     "validator": "^13.1.17"
   },
   "devDependencies": {
