@@ -1,13 +1,25 @@
 .current-song-item{
   color: red;
   cursor: pointer;
+  margin-bottom: 10px;
 }
 
 .song-item{
   cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.song-item:hover{
+  opacity: 0.5;
 }
 
 .song-toolbar{
-  margin-top: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.your-songs{
   margin-bottom: 10px;
+  font-weight: 800;
+  font-size: 1.6rem;
 }

@@ -32,7 +32,13 @@ class VisualizerItem extends React.Component {
         break;
     }
     this.visualizerSettings = Object.assign({}, this.props.visualizerSettings);
+    this.handleColorChange = this.handleColorChange.bind(this);
   }
+
+  handleColorChange = (color, event) => {
+    this.visualizerSettings.generalSettings.color = color.hex;
+  };
+
 
   render() {
     // debugger;
@@ -66,7 +72,7 @@ class VisualizerItem extends React.Component {
           <div className="toolbar">
             <ul>{items}</ul>
             <SongToolBar />
-            <CirclePicker />
+            <CirclePicker onChange={ this.handleColorChange }/>
           </div>
         </>
       );

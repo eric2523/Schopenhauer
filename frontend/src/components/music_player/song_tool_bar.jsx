@@ -26,7 +26,7 @@ class SongToolBarComponent extends React.Component {
 
     return (
       <div className="song-toolbar">
-        Your Songs
+        <div className="your-songs">Your Songs</div>
         <Queue />
         <UploadButton />
       </div>
