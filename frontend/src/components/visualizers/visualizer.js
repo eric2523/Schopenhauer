@@ -5,6 +5,7 @@ import { SongToolBar } from "../music_player/song_tool_bar";
 import { connect } from "react-redux";
 import { FrequencyVisualizer } from "./basic_frequency_visualizer";
 import { SphereVisualizer } from "./nate_visualizer_1";
+import { BarVisualizer } from "./eric-visualizer1";
 
 import { CirclePicker } from "react-color"
 
@@ -30,6 +31,9 @@ class VisualizerItem extends React.Component {
         break;
       case "sphere":
         this.visualizer = new SphereVisualizer();
+        break;
+      case "bars":
+        this.visualizer = new BarVisualizer();
         break;
       case "square":
         this.visualizer = new SquareVisualizer();
