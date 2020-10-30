@@ -43,7 +43,7 @@ class VisualizerItem extends React.Component {
   }
 
   handleColorChange = (color, event) => {
-    this.visualizerSettings.generalSettings.color = color.hex;
+    this.visualizerSettings.generalSettings['color'] = color.hex;
   };
 
 
