@@ -31,6 +31,7 @@ router.post("/signup", (req, res) => {
       const newUser = new User({
         email: req.body.email,
         password: req.body.password,
+        username: req.body.username
       });
 
       bcrypt.genSalt(10, (err, salt) => {
@@ -40,7 +41,7 @@ router.post("/signup", (req, res) => {
           newUser
             .save()
             .then((user) => {
-              const payload = { id: user.id, email: user.email };
+              const payload = { id: user.id, email: user.email};
 
               jwt.sign(
                 payload,
@@ -50,6 +51,7 @@ router.post("/signup", (req, res) => {
                   res.json({
                     success: true,
                     token: "Bearer " + token,
+                    username: user.username
                   });
                 }
               );
@@ -91,6 +93,7 @@ router.post("/login", (req, res) => {
             res.json({
               success: true,
               token: "Bearer " + token,
+              username: user.username
             });
           }
         );
@@ -137,6 +140,63 @@ router.post("/follow", (req, res) => {
 
       return res.json(follower.follows);
     }); 
+  }); 
+});
+
+// Unfollow route
+
+router.post("/unfollow", (req, res) => {
+  const followerId = req.body.followerId;
+  const followedId = req.body.followedId;
+  console.log(`Fielding request that ${followerId} unfollow ${followedId}`);
+
+  let errors = {};
+
+  User.findById(followerId, function (err, follower) { 
+    if (err) { 
+      errors.follow = "No such follower id";
+      console.log(errors); 
+      return res.status(400).json(errors);
+    }
+    console.log(follower)
+    User.findById(followedId, function (err, followed) {
+      if (err) {
+        errors.follow = "No such followed id";
+        console.log(errors);
+        return res.status(400).json(errors);
+      }
+      console.log(followed);
+      if (!followed.followers.includes(followerId)) {
+        errors.follow = "User does not follow that user";
+        return res.status(400).json(errors);
+      }
+
+      followed.followers.pull({_id: followerId});
+      followed.save();
+      follower.follows.pull({_id: followedId});
+      follower.save();
+
+      return res.json(follower.follows);
+    }); 
+  }); 
+});
+
+// Get follows route
+
+router.get("/follows", (req, res) => {
+  const followerId = req.query.followerId;
+  console.log(`Fielding request for those followed by ${followerId}`);
+
+  let errors = {};
+
+  User.findById(followerId, function (err, follower) { 
+    if (err) { 
+      errors.follow = "No such follower id";
+      console.log(errors); 
+      return res.status(400).json(errors);
+    }
+    console.log(follower)
+      return res.json(follower.follows);
   }); 
 });
 
