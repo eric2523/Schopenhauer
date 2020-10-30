@@ -5,7 +5,11 @@ import { SongToolBar } from "../music_player/song_tool_bar";
 import { connect } from "react-redux";
 import { FrequencyVisualizer } from "./basic_frequency_visualizer";
 import { SphereVisualizer } from "./nate_visualizer_1";
+
+import { CirclePicker } from "react-color"
+
 import { SquareVisualizer } from "./basic_square_visualizer";
+
 
 const mSTP = (state) => {
   return {
@@ -35,7 +39,13 @@ class VisualizerItem extends React.Component {
       break;
     }
     this.visualizerSettings = Object.assign({}, this.props.visualizerSettings);
+    this.handleColorChange = this.handleColorChange.bind(this);
   }
+
+  handleColorChange = (color, event) => {
+    this.visualizerSettings.generalSettings.color = color.hex;
+  };
+
 
   render() {
     // debugger;
@@ -69,6 +79,7 @@ class VisualizerItem extends React.Component {
           <div className="toolbar">
             <ul>{items}</ul>
             <SongToolBar />
+            <CirclePicker onChange={ this.handleColorChange }/>
           </div>
         </>
       );
