@@ -7,7 +7,8 @@ export class ProfileVisualizerItem extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      connectMusic: false
+      connectMusic: false,
+      startPlaying: false
     }
     this.toggleMusic = this.toggleMusic.bind(this);
   }
@@ -33,25 +34,27 @@ export class ProfileVisualizerItem extends React.Component {
     this.props.visualizer.width = (width / 4);
     this.props.visualizer.height = (width / 4);
     return (
-      <li className="column">
-        <div className="visualizer-title">
-          {this.props.visualizer.name}
-        </div>
+      // <li className="column">
+      //   <div className="visualizer-title">
+      //     {this.props.visualizer.name}
+      //   </div>
         <VisualizerItemContainer
-          connectMusic={this.state.connectMusic}
-          onHover={false} 
+          connectMusic={this.props.connectMusic}
+          startPlaying={this.props.startPlaying} 
           visualizerSettings={this.props.visualizer}
+          canvasWidth={width/4}
+          canvasHeight={width/4}
           />
-        <button 
+          )
+        {/* <button 
           onClick={this.toggleMusic}
           className="ui button"  
-        >
-          {buttonText}
-        </button>
-        <button onClick={this.handleDelete}>
-          DELETE
-        </button>
-      </li>
-    )
+        > */}
+          {/* {buttonText}
+        </button> */}
+      //   <button onClick={this.handleDelete}>
+      //     DELETE
+      //   </button>
+      // </li>
   }
 }
