@@ -147,7 +147,6 @@ class Canvas extends React.Component {
     return (
       <>
         <canvas
-          style="background-color:black;"
           ref={this.canvas}
           height={this.props.canvasHeight}
           width={this.props.canvasWidth}

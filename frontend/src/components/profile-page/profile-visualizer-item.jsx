@@ -6,7 +6,14 @@ import { VisualizerSettings } from '../visualizers/visualizer-settings';
 export class ProfileVisualizerItem extends React.Component { 
   constructor(props){
     super(props);
+    this.handleDelete = this.handleDelete.bind(this)
   }
+
+  handleDelete(e){
+    // debugger
+    this.props.deleteVisualizer(this.props.visualizer._id)
+  }
+
   render(){
     var width = isNaN(window.innerWidth) ? window.clientWidth : window.innerWidth;
     // var height = isNaN(window.innerHeight) ? window.clientHeight : window.innerHeight;
@@ -18,6 +25,9 @@ export class ProfileVisualizerItem extends React.Component {
           {this.props.visualizer.name}
         </div>
         <VisualizerItemContainer onHover={true} visualizerSettings={this.props.visualizer}/>
+        <button onClick={this.handleDelete}>
+          DELETE
+        </button>
       </li>
     )
   }

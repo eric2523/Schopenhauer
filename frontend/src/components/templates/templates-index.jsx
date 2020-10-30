@@ -35,8 +35,8 @@ class TemplatesIndex extends React.Component {
         case "sphere":
           this.props
           .uploadVisualizer(prepSettings(defaultSphereSettings, this.props.userId))
-            .then((visualizer) =>
-              this.props.history.push(`/visualizers/${visualizer._id}`)
+            .then((payload) =>
+              this.props.history.push(`/visualizers/${payload.visualizer._id}`)
             );
           break;
         default:
