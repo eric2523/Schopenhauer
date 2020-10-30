@@ -17,6 +17,11 @@ export class ProfileVisualizerItem extends React.Component {
   }
 
   render(){
+    const buttonText = !this.state.connectMusic ? (
+      <i className="play icon white-audio-icon"></i>
+    ) : (
+      <i className="pause icon white-audio-icon"></i>
+    );
     var width = isNaN(window.innerWidth) ? window.clientWidth : window.innerWidth;
     // var height = isNaN(window.innerHeight) ? window.clientHeight : window.innerHeight;
     this.props.visualizer.width = (width / 4);
@@ -26,13 +31,17 @@ export class ProfileVisualizerItem extends React.Component {
         <div className="visualizer-title">
           {this.props.visualizer.name}
         </div>
-        <div onClick={this.toggleMusic}>
         <VisualizerItemContainer
           connectMusic={this.state.connectMusic}
-          onHover={true} 
+          onHover={false} 
           visualizerSettings={this.props.visualizer}
           />
-        </div>
+        <button 
+          onClick={this.toggleMusic}
+          className="ui button"  
+        >
+          {buttonText}
+        </button>
       </li>
     )
   }

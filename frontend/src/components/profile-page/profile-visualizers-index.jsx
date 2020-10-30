@@ -19,16 +19,27 @@ const mDTP = (dispatch, ownProps) => {
 class ProfileVisualizerIndexComponent extends React.Component {
   constructor(props){
     super(props);
+    // this.state= {
+    //   connectMusic: null
+    // }
   }
 
   componentDidMount(){
     this.props.fetchUserVisualizer();
   }
 
+  // toggleMusic(id){
+  //   return () => {
+  //     this.setState({connectMusic: id});
+  //   }
+  // }
+
   render(){
     const usersVisualizers = this.props.visualizers.length ? 
     this.props.visualizers.map( (visualizer, i) => {
-      return <ProfileVisualizerItem key={i} visualizer={visualizer}/>
+      return <ProfileVisualizerItem 
+        key={i} 
+        visualizer={visualizer}/>
     })
     : [];
     return (
