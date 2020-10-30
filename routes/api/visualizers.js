@@ -15,21 +15,22 @@ router.post(
       userId: req.body.userId,
       songId: req.body.songId,
     });
-    newVisualizer.save().then((visualizer) =>
-      res.json({
+    newVisualizer.save().then((visualizer) => {
+      return res.json({
+        _id: visualizer._id,
         name: visualizer.name,
         type: visualizer.type,
         typeSettings: visualizer.typeSettings,
         generalSettings: visualizer.generalSettings,
         userId: visualizer.userId,
         songId: visualizer.songId,
-      })
-    );
+      });
+    });
   }
 );
 
 router.get("/", (req, res) => {
-  Visualizer.find({ userId: req.body.userId })
+  Visualizer.find({ userId: req.query.userId })
     .then((visualizers) => res.json(visualizers))
     .catch((err) => res.status(404).json(err));
 });
@@ -38,7 +39,7 @@ router.patch(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const filter = { _id: req.body.id };
+    const filter = { _id: req.body._id };
     const update = {
       name: req.body.name,
       typeSettings: req.body.typeSettings,
@@ -56,9 +57,8 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     console.log("in delete");
-    console.log(req.body.id);
-
-    Visualizer.findByIdAndDelete(req.body.id)
+    console.log(req.query.id);
+    Visualizer.findByIdAndDelete(req.query.id)
       .then(() => res.status(200).json("success!"))
       .catch((err) => res.status(404).json(err));
   }
