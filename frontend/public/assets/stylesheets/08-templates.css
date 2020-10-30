@@ -1,0 +1,12 @@
+.default-templates ul {
+  display: flex;
+  justify-content: center;
+}
+
+.templates {
+  height: 100vh;
+}
+
+.default-templates ul li {
+  background: linear-gradient(137deg, rgba(252,253,253,0) 0%, rgba(0,0,0,0.5998774509803921) 100%);
+}
