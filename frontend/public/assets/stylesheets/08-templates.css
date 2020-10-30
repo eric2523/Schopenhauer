@@ -10,3 +10,19 @@
 .default-templates ul li {
   background: linear-gradient(137deg, rgba(252,253,253,0) 0%, rgba(0,0,0,0.5998774509803921) 100%);
 }
+
+.slick-list {
+  height: 100%
+}
+
+.carousel-main-div .slick-slider {
+  height: 45vh;
+}
+
+.carousel-main-div .slick-dots {
+  background: #313133;
+}
+
+.carousel-main-div {
+  height: 75vh;
+}
