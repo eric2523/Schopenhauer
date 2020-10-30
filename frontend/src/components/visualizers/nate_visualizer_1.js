@@ -37,6 +37,9 @@ export class SphereVisualizer{
     // let collection;
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if(!typeof state.generalSettings !== "object"){
+      state.generalSettings = {heightAmplifier: 1}
+    }
     for ( let i = 0; i < numDots; i++ ){
       let particle = new SphereParticle(canvas);
       particle.draw(state.frequencyArray[i] * state.generalSettings.heightAmplifier)

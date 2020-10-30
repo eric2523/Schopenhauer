@@ -22,7 +22,7 @@ export const App = () => {
       <Switch>
         <ProtectedRoute exact path="/templates" component={TemplatesIndexContainer} />
         <Route exact path="/visualizers/:id" component={VisualizerEditContainer} />
-        <Route exact path="/profile" component={ProfilePage} />
+        <Route exact path="/profile/:id" component={ProfilePage} />
         <Route path="/" component={LandingPageIndex} />
         <Redirect to="/" />
       </Switch>

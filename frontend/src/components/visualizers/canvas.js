@@ -24,7 +24,7 @@ class Canvas extends React.Component {
       typeSettings: props.visualizerSettings.typeSettings,
       generalSettings: props.visualizerSettings.generalSettings,
       visualizer: props.visualizer,
-
+      
       //tbd
       play: false,
       // audio: new Audio(this.props.song),
@@ -38,13 +38,13 @@ class Canvas extends React.Component {
       rafId: null,
       songId: null
     };
+    // debugger;
 
     this.togglePlay = this.togglePlay.bind(this);
     this.tick = this.tick.bind(this);
     this.updateFrequencyData = this.updateFrequencyData.bind(this);
     this.updateWaveformData = this.updateWaveformData.bind(this);
     this.updateAllData = this.updateAllData.bind(this);
-    
   }
 
   componentDidUpdate(prevProps){
@@ -132,9 +132,22 @@ class Canvas extends React.Component {
       <i className="pause icon white-audio-icon"></i>
     );
 
+    if (this.props.onHover){
+      return (
+        <div onMouseEnter={this.togglePlay} onMouseLeave={this.togglePlay}>
+          <canvas
+          ref={this.canvas}
+          height={this.props.canvasHeight}
+          width={this.props.canvasWidth}
+        />
+        </div>
+      )
+    }
+
     return (
       <>
         <canvas
+          style="background-color:black;"
           ref={this.canvas}
           height={this.props.canvasHeight}
           width={this.props.canvasWidth}

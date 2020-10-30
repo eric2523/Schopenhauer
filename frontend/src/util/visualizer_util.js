@@ -19,6 +19,14 @@ export const stdevArray = function (array) {
   return Math.sqrt(averageArray(sqResiduals));
 };
 
+export const parseVisualizerSettings = function (visualizerSettings) {
+  let parsedSettings = Object.assign({}, visualizerSettings);
+  parsedSettings.globalSettings = JSON.parse(visualizerSettings.globalSettings)
+  parsedSettings.typeSettings = JSON.parse(visualizerSettings.typeSettings);
+
+  return parsedSettings;
+}
+
 export const detectPitch = function (array) {
   const notes = [
     "A",

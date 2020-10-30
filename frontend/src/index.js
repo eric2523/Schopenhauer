@@ -9,6 +9,7 @@ import { receiveUserSongs } from './actions/song_actions';
 import { fetchUserVisualizer } from "./actions/visualizer_actions";
 import { defaultFrequencySettings } from "./components/visualizers/basic_frequency_visualizer";
 import { defaultSphereSettings } from "./components/visualizers/nate_visualizer_1";
+import { receiveUser } from './actions/user_actions';
 
 document.addEventListener("DOMContentLoaded", () => {
   // currently no preloaded state
@@ -29,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     store = configureStore(preloadedState);
     store.dispatch(receiveUserSongs(store.getState().session.user.id));
     store.dispatch(fetchUserVisualizer(store.getState().session.user.id));
+    store.dispatch(receiveUser(store.getState().session.user));
     const currentTime = Date.now() / 1000;
 
     if (decodedUser.exp < currentTime) {
