@@ -8,7 +8,8 @@ export class ToolbarItem extends React.Component {
 
   handleChange(e) {
     let name = this.props.setting.name 
-    this.props.generalSettings[name] = e.target.value
+    debugger
+    this.props.generalSettings[name] = parseInt(e.target.value)
   }
 
   render() {

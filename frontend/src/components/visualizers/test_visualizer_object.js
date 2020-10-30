@@ -1,5 +1,5 @@
 export const testVisualizer = {
-  type: "",
+  type: "frequency",
   typeSettings: { binCount: 1024 },
   generalSettings: {
     //for canvas settings

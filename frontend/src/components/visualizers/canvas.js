@@ -3,31 +3,28 @@ import song from "../../audio_files/bensound-goinghigher.mp3";
 import { BeatDetection } from "./beat_detection";
 import { withRouter } from "react-router-dom";
 // import { connect } from "react-redux";
-import ReactPlayer from 'react-player/file';
 
 import { FrequencyVisualizer } from "./basic_frequency_visualizer";
 import { SphereVisualizer } from "./nate_visualizer_1";
-
-
 
 class Canvas extends React.Component {
   constructor(props) {
     // props contain canvasWidth & canvasHeight
     super(props);
-    let visualizer;
+    // let visualizer = this.props.visualizer;
     const binCount = 1024;
     this.canvas = React.createRef();
-    switch (this.props.match.params.id) {
-      case "frequency":
-        visualizer = new FrequencyVisualizer();
-        break;
-      case "sphere":
-        visualizer = new SphereVisualizer();
-        break;
-      default:
-        break;
-    }
-
+    // switch (this.props.match.params.id) {
+    //   case "frequency":
+    //     visualizer = new FrequencyVisualizer();
+    //     break;
+    //   case "sphere":
+    //     visualizer = new SphereVisualizer();
+    //     break;
+    //   default:
+    //     break;
+    // }
+    
     this.audio = new Audio();
     this.audio.crossOrigin = 'anonymous';
     this.audio.src = this.props.song.songUrl
@@ -36,8 +33,9 @@ class Canvas extends React.Component {
       // visualizer: {}
 
       //needed
-      typeSettings: props.visualizer.typeSettings,
-      generalSettings: props.visualizer.generalSettings,
+      typeSettings: props.visualizerSettings.typeSettings,
+      generalSettings: props.visualizerSettings.generalSettings,
+      visualizer: props.visualizer,
 
       //tbd
       play: false,
@@ -50,7 +48,6 @@ class Canvas extends React.Component {
       waveformArray: new Uint8Array(binCount),
       binCount,
       rafId: null,
-      visualizer,
       songId: null
     };
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactPlayer from 'react-player/file';
 import { connect } from 'react-redux';
 import { Queue } from './queue';
 import { UploadButton } from "./upload_button";

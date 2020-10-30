@@ -2,11 +2,11 @@ import React from "react";
 import { CanvasWithRouter } from "./canvas";
 import { VisualizerSettings } from "./visualizer-settings";
 import { ToolbarItem } from "../toolbar/toolbar-item";
-// import { ToolbarIndex } from "../toolbar/toolbar-index";
-// import { Scrubber } from "../toolbar/scrubber";
-// import { testVisualizer } from "./test_visualizer_object";
+import { testVisualizer } from "./test_visualizer_object";
 import { SongToolBar } from '../music_player/song_tool_bar';
 import { connect } from "react-redux";
+import { FrequencyVisualizer } from "./basic_frequency_visualizer";
+import { SphereVisualizer } from "./nate_visualizer_1";
 
 const mSTP = (state) => {
   return {
@@ -15,17 +15,30 @@ const mSTP = (state) => {
   }
 };
 
-class VisualizerComponent extends React.Component {
+// EXAMPLE 
+{/* <VisualizerItemContainer visualizerSettings={visualerSettingsFromDB}/> */}
+
+class VisualizerItem extends React.Component {
   constructor(props) {
     super(props);
-    this.visualizerSettings = new VisualizerSettings();
+    switch (props.visualizerSettings.type) {
+      case "frequency":
+        this.visualizer = new FrequencyVisualizer()
+        break;
+      case "sphere":
+        this.visualizer = new SphereVisualizer()
+        break;
+      default:
+        break;
+    }
+    this.visualizerSettings = props.visualizerSettings
   }
 
   render() {
     if (!this.props.currentSong || !Object.keys(this.props.currentSong).length) {
       return null;
     }
-    const generalSettings = this.visualizerSettings.settings.generalSettings;
+    const generalSettings = this.visualizerSettings.generalSettings;
     let items = [];
     for (const handle in generalSettings) {
       let setting = {
@@ -35,7 +48,7 @@ class VisualizerComponent extends React.Component {
       items.push(
         <ToolbarItem
           key={handle}
-          generalSettings={this.visualizerSettings.settings.generalSettings}
+          generalSettings={this.visualizerSettings.generalSettings}
           setting={setting}
         />
       );
@@ -48,7 +61,8 @@ class VisualizerComponent extends React.Component {
               <CanvasWithRouter
                 canvasWidth={700}
                 canvasHeight={700}
-                visualizer={this.visualizerSettings.settings}
+                visualizer={this.visualizer}
+                visualizerSettings={this.visualizerSettings}
                 song={this.props.currentSong}
               />
             </div>
@@ -64,4 +78,4 @@ class VisualizerComponent extends React.Component {
   }
 }
 
-export const Visualizer = connect(mSTP, null)(VisualizerComponent);
+export const VisualizerItemContainer = connect(mSTP, null)(VisualizerItem);
