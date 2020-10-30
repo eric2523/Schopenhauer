@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import {Carousel} from "../carousel/carousel-provider"
+import { CarouselItemContainer } from "../carousel/carousel-provider"
 
 class CarouselContainer extends React.Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class CarouselContainer extends React.Component {
           <h1 className="carousel-title">{carouselTitle}</h1>
         </div>
         {/* <SimpleSlider /> */}
-        <Carousel />
+        <CarouselItemContainer />
       </div>
     );
   }
