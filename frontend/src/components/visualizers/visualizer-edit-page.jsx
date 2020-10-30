@@ -11,12 +11,14 @@ const mSTP = (state, ownProps) => {
 
 const VisualizerEdit = (props) => {
   const visualizerSettings = props.visualizerSettings;
-
+  const width = window.innerWidth
+  const height = window.innerHeight
+  debugger
   return (
     <VisualizerItemContainer
       toolbox={true}
-      canvasWidth={700}
-      canvasHeight={700}
+      canvasWidth={width}
+      canvasHeight={height}
       visualizerSettings={visualizerSettings}
     />
   );

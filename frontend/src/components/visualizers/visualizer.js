@@ -19,6 +19,7 @@ const mSTP = (state) => {
 class VisualizerItem extends React.Component {
   constructor(props) {
     super(props);
+    debugger
     switch (props.visualizerSettings.type) {
       case "frequency":
         this.visualizer = new FrequencyVisualizer();
@@ -64,8 +65,8 @@ class VisualizerItem extends React.Component {
         <>
           <div className="toolbar">
             <ul>{items}</ul>
+            <SongToolBar />
           </div>
-          <SongToolBar />
         </>
       );
     }
@@ -85,8 +86,8 @@ class VisualizerItem extends React.Component {
                 connectMusic={this.props.connectMusic}
               />
             </div>
-          </div>
           <>{toolbar}</>
+          </div>
         </div>
       </div>
     );

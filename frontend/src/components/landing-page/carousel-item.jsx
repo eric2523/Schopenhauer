@@ -10,7 +10,6 @@ export const CarouselItem = (props) => {
   // if (props.visualizerSettings.name){
   //   templateName = props.visualizerSettings.name
   // }
-  debugger
   return (
     <div className="carousel-item-div">
       <div className="carousel-item-title">
