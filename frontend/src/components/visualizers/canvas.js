@@ -2,10 +2,6 @@ import React from "react";
 import song from "../../audio_files/bensound-goinghigher.mp3";
 import { BeatDetection } from "./beat_detection";
 import { withRouter } from "react-router-dom";
-// import { connect } from "react-redux";
-
-import { FrequencyVisualizer } from "./basic_frequency_visualizer";
-import { SphereVisualizer } from "./nate_visualizer_1";
 
 class Canvas extends React.Component {
   constructor(props) {
@@ -100,8 +96,6 @@ class Canvas extends React.Component {
   }
 
   animation(canvas) {
-    // canvas.width = this.props.canvasWidth;
-    // canvas.height = this.props.canvasHeight;
     this.state.visualizer.animate(canvas, this.state);
   }
 
