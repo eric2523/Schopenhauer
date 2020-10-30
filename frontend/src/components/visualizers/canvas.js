@@ -123,13 +123,7 @@ class Canvas extends React.Component {
   render() {
     if (this.state.source && this.state.analyser) {
       this.state.source.connect(this.state.analyser);
-      if(this.props.connectMusic){
-        this.state.analyser.connect(this.state.audioContext.destination);
-      }
-      else {
-        this.state.analyser.connect(this.state.audioContext.destination);
-        this.state.analyser.disconnect(this.state.audioContext.destination);
-      }
+      this.state.analyser.connect(this.state.audioContext.destination);
     }
 
     const buttonText = !this.state.play ? (
