@@ -15,16 +15,17 @@ router.post(
       userId: req.body.userId,
       songId: req.body.songId,
     });
-    newVisualizer.save().then((visualizer) =>
-      res.json({
+    newVisualizer.save().then((visualizer) => {
+      return res.json({
+        _id: visualizer._id,
         name: visualizer.name,
         type: visualizer.type,
         typeSettings: visualizer.typeSettings,
         generalSettings: visualizer.generalSettings,
         userId: visualizer.userId,
         songId: visualizer.songId,
-      })
-    );
+      });
+    });
   }
 );
 
@@ -38,7 +39,7 @@ router.patch(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const filter = { _id: req.body.id };
+    const filter = { _id: req.body._id };
     const update = {
       name: req.body.name,
       typeSettings: req.body.typeSettings,
