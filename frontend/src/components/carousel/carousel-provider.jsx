@@ -43,6 +43,7 @@ class Carousel extends React.Component {
           <div className="slide-item-div">
             <CarouselItem
               key={key}
+              visualizerId={key}
               visualizerSettings={this.props.visualizers[key]}
             />
           </div>

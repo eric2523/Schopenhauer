@@ -3,8 +3,8 @@
 }
 
 .splash-outer-div {
-  background-image: url("https://media0.giphy.com/media/14urQKQOKld6CQiiMB/giphy.gif?cid=ecf05e47h2mr9mromzan4s3zv4watc5a5d006ejc2w6hjf4p&rid=giphy.gif");
-  background-color: black;
+  /* background-image: url("https://media0.giphy.com/media/14urQKQOKld6CQiiMB/giphy.gif?cid=ecf05e47h2mr9mromzan4s3zv4watc5a5d006ejc2w6hjf4p&rid=giphy.gif"); */
+  background-color: rgb(12, 6, 39);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -77,7 +77,11 @@
 
 .slide-item-div {
   border-radius: 5px;
-  background: linear-gradient(137deg, rgba(252,253,253,0) 0%, rgba(0,0,0,0.75) 75%);
+  background: linear-gradient(
+    137deg,
+    rgba(252, 253, 253, 0) 0%,
+    rgba(0, 0, 0, 0.75) 75%
+  );
 }
 
 .slick-prev {
@@ -122,7 +126,7 @@
 }
 
 .white-audio-icon {
-  color: rgb(255,255,255)
+  color: rgb(255, 255, 255);
 }
 
 .carousel-template-btn > .creation-temp-btn {
