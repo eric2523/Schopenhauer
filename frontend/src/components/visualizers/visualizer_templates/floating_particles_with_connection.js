@@ -2,13 +2,15 @@ import { distance } from "../../../util/visualizer_util";
 
 export class ConnectedFloatingDotsVisualizer {
   constructor(canvas) {
+    canvas.height = 403.6;
+    canvas.width = 1460;
     this.particleArray = [];
-    for (let i = 0; i < 25; i++) {
-      let size = 0.75;
+    for (let i = 0; i < 50; i++) {
+      let size = Math.random() * 3 + 1;
       let x = Math.random() * canvas.width;
       let y = Math.random() * canvas.height;
-      let xVel = Math.random() * 0.1;
-      let yVel = Math.random() * 0.1;
+      let xVel = Math.random() * 0.4;
+      let yVel = Math.random() * 0.4;
       let color = "black";
       this.particleArray.push(new Particle(x, y, xVel, yVel, size, color));
     }
@@ -27,7 +29,7 @@ export class ConnectedFloatingDotsVisualizer {
     for (let a = 0; a < this.particleArray.length; a++) {
       for (let b = a + 1; b < this.particleArray.length; b++) {
         const dist = distance(this.particleArray[a], this.particleArray[b]);
-        opacityValue = 1 - dist / 50;
+        opacityValue = 1 - dist / 150;
         ctx.strokeStyle = "rgba(140,85,31," + opacityValue + ")";
         ctx.lineWidth = 1;
         ctx.beginPath();
