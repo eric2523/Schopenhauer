@@ -14,6 +14,12 @@ export class ProfileVisualizerItem extends React.Component {
 
   toggleMusic(){
     this.setState({connectMusic: !this.state.connectMusic});
+    this.handleDelete = this.handleDelete.bind(this)
+  }
+
+  handleDelete(e){
+    // debugger
+    this.props.deleteVisualizer(this.props.visualizer._id)
   }
 
   render(){
@@ -41,6 +47,9 @@ export class ProfileVisualizerItem extends React.Component {
           className="ui button"  
         >
           {buttonText}
+        </button>
+        <button onClick={this.handleDelete}>
+          DELETE
         </button>
       </li>
     )

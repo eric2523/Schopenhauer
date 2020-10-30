@@ -19,14 +19,6 @@ export const stdevArray = function (array) {
   return Math.sqrt(averageArray(sqResiduals));
 };
 
-export const parseVisualizerSettings = function (visualizerSettings) {
-  let parsedSettings = Object.assign({}, visualizerSettings);
-  parsedSettings.globalSettings = JSON.parse(visualizerSettings.globalSettings)
-  parsedSettings.typeSettings = JSON.parse(visualizerSettings.typeSettings);
-
-  return parsedSettings;
-}
-
 export const detectPitch = function (array) {
   const notes = [
     "A",
@@ -67,3 +59,23 @@ export const detectPitch = function (array) {
 
   return pitch;
 };
+
+export const prepSettings = function(visualizerSettings, userId) {
+  const stringifiedSettings = Object.assign({}, visualizerSettings);
+  stringifiedSettings.generalSettings = JSON.stringify(
+    visualizerSettings.generalSettings
+  );
+  stringifiedSettings.typeSettings = JSON.stringify(
+    visualizerSettings.typeSettings
+  );
+
+  stringifiedSettings.userId = userId
+  return stringifiedSettings;
+};
+
+export const parseVisualizerSettings = function(visualizerSettings) {
+  const parsedSettings = Object.assign({}, visualizerSettings);
+  parsedSettings.generalSettings = JSON.parse(visualizerSettings.generalSettings)
+  parsedSettings.typeSettings = JSON.parse(visualizerSettings.typeSettings);
+  return parsedSettings;
+}

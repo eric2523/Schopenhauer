@@ -11,20 +11,8 @@ class Canvas extends React.Component {
   constructor(props) {
     // props contain canvasWidth & canvasHeight
     super(props);
-    // let visualizer = this.props.visualizer;
     const binCount = 1024;
     this.canvas = React.createRef();
-    // switch (this.props.match.params.id) {
-    //   case "frequency":
-    //     visualizer = new FrequencyVisualizer();
-    //     break;
-    //   case "sphere":
-    //     visualizer = new SphereVisualizer();
-    //     break;
-    //   default:
-    //     break;
-    // }
-    
     this.audio = new Audio();
     this.audio.crossOrigin = 'anonymous';
     this.audio.src = this.props.song.songUrl
@@ -53,7 +41,6 @@ class Canvas extends React.Component {
     // debugger;
 
     this.togglePlay = this.togglePlay.bind(this);
-    // this.handleHeightAmp = this.handleHeightAmp.bind(this);
     this.tick = this.tick.bind(this);
     this.updateFrequencyData = this.updateFrequencyData.bind(this);
     this.updateWaveformData = this.updateWaveformData.bind(this);
@@ -79,7 +66,6 @@ class Canvas extends React.Component {
   togglePlay() {
     // checks if audio input is in (can change second conditional later to be more specific. Currently just a placeholder until I figure out a better flag )
     if ((this.audio instanceof Audio && !this.state.source) || (this.state.songId !== this.props.song._id)) {
-      // debugger;
       const audioContext = new (window.AudioContext ||
         window.webkitAudioContext)();
       const source = audioContext.createMediaElementSource(this.audio);
