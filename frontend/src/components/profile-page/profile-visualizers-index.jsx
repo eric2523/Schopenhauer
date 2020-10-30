@@ -67,7 +67,7 @@ class ProfileVisualizerIndexComponent extends React.Component {
     const usersVisualizers = this.props.visualizers.length
       ? this.props.visualizers.map((visualizer, i) => {
           return (
-            <li key={i} className="column">
+            <li key={visualizer._id} className="column">
               <div className="visualizer-title">
               {visualizer.name}
               </div>
@@ -90,7 +90,7 @@ class ProfileVisualizerIndexComponent extends React.Component {
                   //   this.state.startPlaying === i ? true : false
                   // }
                   onHover={true}
-                  key={i}
+                  key={visualizer._id}
                   visualizer={visualizer}
                   deleteVisualizer={this.props.deleteVisualizer}
                 />

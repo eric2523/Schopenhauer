@@ -37,11 +37,11 @@ export class SphereVisualizer{
     // let collection;
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    if(!typeof state.generalSettings !== "object"){
-      state.generalSettings = {heightAmplifier: 1}
-    }
+    // if(!typeof state.generalSettings !== "object"){
+    //   state.generalSettings = {heightAmplifier: 1}
+    // }
     for ( let i = 0; i < numDots; i++ ){
-      let particle = new SphereParticle(canvas);
+      let particle = new SphereParticle(canvas, state, i);
       particle.draw(state.frequencyArray[i] * state.generalSettings.heightAmplifier)
       // collection.push(new SphereParticle(canvas));
     }
@@ -54,10 +54,13 @@ export class SphereVisualizer{
 
 //represents one particle in sphere. Code inspired by Louis Hoebregts
 class SphereParticle {
-  constructor(canvas){
+  constructor(canvas, state){
 
     this.particleRadius = 7;
-    this.color = '#' + Math.floor(Math.random()*16777215).toString(16);
+
+    this.color = state.generalSettings.color ? 
+    state.generalSettings.color :
+    '#' + Math.floor(Math.random()*16777215).toString(16);
     //canvas properties
     this.canvas = canvas;
     this.perspective = canvas.width * 0.8;
