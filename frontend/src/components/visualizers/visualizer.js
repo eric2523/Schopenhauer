@@ -76,12 +76,13 @@ class VisualizerItem extends React.Component {
           <div className="canvas-main-div">
             <div className={this.props.onHover ? "hover-canvas" : "canvas-div"}>
               <CanvasWithRouter
-                canvasWidth={this.visualizerSettings.width}
-                canvasHeight={this.visualizerSettings.height}
+                canvasWidth={this.props.canvasWidth}
+                canvasHeight={this.props.canvasHeight}
                 visualizer={this.visualizer}
                 visualizerSettings={this.visualizerSettings}
                 song={this.props.currentSong}
                 onHover={this.props.onHover}
+                connectMusic={this.props.connectMusic}
               />
             </div>
           </div>

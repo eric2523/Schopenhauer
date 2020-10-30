@@ -27,21 +27,48 @@ const mDTP = (dispatch, ownProps) => {
 class ProfileVisualizerIndexComponent extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      connectMusic: null,
+      startPlaying: null
+    }
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchUserVisualizer();
   }
 
+  handleClick(i){
+    return () => {
+      this.setState({connectMusic: i, startPlaying: i})
+    }
+  }
+
   render() {
     const usersVisualizers = this.props.visualizers.length
       ? this.props.visualizers.map((visualizer, i) => {
           return (
-            <ProfileVisualizerItem
-              key={i}
-              visualizer={visualizer}
-              deleteVisualizer={this.props.deleteVisualizer}
-            />
+            <li className="column">
+              <div className="visualizer-title">
+              {visualizer.name}
+              </div>
+              <div className="item-overlay">
+                <ProfileVisualizerItem
+                  connectMusic={
+                    this.state.connectMusic === i ? true : false
+                  }
+                  startPlaying={
+                    this.state.startPlaying === i ? true : false
+                  }
+                  key={i}
+                  visualizer={visualizer}
+                  deleteVisualizer={this.props.deleteVisualizer}
+                />
+              </div>
+              <button className="ui button" onClick={this.handleDelete}>
+                <i className="trash icon"></i>
+              </button>
+            </li>
           );
         })
       : [];
