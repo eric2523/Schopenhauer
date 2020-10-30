@@ -18,9 +18,10 @@
 }
 
 .column, .visualizer-title{
-  display: flex; 
+  display: flex !important; 
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .hover-canvas {
@@ -29,3 +30,6 @@
   align-items: center;
 }
 
+i.trash.icon{
+  color: #313030;
+}

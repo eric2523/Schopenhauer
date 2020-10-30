@@ -65,8 +65,8 @@ class ProfileVisualizerIndexComponent extends React.Component {
                   deleteVisualizer={this.props.deleteVisualizer}
                 />
               </div>
-              <button onClick={this.handleDelete}>
-                DELETE
+              <button className="ui button" onClick={this.handleDelete}>
+                <i className="trash icon"></i>
               </button>
             </li>
           );
