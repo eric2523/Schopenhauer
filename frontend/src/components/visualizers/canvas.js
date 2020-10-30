@@ -16,6 +16,9 @@ class Canvas extends React.Component {
       case "frequency":
         visualizer = new FrequencyVisualizer();
         break;
+      case "sphere":
+        visualizer = new SphereVisualizer();
+        break;
       default:
         break;
     }
