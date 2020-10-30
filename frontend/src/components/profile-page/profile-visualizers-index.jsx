@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getVisualizersByUserId } from '../../reducers/selectors/visualizer_selectors';
 import { fetchUserVisualizer } from '../../actions/visualizer_actions';
-import { VisualizerItem } from './visualizer-item';
+import { ProfileVisualizerItem } from './profile-visualizer-item';
 
 const mSTP = (state, ownProps) => {
   return {
@@ -21,10 +21,14 @@ class ProfileVisualizerIndexComponent extends React.Component {
     super(props);
   }
 
+  componentDidMount(){
+    this.props.fetchUserVisualizer();
+  }
+
   render(){
     const usersVisualizers = this.props.visualizers.length ? 
     this.props.visualizers.map( (visualizer, i) => {
-      return <VisualizerItem key={i} visualizer={visualizer}/>
+      return <ProfileVisualizerItem key={i} visualizer={visualizer}/>
     })
     : [];
     return (

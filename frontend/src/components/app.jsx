@@ -19,8 +19,8 @@ export const App = () => {
       <SongUploadModal />
       <UserAuthModal />
       <Switch>
-        <Route exact path="/visualizer" component={} />
-        <Route exact path="/profile/:d" component={ProfilePage} />
+        <Route exact path="/visualizer" component={VisualizerItemContainer} />
+        <Route exact path="/profile/:id" component={ProfilePage} />
         <Route path="/" component={LandingPageIndex} />
         <Redirect to="/" />
       </Switch>

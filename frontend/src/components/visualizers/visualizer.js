@@ -29,6 +29,7 @@ class VisualizerItem extends React.Component {
         this.visualizer = new SphereVisualizer()
         break;
       default:
+        this.visualizer = new SphereVisualizer()
         break;
     }
     this.visualizerSettings = props.visualizerSettings
@@ -59,19 +60,24 @@ class VisualizerItem extends React.Component {
           <div className="canvas-main-div">
             <div className="canvas-div">
               <CanvasWithRouter
-                canvasWidth={700}
-                canvasHeight={700}
+                canvasWidth={this.props.visualizerSettings.width}
+                canvasHeight={this.props.visualizerSettings.height}
                 visualizer={this.visualizer}
                 visualizerSettings={this.visualizerSettings}
                 song={this.props.currentSong}
+                onHover={this.props.onHover}
               />
             </div>
           </div>
+          {this.props.toolbar ? 
+          <>
           <div className="toolbar">
             <ul>{items}</ul>
           </div>
           {/* </div> */}
           <SongToolBar />
+          </>
+          : <></>}
         </div>
       </div>
     );
