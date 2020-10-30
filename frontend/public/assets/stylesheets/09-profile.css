@@ -10,11 +10,21 @@
   display: flex;
   flex-direction: column; 
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
+  border-bottom: .7px solid #e0e1e2;
+  width: 20%;
+  padding-bottom: 10px;
 }
 
 .profile-bio *{
   margin-bottom: 10px;
+}
+
+
+.profile-border *{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .column, .visualizer-title{
@@ -62,7 +72,7 @@ i.trash.icon{
 }
 
 .item-overlay{
-  border: 1px solid #b3b4b6;
+  border: .5px solid #b3b4b6;
   border-radius: 8px;
   margin-bottom: 10px;
 }

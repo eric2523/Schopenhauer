@@ -95,6 +95,7 @@ class Canvas extends React.Component {
   }
 
   animation(canvas) {
+    console.log('i am animating')
     // canvas.width = this.props.canvasWidth;
     // canvas.height = this.props.canvasHeight;
     this.state.visualizer.animate(canvas, this.state);
