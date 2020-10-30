@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom";
 import { uploadVisualizer } from "../../actions/visualizer_actions";
 import { connect } from "react-redux";
 import { prepSettings } from "../../util/visualizer_util";
+import { defaultBarsSettings } from "../visualizers/eric-visualizer1";
 
 const mSTP = (state) => ({
   userId: state.session.user.id,
@@ -43,6 +44,15 @@ class TemplatesIndex extends React.Component {
               this.props.history.push(`/visualizers/${payload.visualizer._id}`)
             );
           break;
+        case "bars":
+          this.props
+            .uploadVisualizer(
+              prepSettings(defaultBarsSettings, this.props.userId)
+            )
+            .then((payload) =>
+              this.props.history.push(`/visualizers/${payload.visualizer._id}`)
+            );
+          break;
         default:
           break;
       }
@@ -72,6 +82,16 @@ class TemplatesIndex extends React.Component {
                 canvasHeight={450}
                 // toolbox={false}
                 visualizerSettings={defaultSphereSettings}
+                onTemplate={true}
+              />
+            </li>
+            <li onClick={this.handleClick("bars")}>
+              <h1>Bars Visualizer</h1>
+              <VisualizerItemContainer
+                canvasWidth={450}
+                canvasHeight={450}
+                // toolbox={false}
+                visualizerSettings={defaultBarsSettings}
                 onTemplate={true}
               />
             </li>
