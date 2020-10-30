@@ -6,6 +6,7 @@ import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/session_api_util';
 import { logout } from './actions/session_actions';
 import { receiveUserSongs } from './actions/song_actions';
+import { receiveUser } from './actions/user_actions';
 
 document.addEventListener("DOMContentLoaded", () => {
   // currently no preloaded state
@@ -17,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     store = configureStore(preloadedState);
     store.dispatch(receiveUserSongs(store.getState().session.user.id));
+    store.dispatch(receiveUser(store.getState().session.user));
     const currentTime = Date.now() / 1000;
 
     if (decodedUser.exp < currentTime) {

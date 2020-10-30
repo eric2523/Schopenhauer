@@ -21,7 +21,8 @@ export class ProfileBio extends React.Component {
   render(){
     return(
       <div>
-        Profile Bio
+        {this.props.user.email}
+        {this.props.user.username}
       </div>
     )
   }

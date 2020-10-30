@@ -11,14 +11,15 @@ class ProfileIndex extends React.Component {
     return(
       <div>
         Profile index
-        <ProfileBio />
+        <ProfileBio user={this.props.user}/>
       </div>
     )
   }
 }
 
-const mSTP = (state) => ({
-  users: state.entities.users
+const mSTP = (state, ownProps) => ({
+  // users: state.entities.users,
+  user: state.entities.users[ownProps.match.params.id],
 })
 
 export const ProfilePage = connect(mSTP, null)(ProfileIndex) 
