@@ -21,7 +21,7 @@ export const App = () => {
       <UserAuthModal />
       <Switch>
         <Route exact path="/visualizer/:id" component={Visualizer} />
-        <Route exact path="/profile" component={ProfilePage} />
+        <Route exact path="/profile/:id" component={ProfilePage} />
         <Route path="/" component={LandingPageIndex} />
         <Redirect to="/" />
       </Switch>

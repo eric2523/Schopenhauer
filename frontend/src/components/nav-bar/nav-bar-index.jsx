@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 const mSTP = (state) => {
   return {
     loggedIn: state.session.isAuthenticated,
+    currentUserId: state.session.user ? state.session.user.id : ''
   };
 };
 
@@ -27,7 +28,12 @@ class NavBarIndexComponent extends React.Component {
   }
 
   render() {
-    const navPaths = mainNavPaths();
+    let navPaths = mainNavPaths();
+    if (this.props.currentUserId) {
+      navPaths.profile.path = navPaths.profile.path.concat(
+        `/${this.props.currentUserId}`
+      );
+    }
     let navListItems = [];
     for (const keys in navPaths) {
       let { name, path } = navPaths[keys];
