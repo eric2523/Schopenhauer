@@ -82,6 +82,7 @@ class VisualizerItem extends React.Component {
                 song={this.props.currentSong}
                 onHover={this.props.onHover}
                 onTemplate={this.props.onTemplate}
+                connectMusic={this.props.connectMusic}
               />
             </div>
           </div>

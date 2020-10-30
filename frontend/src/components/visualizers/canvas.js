@@ -133,7 +133,7 @@ class Canvas extends React.Component {
 
     if (this.props.onHover || this.props.onTemplate) {
       return (
-        <div onMouseEnter={this.togglePlay} onMouseLeave={this.togglePlay}>
+        <div>
           <canvas
             ref={this.canvas}
             height={this.props.canvasHeight}
