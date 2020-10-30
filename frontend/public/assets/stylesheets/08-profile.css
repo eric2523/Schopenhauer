@@ -16,3 +16,16 @@
 .profile-bio *{
   margin-bottom: 10px;
 }
+
+.column, .visualizer-title{
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+}
+
+.hover-canvas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

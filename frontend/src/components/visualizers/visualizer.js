@@ -58,7 +58,9 @@ class VisualizerItem extends React.Component {
       <div className="viz-outer-div">
         <div className="visualizer">
           <div className="canvas-main-div">
-            <div className="canvas-div">
+            <div className={
+              this.props.onHover ? 
+              "hover-canvas" : "canvas-div"}>
               <CanvasWithRouter
                 canvasWidth={this.props.visualizerSettings.width}
                 canvasHeight={this.props.visualizerSettings.height}

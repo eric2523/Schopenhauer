@@ -7,13 +7,14 @@ export class ProfileVisualizerItem extends React.Component {
   constructor(props){
     super(props);
   }
-
   render(){
-    this.props.visualizer.width = window.innderWidth/4;
-    this.props.visualizer.height = window.innderHeight/4;
+    var width = isNaN(window.innerWidth) ? window.clientWidth : window.innerWidth;
+    // var height = isNaN(window.innerHeight) ? window.clientHeight : window.innerHeight;
+    this.props.visualizer.width = (width / 4);
+    this.props.visualizer.height = (width / 4);
     return (
       <li className="column">
-        <div>
+        <div className="visualizer-title">
           {this.props.visualizer.name}
         </div>
         <VisualizerItemContainer onHover={true} visualizerSettings={this.props.visualizer}/>
