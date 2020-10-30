@@ -28,10 +28,13 @@ class ProfileVisualizerIndexComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      connectMusic: null,
-      startPlaying: null
+      disconnectMusic: null,
+      startPlaying: null,
+      hover: null
     }
     this.handleClick = this.handleClick.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleHover = this.handleHover.bind(this);
   }
 
   componentDidMount() {
@@ -40,7 +43,24 @@ class ProfileVisualizerIndexComponent extends React.Component {
 
   handleClick(i){
     return () => {
-      this.setState({connectMusic: i, startPlaying: i})
+      if(this.state.disconnectMusic === i){
+        this.setState({disconnectMusic: null})
+      } else{ 
+        this.setState({disconnectMusic: i})
+      }
+    }
+  }
+
+  handleHover(i){
+    return () => {
+      this.setState({hover: i})
+    }
+  }
+
+  handleDelete(id){
+    // debugger
+    return () => {
+      this.props.deleteVisualizer(id)
     }
   }
 
@@ -48,24 +68,35 @@ class ProfileVisualizerIndexComponent extends React.Component {
     const usersVisualizers = this.props.visualizers.length
       ? this.props.visualizers.map((visualizer, i) => {
           return (
-            <li className="column">
+            <li key={i} className="column">
               <div className="visualizer-title">
               {visualizer.name}
               </div>
-              <div className="item-overlay">
+              <div 
+                id={this.state.disconnectMusic === i ? 
+                'vis-playing' : ''}
+                className="item-overlay" //{this.state.hover === i ? "item-overlay" : ""} 
+                onClick={this.handleClick(i)}
+                // onHover={this.handleHover(i)}
+                >
+                {this.state.disconnectMusic === i ?
+                <i id="profile-play" className="big volume up icon"></i> :
+                <i id="profile-play" className="big volume off icon"></i>
+                }
                 <ProfileVisualizerItem
-                  connectMusic={
-                    this.state.connectMusic === i ? true : false
+                  disconnectMusic={
+                    this.state.disconnectMusic === i ? false : true
                   }
-                  startPlaying={
-                    this.state.startPlaying === i ? true : false
-                  }
+                  // startPlaying={
+                  //   this.state.startPlaying === i ? true : false
+                  // }
+                  onHover={true}
                   key={i}
                   visualizer={visualizer}
                   deleteVisualizer={this.props.deleteVisualizer}
                 />
               </div>
-              <button className="ui button" onClick={this.handleDelete}>
+              <button className="ui button" onClick={this.handleDelete(visualizer._id)}>
                 <i className="trash icon"></i>
               </button>
             </li>

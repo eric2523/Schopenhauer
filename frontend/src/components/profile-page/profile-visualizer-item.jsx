@@ -32,31 +32,15 @@ export class ProfileVisualizerItem extends React.Component {
       : window.innerWidth;
 
     return (
-      // <li className="column">
-      //   <div className="visualizer-title">
-      //     {this.props.visualizer.name}
-      //   </div>
-      <VisualizerItemContainer
-        connectMusic={this.props.connectMusic}
-        startPlaying={this.props.startPlaying}
-        visualizerSettings={this.props.visualizer}
-        canvasWidth={width / 4}
-        canvasHeight={width / 4}
-      />
-    );
-    {
-      /* <button 
-          onClick={this.toggleMusic}
-          className="ui button"  
-        > */
-    }
-    {
-      /* {buttonText}
-        </button> */
-    }
-    //   <button onClick={this.handleDelete}>
-    //     DELETE
-    //   </button>
-    // </li>
+        <VisualizerItemContainer
+          connectMusic={this.props.connectMusic}
+          startPlaying={this.props.startPlaying} 
+          visualizerSettings={this.props.visualizer}
+          canvasWidth={width/4}
+          canvasHeight={width/4}
+          onHover={this.props.onHover}
+          disconnectMusic={this.props.disconnectMusic}
+          />
+          )
   }
 }
