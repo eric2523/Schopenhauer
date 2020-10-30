@@ -75,8 +75,8 @@ class VisualizerItem extends React.Component {
           <div className="canvas-main-div">
             <div className="canvas-div">
               <CanvasWithRouter
-                canvasWidth={700}
-                canvasHeight={700}
+                canvasWidth={this.props.canvasWidth}
+                canvasHeight={this.props.canvasHeight}
                 visualizer={this.visualizer}
                 visualizerSettings={this.visualizerSettings}
                 song={this.props.currentSong}

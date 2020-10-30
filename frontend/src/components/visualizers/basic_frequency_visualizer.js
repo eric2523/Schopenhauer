@@ -4,8 +4,9 @@ export const defaultFrequencySettings = {
   generalSettings: {
     //for canvas settings
 
-    centerX: 350,
-    centerY: 350,
+    // maybe we shouldnt let users change this. gonna mess up the center positioning of visualizer 
+    // centerX: 350,
+    // centerY: 350,
 
     //for any bar
     barWidth: 1,
@@ -27,16 +28,16 @@ export class FrequencyVisualizer {
       let height =
         state.waveformArray[i] * state.generalSettings.heightAmplifier;
       const xStart =
-        state.generalSettings.centerX +
+        (canvas.width / 2) +
         Math.cos(radians * i) * state.generalSettings.radius;
       const yStart =
-        state.generalSettings.centerY +
+        (canvas.height / 2) +
         Math.sin(radians * i) * state.generalSettings.radius;
       const xEnd =
-        state.generalSettings.centerX +
+        (canvas.width / 2) +
         Math.cos(radians * i) * (state.generalSettings.radius + height);
       const yEnd =
-        state.generalSettings.centerY +
+        (canvas.height / 2) +
         Math.sin(radians * i) * (state.generalSettings.radius + height);
       this.drawBar(
         xStart,
