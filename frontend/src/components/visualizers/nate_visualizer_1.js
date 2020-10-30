@@ -1,5 +1,21 @@
 const numDots = 1024;
 
+export const defaultSphereSettings = {
+  type: "sphere",
+  typeSettings: { binCount: 1024 },
+  generalSettings: {
+    //for canvas settings
+    centerX: 350,
+    centerY: 350,
+    //for any bar
+    barWidth: 1,
+    //for any circular object
+    radius: 0,
+    // finished controls
+    heightAmplifier: 0.5,
+  },
+}
+
 export class SphereVisualizer{
   constructor(canvas){
     // this.state = state;
@@ -21,6 +37,9 @@ export class SphereVisualizer{
     // let collection;
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if(!typeof state.generalSettings !== "object"){
+      state.generalSettings = {heightAmplifier: 1}
+    }
     for ( let i = 0; i < numDots; i++ ){
       let particle = new SphereParticle(canvas);
       particle.draw(state.frequencyArray[i] * state.generalSettings.heightAmplifier)

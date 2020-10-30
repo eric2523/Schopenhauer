@@ -3,31 +3,16 @@ import song from "../../audio_files/bensound-goinghigher.mp3";
 import { BeatDetection } from "./beat_detection";
 import { withRouter } from "react-router-dom";
 // import { connect } from "react-redux";
-import ReactPlayer from 'react-player/file';
 
 import { FrequencyVisualizer } from "./basic_frequency_visualizer";
 import { SphereVisualizer } from "./nate_visualizer_1";
-
-
 
 class Canvas extends React.Component {
   constructor(props) {
     // props contain canvasWidth & canvasHeight
     super(props);
-    let visualizer;
     const binCount = 1024;
     this.canvas = React.createRef();
-    switch (this.props.match.params.id) {
-      case "frequency":
-        visualizer = new FrequencyVisualizer();
-        break;
-      case "sphere":
-        visualizer = new SphereVisualizer();
-        break;
-      default:
-        break;
-    }
-
     this.audio = new Audio();
     this.audio.crossOrigin = 'anonymous';
     this.audio.src = this.props.song.songUrl
@@ -36,9 +21,10 @@ class Canvas extends React.Component {
       // visualizer: {}
 
       //needed
-      typeSettings: props.visualizer.typeSettings,
-      generalSettings: props.visualizer.generalSettings,
-
+      typeSettings: props.visualizerSettings.typeSettings,
+      generalSettings: props.visualizerSettings.generalSettings,
+      visualizer: props.visualizer,
+      
       //tbd
       play: false,
       // audio: new Audio(this.props.song),
@@ -50,17 +36,15 @@ class Canvas extends React.Component {
       waveformArray: new Uint8Array(binCount),
       binCount,
       rafId: null,
-      visualizer,
       songId: null
     };
+    // debugger;
 
     this.togglePlay = this.togglePlay.bind(this);
-    // this.handleHeightAmp = this.handleHeightAmp.bind(this);
     this.tick = this.tick.bind(this);
     this.updateFrequencyData = this.updateFrequencyData.bind(this);
     this.updateWaveformData = this.updateWaveformData.bind(this);
     this.updateAllData = this.updateAllData.bind(this);
-    
   }
 
   componentDidUpdate(prevProps){
@@ -82,7 +66,6 @@ class Canvas extends React.Component {
   togglePlay() {
     // checks if audio input is in (can change second conditional later to be more specific. Currently just a placeholder until I figure out a better flag )
     if ((this.audio instanceof Audio && !this.state.source) || (this.state.songId !== this.props.song._id)) {
-      // debugger;
       const audioContext = new (window.AudioContext ||
         window.webkitAudioContext)();
       const source = audioContext.createMediaElementSource(this.audio);
@@ -148,6 +131,18 @@ class Canvas extends React.Component {
     ) : (
       <i className="pause icon white-audio-icon"></i>
     );
+
+    if (this.props.onHover){
+      return (
+        <div onMouseEnter={this.togglePlay} onMouseLeave={this.togglePlay}>
+          <canvas
+          ref={this.canvas}
+          height={this.props.canvasHeight}
+          width={this.props.canvasWidth}
+        />
+        </div>
+      )
+    }
 
     return (
       <>

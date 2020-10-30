@@ -14,7 +14,7 @@ export const Splash = (props) => {
         </div>
       </div>
       <div className="splash-btn">
-        <Link to="/visualizer/frequency">
+        <Link to="/visualizer">
           <button className="ui primary button">GET STARTED NOW</button>
         </Link>
       </div>

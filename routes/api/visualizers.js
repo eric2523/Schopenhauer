@@ -31,7 +31,7 @@ router.post(
 
 router.get("/", (req, res) => {
   Visualizer.find({ userId: req.query.userId })
-    .then((visualizers) => res.json(visualizers))
+    .then((visualizers) => {res.json(visualizers)})
     .catch((err) => res.status(404).json(err));
 });
 

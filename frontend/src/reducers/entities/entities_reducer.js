@@ -6,5 +6,6 @@ import { visualizersReducer } from "./visualizers_reducer";
 export const EntitiesReducer = combineReducers({
   song: SongReducer,
   users: usersReducer,
-  visualizers: visualizersReducer
+  visualizers: visualizersReducer,
+  defaultSettings: {}
 });
