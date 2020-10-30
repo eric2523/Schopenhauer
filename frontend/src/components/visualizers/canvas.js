@@ -2,6 +2,8 @@ import React from "react";
 import song from "../../audio_files/bensound-goinghigher.mp3";
 import { BeatDetection } from "./beat_detection";
 import { withRouter } from "react-router-dom";
+// import { connect } from "react-redux";
+
 import { FrequencyVisualizer } from "./basic_frequency_visualizer";
 import { SphereVisualizer } from "./nate_visualizer_1";
 
@@ -9,29 +11,35 @@ class Canvas extends React.Component {
   constructor(props) {
     // props contain canvasWidth & canvasHeight
     super(props);
-    let visualizer;
+    // let visualizer = this.props.visualizer;
     const binCount = 1024;
     this.canvas = React.createRef();
-    switch (this.props.match.params.id) {
-      case "frequency":
-        visualizer = new FrequencyVisualizer();
-        break;
-      case "sphere":
-        visualizer = new SphereVisualizer();
-        break;
-      default:
-        break;
-    }
+    // switch (this.props.match.params.id) {
+    //   case "frequency":
+    //     visualizer = new FrequencyVisualizer();
+    //     break;
+    //   case "sphere":
+    //     visualizer = new SphereVisualizer();
+    //     break;
+    //   default:
+    //     break;
+    // }
+    
+    this.audio = new Audio();
+    this.audio.crossOrigin = 'anonymous';
+    this.audio.src = this.props.song.songUrl
+    
     this.state = {
       // visualizer: {}
 
       //needed
-      typeSettings: props.visualizer.typeSettings,
-      generalSettings: props.visualizer.generalSettings,
+      typeSettings: props.visualizerSettings.typeSettings,
+      generalSettings: props.visualizerSettings.generalSettings,
+      visualizer: props.visualizer,
 
       //tbd
       play: false,
-      audio: new Audio(song),
+      // audio: new Audio(this.props.song),
       beatDetection: new BeatDetection(),
       audioContext: null,
       source: null,
@@ -40,7 +48,7 @@ class Canvas extends React.Component {
       waveformArray: new Uint8Array(binCount),
       binCount,
       rafId: null,
-      visualizer,
+      songId: null
     };
 
     this.togglePlay = this.togglePlay.bind(this);
@@ -49,32 +57,50 @@ class Canvas extends React.Component {
     this.updateFrequencyData = this.updateFrequencyData.bind(this);
     this.updateWaveformData = this.updateWaveformData.bind(this);
     this.updateAllData = this.updateAllData.bind(this);
+    
+  }
+
+  componentDidUpdate(prevProps){
+    if(this.props.song !== prevProps.song){
+      this.setState({
+        play: false
+      }, () => {
+      this.audio.pause();
+      // cancelAnimationFrame(this.state.rafId)
+      cancelAnimationFrame(this.state.rafId)
+      this.audio = new Audio();
+      this.audio.crossOrigin = 'anonymous';
+      this.audio.src = this.props.song.songUrl;
+      });
+      
+    }
   }
 
   togglePlay() {
     // checks if audio input is in (can change second conditional later to be more specific. Currently just a placeholder until I figure out a better flag )
-    if (this.state.audio instanceof Audio && !this.state.source) {
+    if ((this.audio instanceof Audio && !this.state.source) || (this.state.songId !== this.props.song._id)) {
+      // debugger;
       const audioContext = new (window.AudioContext ||
         window.webkitAudioContext)();
-      const source = audioContext.createMediaElementSource(this.state.audio);
+      const source = audioContext.createMediaElementSource(this.audio);
       const analyser = audioContext.createAnalyser();
-
       this.setState({
+        songId: this.props.song._id,
         audioContext,
         source,
         analyser,
       });
     }
-    console.log(this.state.frequencyArray);
+    // console.log(this.state.frequencyArray);
     if (!this.state.play) {
-      this.state.audio.play();
+      this.audio.play();
       let rafId = requestAnimationFrame(this.tick);
       this.setState({
         rafId,
         play: true,
       });
     } else {
-      this.state.audio.pause();
+      this.audio.pause();
       cancelAnimationFrame(this.state.rafId);
       this.setState({
         play: false,
