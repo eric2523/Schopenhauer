@@ -47,7 +47,7 @@ class SphereParticle {
     this.ctx = canvas.getContext('2d');
 
     //polar coordinates
-    this.sphereRadius = canvas.width/2;
+    this.sphereRadius = canvas.width/3;
     this.theta = Math.random() * 2 * Math.PI; //polar angle
     this.phi = Math.acos((Math.random() * 2) -1); //azimuth angle
 
@@ -80,7 +80,7 @@ class SphereParticle {
   }
 
   draw = (multiplier) => {
-    this.project3DTo2D(multiplier*.007); //get 2D position
+    this.project3DTo2D(multiplier*.01); //get 2D position
     this.ctx.globalAlpha = Math.abs(1 - this.z / this.canvas.width); //set opacity
     this.ctx.fillStyle = this.color;
     this.ctx.strokeStyle = this.color;

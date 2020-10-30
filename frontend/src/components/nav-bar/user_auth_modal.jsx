@@ -58,7 +58,8 @@ class UserAuthModalComponent extends React.Component {
     }
   }
 
-  handleDemo() {
+  handleDemo(e) {
+    e.preventDefault();
     const demo = {
       email: "demo@demo.com",
       password: "demodemo",

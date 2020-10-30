@@ -6,7 +6,7 @@ export const RECEIVE_SONG_UPLOAD_ERROR = "RECEIVE_SONG_UPLOAD_ERROR";
 export const RECEIVE_SONG_DELETE_ERROR = "RECEIVE_SONG_DELETE_ERROR";
 export const RECEIVE_USER_SONGS = "RECEIVE_USER_SONGS";
 
-const receiveCurrentSong = (song) => {
+export const receiveCurrentSong = (song) => {
   return {
     type: RECEIVE_CURRENT_SONG,
     song,
@@ -51,7 +51,7 @@ export const uploadSong = (songFile, metaData) => (dispatch) => {
       return SongAPIUtil.uploadSongDB(
         Object.assign({}, DBEntry, metaData)
       ).then(
-        (song) => dispatch(receiveCurrentSong(song)),
+        (song) => dispatch(receiveCurrentSong(song.data)),
         (err) => dispatch(receiveSongUploadError(err))
       );
     },

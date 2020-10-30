@@ -11,7 +11,9 @@ export const SongReducer = (state = _nullSong, action) => {
   let newState = Object.assign({}, state);
   switch (action.type) {
     case RECEIVE_CURRENT_SONG:
-      newState[action.song.data._id] = action.song.data;
+      if(action.song._id){ 
+        newState[action.song._id] = action.song;
+      }
       return newState;
     case RECEIVE_USER_SONGS:
       if (action.songs.data){
