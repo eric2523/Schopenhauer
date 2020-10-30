@@ -5,6 +5,7 @@ import { SongToolBar } from "../music_player/song_tool_bar";
 import { connect } from "react-redux";
 import { FrequencyVisualizer } from "./basic_frequency_visualizer";
 import { SphereVisualizer } from "./nate_visualizer_1";
+import { SquareVisualizer } from "./basic_square_visualizer";
 
 const mSTP = (state) => {
   return {
@@ -26,9 +27,12 @@ class VisualizerItem extends React.Component {
       case "sphere":
         this.visualizer = new SphereVisualizer();
         break;
+      case "square":
+        this.visualizer = new SquareVisualizer();
+        break;
       default:
         this.visualizer = new SphereVisualizer();
-        break;
+      break;
     }
     this.visualizerSettings = Object.assign({}, this.props.visualizerSettings);
   }
