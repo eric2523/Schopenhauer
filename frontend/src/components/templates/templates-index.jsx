@@ -2,17 +2,17 @@ import React from "react";
 import { VisualizerItemContainer } from "../visualizers/visualizer";
 import { defaultFrequencySettings } from "../visualizers/basic_frequency_visualizer";
 import { defaultSphereSettings } from "../visualizers/nate_visualizer_1";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { uploadVisualizer } from "../../actions/visualizer_actions";
 import { connect } from "react-redux";
 import { prepSettings } from "../../util/visualizer_util";
 
 const mSTP = (state) => ({
-  userId: state.session.user.id
-})
+  userId: state.session.user.id,
+});
 
 const mDTP = (dispatch) => ({
-  uploadVisualizer: (visualizer) => dispatch(uploadVisualizer(visualizer))
+  uploadVisualizer: (visualizer) => dispatch(uploadVisualizer(visualizer)),
 });
 
 class TemplatesIndex extends React.Component {
@@ -26,15 +26,18 @@ class TemplatesIndex extends React.Component {
       switch (type) {
         case "frequency":
           this.props
-            .uploadVisualizer(prepSettings(defaultFrequencySettings, this.props.userId))
+            .uploadVisualizer(
+              prepSettings(defaultFrequencySettings, this.props.userId)
+            )
             .then((payload) => {
-              this.props.history.push(`/visualizers/${payload.visualizer._id}`)
-            })
-            ;
+              this.props.history.push(`/visualizers/${payload.visualizer._id}`);
+            });
           break;
         case "sphere":
           this.props
-          .uploadVisualizer(prepSettings(defaultSphereSettings, this.props.userId))
+            .uploadVisualizer(
+              prepSettings(defaultSphereSettings, this.props.userId)
+            )
             .then((payload) =>
               this.props.history.push(`/visualizers/${payload.visualizer._id}`)
             );
@@ -55,8 +58,9 @@ class TemplatesIndex extends React.Component {
               <VisualizerItemContainer
                 canvasWidth={450}
                 canvasHeight={450}
-                toolbox={false}
+                // toolbox={false}
                 visualizerSettings={defaultFrequencySettings}
+                onTemplate={true}
               />
             </li>
 
@@ -65,8 +69,9 @@ class TemplatesIndex extends React.Component {
               <VisualizerItemContainer
                 canvasWidth={450}
                 canvasHeight={450}
-                toolbox={false}
+                // toolbox={false}
                 visualizerSettings={defaultSphereSettings}
+                onTemplate={true}
               />
             </li>
           </ul>

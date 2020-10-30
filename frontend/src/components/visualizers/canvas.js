@@ -2,10 +2,6 @@ import React from "react";
 import song from "../../audio_files/bensound-goinghigher.mp3";
 import { BeatDetection } from "./beat_detection";
 import { withRouter } from "react-router-dom";
-// import { connect } from "react-redux";
-
-import { FrequencyVisualizer } from "./basic_frequency_visualizer";
-import { SphereVisualizer } from "./nate_visualizer_1";
 
 class Canvas extends React.Component {
   constructor(props) {
@@ -14,9 +10,9 @@ class Canvas extends React.Component {
     const binCount = 1024;
     this.canvas = React.createRef();
     this.audio = new Audio();
-    this.audio.crossOrigin = 'anonymous';
-    this.audio.src = this.props.song.songUrl
-    
+    this.audio.crossOrigin = "anonymous";
+    this.audio.src = this.props.song ? this.props.song.songUrl : song;
+
     this.state = {
       // visualizer: {}
 
@@ -24,7 +20,7 @@ class Canvas extends React.Component {
       typeSettings: props.visualizerSettings.typeSettings,
       generalSettings: props.visualizerSettings.generalSettings,
       visualizer: props.visualizer,
-      
+
       //tbd
       play: false,
       // audio: new Audio(this.props.song),
@@ -36,9 +32,8 @@ class Canvas extends React.Component {
       waveformArray: new Uint8Array(binCount),
       binCount,
       rafId: null,
-      songId: null
+      songId: null,
     };
-    // debugger;
 
     this.togglePlay = this.togglePlay.bind(this);
     this.tick = this.tick.bind(this);
@@ -47,31 +42,37 @@ class Canvas extends React.Component {
     this.updateAllData = this.updateAllData.bind(this);
   }
 
-  componentDidUpdate(prevProps){
-    if(this.props.song !== prevProps.song){
-      this.setState({
-        play: false
-      }, () => {
-      this.audio.pause();
-      // cancelAnimationFrame(this.state.rafId)
-      cancelAnimationFrame(this.state.rafId)
-      this.audio = new Audio();
-      this.audio.crossOrigin = 'anonymous';
-      this.audio.src = this.props.song.songUrl;
-      });
-      
+  componentDidUpdate(prevProps) {
+    if (this.props.song !== prevProps.song) {
+      this.setState(
+        {
+          play: false,
+        },
+        () => {
+          this.audio.pause();
+          // cancelAnimationFrame(this.state.rafId)
+          cancelAnimationFrame(this.state.rafId);
+          this.audio = new Audio();
+          this.audio.crossOrigin = "anonymous";
+          this.audio.src = this.props.song.songUrl;
+        }
+      );
     }
   }
 
   togglePlay() {
     // checks if audio input is in (can change second conditional later to be more specific. Currently just a placeholder until I figure out a better flag )
-    if ((this.audio instanceof Audio && !this.state.source) || (this.state.songId !== this.props.song._id)) {
+    debugger;
+    if (
+      (this.audio instanceof Audio && !this.state.source) ||
+      this.state.songId !== this.props.song._id
+    ) {
       const audioContext = new (window.AudioContext ||
         window.webkitAudioContext)();
       const source = audioContext.createMediaElementSource(this.audio);
       const analyser = audioContext.createAnalyser();
       this.setState({
-        songId: this.props.song._id,
+        songId: this.props.song ? this.props.song._id : "default",
         audioContext,
         source,
         analyser,
@@ -95,8 +96,6 @@ class Canvas extends React.Component {
   }
 
   animation(canvas) {
-    // canvas.width = this.props.canvasWidth;
-    // canvas.height = this.props.canvasHeight;
     this.state.visualizer.animate(canvas, this.state);
   }
 
@@ -132,16 +131,16 @@ class Canvas extends React.Component {
       <i className="pause icon white-audio-icon"></i>
     );
 
-    if (this.props.onHover){
+    if (this.props.onHover || this.props.onTemplate) {
       return (
         <div>
           <canvas
-          ref={this.canvas}
-          height={this.props.canvasHeight}
-          width={this.props.canvasWidth}
-        />
+            ref={this.canvas}
+            height={this.props.canvasHeight}
+            width={this.props.canvasWidth}
+          />
         </div>
-      )
+      );
     }
 
     return (
