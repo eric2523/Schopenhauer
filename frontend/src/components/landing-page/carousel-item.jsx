@@ -2,6 +2,7 @@ import React from "react";
 import { CanvasWithRouter } from "../visualizers/canvas";
 import { testVisualizer } from "../visualizers/test_visualizer_object";
 import { VisualizerItemContainer } from "../visualizers/visualizer";
+import {Link} from 'react-router-dom'
 
 export const CarouselItem = (props) => {
   // need to figure out what vars we want in the template
@@ -28,7 +29,9 @@ export const CarouselItem = (props) => {
         />
       </div>
       <div className="carousel-template-btn">
-        <button className="ui primary button creation-temp-btn">go to creation</button>
+        <Link to={`/visualizers/${props.visualizerId}`}>
+          <button className="ui primary button creation-temp-btn">go to creation</button>
+        </Link>
       </div>
     </div>
   );
