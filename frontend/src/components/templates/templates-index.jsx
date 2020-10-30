@@ -24,6 +24,7 @@ class TemplatesIndex extends React.Component {
 
   handleClick(type) {
     return (e) => {
+      
       switch (type) {
         case "frequency":
           this.props

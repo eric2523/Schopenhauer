@@ -11,15 +11,20 @@ const mSTP = (state, ownProps) => {
 
 const VisualizerEdit = (props) => {
   const visualizerSettings = props.visualizerSettings;
-
-  return (
-    <VisualizerItemContainer
-      toolbox={true}
-      canvasWidth={700}
-      canvasHeight={700}
-      visualizerSettings={visualizerSettings}
-    />
-  );
+  const width = window.innerWidth
+  const height = window.innerHeight
+  if (visualizerSettings) {
+    return (
+      <VisualizerItemContainer
+        toolbox={true}
+        canvasWidth={width}
+        canvasHeight={height}
+        visualizerSettings={visualizerSettings}
+      />
+    );
+  } else {
+    return null
+  }
 };
 
 export const VisualizerEditContainer = connect(mSTP, null)(VisualizerEdit);

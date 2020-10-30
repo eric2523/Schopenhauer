@@ -60,9 +60,16 @@ class Canvas extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.audio.pause();
+    cancelAnimationFrame(this.state.rafId);
+    this.setState({
+      play: false,
+    });
+  }
+
   togglePlay() {
     // checks if audio input is in (can change second conditional later to be more specific. Currently just a placeholder until I figure out a better flag )
-    // debugger;
     if (
       (this.audio instanceof Audio && !this.state.source) ||
       this.state.songId !== this.props.song._id
@@ -121,8 +128,14 @@ class Canvas extends React.Component {
 
   render() {
     if (this.state.source && this.state.analyser) {
-      this.state.source.connect(this.state.analyser);
-      this.state.analyser.connect(this.state.audioContext.destination);
+      if (this.props.disconnectMusic) {
+        this.state.source.connect(this.state.analyser);
+        this.state.analyser.connect(this.state.audioContext.destination);
+        this.state.analyser.disconnect(this.state.audioContext.destination);
+      } else {
+        this.state.source.connect(this.state.analyser);
+        this.state.analyser.connect(this.state.audioContext.destination);
+      }
     }
 
     const buttonText = !this.state.play ? (
@@ -133,7 +146,7 @@ class Canvas extends React.Component {
 
     if (this.props.onHover || this.props.onTemplate) {
       return (
-        <div>
+        <div onMouseEnter={this.togglePlay} onMouseLeave={this.togglePlay}>
           <canvas
             ref={this.canvas}
             height={this.props.canvasHeight}

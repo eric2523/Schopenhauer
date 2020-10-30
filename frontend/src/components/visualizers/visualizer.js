@@ -68,8 +68,8 @@ class VisualizerItem extends React.Component {
         <>
           <div className="toolbar">
             <ul>{items}</ul>
+            <SongToolBar />
           </div>
-          <SongToolBar />
         </>
       );
     }
@@ -87,10 +87,11 @@ class VisualizerItem extends React.Component {
                 onHover={this.props.onHover}
                 onTemplate={this.props.onTemplate}
                 connectMusic={this.props.connectMusic}
+                disconnectMusic={this.props.disconnectMusic}
               />
             </div>
-          </div>
           <>{toolbar}</>
+          </div>
         </div>
       </div>
     );
