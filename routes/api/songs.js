@@ -6,7 +6,7 @@ const upload = require("./song_upload_aws");
 const singleUpload = upload.single("song");
 
 router.get("/users", (req, res) => {
-  Song.find({ userId: req.query.user_id })
+  Song.find({ userId: req.query.userId })
     .then((songs) => res.json(songs))
     .catch((err) => res.status(400).json(err));
 });
@@ -37,13 +37,14 @@ router.post("/uploadSongDB", (req, res) => {
     fileName: req.body.fileName,
     songUrl: req.body.songUrl,
   });
-  newSong.save().then((song) =>
-    res.json({
+  newSong.save().then((song) => { 
+  res.json({
+      id: song.id,
       userId: song.userId,
       title: song.title,
       fileName: song.fileName,
       songUrl: song.songUrl,
-    })
+    })}
   );
 });
 

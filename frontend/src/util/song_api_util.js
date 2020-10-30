@@ -17,5 +17,5 @@ export const deleteSong = (songId) => {
 };
 
 export const getSongs = (userId) => {
-  return axios.get(`/api/songs/users/?user_id=${userId}`)
+  return axios.get(`/api/songs/users/?userId=${userId}`)
 };

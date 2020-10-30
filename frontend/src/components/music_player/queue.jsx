@@ -7,7 +7,7 @@ const mSTP = (state) => {
   return {
     user: state.session.user,
     currentSong: state.session.song,
-    userSongs: state.entities.songs 
+    userSongs: state.entities.song
   }
 }
 

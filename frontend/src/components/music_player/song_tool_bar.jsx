@@ -2,6 +2,7 @@ import React from 'react';
 import ReactPlayer from 'react-player/file';
 import { connect } from 'react-redux';
 import { Queue } from './queue';
+import { UploadButton } from "./upload_button";
 
 const mSTP = (state) => {
   return {
@@ -26,11 +27,9 @@ class SongToolBarComponent extends React.Component {
 
     return (
       <div>
-        Sound Bar
+        Your Songs
         <Queue />
-        <ReactPlayer 
-        url={songSrc}
-        controls={true}/>
+        <UploadButton />
       </div>
     )
   }

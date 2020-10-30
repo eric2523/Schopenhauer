@@ -8,7 +8,6 @@ import { ProtectedRoute, AuthRoute } from "../util/route_util";
 import { LandingPageIndex } from "./landing-page/landing-page-index";
 //Will probably move this component to a full sound bar component
 import { SongUploadModal } from "./music_player/upload_modal";
-import { UploadButton } from "./music_player/upload_button";
 import { ProfilePage } from "./profile-page/profile-index";
 
 export const App = () => {
@@ -25,7 +24,7 @@ export const App = () => {
         <Route path="/" component={LandingPageIndex} />
         <Redirect to="/" />
       </Switch>
-      <UploadButton />
+      
     </div>
   );
 };

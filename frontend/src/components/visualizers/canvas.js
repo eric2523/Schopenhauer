@@ -3,7 +3,7 @@ import song from "../../audio_files/bensound-goinghigher.mp3";
 import { BeatDetection } from "./beat_detection";
 import { withRouter } from "react-router-dom";
 // import { connect } from "react-redux";
-
+import ReactPlayer from 'react-player/file';
 
 import { FrequencyVisualizer } from "./basic_frequency_visualizer";
 import { SphereVisualizer } from "./nate_visualizer_1";
@@ -21,6 +21,8 @@ class Canvas extends React.Component {
       case "frequency":
         visualizer = new FrequencyVisualizer();
         break;
+      case "sphere":
+        visualizer = new SphereVisualizer();
       default:
         break;
     }
@@ -28,7 +30,7 @@ class Canvas extends React.Component {
     this.audio = new Audio();
     this.audio.crossOrigin = 'anonymous';
     this.audio.src = this.props.song.songUrl
-
+    
     this.state = {
       // visualizer: {}
 
@@ -66,18 +68,17 @@ class Canvas extends React.Component {
         play: false
       }, () => {
       this.audio.pause();
-      cancelAnimationFrame(this.state.rafId);
+      // cancelAnimationFrame(this.state.rafId)
+      cancelAnimationFrame(this.state.rafId)
       this.audio = new Audio();
       this.audio.crossOrigin = 'anonymous';
       this.audio.src = this.props.song.songUrl;
-      
       });
       
     }
   }
 
   togglePlay() {
-
     // checks if audio input is in (can change second conditional later to be more specific. Currently just a placeholder until I figure out a better flag )
     if ((this.audio instanceof Audio && !this.state.source) || (this.state.songId !== this.props.song._id)) {
       // debugger;
@@ -92,7 +93,7 @@ class Canvas extends React.Component {
         analyser,
       });
     }
-    console.log(this.state.frequencyArray);
+    // console.log(this.state.frequencyArray);
     if (!this.state.play) {
       this.audio.play();
       let rafId = requestAnimationFrame(this.tick);
@@ -136,7 +137,6 @@ class Canvas extends React.Component {
   }
 
   render() {
-    
     if (this.state.source && this.state.analyser) {
       this.state.source.connect(this.state.analyser);
       this.state.analyser.connect(this.state.audioContext.destination);

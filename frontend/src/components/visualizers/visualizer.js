@@ -10,9 +10,9 @@ import { connect } from "react-redux";
 
 const mSTP = (state) => {
   return {
-    currentSong: state.session.song,
+    currentSong: state.session.song
     // id: state.session.song ? state.session.song.id : null
-  };
+  }
 };
 
 class VisualizerComponent extends React.Component {
@@ -22,7 +22,7 @@ class VisualizerComponent extends React.Component {
   }
 
   render() {
-    if (!this.props.currentSong) {
+    if (!this.props.currentSong || !Object.keys(this.props.currentSong).length) {
       return null;
     }
     const generalSettings = this.visualizerSettings.settings.generalSettings;
@@ -48,7 +48,7 @@ class VisualizerComponent extends React.Component {
                 canvasWidth={700}
                 canvasHeight={700}
                 visualizer={this.visualizerSettings.settings}
-                song={this.props.song.songUrl}
+                song={this.props.currentSong}
               />
             </div>
           </div>
