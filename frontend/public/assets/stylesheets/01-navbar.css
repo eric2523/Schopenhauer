@@ -71,3 +71,7 @@
   font-size: 13px;
   font-weight: 100;
 }
+
+.active-blue li {
+  color: #41bfef;
+}
