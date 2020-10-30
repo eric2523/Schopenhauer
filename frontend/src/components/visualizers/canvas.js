@@ -66,7 +66,6 @@ class Canvas extends React.Component {
   togglePlay() {
     // checks if audio input is in (can change second conditional later to be more specific. Currently just a placeholder until I figure out a better flag )
     if ((this.audio instanceof Audio && !this.state.source) || (this.state.songId !== this.props.song._id)) {
-      // debugger;
       const audioContext = new (window.AudioContext ||
         window.webkitAudioContext)();
       const source = audioContext.createMediaElementSource(this.audio);

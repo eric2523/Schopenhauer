@@ -8,8 +8,8 @@ import { LandingPageIndex } from "./landing-page/landing-page-index";
 //Will probably move this component to a full sound bar component
 import { SongUploadModal } from "./music_player/upload_modal";
 import { ProfilePage } from "./profile-page/profile-index";
-import { TemplatesIndex } from "./templates/templates-index";
-import { VisualizerEdit } from "./visualizers/visualizer-edit-page";
+import { TemplatesIndexContainer } from "./templates/templates-index";
+import { VisualizerEditContainer } from "./visualizers/visualizer-edit-page";
 
 export const App = () => {
   return (
@@ -20,8 +20,8 @@ export const App = () => {
       <SongUploadModal />
       <UserAuthModal />
       <Switch>
-        <Route exact path="/templates" component={TemplatesIndex} />
-        <Route exact path="/visualizer/edit" component={VisualizerEdit} />
+        <ProtectedRoute exact path="/templates" component={TemplatesIndexContainer} />
+        <Route exact path="/visualizers/:id" component={VisualizerEditContainer} />
         <Route exact path="/profile" component={ProfilePage} />
         <Route path="/" component={LandingPageIndex} />
         <Redirect to="/" />

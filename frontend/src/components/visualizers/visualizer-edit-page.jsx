@@ -1,8 +1,16 @@
 import React from "react";
 import { VisualizerItemContainer } from "./visualizer";
+import { connect } from "react-redux";
 
-export const VisualizerEdit = (props) => {
-  const visualizerSettings = props.location.state.visualizerSettings;
+const mSTP = (state, ownProps) => {
+  return {
+    defaultSettings: state.entities.defaultSettings,
+    visualizerSettings: state.entities.visualizers[ownProps.match.params.id],
+  };
+};
+
+const VisualizerEdit = (props) => {
+  const visualizerSettings = props.visualizerSettings;
 
   return (
     <VisualizerItemContainer
@@ -13,3 +21,5 @@ export const VisualizerEdit = (props) => {
     />
   );
 };
+
+export const VisualizerEditContainer = connect(mSTP, null)(VisualizerEdit);

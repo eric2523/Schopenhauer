@@ -59,3 +59,16 @@ export const detectPitch = function (array) {
 
   return pitch;
 };
+
+export const prepSettings = (visualizerSettings, userId) => {
+  let stringifiedSettings = Object.assign({}, visualizerSettings);
+  stringifiedSettings.generalSettings = JSON.stringify(
+    visualizerSettings.generalSettings
+  );
+  stringifiedSettings.typeSettings = JSON.stringify(
+    visualizerSettings.typeSettings
+  );
+
+  stringifiedSettings.userId = userId
+  return stringifiedSettings;
+};
