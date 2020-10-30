@@ -2,6 +2,7 @@ import React from "react";
 import { VisualizerItemContainer } from "../visualizers/visualizer";
 import { defaultFrequencySettings } from "../visualizers/basic_frequency_visualizer";
 import { defaultSphereSettings } from "../visualizers/nate_visualizer_1";
+import { defaultSquareSettings} from "../visualizers/basic_square_visualizer";
 import { withRouter } from "react-router-dom";
 import { uploadVisualizer } from "../../actions/visualizer_actions";
 import { connect } from "react-redux";
@@ -53,6 +54,14 @@ class TemplatesIndex extends React.Component {
               this.props.history.push(`/visualizers/${payload.visualizer._id}`)
             );
           break;
+        case "square":
+          this.props
+            .uploadVisualizer(
+              prepSettings(defaultSquareSettings, this.props.userId)
+            )
+            .then((payload) =>
+              this.props.history.push(`/visualizers/${payload.visualizer._id}`));
+          break;
         default:
           break;
       }
@@ -87,6 +96,7 @@ class TemplatesIndex extends React.Component {
             </li>
             <li onClick={this.handleClick("bars")}>
               <h1>Bars Visualizer</h1>
+              <h1>Square Visualizer</h1>
               <VisualizerItemContainer
                 canvasWidth={450}
                 canvasHeight={450}
@@ -95,6 +105,16 @@ class TemplatesIndex extends React.Component {
                 onTemplate={true}
               />
             </li>
+            <li onClick={this.handleClick("square")}>
+              <h1>Square Visualizer</h1>
+              <VisualizerItemContainer
+                canvasWidth={450}
+                canvasHeight={450}
+                visualizerSettings={defaultSquareSettings}
+                onTemplate={true}
+              />
+            </li>
+
           </ul>
         </div>
       </div>

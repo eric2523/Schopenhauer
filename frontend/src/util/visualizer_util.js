@@ -60,7 +60,13 @@ export const detectPitch = function (array) {
   return pitch;
 };
 
-export const prepSettings = function(visualizerSettings, userId) {
+export const distance = function (objectA, objectB) {
+  const dx = objectA.x - objectB.x;
+  const dy = objectA.y - objectB.y;
+  return Math.sqrt(dx * dx + dy * dy);
+};
+
+export const prepSettings = function (visualizerSettings, userId) {
   const stringifiedSettings = Object.assign({}, visualizerSettings);
   stringifiedSettings.generalSettings = JSON.stringify(
     visualizerSettings.generalSettings
@@ -69,13 +75,15 @@ export const prepSettings = function(visualizerSettings, userId) {
     visualizerSettings.typeSettings
   );
 
-  stringifiedSettings.userId = userId
+  stringifiedSettings.userId = userId;
   return stringifiedSettings;
 };
 
-export const parseVisualizerSettings = function(visualizerSettings) {
+export const parseVisualizerSettings = function (visualizerSettings) {
   const parsedSettings = Object.assign({}, visualizerSettings);
-  parsedSettings.generalSettings = JSON.parse(visualizerSettings.generalSettings)
+  parsedSettings.generalSettings = JSON.parse(
+    visualizerSettings.generalSettings
+  );
   parsedSettings.typeSettings = JSON.parse(visualizerSettings.typeSettings);
   return parsedSettings;
-}
+};

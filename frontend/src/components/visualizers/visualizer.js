@@ -7,6 +7,11 @@ import { FrequencyVisualizer } from "./basic_frequency_visualizer";
 import { SphereVisualizer } from "./nate_visualizer_1";
 import { BarVisualizer } from "./eric-visualizer1";
 
+import { CirclePicker } from "react-color"
+
+import { SquareVisualizer } from "./basic_square_visualizer";
+
+
 const mSTP = (state) => {
   return {
     currentSong: state.session.song,
@@ -30,12 +35,21 @@ class VisualizerItem extends React.Component {
       case "bars":
         this.visualizer = new BarVisualizer();
         break;
+      case "square":
+        this.visualizer = new SquareVisualizer();
+        break;
       default:
         this.visualizer = new SphereVisualizer();
-        break;
+      break;
     }
     this.visualizerSettings = Object.assign({}, this.props.visualizerSettings);
+    this.handleColorChange = this.handleColorChange.bind(this);
   }
+
+  handleColorChange = (color, event) => {
+    this.visualizerSettings.generalSettings['color'] = color.hex;
+  };
+
 
   render() {
     // debugger;
@@ -69,6 +83,7 @@ class VisualizerItem extends React.Component {
           <div className="toolbar">
             <ul>{items}</ul>
             <SongToolBar />
+            <CirclePicker onChange={ this.handleColorChange }/>
           </div>
         </>
       );
