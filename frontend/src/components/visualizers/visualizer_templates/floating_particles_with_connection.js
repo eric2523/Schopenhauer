@@ -5,12 +5,12 @@ export class ConnectedFloatingDotsVisualizer {
     // canvas.height = 1080;
     // canvas.width = 1460;
     this.particleArray = [];
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 150; i++) {
       let size = Math.random() * 3 + 1;
       let x = Math.random() * canvas.width;
       let y = Math.random() * canvas.height;
-      let xVel = Math.random() * 0.4;
-      let yVel = Math.random() * 0.4;
+      let xVel = Math.random() * 0.1;
+      let yVel = Math.random() * 0.1;
       let color = "black";
       this.particleArray.push(new Particle(x, y, xVel, yVel, size, color));
     }
@@ -29,13 +29,15 @@ export class ConnectedFloatingDotsVisualizer {
     for (let a = 0; a < this.particleArray.length; a++) {
       for (let b = a + 1; b < this.particleArray.length; b++) {
         const dist = distance(this.particleArray[a], this.particleArray[b]);
-        opacityValue = 1 - dist / 150;
-        ctx.strokeStyle = "rgba(140,85,31," + opacityValue + ")";
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(this.particleArray[a].x, this.particleArray[a].y);
-        ctx.lineTo(this.particleArray[b].x, this.particleArray[b].y);
-        ctx.stroke();
+        if (dist < 150) {
+          opacityValue = 1 - dist / 150;
+          ctx.strokeStyle = "rgba(140,85,31," + opacityValue + ")";
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(this.particleArray[a].x, this.particleArray[a].y);
+          ctx.lineTo(this.particleArray[b].x, this.particleArray[b].y);
+          ctx.stroke();
+        }
       }
     }
   }
@@ -69,8 +71,10 @@ class Particle {
     const dist = distance(state.mouse, this);
 
     if (dist < state.mouse.radius) {
-      this.x += Math.sign(this.x - state.mouse.x) * 10;
-      this.y += Math.sign(this.y - state.mouse.y) * 10;
+      this.x += Math.sign(this.x - state.mouse.x) * 5;
+      this.y += Math.sign(this.y - state.mouse.y) * 5;
+      this.xVel = -this.xVel;
+      this.yVel = -this.yVel;
     }
     this.x += this.xVel;
     this.y += this.yVel;
