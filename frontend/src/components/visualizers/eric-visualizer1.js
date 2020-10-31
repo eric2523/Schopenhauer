@@ -2,9 +2,6 @@ export const defaultBarsSettings = {
   type: "bars",
   typeSettings: { binCount: 1024 },
   generalSettings: {
-    //for canvas settings
-    centerX: 350,
-    centerY: 350,
     //for any bar
     barWidth: 10,
     //for any circular object
