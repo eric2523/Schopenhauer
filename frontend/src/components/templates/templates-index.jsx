@@ -24,6 +24,22 @@ class TemplatesIndex extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  componentDidMount(){
+    let visualizerItems = document.getElementsByClassName("li-inner-div")
+      for (let i = 0; i < visualizerItems.length; i++) {
+        window.setTimeout(() => {
+          visualizerItems[i].classList.add("li-inner-div-color")    
+        }, 250)
+      }
+  }
+
+  componentWillUnmount(){
+    let visualizerItems = document.getElementsByClassName("li-inner-div")
+    for (let i = 0; i < visualizerItems.length; i++) {
+      visualizerItems[i].classList.remove("li-inner-div-color")    
+    }
+  }
+
   handleClick(type) {
     return (e) => {
       switch (type) {
@@ -96,66 +112,66 @@ class TemplatesIndex extends React.Component {
         </header>
         <div className="default-templates">
           <ul>
-            <li onClick={this.handleClick("frequency")}>
+            <li className="templ-li" onClick={this.handleClick("frequency")}>
               <div className="li-inner-div">
                 <VisualizerItemContainer
-                  canvasWidth={450}
+                  canvasWidth={400}
                   canvasHeight={250}
                   // toolbox={false}
                   visualizerSettings={defaultFrequencySettings}
                   onTemplate={true}
                 />
               </div>
-              <h1>Frequency Visualizer</h1>
+              <h1 className="templ-visualizer-h1">Frequency</h1>
             </li>
 
-            <li onClick={this.handleClick("sphere")}>
+            <li className="templ-li" onClick={this.handleClick("sphere")}>
               <div className="li-inner-div">
                 <VisualizerItemContainer
-                  canvasWidth={450}
+                  canvasWidth={400}
                   canvasHeight={250}
                   // toolbox={false}
                   visualizerSettings={defaultSphereSettings}
                   onTemplate={true}
                 />
               </div>
-              <h1>Sphere Visualizer</h1>
+              <h1 className="templ-visualizer-h1">Sphere</h1>
             </li>
-            <li onClick={this.handleClick("bars")}>
+            <li className="templ-li" onClick={this.handleClick("bars")}>
               <div className="li-inner-div">
                 <VisualizerItemContainer
-                  canvasWidth={450}
+                  canvasWidth={400}
                   canvasHeight={250}
                   // toolbox={false}
                   visualizerSettings={defaultBarsSettings}
                   onTemplate={true}
                 />
               </div>
-              <h1>Bars Visualizer</h1>
+              <h1 className="templ-visualizer-h1">Bars</h1>
             </li>
-            <li onClick={this.handleClick("square")}>
+            <li className="templ-li" onClick={this.handleClick("square")}>
               <div className="li-inner-div">
                 <VisualizerItemContainer
-                  canvasWidth={450}
+                  canvasWidth={400}
                   canvasHeight={250}
                   visualizerSettings={defaultSquareSettings}
                   onTemplate={true}
                 />
               </div>
-              <h1>Square Visualizer</h1>
+              <h1 className="templ-visualizer-h1">Square</h1>
             </li>
 
-            <li onClick={this.handleClick("ring")}>
+            <li className="templ-li" onClick={this.handleClick("ring")}>
               <div className="li-inner-div">
                 <VisualizerItemContainer
-                  canvasWidth={450}
+                  canvasWidth={400}
                   canvasHeight={250}
                   // toolbox={false}
                   visualizerSettings={defaultRingSettings}
                   onTemplate={true}
                 />
               </div>
-              <h1>Ring Visualizer</h1>
+              <h1 className="templ-visualizer-h1">Ring</h1>
             </li>
           </ul>
         </div>
