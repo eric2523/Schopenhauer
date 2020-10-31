@@ -41,13 +41,15 @@ export class ConnectedFloatingDotsVisualizer {
   }
 }
 class Particle {
-  constructor(x, y, xVel, yVel, size, color) {
+  constructor(x, y, xVel, yVel, size, color, twinkle) {
     this.x = x;
     this.y = y;
     this.xVel = xVel;
     this.yVel = yVel;
+    this.baseSize = size;
     this.size = size;
     this.color = color;
+    this.twinkle = twinkle ? 0.01 : 0;
   }
 
   draw(ctx) {
@@ -58,14 +60,15 @@ class Particle {
   }
 
   animate(canvas, state, ctx) {
-    // this.x = (this.x + canvas.width) % canvas.width;
-    // this.y = (this.y + canvas.height) % canvas.height;
     if (this.x > canvas.width || this.x < 0) {
+      this.x = this.x < 0 ? 0 : canvas.width;
       this.xVel = -this.xVel;
     }
     if (this.y > canvas.height || this.y < 0) {
+      this.y = this.y < 0 ? 0 : canvas.height;
       this.yVel = -this.yVel;
     }
+
     const dist = distance(state.mouse, this);
 
     if (dist < state.mouse.radius) {
