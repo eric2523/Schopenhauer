@@ -6,7 +6,7 @@ export const LandingPageIndex = (props) => {
   return (
     <div>
       <Splash />
-      <CarouselIndex />
+      {/* <CarouselIndex /> */}
     </div>
   );
 };

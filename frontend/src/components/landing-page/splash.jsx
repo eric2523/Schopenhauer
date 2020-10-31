@@ -11,7 +11,7 @@ export class Splash extends React.Component {
       mouse: {
         x: 0,
         y: 0,
-        radius: 30,
+        radius: 50,
       },
       visualizer: null,
       rafId: null,
@@ -21,7 +21,8 @@ export class Splash extends React.Component {
   }
 
   componentDidMount() {
-   
+    this.canvas.current.height = window.innerHeight;
+    this.canvas.current.width = window.innerWidth;
     this.setState(
       {
         visualizer: new ConnectedFloatingDotsVisualizer(this.canvas.current),
@@ -34,7 +35,18 @@ export class Splash extends React.Component {
     cancelAnimationFrame(this.state.rafId);
   }
   onMouseMove(e) {
-    this.setState({ mouse: { x: e.clientX, y: e.clientY } });
+    const rect = this.canvas.current.getBoundingClientRect();
+    this.setState({
+      mouse: {
+        x:
+          ((e.clientX - rect.left) / (rect.right - rect.left)) *
+          this.canvas.current.width,
+        y:
+          ((e.clientY - rect.top) / (rect.bottom - rect.top)) *
+          this.canvas.current.height,
+        radius: this.state.mouse.radius,
+      },
+    });
   }
   animation(canvas) {
     this.state.visualizer.animate(canvas, this.state);
