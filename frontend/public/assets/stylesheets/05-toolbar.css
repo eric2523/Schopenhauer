@@ -65,6 +65,8 @@
   left: 0;
   padding-top: 10px;
   background: #171717;
+  overflow-y: scroll;
+  height: 100%;
 }
 
 .toolbar-container {
