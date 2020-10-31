@@ -10,7 +10,7 @@ export class Particle {
     this.color = color;
     if (twinkle) {
       this.twinkle = this.baseSize / 140;
-      this.size = Math.random() * size + this.twinkle;
+      this.size = Math.random() * (size - 1) + 1;
     } else {
       this.twinkle = 0;
       this.size = size;
