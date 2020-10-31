@@ -10,6 +10,7 @@ import { fetchUserVisualizer } from "./actions/visualizer_actions";
 import { defaultFrequencySettings } from "./components/visualizers/basic_frequency_visualizer";
 import { defaultSphereSettings } from "./components/visualizers/nate_visualizer_1";
 import { receiveUser } from './actions/user_actions';
+import { defaultBarsSettings } from "./components/visualizers/eric-visualizer1";
 
 document.addEventListener("DOMContentLoaded", () => {
   // currently no preloaded state
@@ -22,7 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
       entities: {
         defaultSettings: {
           frequencySettings: defaultFrequencySettings,
-          sphereSettings: defaultSphereSettings
+          sphereSettings: defaultSphereSettings,
+          barsSettings: defaultBarsSettings,
         }
       }
     };

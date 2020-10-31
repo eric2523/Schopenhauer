@@ -77,8 +77,9 @@ class SphereParticle {
     this.particleRadius = state.generalSettings.barWidth > 0 ?
       state.generalSettings.barWidth : 2;
 
-    this.multiplier = state.frequencyArray[i] * state.generalSettings.heightAmplifier > 0 ? 
-    state.frequencyArray[i] * state.generalSettings.heightAmplifier : 1;
+    this.multiplier = state.generalSettings.heightAmplifier > 0 ? 
+      (state.frequencyArray[i] * .003) * state.generalSettings.heightAmplifier
+     : (state.frequencyArray[i] * .003);
 
 
     if(state.generalSettings.color){
@@ -97,7 +98,7 @@ class SphereParticle {
     this.ctx = canvas.getContext('2d');
 
     //polar coordinates
-    this.sphereRadius = canvas.width/7;
+    this.sphereRadius = canvas.width/2;
     this.theta = Math.random() * 2 * Math.PI; //polar angle
     this.phi = Math.acos((Math.random() * 2) -1); //azimuth angle
 
@@ -115,15 +116,15 @@ class SphereParticle {
 
   //project 3D position to 2D canvas
   project3DTo2D = () => {
-    this.xPos = this.multiplier*.001 * this.sphereRadius * Math.sin(this.phi) * Math.cos(this.theta);
-    this.yPos = this.multiplier*.001 * this.sphereRadius * Math.cos(this.phi) ;
-    this.zPos = this.multiplier*.001 * this.sphereRadius * Math.sin(this.phi) * Math.sin(this.theta) + this.sphereRadius;
+    this.xPos =  (this.multiplier) * this.sphereRadius * Math.sin(this.phi) * Math.cos(this.theta);
+    this.yPos = (this.multiplier) * this.sphereRadius * Math.cos(this.phi) ;
+    this.zPos = (this.multiplier) * this.sphereRadius * Math.sin(this.phi) * Math.sin(this.theta) + this.sphereRadius;
     
       
     //2D position of particle
     this.depthProjected = this.perspective / (this.perspective + this.zPos);
-    this.xProjected = (this.xPos * this.depthProjected) + this.canvasCenterX;
-    this.yProjected = (this.yPos * this.depthProjected) + this.canvasCenterY;
+    this.xProjected = ((this.xPos * this.depthProjected) + this.canvasCenterX);
+    this.yProjected = ((this.yPos * this.depthProjected) + this.canvasCenterY);
     if (this.depthProjected < 0){
       this.depthProjected = this.depthProjected * -1
     }
