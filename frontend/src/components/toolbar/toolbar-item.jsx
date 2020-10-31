@@ -7,15 +7,19 @@ export class ToolbarItem extends React.Component {
   }
 
   handleChange(e) {
-    let name = this.props.setting.name 
-    this.props.generalSettings[name] = parseInt(e.target.value)
+    let name = this.props.setting.name;
+    this.props.generalSettings[name] = parseInt(e.target.value);
   }
 
   render() {
     return (
-      <div>
-        <div className="ui input">
-          <input onChange={this.handleChange} type="number" placeholder={this.props.setting.name} />
+      <div className="toolbar-item-container">
+        <div className="ui transparent input toolbar-input-container">
+          <input
+            onChange={this.handleChange}
+            type="number"
+            placeholder={this.props.setting.name}
+          />
         </div>
       </div>
     );

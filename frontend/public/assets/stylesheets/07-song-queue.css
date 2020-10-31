@@ -1,25 +1,25 @@
-.current-song-item{
-  color: red;
+.current-song-item {
+  color: #41bfef;
   cursor: pointer;
   margin-bottom: 10px;
 }
 
-.song-item{
+.song-item {
   cursor: pointer;
   margin-bottom: 10px;
 }
 
-.song-item:hover{
+.song-item:hover {
   opacity: 0.5;
 }
 
-.song-toolbar{
+.song-toolbar {
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-.your-songs{
-  margin-bottom: 10px;
-  font-weight: 800;
-  font-size: 1.6rem;
+.your-songs {
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  color: #41bfef;
 }
