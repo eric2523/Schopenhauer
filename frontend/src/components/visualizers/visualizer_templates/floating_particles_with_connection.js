@@ -10,7 +10,9 @@ export class ConnectedFloatingDotsVisualizer {
       let xVel = Math.random() * 0.1;
       let yVel = Math.random() * 0.1;
       let color = "white";
-      this.particleArray.push(new Particle(x, y, xVel, yVel, size, color));
+      this.particleArray.push(
+        new Particle(x, y, xVel, yVel, size, color, true)
+      );
     }
   }
 
@@ -30,7 +32,7 @@ export class ConnectedFloatingDotsVisualizer {
         if (dist < 150) {
           opacity = 1 - dist / 150;
           ctx.strokeStyle = "rgba(123, 85, 48," + opacity + ")";
-          ctx.lineWidth = 1;
+          ctx.lineWidth = 0.3;
           ctx.beginPath();
           ctx.moveTo(this.particleArray[a].x, this.particleArray[a].y);
           ctx.lineTo(this.particleArray[b].x, this.particleArray[b].y);
@@ -49,12 +51,14 @@ class Particle {
     this.baseSize = size;
     this.size = size;
     this.color = color;
-    this.twinkle = twinkle ? 0.01 : 0;
+    this.twinkle = twinkle ? 0.02 : 0;
   }
 
   draw(ctx) {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+    ctx.shadowBlur = 8;
+    ctx.shadowColor = "white";
     ctx.fillStyle = this.color;
     ctx.fill();
   }
@@ -69,6 +73,12 @@ class Particle {
       this.yVel = -this.yVel;
     }
 
+    if (this.twinkle) {
+      if (this.size > this.baseSize || this.size < 1) {
+        this.twinkle = -this.twinkle;
+      }
+      this.size += this.twinkle;
+    }
     const dist = distance(state.mouse, this);
 
     if (dist < state.mouse.radius) {
