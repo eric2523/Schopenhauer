@@ -8,7 +8,6 @@ export const defaultSquareSettings = {
 
 export class SquareVisualizer {
   animate(canvas, state) {
-    debugger;
     let width = canvas.width;
     let height = canvas.height
   

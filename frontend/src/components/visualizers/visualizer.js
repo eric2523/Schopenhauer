@@ -10,6 +10,7 @@ import { BarVisualizer } from "./eric-visualizer1";
 import { CirclePicker } from "react-color"
 
 import { SquareVisualizer } from "./basic_square_visualizer";
+import { RingVisualizer } from "./ring_visualizer";
 
 
 const mSTP = (state) => {
@@ -37,6 +38,9 @@ class VisualizerItem extends React.Component {
         break;
       case "square":
         this.visualizer = new SquareVisualizer();
+        break;
+      case "ring":
+        this.visualizer = new RingVisualizer();
         break;
       default:
         this.visualizer = new SphereVisualizer();
