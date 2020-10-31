@@ -3,6 +3,7 @@ import { VisualizerItemContainer } from "../visualizers/visualizer";
 import { defaultFrequencySettings } from "../visualizers/basic_frequency_visualizer";
 import { defaultSphereSettings } from "../visualizers/nate_visualizer_1";
 import { defaultSquareSettings} from "../visualizers/basic_square_visualizer";
+import { defaultRingSettings} from "../visualizers/ring_visualizer";
 import { withRouter } from "react-router-dom";
 import { uploadVisualizer } from "../../actions/visualizer_actions";
 import { connect } from "react-redux";
@@ -52,6 +53,14 @@ class TemplatesIndex extends React.Component {
             .then((payload) =>
               this.props.history.push(`/visualizers/${payload.visualizer._id}`));
           break;
+        case "ring":
+          this.props
+            .uploadVisualizer(
+              prepSettings(defaultRingSettings, this.props.userId)
+            )
+            .then((payload) =>
+              this.props.history.push(`/visualizers/${payload.visualizer._id}`));
+          break;
         default:
           break;
       }
@@ -92,6 +101,17 @@ class TemplatesIndex extends React.Component {
                 canvasHeight={450}
                 // toolbox={false}
                 visualizerSettings={defaultSquareSettings}
+                onTemplate={true}
+              />
+            </li>
+
+            <li onClick={this.handleClick("ring")}>
+              <h1>Ring Visualizer</h1>
+              <VisualizerItemContainer
+                canvasWidth={450}
+                canvasHeight={450}
+                // toolbox={false}
+                visualizerSettings={defaultRingSettings}
                 onTemplate={true}
               />
             </li>
