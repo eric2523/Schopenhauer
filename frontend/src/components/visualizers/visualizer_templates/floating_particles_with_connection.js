@@ -2,8 +2,8 @@ import { distance } from "../../../util/visualizer_util";
 
 export class ConnectedFloatingDotsVisualizer {
   constructor(canvas) {
-    canvas.height = 403.6;
-    canvas.width = 1460;
+    // canvas.height = 1080;
+    // canvas.width = 1460;
     this.particleArray = [];
     for (let i = 0; i < 50; i++) {
       let size = Math.random() * 3 + 1;

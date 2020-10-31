@@ -21,7 +21,9 @@ export class Splash extends React.Component {
   }
 
   componentDidMount() {
-   
+    debugger;
+    this.canvas.current.height = window.innerHeight;
+    this.canvas.current.width = window.innerWidth;
     this.setState(
       {
         visualizer: new ConnectedFloatingDotsVisualizer(this.canvas.current),

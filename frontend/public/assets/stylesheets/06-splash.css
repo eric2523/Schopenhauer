@@ -5,6 +5,7 @@
 .splash-outer-div {
   /* background-image: url("https://media0.giphy.com/media/14urQKQOKld6CQiiMB/giphy.gif?cid=ecf05e47h2mr9mromzan4s3zv4watc5a5d006ejc2w6hjf4p&rid=giphy.gif"); */
   background-color: rgb(12, 6, 39);
+  /* background-color: #070417; */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -12,14 +13,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 50vh;
+  height: 95vh;
   fill: black;
   position: relative;
+  /* position: absolute; */
 }
 
 .splash-img-overlay {
   position: absolute;
-  height: 50vh;
+
+  height: 95vh;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.4);
 }
