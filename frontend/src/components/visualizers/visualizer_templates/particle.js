@@ -7,9 +7,14 @@ export class Particle {
     this.xVel = xVel;
     this.yVel = yVel;
     this.baseSize = size;
-    this.size = size;
     this.color = color;
-    this.twinkle = twinkle ? 0.02 : 0;
+    if (twinkle) {
+      this.twinkle = this.baseSize / 140;
+      this.size = Math.random() * size + this.twinkle;
+    } else {
+      this.twinkle = 0;
+      this.size = size;
+    }
   }
 
   draw(ctx) {
