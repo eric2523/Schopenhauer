@@ -81,9 +81,12 @@ class VisualizerItem extends React.Component {
       toolbar = (
         <>
           <div className="toolbar">
-            <ul>{items}</ul>
-            <SongToolBar />
-            <CirclePicker onChange={ this.handleColorChange }/>
+            <div className="toolbar-container">
+              <h3 className="toolbar-h3">Settings</h3>
+              <ul className="toolbar-ul">{items}</ul>
+              <SongToolBar />
+              <CirclePicker onChange={ this.handleColorChange }/>
+            </div>
           </div>
         </>
       );
