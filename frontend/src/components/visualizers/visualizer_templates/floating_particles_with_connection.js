@@ -5,7 +5,7 @@ export class ConnectedFloatingDotsVisualizer {
     // canvas.height = 1080;
     // canvas.width = 1460;
     this.particleArray = [];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 200; i++) {
       let size = Math.random() * 3 + 1;
       let x = Math.random() * canvas.width;
       let y = Math.random() * canvas.height;
@@ -68,7 +68,7 @@ class Particle {
     }
     const dist = distance(state.mouse, this);
 
-    if (dist < state.mouse.radius + this.size) {
+    if (dist < state.mouse.radius) {
       this.x += Math.sign(this.x - state.mouse.x) * 10;
       this.y += Math.sign(this.y - state.mouse.y) * 10;
     }
