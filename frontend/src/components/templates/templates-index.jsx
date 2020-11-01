@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { uploadVisualizer } from "../../actions/visualizer_actions";
 import { prepSettings } from "../../util/visualizer_api_util";
 
-import { VisualizerItemContainer } from "../visualizers/visualizer";
+import { VisualizerItemContainer } from "../visualizers/visualizer_item";
 import { visualizerConstructors } from "../../util/visualizer_constructor_util";
 
 const mSTP = (state) => ({
@@ -42,6 +42,7 @@ class TemplatesIndex extends React.Component {
   handleClick(type) {
     return (e) => {
       const defaultSettings = visualizerConstructors[type].defaultSettings;
+      
       this.props
         .uploadVisualizer(prepSettings(defaultSettings, this.props.userId))
         .then((payload) => {

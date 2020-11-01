@@ -1,5 +1,5 @@
 import React from "react";
-import { VisualizerItemContainer } from "./visualizer";
+import { VisualizerItemContainer } from "./visualizer_item";
 import { connect } from "react-redux";
 
 const mSTP = (state, ownProps) => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { VisualizerItemContainer } from "../visualizers/visualizer";
+import { VisualizerItemContainer } from "../visualizers/visualizer_item";
 
 export class ProfileVisualizerItem extends React.Component {
   constructor(props) {
@@ -31,15 +31,15 @@ export class ProfileVisualizerItem extends React.Component {
       ? window.clientWidth
       : window.innerWidth;
     return (
-        <VisualizerItemContainer
-          connectMusic={this.props.connectMusic}
-          startPlaying={this.props.startPlaying} 
-          visualizerSettings={this.props.visualizer}
-          canvasWidth={width/4}
-          canvasHeight={width/4}
-          onHover={this.props.onHover}
-          disconnectMusic={this.props.disconnectMusic}
-          />
-          )
+      <VisualizerItemContainer
+        connectMusic={this.props.connectMusic}
+        startPlaying={this.props.startPlaying}
+        visualizerSettings={this.props.visualizer}
+        canvasWidth={width / 4}
+        canvasHeight={width / 4}
+        onHover={this.props.onHover}
+        disconnectMusic={this.props.disconnectMusic}
+      />
+    );
   }
 }

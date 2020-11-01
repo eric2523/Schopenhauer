@@ -17,7 +17,7 @@ const mSTP = (state) => {
 class VisualizerItem extends React.Component {
   constructor(props) {
     super(props);
-
+    debugger;
     const visualizerType = props.visualizerSettings
       ? props.visualizerSettings.type
       : props.type;
