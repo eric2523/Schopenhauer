@@ -120,5 +120,3 @@ export const distance = function (objectA, objectB) {
   const dy = objectA.y - objectB.y;
   return Math.sqrt(dx * dx + dy * dy);
 };
-
-
