@@ -2,15 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Root } from "./components/root";
 import { configureStore } from "./store/store";
-import jwt_decode from 'jwt-decode';
-import { setAuthToken } from './util/session_api_util';
-import { logout } from './actions/session_actions';
-import { receiveUserSongs } from './actions/song_actions';
+import jwt_decode from "jwt-decode";
+import { setAuthToken } from "./util/session_api_util";
+import { logout } from "./actions/session_actions";
+import { receiveUserSongs } from "./actions/song_actions";
 import { fetchUserVisualizer } from "./actions/visualizer_actions";
-import { defaultFrequencySettings } from "./components/visualizers/basic_frequency_visualizer";
-import { defaultSphereSettings } from "./components/visualizers/nate_visualizer_1";
-import { receiveUser } from './actions/user_actions';
-import { defaultBarsSettings } from "./components/visualizers/eric-visualizer1";
+// import { defaultFrequencySettings } from "./components/visualizers/basic_frequency_visualizer";
+// import { defaultSphereSettings } from "./components/visualizers/nate_visualizer_1";
+// import { defaultBarsSettings } from "./components/visualizers/eric-visualizer1";
+import { receiveUser } from "./actions/user_actions";
 
 document.addEventListener("DOMContentLoaded", () => {
   // currently no preloaded state
@@ -18,15 +18,15 @@ document.addEventListener("DOMContentLoaded", () => {
   if (localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);
     const decodedUser = jwt_decode(localStorage.jwtToken);
-    const preloadedState = { 
-      session: { isAuthenticated: true, user: decodedUser }, 
-      entities: {
-        defaultSettings: {
-          frequencySettings: defaultFrequencySettings,
-          sphereSettings: defaultSphereSettings,
-          barsSettings: defaultBarsSettings,
-        }
-      }
+    const preloadedState = {
+      session: { isAuthenticated: true, user: decodedUser },
+      // entities: {
+      //   defaultSettings: {
+      //     frequencySettings: defaultFrequencySettings,
+      //     sphereSettings: defaultSphereSettings,
+      //     barsSettings: defaultBarsSettings,
+      //   }
+      // }
     };
 
     store = configureStore(preloadedState);
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (decodedUser.exp < currentTime) {
       store.dispatch(logout());
-      window.location.href = '/';
+      window.location.href = "/";
     }
   } else {
     store = configureStore({});
