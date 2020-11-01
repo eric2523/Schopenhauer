@@ -3,8 +3,7 @@ import {
   RECEIVE_VISUALIZERS,
   DELETE_VISUALIZER,
 } from "../../actions/visualizer_actions";
-
-import { parseVisualizerSettings } from "../../util/visualizer_util";
+import { parseVisualizerSettings } from "../../util/visualizer_api_util";
 
 export const visualizersReducer = (state = {}, action) => {
   Object.freeze(state);
@@ -16,10 +15,12 @@ export const visualizersReducer = (state = {}, action) => {
       });
       return newState;
     case RECEIVE_VISUALIZER:
-      newState[action.visualizer._id] = parseVisualizerSettings(action.visualizer);
+      newState[action.visualizer._id] = parseVisualizerSettings(
+        action.visualizer
+      );
       return newState;
     case DELETE_VISUALIZER:
-      delete newState[action.visualizerId]
+      delete newState[action.visualizerId];
       return newState;
     default:
       return state;
