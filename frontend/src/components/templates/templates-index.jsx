@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 
 import { uploadVisualizer } from "../../actions/visualizer_actions";
 import { prepSettings } from "../../util/visualizer_api_util";
-
-import { VisualizerItemContainer } from "../visualizers/visualizer_item";
 import {
   selectAllVisualizerTypes,
   visualizerConstructors,
 } from "../../util/visualizer_constructor_util";
+
+import { VisualizerItemContainer } from "../visualizers/visualizer_item";
 
 const mSTP = (state) => ({
   userId: state.session.user.id,
@@ -57,6 +57,7 @@ class TemplatesIndex extends React.Component {
           <VisualizerItemContainer
             canvasWidth={400}
             canvasHeight={250}
+            toolbox={false}
             visualizerSettings={visualizerConstructors[type].defaultSettings}
             onTemplate={true}
           />

@@ -15,9 +15,9 @@ const VisualizerEdit = (props) => {
   if (visualizerSettings) {
     return (
       <VisualizerItemContainer
-        toolbox={true}
         canvasWidth={width}
         canvasHeight={height}
+        toolbox={true}
         visualizerSettings={visualizerSettings}
       />
     );
