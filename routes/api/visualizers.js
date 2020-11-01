@@ -31,7 +31,9 @@ router.post(
 
 router.get("/", (req, res) => {
   Visualizer.find({ userId: req.query.userId })
-    .then((visualizers) => {res.json(visualizers)})
+    .then((visualizers) => {
+      res.json(visualizers);
+    })
     .catch((err) => res.status(404).json(err));
 });
 
@@ -56,8 +58,6 @@ router.delete(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log("in delete");
-    console.log(req.query.id);
     Visualizer.findByIdAndDelete(req.query.id)
       .then(() => res.status(200).json("success!"))
       .catch((err) => res.status(404).json(err));

@@ -13,7 +13,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 95vh;
+  height: calc(100vh - 60px);
   fill: black;
   position: relative;
   /* position: absolute; */
@@ -22,7 +22,7 @@
 .splash-img-overlay {
   position: absolute;
 
-  height: 95vh;
+  height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.4);
 }
@@ -134,4 +134,11 @@
 
 .carousel-template-btn > .creation-temp-btn {
   margin-bottom: 15px;
+}
+
+#letsplay {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: nowrap;
 }

@@ -4,11 +4,11 @@ import { defaultFrequencySettings } from "../visualizers/basic_frequency_visuali
 import { defaultSphereSettings } from "../visualizers/nate_visualizer_1";
 import { defaultSquareSettings } from "../visualizers/basic_square_visualizer";
 import { defaultRingSettings } from "../visualizers/ring_visualizer";
+import { defaultBarsSettings } from "../visualizers/eric-visualizer1";
 import { withRouter } from "react-router-dom";
 import { uploadVisualizer } from "../../actions/visualizer_actions";
 import { connect } from "react-redux";
-import { prepSettings } from "../../util/visualizer_util";
-import { defaultBarsSettings } from "../visualizers/eric-visualizer1";
+import { prepSettings } from "../../util/visualizer_api_util";
 
 const mSTP = (state) => ({
   userId: state.session.user.id,
@@ -24,19 +24,19 @@ class TemplatesIndex extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  componentDidMount(){
-    let visualizerItems = document.getElementsByClassName("li-inner-div")
-      for (let i = 0; i < visualizerItems.length; i++) {
-        window.setTimeout(() => {
-          visualizerItems[i].classList.add("li-inner-div-color")    
-        }, 250)
-      }
+  componentDidMount() {
+    let visualizerItems = document.getElementsByClassName("li-inner-div");
+    for (let i = 0; i < visualizerItems.length; i++) {
+      window.setTimeout(() => {
+        visualizerItems[i].classList.add("li-inner-div-color");
+      }, 250);
+    }
   }
 
-  componentWillUnmount(){
-    let visualizerItems = document.getElementsByClassName("li-inner-div")
+  componentWillUnmount() {
+    let visualizerItems = document.getElementsByClassName("li-inner-div");
     for (let i = 0; i < visualizerItems.length; i++) {
-      visualizerItems[i].classList.remove("li-inner-div-color")    
+      visualizerItems[i].classList.remove("li-inner-div-color");
     }
   }
 
