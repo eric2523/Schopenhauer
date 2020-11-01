@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { ProfileBio } from "./profile-bio";
-import { ProfileVisualizerIndex } from "./profile-visualizers-index";
+import { ProfileVisualizerIndexContainer } from "./profile-visualizers-index";
 import { getVisualizersByUserId } from "../../reducers/selectors/visualizer_selectors";
 import { ConnectedFloatingDotsVisualizer } from "../visualizers/visualizer_templates/floating_particles_with_connection";
 
@@ -60,7 +60,10 @@ class ProfileIndex extends React.Component {
             self={self}
           />
         </div>
-        <ProfileVisualizerIndex self={self} userId={this.props.user.id} />
+        <ProfileVisualizerIndexContainer
+          self={self}
+          userId={this.props.user.id}
+        />
       </div>
     );
   }
