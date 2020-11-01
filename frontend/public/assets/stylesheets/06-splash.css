@@ -135,3 +135,10 @@
 .carousel-template-btn > .creation-temp-btn {
   margin-bottom: 15px;
 }
+
+#letsplay {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
