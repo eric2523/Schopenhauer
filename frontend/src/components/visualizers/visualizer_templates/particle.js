@@ -20,8 +20,10 @@ export class Particle {
   draw(ctx) {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-    ctx.shadowBlur = 8;
-    ctx.shadowColor = "white";
+    if (this.twinkle) {
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = "white";
+    }
     ctx.fillStyle = this.color;
     ctx.fill();
   }
