@@ -7,6 +7,7 @@ export class Particle {
     this.xVel = xVel;
     this.yVel = yVel;
     this.baseSize = size;
+    this.baseColor = color;
     this.color = color;
     if (twinkle) {
       this.twinkle = this.baseSize / 140;
@@ -28,7 +29,8 @@ export class Particle {
     ctx.fill();
   }
 
-  animate(canvas, state, ctx) {
+  animate(canvas, ctx) {
+    // this.color = this.baseColor;
     if (this.x > canvas.width || this.x < 0) {
       this.x = this.x < 0 ? 0 : canvas.width;
       this.xVel = -this.xVel;
@@ -42,15 +44,10 @@ export class Particle {
       if (this.size > this.baseSize || this.size < 1) {
         this.twinkle = -this.twinkle;
       }
+      // if (this.size > 0.99 * this.baseSize) {
+      //   this.color = "black";
+      // }
       this.size += this.twinkle;
-    }
-    const dist = distance(state.mouse, this);
-
-    if (dist < state.mouse.radius) {
-      this.x += Math.sign(this.x - state.mouse.x) * 5;
-      this.y += Math.sign(this.y - state.mouse.y) * 5;
-      this.xVel = -this.xVel;
-      this.yVel = -this.yVel;
     }
     this.x += this.xVel;
     this.y += this.yVel;
