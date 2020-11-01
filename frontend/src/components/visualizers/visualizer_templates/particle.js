@@ -1,4 +1,4 @@
-import { distance } from "../../../util/visualizer_util";
+import { detectPitchColor } from "../../../util/visualizer_util";
 
 export class Particle {
   constructor(x, y, xVel, yVel, size, color, twinkle) {
@@ -16,6 +16,7 @@ export class Particle {
       this.twinkle = 0;
       this.size = size;
     }
+    this.dancing = false;
   }
 
   draw(ctx) {
@@ -29,8 +30,7 @@ export class Particle {
     ctx.fill();
   }
 
-  animate(canvas, ctx) {
-    // this.color = this.baseColor;
+  animate(canvas, ctx, state) {
     if (this.x > canvas.width || this.x < 0) {
       this.x = this.x < 0 ? 0 : canvas.width;
       this.xVel = -this.xVel;
@@ -44,13 +44,23 @@ export class Particle {
       if (this.size > this.baseSize || this.size < 1) {
         this.twinkle = -this.twinkle;
       }
-      // if (this.size > 0.99 * this.baseSize) {
-      //   this.color = "black";
-      // }
       this.size += this.twinkle;
     }
     this.x += this.xVel;
     this.y += this.yVel;
+    if (this.dancing) {
+      this.dance(state);
+      this.x += 2 * this.xVel;
+      this.y += 2 * this.yVel;
+    }
     this.draw(ctx);
+  }
+  dance(state) {
+    if (state.beatDetection.detected) {
+      this.size = this.baseSize;
+      this.twinkle = -Math.abs(this.twinkle);
+      const pitchColor = detectPitchColor(state.frequencyArray).join(",");
+      this.color = `rgb(${pitchColor})`;
+    }
   }
 }
