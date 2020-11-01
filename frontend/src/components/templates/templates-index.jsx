@@ -52,7 +52,7 @@ class TemplatesIndex extends React.Component {
 
   render() {
     const visualizerItems = this.allVisualizers.map((type) => (
-      <li className="templ-li" onClick={this.handleClick(type)}>
+      <li className="templ-li" onClick={this.handleClick(type)} key={type}>
         <div className={this.state.itemClassName}>
           <VisualizerItemContainer
             canvasWidth={400}
