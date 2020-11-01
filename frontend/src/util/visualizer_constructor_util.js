@@ -42,3 +42,5 @@ export const visualizerConstructors = {
     TypeConstructor: RingVisualizer,
   },
 };
+
+export const selectAllVisualizerTypes = Object.keys(visualizerConstructors);
