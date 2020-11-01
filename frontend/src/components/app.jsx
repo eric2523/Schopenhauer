@@ -7,7 +7,7 @@ import { ProtectedRoute, AuthRoute } from "../util/route_util";
 import { LandingPageIndex } from "./landing-page/landing-page-index";
 //Will probably move this component to a full sound bar component
 import { SongUploadModal } from "./music_player/upload_modal";
-import { ProfilePage } from "./profile-page/profile-index";
+import { ProfilePageContainer } from "./profile-page/profile-index";
 import { TemplatesIndexContainer } from "./templates/templates-index";
 import { VisualizerEditContainer } from "./visualizers/visualizer-edit-page";
 import { AboutPage } from "./about-page/about-page";
@@ -21,14 +21,21 @@ export const App = () => {
       <SongUploadModal />
       <UserAuthModal />
       <Switch>
-        <ProtectedRoute exact path="/templates" component={TemplatesIndexContainer} />
-        <Route exact path="/visualizers/:id" component={VisualizerEditContainer} />
-        <Route exact path="/profile/:id" component={ProfilePage} />
+        <ProtectedRoute
+          exact
+          path="/templates"
+          component={TemplatesIndexContainer}
+        />
+        <Route
+          exact
+          path="/visualizers/:id"
+          component={VisualizerEditContainer}
+        />
+        <Route exact path="/profile/:id" component={ProfilePageContainer} />
         <Route exact path="/about" component={AboutPage} />
         <Route path="/" component={LandingPageIndex} />
         <Redirect to="/" />
       </Switch>
-      
     </div>
   );
 };

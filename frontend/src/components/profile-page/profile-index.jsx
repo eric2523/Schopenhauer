@@ -4,8 +4,9 @@ import { ProfileBio } from "./profile-bio";
 import { ProfileVisualizerIndexContainer } from "./profile-visualizers-index";
 import { getVisualizersByUserId } from "../../reducers/selectors/visualizer_selectors";
 import { ConnectedFloatingDotsVisualizer } from "../visualizers/visualizer_templates/floating_particles_with_connection";
+import { BeatDetection } from "../visualizers/beat_detection";
 
-class ProfileIndex extends React.Component {
+class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
     this.canvas = React.createRef();
@@ -15,6 +16,7 @@ class ProfileIndex extends React.Component {
         y: 0,
         radius: 50,
       },
+      beatDetection: new BeatDetection(),
       visualizer: null,
       rafId: null,
     };
@@ -80,4 +82,4 @@ const mSTP = (state, ownProps) => {
   };
 };
 
-export const ProfilePage = connect(mSTP, null)(ProfileIndex);
+export const ProfilePageContainer = connect(mSTP, null)(ProfilePage);
