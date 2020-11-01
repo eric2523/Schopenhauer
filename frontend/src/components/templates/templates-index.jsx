@@ -6,7 +6,10 @@ import { uploadVisualizer } from "../../actions/visualizer_actions";
 import { prepSettings } from "../../util/visualizer_api_util";
 
 import { VisualizerItemContainer } from "../visualizers/visualizer_item";
-import { visualizerConstructors } from "../../util/visualizer_constructor_util";
+import {
+  selectAllVisualizerTypes,
+  visualizerConstructors,
+} from "../../util/visualizer_constructor_util";
 
 const mSTP = (state) => ({
   userId: state.session.user.id,
@@ -20,6 +23,22 @@ const mDTP = (dispatch) => ({
 class TemplatesIndex extends React.Component {
   constructor(props) {
     super(props);
+    const allVisualizers = selectAllVisualizerTypes;
+
+    this.visualizerItems = allVisualizers.map((type) => (
+      <li className="templ-li" onClick={this.handleClick(type)}>
+        <div className="li-inner-div">
+          <VisualizerItemContainer
+            canvasWidth={400}
+            canvasHeight={250}
+            visualizerSettings={visualizerConstructors[type].defaultSettings}
+            onTemplate={true}
+          />
+        </div>
+        <h1 className="templ-visualizer-h1">{type}</h1>
+      </li>
+    ));
+
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -42,7 +61,7 @@ class TemplatesIndex extends React.Component {
   handleClick(type) {
     return (e) => {
       const defaultSettings = visualizerConstructors[type].defaultSettings;
-      
+
       this.props
         .uploadVisualizer(prepSettings(defaultSettings, this.props.userId))
         .then((payload) => {
@@ -68,69 +87,7 @@ class TemplatesIndex extends React.Component {
           </div>
         </header>
         <div className="default-templates">
-          <ul>
-            <li className="templ-li" onClick={this.handleClick("frequency")}>
-              <div className="li-inner-div">
-                <VisualizerItemContainer
-                  canvasWidth={400}
-                  canvasHeight={250}
-                  // toolbox={false}
-                  type="frequency"
-                  onTemplate={true}
-                />
-              </div>
-              <h1 className="templ-visualizer-h1">Frequency</h1>
-            </li>
-
-            <li className="templ-li" onClick={this.handleClick("sphere")}>
-              <div className="li-inner-div">
-                <VisualizerItemContainer
-                  canvasWidth={400}
-                  canvasHeight={250}
-                  // toolbox={false}
-                  type="sphere"
-                  onTemplate={true}
-                />
-              </div>
-              <h1 className="templ-visualizer-h1">Sphere</h1>
-            </li>
-            <li className="templ-li" onClick={this.handleClick("bars")}>
-              <div className="li-inner-div">
-                <VisualizerItemContainer
-                  canvasWidth={400}
-                  canvasHeight={250}
-                  // toolbox={false}
-                  type="bars"
-                  onTemplate={true}
-                />
-              </div>
-              <h1 className="templ-visualizer-h1">Bars</h1>
-            </li>
-            <li className="templ-li" onClick={this.handleClick("square")}>
-              <div className="li-inner-div">
-                <VisualizerItemContainer
-                  canvasWidth={400}
-                  canvasHeight={250}
-                  type="square"
-                  onTemplate={true}
-                />
-              </div>
-              <h1 className="templ-visualizer-h1">Square</h1>
-            </li>
-
-            <li className="templ-li" onClick={this.handleClick("ring")}>
-              <div className="li-inner-div">
-                <VisualizerItemContainer
-                  canvasWidth={400}
-                  canvasHeight={250}
-                  // toolbox={false}
-                  type="ring"
-                  onTemplate={true}
-                />
-              </div>
-              <h1 className="templ-visualizer-h1">Ring</h1>
-            </li>
-          </ul>
+          <ul>{this.visualizerItems}</ul>
         </div>
       </div>
     );
