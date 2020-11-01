@@ -11,7 +11,7 @@ export class Splash extends React.Component {
       mouse: {
         x: 0,
         y: 0,
-        radius: 50,
+        radius: 100,
       },
       visualizer: null,
       rafId: null,
