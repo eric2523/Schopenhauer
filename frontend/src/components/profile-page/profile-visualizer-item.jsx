@@ -27,10 +27,9 @@ export class ProfileVisualizerItem extends React.Component {
     ) : (
       <i className="pause icon white-audio-icon"></i>
     );
-    var width = isNaN(window.innerWidth)
+    let width = isNaN(window.innerWidth)
       ? window.clientWidth
       : window.innerWidth;
-
     return (
         <VisualizerItemContainer
           connectMusic={this.props.connectMusic}

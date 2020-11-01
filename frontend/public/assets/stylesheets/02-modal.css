@@ -17,6 +17,7 @@
   position: absolute;
   top: 40%;
   left: 50%;
+  /* transition: visibility 0s, opacity 0.5s linear; */
   transform: translate(-50%, -50%);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
 }
