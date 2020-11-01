@@ -23,39 +23,19 @@ const mDTP = (dispatch) => ({
 class TemplatesIndex extends React.Component {
   constructor(props) {
     super(props);
-    const allVisualizers = selectAllVisualizerTypes;
+    this.allVisualizers = selectAllVisualizerTypes;
 
-    this.visualizerItems = allVisualizers.map((type) => (
-      <li className="templ-li" onClick={this.handleClick(type)}>
-        <div className="li-inner-div">
-          <VisualizerItemContainer
-            canvasWidth={400}
-            canvasHeight={250}
-            visualizerSettings={visualizerConstructors[type].defaultSettings}
-            onTemplate={true}
-          />
-        </div>
-        <h1 className="templ-visualizer-h1">{type}</h1>
-      </li>
-    ));
+    this.state = {
+      itemClassName: "li-inner-div",
+    };
 
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
-    let visualizerItems = document.getElementsByClassName("li-inner-div");
-    for (let i = 0; i < visualizerItems.length; i++) {
-      window.setTimeout(() => {
-        visualizerItems[i].classList.add("li-inner-div-color");
-      }, 250);
-    }
-  }
-
-  componentWillUnmount() {
-    let visualizerItems = document.getElementsByClassName("li-inner-div");
-    for (let i = 0; i < visualizerItems.length; i++) {
-      visualizerItems[i].classList.remove("li-inner-div-color");
-    }
+    setTimeout(() => {
+      this.setState({ itemClassName: "li-inner-div li-inner-div-color" });
+    }, 250);
   }
 
   handleClick(type) {
@@ -71,6 +51,20 @@ class TemplatesIndex extends React.Component {
   }
 
   render() {
+    const visualizerItems = this.allVisualizers.map((type) => (
+      <li className="templ-li" onClick={this.handleClick(type)}>
+        <div className={this.state.itemClassName}>
+          <VisualizerItemContainer
+            canvasWidth={400}
+            canvasHeight={250}
+            visualizerSettings={visualizerConstructors[type].defaultSettings}
+            onTemplate={true}
+          />
+        </div>
+        <h1 className="templ-visualizer-h1">{type}</h1>
+      </li>
+    ));
+
     return (
       <div className="templates">
         <header className="templates-header">
@@ -87,7 +81,7 @@ class TemplatesIndex extends React.Component {
           </div>
         </header>
         <div className="default-templates">
-          <ul>{this.visualizerItems}</ul>
+          <ul>{visualizerItems}</ul>
         </div>
       </div>
     );
