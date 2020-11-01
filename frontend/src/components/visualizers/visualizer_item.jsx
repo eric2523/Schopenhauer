@@ -17,21 +17,11 @@ const mSTP = (state) => {
 class VisualizerItem extends React.Component {
   constructor(props) {
     super(props);
-    debugger;
-    const visualizerType = props.visualizerSettings
-      ? props.visualizerSettings.type
-      : props.type;
-    const { defaultSettings, TypeConstructor } = visualizerConstructors[
-      visualizerType
-    ];
+    const visualizerType = props.visualizerSettings.type;
+    const { TypeConstructor } = visualizerConstructors[visualizerType];
 
     this.visualizer = new TypeConstructor();
-
-    if (props.onTemplate) {
-      this.visualizerSettings = Object.assign({}, defaultSettings);
-    } else {
-      this.visualizerSettings = props.visualizerSettings;
-    }
+    this.visualizerSettings = props.visualizerSettings;
 
     this.handleColorChange = this.handleColorChange.bind(this);
   }
@@ -49,7 +39,7 @@ class VisualizerItem extends React.Component {
     //   return null;
     // }
 
-    let toolbar = null;
+    let toolBar;
     if (this.props.toolbox) {
       let items = [];
       const generalSettings = this.visualizerSettings.generalSettings;
@@ -66,7 +56,7 @@ class VisualizerItem extends React.Component {
           />
         );
       }
-      toolbar = (
+      toolBar = (
         <>
           <div className="toolbar">
             <div className="toolbar-container">
@@ -97,7 +87,7 @@ class VisualizerItem extends React.Component {
                 disconnectMusic={this.props.disconnectMusic}
               />
             </div>
-            <>{toolbar}</>
+            <>{toolBar}</>
           </div>
         </div>
       </div>
