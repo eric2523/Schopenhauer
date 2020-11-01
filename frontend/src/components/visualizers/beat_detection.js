@@ -15,7 +15,7 @@ import { averageArray } from "../../util/visualizer_util";
 
 export class BeatDetection {
   constructor(
-    minThreshold = 15,
+    minThreshold = 20,
     dynamicThresholdMultiplier = 1.5,
     decayRate = 0.95,
     framesGap = 30
