@@ -1,17 +1,14 @@
-import {
-  detectPitchColor,
-  distance,
-  pitchColor,
-} from "../../../util/visualizer_util";
+import { distance } from "../../../util/visualizer_util";
 import { Particle } from "./particle";
 export class ConnectedFloatingDotsVisualizer {
   constructor(canvas) {
     this.particleArray = [];
     this.scaleConstant = (1 / 1757548) * canvas.width * canvas.height;
-    this.repulseRadius = 100 * this.scaleConstant;
-    this.influenceRadius = 110 * this.scaleConstant;
+    this.repulseRadius = Math.max(100 * this.scaleConstant, 30);
+    this.influenceRadius = Math.max(110 * this.scaleConstant, 40);
     const velScale = 0.3 * this.scaleConstant;
-    for (let i = 0; i < 150 * this.scaleConstant; i++) {
+    const numParticles = Math.min(150 * this.scaleConstant, 200);
+    for (let i = 0; i < numParticles; i++) {
       let size = Math.random() * 3 + 1;
       let x = Math.random() * canvas.width;
       let y = Math.random() * canvas.height;
@@ -47,7 +44,7 @@ export class ConnectedFloatingDotsVisualizer {
 
       particle.animate(canvas, ctx, state);
     }
-    this.interact(ctx, 150 * this.scaleConstant, 50 * this.scaleConstant);
+    this.interact(ctx, 150, Math.max(50 * this.scaleConstant, 50));
   };
 
   interact(ctx, connectDist, danceDist, syncDist) {
