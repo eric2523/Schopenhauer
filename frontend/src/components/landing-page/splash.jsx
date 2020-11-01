@@ -15,7 +15,6 @@ export class Splash extends React.Component {
       mouse: {
         x: 0,
         y: 0,
-        radius: 100,
       },
       visualizer: null,
       rafId: null,
@@ -44,7 +43,24 @@ export class Splash extends React.Component {
       () => this.tick()
     );
   }
+  componentDidUpdate() {
+    this.bound = this.canvas.current.getBoundingClientRect();
+    if (
+      this.canvas.current.height !== this.bound.height ||
+      this.canvas.current.width !== this.bound.width
+    ) {
+      cancelAnimationFrame(this.state.rafId);
 
+      this.canvas.current.height = window.innerHeight - this.bound.top; // 10 is for the padding of the immediate sibling element
+      this.canvas.current.width = window.innerWidth - this.bound.left;
+      this.setState(
+        {
+          visualizer: new ConnectedFloatingDotsVisualizer(this.canvas.current),
+        },
+        () => this.tick()
+      );
+    }
+  }
   componentWillUnmount() {
     this.audio.pause();
     cancelAnimationFrame(this.state.rafId);
@@ -65,6 +81,7 @@ export class Splash extends React.Component {
             (this.bound.bottom - this.bound.top)) *
           this.canvas.current.height,
         radius: this.state.mouse.radius,
+        influenceRadius: this.state.mouse.influenceRadius,
       },
     });
   }
@@ -107,6 +124,7 @@ export class Splash extends React.Component {
 
   tick() {
     this.animation(this.canvas.current);
+    if (this.state.play) this.updateFrequencyData();
     this.setState({ rafId: requestAnimationFrame(this.tick) });
   }
 
@@ -135,9 +153,6 @@ export class Splash extends React.Component {
           ref={this.canvas}
           onMouseMove={this.onMouseMove}
         ></canvas>
-        <button className="carousel-play" onClick={this.togglePlay}>
-          {buttonText}
-        </button>
         <div className="splash-title">
           <div className="main-title">
             <h1 className="splash-title">Schopenhauer</h1>
@@ -150,6 +165,14 @@ export class Splash extends React.Component {
           <Link to="/templates">
             <button className="ui primary button">GET STARTED NOW</button>
           </Link>
+          <button
+            className="ui primary button"
+            id="lets-play"
+            onClick={this.togglePlay}
+          >
+            <div>LET'S DANCE</div>
+            <div>{buttonText}</div>
+          </button>
         </div>
       </div>
     );
