@@ -21,8 +21,10 @@ export class Splash extends React.Component {
   }
 
   componentDidMount() {
-    this.canvas.current.height = window.innerHeight;
-    this.canvas.current.width = window.innerWidth;
+    debugger;
+    this.bound = this.canvas.current.getBoundingClientRect();
+    this.canvas.current.height = window.innerHeight - this.bound.top; // 10 is for the padding of the immediate sibling element
+    this.canvas.current.width = window.innerWidth - this.bound.left;
     this.setState(
       {
         visualizer: new ConnectedFloatingDotsVisualizer(this.canvas.current),
@@ -35,14 +37,15 @@ export class Splash extends React.Component {
     cancelAnimationFrame(this.state.rafId);
   }
   onMouseMove(e) {
-    const rect = this.canvas.current.getBoundingClientRect();
     this.setState({
       mouse: {
         x:
-          ((e.clientX - rect.left) / (rect.right - rect.left)) *
+          ((e.clientX - this.bound.left) /
+            (this.bound.right - this.bound.left)) *
           this.canvas.current.width,
         y:
-          ((e.clientY - rect.top) / (rect.bottom - rect.top)) *
+          ((e.clientY - this.bound.top) /
+            (this.bound.bottom - this.bound.top)) *
           this.canvas.current.height,
         radius: this.state.mouse.radius,
       },
