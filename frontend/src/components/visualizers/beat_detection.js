@@ -18,7 +18,7 @@ export class BeatDetection {
     minThreshold = 15,
     dynamicThresholdMultiplier = 1.5,
     decayRate = 0.95,
-    framesGap = 20
+    framesGap = 30
   ) {
     this.framesGap = framesGap;
     this.framesSinceLastPeak = 0;
