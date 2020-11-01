@@ -13,8 +13,6 @@ class Canvas extends React.Component {
     this.audio.crossOrigin = "anonymous";
     this.audio.src = this.props.song ? this.props.song.songUrl : song;
     this.state = {
-      // visualizer: {}
-
       //needed
       typeSettings: props.visualizerSettings.typeSettings,
       generalSettings: props.visualizerSettings.generalSettings,
@@ -49,7 +47,6 @@ class Canvas extends React.Component {
         },
         () => {
           this.audio.pause();
-          // cancelAnimationFrame(this.state.rafId)
           cancelAnimationFrame(this.state.rafId);
           this.audio = new Audio();
           this.audio.crossOrigin = "anonymous";
@@ -84,7 +81,6 @@ class Canvas extends React.Component {
         analyser,
       });
     }
-    // console.log(this.state.frequencyArray);
     if (!this.state.play) {
       this.audio.play();
       let rafId = requestAnimationFrame(this.tick);
@@ -129,6 +125,7 @@ class Canvas extends React.Component {
     if (this.state.source && this.state.analyser) {
       if (this.props.disconnectMusic) {
         this.state.source.connect(this.state.analyser);
+        // need testing seems redundant
         this.state.analyser.connect(this.state.audioContext.destination);
         this.state.analyser.disconnect(this.state.audioContext.destination);
       } else {
