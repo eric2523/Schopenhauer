@@ -7,8 +7,8 @@ export class ConnectedFloatingDotsVisualizer {
       let size = Math.random() * 3 + 1;
       let x = Math.random() * canvas.width;
       let y = Math.random() * canvas.height;
-      let xVel = Math.random() * 0.1;
-      let yVel = Math.random() * 0.1;
+      let xVel = Math.random() * 0.15;
+      let yVel = Math.random() * 0.15;
       let color = "white";
       this.particleArray.push(
         new Particle(x, y, xVel, yVel, size, color, true)
