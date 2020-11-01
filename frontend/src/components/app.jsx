@@ -10,6 +10,7 @@ import { SongUploadModal } from "./music_player/upload_modal";
 import { ProfilePage } from "./profile-page/profile-index";
 import { TemplatesIndexContainer } from "./templates/templates-index";
 import { VisualizerEditContainer } from "./visualizers/visualizer-edit-page";
+import { AboutPage } from "./about-page/about-page";
 
 export const App = () => {
   return (
@@ -23,6 +24,7 @@ export const App = () => {
         <ProtectedRoute exact path="/templates" component={TemplatesIndexContainer} />
         <Route exact path="/visualizers/:id" component={VisualizerEditContainer} />
         <Route exact path="/profile/:id" component={ProfilePage} />
+        <Route exact path="/about" component={AboutPage} />
         <Route path="/" component={LandingPageIndex} />
         <Redirect to="/" />
       </Switch>
