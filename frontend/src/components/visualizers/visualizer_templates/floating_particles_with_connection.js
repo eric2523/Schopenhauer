@@ -1,4 +1,4 @@
-import { distance } from "../../../util/visualizer_util";
+import { detectPitchColor, distance } from "../../../util/visualizer_util";
 import { Particle } from "./particle";
 export class ConnectedFloatingDotsVisualizer {
   constructor(canvas) {
@@ -25,21 +25,27 @@ export class ConnectedFloatingDotsVisualizer {
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (const particle of this.particleArray) {
-      if (!state.play) {
-        particle.color = "white";
-        particle.dancing = false;
-      }
       const dist = distance(state.mouse, particle);
-      if (state.beatDetection.detected) {
-        if (dist < this.influenceRadius) {
-          particle.dancing = true;
+      if (!state.play) {
+        particle.dancing = false;
+        if (dist < this.repulseRadius) {
+          particle.x += Math.sign(particle.x - state.mouse.x) * 5;
+          particle.y += Math.sign(particle.y - state.mouse.y) * 5;
+          particle.xVel = -particle.xVel;
+          particle.yVel = -particle.yVel;
         }
-      }
-      if (dist < this.repulseRadius) {
-        particle.x += Math.sign(particle.x - state.mouse.x) * 5;
-        particle.y += Math.sign(particle.y - state.mouse.y) * 5;
-        particle.xVel = -particle.xVel;
-        particle.yVel = -particle.yVel;
+      } else {
+        if (dist < this.influenceRadius) {
+          if (state.beatDetection.detected) {
+            particle.dancing = true;
+          }
+          const opacity = 1 - (dist / this.influenceRadius) * 0.5;
+          const pitchColor = detectPitchColor(state.frequencyArray).join(",");
+          this.color = `rgba(${pitchColor}, ${opacity})`;
+          ctx.strokeStyle = this.color;
+          ctx.shadowBlur = 10;
+          this.connect(state.mouse, particle, ctx);
+        }
       }
 
       particle.animate(canvas, ctx, state);
@@ -48,11 +54,10 @@ export class ConnectedFloatingDotsVisualizer {
   };
 
   interact(ctx, connectDist, danceDist, syncDist) {
-    let opacity = 1;
     for (let a = 0; a < this.particleArray.length; a++) {
       for (let b = a + 1; b < this.particleArray.length; b++) {
         const dist = distance(this.particleArray[a], this.particleArray[b]);
-        opacity = 1 - dist / connectDist;
+        const opacity = 1 - dist / connectDist;
         ctx.strokeStyle = "rgba(123, 85, 48," + opacity + ")";
         ctx.shadowColor = "white";
         if (dist < danceDist) {
@@ -71,11 +76,7 @@ export class ConnectedFloatingDotsVisualizer {
           }
         }
         if (dist < connectDist) {
-          ctx.lineWidth = 0.3;
-          ctx.beginPath();
-          ctx.moveTo(this.particleArray[a].x, this.particleArray[a].y);
-          ctx.lineTo(this.particleArray[b].x, this.particleArray[b].y);
-          ctx.stroke();
+          this.connect(this.particleArray[a], this.particleArray[b], ctx);
         }
 
         if (dist < syncDist) {
@@ -88,5 +89,13 @@ export class ConnectedFloatingDotsVisualizer {
         }
       }
     }
+  }
+
+  connect(objectA, objectB, ctx) {
+    ctx.lineWidth = 0.3;
+    ctx.beginPath();
+    ctx.moveTo(objectA.x, objectA.y);
+    ctx.lineTo(objectB.x, objectB.y);
+    ctx.stroke();
   }
 }
