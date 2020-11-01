@@ -1,5 +1,3 @@
-import { octave } from "../components/visualizers/octave";
-
 export const getFrequencyAmp = function (frequency, frequencyArray, nyquist) {
   const index = Math.round((frequency / nyquist) * frequencyArray.length);
   return frequencyArray[index] ?? 0;
@@ -62,6 +60,23 @@ export const detectPitch = function (array) {
   return pitch;
 };
 
+export const octave = (frequencyArray, context) => {
+  const fmin = 27.5;
+  let freq = fmin;
+  const nyquist = context ? context.sampleRate / 2 : 48000 / 2;
+  const octaveSteps = 12;
+  const octaveAmp = new Array(octaveSteps).fill(0);
+  let i = 0;
+  while (freq < nyquist) {
+    freq = Math.pow(2, i / octaveSteps) * fmin;
+    octaveAmp[i % octaveSteps] +=
+      getFrequencyAmp(freq, frequencyArray, nyquist) / 50;
+    i++;
+  }
+
+  return octaveAmp;
+};
+
 export const noteColorMap = {
   A: [255, 99, 0],
   As: [255, 236, 0],
@@ -90,7 +105,6 @@ export const pitchColor = function (pitchArray) {
   color[0] = Math.floor(color[0] / pitchArray.length);
   color[1] = Math.floor(color[1] / pitchArray.length);
   color[2] = Math.floor(color[2] / pitchArray.length);
-
   return color;
 };
 
