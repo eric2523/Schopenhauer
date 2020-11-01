@@ -7,7 +7,7 @@ import { ProtectedRoute, AuthRoute } from "../util/route_util";
 import { LandingPageIndex } from "./landing-page/landing-page-index";
 //Will probably move this component to a full sound bar component
 import { SongUploadModal } from "./music_player/upload_modal";
-import { ProfilePageContainer } from "./profile-page/profile-index";
+import { ProfilePageContainer } from "./profile-page/profile-page-container";
 import { TemplatesIndexContainer } from "./templates/templates-index";
 import { VisualizerEditContainer } from "./visualizers/visualizer-edit-page";
 import { AboutPage } from "./about-page/about-page";
