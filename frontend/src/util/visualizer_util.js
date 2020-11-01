@@ -1,5 +1,6 @@
 export const getFrequencyAmp = function (frequency, frequencyArray, nyquist) {
   const index = Math.round((frequency / nyquist) * frequencyArray.length);
+
   return frequencyArray[index] ?? 0;
 };
 
@@ -16,6 +17,7 @@ export const averageArray = function (array) {
 export const stdevArray = function (array) {
   const avg = averageArray(array);
   const sqResiduals = array.map((el) => (el - avg) ** 2);
+
   return Math.sqrt(averageArray(sqResiduals));
 };
 
@@ -94,9 +96,8 @@ export const noteColorMap = {
 
 export const pitchColor = function (pitchArray) {
   const color = [0, 0, 0];
+
   for (const pitch of pitchArray) {
-    // debugger;
-    // console.log(pitch);
     color[0] += noteColorMap[pitch][0];
     color[1] += noteColorMap[pitch][1];
     color[2] += noteColorMap[pitch][2];
@@ -105,18 +106,20 @@ export const pitchColor = function (pitchArray) {
   color[0] = Math.floor(color[0] / pitchArray.length);
   color[1] = Math.floor(color[1] / pitchArray.length);
   color[2] = Math.floor(color[2] / pitchArray.length);
+
   return color;
 };
 
 export const detectPitchColor = function (array) {
   const octaveArray = octave(array);
   const pitch = detectPitch(octaveArray);
-  console.log("incolor" + pitch.notes);
+
   return pitchColor(pitch.notes);
 };
 
 export const distance = function (objectA, objectB) {
   const dx = objectA.x - objectB.x;
   const dy = objectA.y - objectB.y;
+
   return Math.sqrt(dx * dx + dy * dy);
 };

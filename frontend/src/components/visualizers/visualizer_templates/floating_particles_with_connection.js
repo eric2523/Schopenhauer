@@ -79,8 +79,6 @@ export class ConnectedFloatingDotsVisualizer {
         }
 
         if (dist < syncDist) {
-          // this.particleArray[b].size = this.particleArray[b].baseSize;
-          // this.particleArray[a].size = this.particleArray[a].baseSize;
           this.particleArray[b].size =
             (this.particleArray[a].size / this.particleArray[a].baseSize) *
             this.particleArray[b].baseSize;
