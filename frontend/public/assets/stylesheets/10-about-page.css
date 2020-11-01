@@ -16,7 +16,7 @@
 }
 
 .info-1-head {
-  height: 30%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
@@ -24,23 +24,77 @@
 }
 
 .info-1-head h1 {
-  border-bottom: 1px solid rgba(255,255,255,0.75);
-  padding: 30px 25px 25px 25px;
+  border-bottom: 1px solid #41bfef;
+  padding: 30px 25px 30px 25px;
   margin: 25px;
   font-weight: 100;
   text-transform: uppercase;
   font-family: "Noto Sans TC", sans-serif;
+  color: #41bfef;
+  letter-spacing: 0.1rem;
 }
 
 .motivation-bottom {
   width: 75%;
+  display: flex;
+  flex-direction: column;
 }
 
-#info-1-head-h2 {
+.info-1-head-p {
   font-family: "Noto Sans TC", sans-serif;
   font-weight: 100;
   margin: 0;
   font-size: 18px;
   letter-spacing: 0.06rem;
   line-height: 1.75;
+}
+
+.profile-pic-icon {
+  width: 12vw;
+  height: 12vw;
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+.prof-pic-0 {
+  background-image: url(../images/eric_xian.png);
+}
+.prof-pic-1 {
+  background-image: url(../images/Yuehan_Huang.png);
+}
+.prof-pic-2 {
+  background-image: url(../images/nate.JPG);
+}
+.prof-pic-3 {
+  background-image: url(../images/hal.png);
+}
+
+.personal-bios ul {
+  display: flex;
+  justify-content: space-around;
+}
+
+.personal-bios ul li {
+  margin: 15px 40px 15px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.personal-bios {
+  height: 100%;
+  display: flex;
+}
+
+.fa-github {
+  font-size: 30px;
+  margin: 10px;
+  transition: all 300ms ease-in-out;
+}
+
+.personal-bio-li h2 {
+  letter-spacing: 0.06rem;
+  font-weight: 300;
 }
