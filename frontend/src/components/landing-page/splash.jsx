@@ -25,16 +25,19 @@ export class Splash extends React.Component {
       analyser: null,
       frequencyArray: new Uint8Array(binCount),
       binCount,
+      canvasRendered: false,
     };
     this.onMouseMove = this.onMouseMove.bind(this);
     this.tick = this.tick.bind(this);
     this.togglePlay = this.togglePlay.bind(this);
     this.updateFrequencyData = this.updateFrequencyData.bind(this);
+    this.updateVisualizer = this.updateVisualizer.bind(this);
   }
 
   componentDidMount() {
+    window.addEventListener("resize", this.updateVisualizer);
     this.bound = this.canvas.current.getBoundingClientRect();
-    this.canvas.current.height = window.innerHeight - this.bound.top; // 10 is for the padding of the immediate sibling element
+    this.canvas.current.height = window.innerHeight - this.bound.top;
     this.canvas.current.width = window.innerWidth - this.bound.left;
     this.setState(
       {
@@ -43,25 +46,22 @@ export class Splash extends React.Component {
       () => this.tick()
     );
   }
-  componentDidUpdate() {
-    this.bound = this.canvas.current.getBoundingClientRect();
-    if (
-      this.canvas.current.height !== this.bound.height ||
-      this.canvas.current.width !== this.bound.width
-    ) {
-      cancelAnimationFrame(this.state.rafId);
 
-      this.canvas.current.height = window.innerHeight - this.bound.top; // 10 is for the padding of the immediate sibling element
-      this.canvas.current.width = window.innerWidth - this.bound.left;
-      this.setState(
-        {
-          visualizer: new ConnectedFloatingDotsVisualizer(this.canvas.current),
-        },
-        () => this.tick()
-      );
-    }
+  updateVisualizer() {
+    cancelAnimationFrame(this.state.rafId);
+    this.bound = this.canvas.current.getBoundingClientRect();
+    this.canvas.current.height = window.innerHeight - this.bound.top;
+    this.canvas.current.width = window.innerWidth - this.bound.left;
+    this.setState(
+      {
+        visualizer: new ConnectedFloatingDotsVisualizer(this.canvas.current),
+      },
+      () => this.tick()
+    );
   }
+
   componentWillUnmount() {
+    window.removeEventListener("resize", this.updateVisualizer);
     this.audio.pause();
     cancelAnimationFrame(this.state.rafId);
     this.setState({
@@ -101,14 +101,11 @@ export class Splash extends React.Component {
     }
     if (!this.state.play) {
       this.audio.play();
-      let rafId = requestAnimationFrame(this.tick);
       this.setState({
-        rafId,
         play: true,
       });
     } else {
       this.audio.pause();
-      cancelAnimationFrame(this.state.rafId);
       this.setState({
         play: false,
       });
