@@ -2,24 +2,85 @@
   display: flex; 
   flex-direction: column; 
   align-items: center;
-  padding: 20px 10px; 
+  min-height: 100vh;
+  /* padding: 0 20px 20px 20px;  */
   
+}
+
+.profile-header{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px 15px 40px 15px;
+  /* background: #171717; */
+  background: rgba(0.1, 0.1, 0.1, 0);
+  height: 30vh;
+  width: 100%;
+  padding-left: 10vw;
+  position: relative;
+}
+
+.header-bg{
+  position:absolute;
+  background-color: #171717;
+  /* z-index: -1; */
 }
 
 .profile-bio{
   display: flex;
-  flex-direction: column; 
   align-items: center;
-  margin-bottom: 30px;
-  border-bottom: .7px solid #e0e1e2;
-  width: 20%;
-  padding-bottom: 10px;
+  justify-content: space-around;
+  /* width: 20%; */
 }
 
-.profile-bio *{
+#follow-btn{
+  padding: 8px 10px;
+}
+
+.profile-bio-right{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.profile-bio .fa-user{
+  font-size: 50px;
+  margin-right: 30px;
+}
+
+.profile-title div{
+  font-size: 20px;
+  font-weight: 500;
+  margin-right: 20px;
+}
+
+.profile-title{
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
   margin-bottom: 10px;
 }
 
+.profile-stats{
+  font-size: 15px; 
+  font-weight: 400;
+  display: flex;
+  /* width: 20%; */
+  justify-content: space-around;
+}
+
+.profile-stats div{
+  margin-right: 20px;
+}
+
+.profile-stats div:last-child{
+  margin-right: 0px;
+}
+
+
+.profile-stats{
+  display: flex;
+}
 
 .profile-border *{
   display: flex;
@@ -27,11 +88,12 @@
   justify-content: center;
 }
 
-.column, .visualizer-title{
+.visualizer-title{
   display: flex !important; 
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-right: 20px;
 }
 
 .hover-canvas {
@@ -41,7 +103,9 @@
 }
 
 i.trash.icon{
-  color: #313030;
+  /* color: #313030; */
+  font-size: 15px;
+  cursor: pointer;
 }
 
 .item-overlay{
@@ -72,7 +136,34 @@ i.trash.icon{
 }
 
 .item-overlay{
-  border: .5px solid #b3b4b6;
-  border-radius: 8px;
   margin-bottom: 10px;
+} 
+
+.vis-list{
+  padding-top: 30px;
+  padding-bottom: 10px;
+  display: flex; 
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #313030;
+  z-index: 2;
+  width: 100%
+}
+
+.vis-item{ 
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-bottom: 30px;
+}
+
+
+
+.vis-item-meta{
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  font-weight: 100;
+  letter-spacing: 0.08rem;
+  font-size: 20px;
+  padding-left: 10px;
 }
