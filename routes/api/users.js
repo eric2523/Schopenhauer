@@ -41,7 +41,13 @@ router.post("/signup", (req, res) => {
           newUser
             .save()
             .then((user) => {
-              const payload = { id: user.id, email: user.email};
+              const payload = {
+                username: user.username, 
+                id: user.id, 
+                email: user.email, 
+                followers: user.followers,
+                follows: user.follows
+              };
 
               jwt.sign(
                 payload,
@@ -83,7 +89,13 @@ router.post("/login", (req, res) => {
 
     bcrypt.compare(password, user.password).then((isMatch) => {
       if (isMatch) {
-        const payload = { id: user.id, email: user.email };
+        const payload = { 
+          username: user.username,
+          id: user.id, 
+          email: user.email,
+          followers: user.followers,
+          follows: user.follows 
+        };
 
         jwt.sign(
           payload,
@@ -198,6 +210,39 @@ router.get("/follows", (req, res) => {
     console.log(follower)
       return res.json(follower.follows);
   }); 
+});
+
+//get followers 
+
+router.get("/followers", (req,res) => {
+  const userId = req.query.userId;
+  let errors = {};
+  User.findById(userId, function (err, user) {
+    if (err) {
+      error.followers = "No such user";
+      return res.status(400).json(errors);
+    }
+    return res.json(user.followers)
+  })
+})
+
+// get user 
+
+router.get("/", (req, res) => {
+  User.findById(req.query.id, function (err, user) {
+    if (err) {
+      errors.user = "No user with queried id";
+      return res.status(400).json(errors);
+    }
+    const payload = { 
+      username: user.username,
+      id: user.id, 
+      email: user.email,
+      followers: user.followers,
+      follows: user.follows 
+    };
+    return res.json(payload);
+  })
 });
 
 module.exports = router;
