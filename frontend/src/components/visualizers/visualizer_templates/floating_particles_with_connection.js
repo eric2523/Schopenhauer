@@ -1,5 +1,5 @@
 import { distance } from "../../../util/visualizer_util";
-import { Particle } from "./particle";
+import { Particle } from "../element_templates/particle";
 export class ConnectedFloatingDotsVisualizer {
   constructor(canvas) {
     this.particleArray = [];
