@@ -1,21 +1,20 @@
 import React from "react";
-import { VisualizerItemContainer } from "../visualizers/visualizer";
-import { defaultFrequencySettings } from "../visualizers/basic_frequency_visualizer";
-import { defaultSphereSettings } from "../visualizers/nate_visualizer_1";
-import { defaultSquareSettings } from "../visualizers/basic_square_visualizer";
-import { defaultRingSettings } from "../visualizers/ring_visualizer";
-import { defaultBarsSettings } from "../visualizers/eric-visualizer1";
 import { withRouter } from "react-router-dom";
-import { uploadVisualizer } from "../../actions/visualizer_actions";
 import { connect } from "react-redux";
+
+import { uploadVisualizer } from "../../actions/visualizer_actions";
 import { prepSettings } from "../../util/visualizer_api_util";
+
+import { VisualizerItemContainer } from "../visualizers/visualizer";
+import { visualizerConstructors } from "../../util/visualizer_constructor_util";
 
 const mSTP = (state) => ({
   userId: state.session.user.id,
 });
 
 const mDTP = (dispatch) => ({
-  uploadVisualizer: (visualizer) => dispatch(uploadVisualizer(visualizer)),
+  uploadVisualizer: (visualizerSettings) =>
+    dispatch(uploadVisualizer(visualizerSettings)),
 });
 
 class TemplatesIndex extends React.Component {
@@ -42,55 +41,12 @@ class TemplatesIndex extends React.Component {
 
   handleClick(type) {
     return (e) => {
-      switch (type) {
-        case "frequency":
-          this.props
-            .uploadVisualizer(
-              prepSettings(defaultFrequencySettings, this.props.userId)
-            )
-            .then((payload) => {
-              this.props.history.push(`/visualizers/${payload.visualizer._id}`);
-            });
-          break;
-        case "sphere":
-          this.props
-            .uploadVisualizer(
-              prepSettings(defaultSphereSettings, this.props.userId)
-            )
-            .then((payload) =>
-              this.props.history.push(`/visualizers/${payload.visualizer._id}`)
-            );
-          break;
-        case "bars":
-          this.props
-            .uploadVisualizer(
-              prepSettings(defaultBarsSettings, this.props.userId)
-            )
-            .then((payload) =>
-              this.props.history.push(`/visualizers/${payload.visualizer._id}`)
-            );
-          break;
-        case "square":
-          this.props
-            .uploadVisualizer(
-              prepSettings(defaultSquareSettings, this.props.userId)
-            )
-            .then((payload) =>
-              this.props.history.push(`/visualizers/${payload.visualizer._id}`)
-            );
-          break;
-        case "ring":
-          this.props
-            .uploadVisualizer(
-              prepSettings(defaultRingSettings, this.props.userId)
-            )
-            .then((payload) =>
-              this.props.history.push(`/visualizers/${payload.visualizer._id}`)
-            );
-          break;
-        default:
-          break;
-      }
+      const defaultSettings = visualizerConstructors[type].defaultSettings;
+      this.props
+        .uploadVisualizer(prepSettings(defaultSettings, this.props.userId))
+        .then((payload) => {
+          this.props.history.push(`/visualizers/${payload.visualizer._id}`);
+        });
     };
   }
 
@@ -118,7 +74,7 @@ class TemplatesIndex extends React.Component {
                   canvasWidth={400}
                   canvasHeight={250}
                   // toolbox={false}
-                  visualizerSettings={defaultFrequencySettings}
+                  type="frequency"
                   onTemplate={true}
                 />
               </div>
@@ -131,7 +87,7 @@ class TemplatesIndex extends React.Component {
                   canvasWidth={400}
                   canvasHeight={250}
                   // toolbox={false}
-                  visualizerSettings={defaultSphereSettings}
+                  type="sphere"
                   onTemplate={true}
                 />
               </div>
@@ -143,7 +99,7 @@ class TemplatesIndex extends React.Component {
                   canvasWidth={400}
                   canvasHeight={250}
                   // toolbox={false}
-                  visualizerSettings={defaultBarsSettings}
+                  type="bars"
                   onTemplate={true}
                 />
               </div>
@@ -154,7 +110,7 @@ class TemplatesIndex extends React.Component {
                 <VisualizerItemContainer
                   canvasWidth={400}
                   canvasHeight={250}
-                  visualizerSettings={defaultSquareSettings}
+                  type="square"
                   onTemplate={true}
                 />
               </div>
@@ -167,7 +123,7 @@ class TemplatesIndex extends React.Component {
                   canvasWidth={400}
                   canvasHeight={250}
                   // toolbox={false}
-                  visualizerSettings={defaultRingSettings}
+                  type="ring"
                   onTemplate={true}
                 />
               </div>

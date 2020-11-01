@@ -22,23 +22,23 @@ import {
 export const visualizerConstructors = {
   frequency: {
     defaultSettings: defaultFrequencySettings,
-    constructor: FrequencyVisualizer,
+    TypeConstructor: FrequencyVisualizer,
   },
   sphere: {
     defaultSettings: defaultSphereSettings,
-    constructor: SphereVisualizer,
+    TypeConstructor: SphereVisualizer,
   },
 
   bars: {
     defaultSettings: defaultBarsSettings,
-    constructor: BarVisualizer,
+    TypeConstructor: BarVisualizer,
   },
   square: {
     defaultSettings: defaultSquareSettings,
-    constructor: SquareVisualizer,
+    TypeConstructor: SquareVisualizer,
   },
   ring: {
     defaultSettings: defaultRingSettings,
-    constructor: RingVisualizer,
+    TypeConstructor: RingVisualizer,
   },
 };
