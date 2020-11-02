@@ -108,6 +108,12 @@ i.trash.icon{
   cursor: pointer;
 }
 
+i.edit.icon{
+  font-size: 15px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
 .item-overlay{
   position:relative;
 }
@@ -161,9 +167,11 @@ i.trash.icon{
 .vis-item-meta{
   display: flex;
   width: 100%;
-  justify-content: flex-start;
+  justify-content: space-between;
   font-weight: 100;
   letter-spacing: 0.08rem;
   font-size: 20px;
   padding-left: 10px;
+  padding-right: 10px;
 }
+

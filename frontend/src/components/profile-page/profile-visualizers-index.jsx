@@ -37,6 +37,7 @@ class ProfileVisualizerIndex extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleHover = this.handleHover.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleClick(i) {
@@ -73,29 +74,13 @@ class ProfileVisualizerIndex extends React.Component {
 
   componentDidMount() {
     this.props.fetchUserVisualizer();
-    // let visualizerItems = this.items
-    //   for (let i = 0; i < visualizerItems.length; i++) {
-    //     window.setTimeout(() => {
-    //       visualizerItems[i].current.classList.add("li-inner-div-color")
-    //     }, 250)
-    //   }
   }
 
-  // componentWillUnmount(){
-  //   let visualizerItems = this.items
-  //   for (let i = 0; i < visualizerItems.length; i++) {
-  //     visualizerItems[i].current.classList.remove("li-inner-div-color")
-  //   }
-  // }
-
-  // componentDidUpdate(){
-  //   let visualizerItems = this.items
-  //     for (let i = 0; i < visualizerItems.length; i++) {
-  //       window.setTimeout(() => {
-  //         visualizerItems[i].current.classList.add("li-inner-div-color")
-  //       }, 250)
-  //     }
-  // }
+  handleEdit(id){
+    return () => {
+      this.props.history.push(`/visualizers/${id}`)
+    }
+  }
 
   render() {
     const usersVisualizers = this.props.visualizers.length
@@ -129,12 +114,20 @@ class ProfileVisualizerIndex extends React.Component {
                   {visualizer.name ? visualizer.name : "Untitled"}
                 </div>
                 {this.props.self ? (
-                  <button
-                    onClick={this.handleDelete(visualizer._id)}
-                    className="delete-btn"
+                  <div className="vis-item-buttons">
+                    <button
+                      onClick={this.handleDelete(visualizer._id)}
+                      className="delete-btn"
+                    >
+                      <i className="trash icon"></i>
+                    </button>
+                    <button
+                    onClick={this.handleEdit(visualizer._id)}
+                    className="edit-btn"
                   >
-                    <i className="trash icon"></i>
+                    <i className="edit icon"></i>
                   </button>
+                </div>
                 ) : (
                   ""
                 )}
