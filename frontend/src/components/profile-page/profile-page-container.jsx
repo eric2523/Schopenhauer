@@ -5,7 +5,7 @@ import { ProfileVisualizerIndexContainer } from "./profile-visualizers-index";
 import { getVisualizersByUserId } from "../../reducers/selectors/visualizer_selectors";
 import { ConnectedFloatingDotsVisualizer } from "../visualizers/visualizer_templates/floating_particles_with_connection";
 import { BeatDetection } from "../visualizers/beat_detection";
-
+import { getUser } from "../../actions/user_actions";
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
@@ -22,12 +22,29 @@ class ProfilePage extends React.Component {
     };
     this.tick = this.tick.bind(this);
     this.updateVisualizer = this.updateVisualizer.bind(this);
+    this.initializeCanvas = this.initializeCanvas.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener("resize", this.updateVisualizer);
-    this.canvas.current.height = window.innerHeight * 0.33;
-    this.canvas.current.width = window.innerWidth;
+    if (!this.props.user) {
+      console.log("no user");
+      this.props.getUser().then(this.initializeCanvas);
+    } else {
+      this.initializeCanvas();
+    }
+  }
+
+  updateVisualizer() {
+    cancelAnimationFrame(this.state.rafId);
+    this.initializeCanvas();
+  }
+
+  initializeCanvas() {
+    const width = window.innerWidth || window.clientWidth;
+    const height = window.innerHeight || window.clientHeight;
+    this.canvas.current.height = height * 0.3;
+    this.canvas.current.width = width;
     this.setState(
       {
         visualizer: new ConnectedFloatingDotsVisualizer(this.canvas.current),
@@ -36,18 +53,6 @@ class ProfilePage extends React.Component {
     );
   }
 
-  updateVisualizer() {
-    cancelAnimationFrame(this.state.rafId);
-    this.canvas.current.height = window.innerHeight * 0.33;
-    this.canvas.current.width = window.innerWidth;
-    this.setState(
-      {
-        visualizer: new ConnectedFloatingDotsVisualizer(this.canvas.current),
-      },
-      () => this.tick()
-    );
-  }
-  
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateVisualizer);
     cancelAnimationFrame(this.state.rafId);
@@ -73,8 +78,11 @@ class ProfilePage extends React.Component {
         <div className="profile-header">
           <ProfileBio
             user={this.props.user}
+            followers={this.props.user.followers}
+            follows={this.props.user.follows}
             count={this.props.visualizers.length}
             self={self}
+            currentUser={this.props.currentUser}
           />
         </div>
         <ProfileVisualizerIndexContainer
@@ -97,4 +105,10 @@ const mSTP = (state, ownProps) => {
   };
 };
 
-export const ProfilePageContainer = connect(mSTP, null)(ProfilePage);
+const mDTP = (dispatch, ownProps) => {
+  return {
+    getUser: () => dispatch(getUser(ownProps.match.params.id)),
+  };
+};
+
+export const ProfilePageContainer = connect(mSTP, mDTP)(ProfilePage);
