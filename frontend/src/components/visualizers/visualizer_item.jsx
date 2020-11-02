@@ -5,11 +5,9 @@ import { SongToolBar } from "../music_player/song_tool_bar";
 import { connect } from "react-redux";
 import song from "../../audio_files/bensound-goinghigher.mp3";
 import { CirclePicker } from "react-color";
-
 import { visualizerConstructors } from "../../util/visualizer_constructor_util";
-import { withRouter } from "react-router-dom";
 
-const mSTP = (state, ownProps) => {
+const mSTP = (state) => {
   return {
     currentSong: state.session.song,
   };
@@ -57,6 +55,8 @@ class VisualizerItem extends React.Component {
               <SongToolBar />
               <h3 className="toolbar-h3">Color Picker</h3>
               <CirclePicker onChange={this.handleColorChange} />
+              <h3>Save</h3>
+              <button onClick={this.props.handleSave}>Save</button>
             </div>
           </div>
         </>
@@ -87,4 +87,4 @@ class VisualizerItem extends React.Component {
   }
 }
 
-export const VisualizerItemContainer = withRouter(connect(mSTP, null)(VisualizerItem));
+export const VisualizerItemContainer = connect(mSTP, null)(VisualizerItem);
