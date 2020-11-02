@@ -21,10 +21,12 @@ class ProfilePage extends React.Component {
       rafId: null,
     };
     this.tick = this.tick.bind(this);
+    this.updateVisualizer = this.updateVisualizer.bind(this);
   }
 
   componentDidMount() {
-    this.canvas.current.height = window.innerHeight / 2;
+    window.addEventListener("resize", this.updateVisualizer);
+    this.canvas.current.height = window.innerHeight * 0.33;
     this.canvas.current.width = window.innerWidth;
     this.setState(
       {
@@ -34,7 +36,20 @@ class ProfilePage extends React.Component {
     );
   }
 
+  updateVisualizer() {
+    cancelAnimationFrame(this.state.rafId);
+    this.canvas.current.height = window.innerHeight * 0.33;
+    this.canvas.current.width = window.innerWidth;
+    this.setState(
+      {
+        visualizer: new ConnectedFloatingDotsVisualizer(this.canvas.current),
+      },
+      () => this.tick()
+    );
+  }
+  
   componentWillUnmount() {
+    window.removeEventListener("resize", this.updateVisualizer);
     cancelAnimationFrame(this.state.rafId);
   }
 
