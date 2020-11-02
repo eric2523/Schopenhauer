@@ -21,7 +21,11 @@ const mDTP = (dispatch) => ({
 class TemplatesIndex extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      disconnectMusic: true
+    }
     this.handleClick = this.handleClick.bind(this);
+    this.toggleMusic = this.toggleMusic.bind(this);
   }
 
   componentDidMount() {
@@ -94,6 +98,10 @@ class TemplatesIndex extends React.Component {
     };
   }
 
+  toggleMusic(){
+    this.setState({disconnectMusic: !this.state.disconnectMusic})
+  }
+
   render() {
     return (
       <div className="templates">
@@ -111,15 +119,25 @@ class TemplatesIndex extends React.Component {
           </div>
         </header>
         <div className="default-templates">
+          <div 
+            className="template-audio" 
+            onClick={this.toggleMusic}>
+            {!this.state.disconnectMusic ?
+              <i className="big volume up icon"></i> :
+              <i className="big volume off icon"></i>
+            } 
+          </div>
           <ul>
             <li className="templ-li" onClick={this.handleClick("frequency")}>
               <div className="li-inner-div">
+                <div className="template-prompt">Use as template</div>
                 <VisualizerItemContainer
                   canvasWidth={400}
                   canvasHeight={250}
                   // toolbox={false}
                   visualizerSettings={defaultFrequencySettings}
                   onTemplate={true}
+                  disconnectMusic={this.state.disconnectMusic}
                 />
               </div>
               <h1 className="templ-visualizer-h1">Frequency</h1>
@@ -127,35 +145,41 @@ class TemplatesIndex extends React.Component {
 
             <li className="templ-li" onClick={this.handleClick("sphere")}>
               <div className="li-inner-div">
+              <div className="template-prompt">Use as template</div>
                 <VisualizerItemContainer
                   canvasWidth={400}
                   canvasHeight={250}
                   // toolbox={false}
                   visualizerSettings={defaultSphereSettings}
                   onTemplate={true}
+                  disconnectMusic={this.state.disconnectMusic}
                 />
               </div>
               <h1 className="templ-visualizer-h1">Sphere</h1>
             </li>
             <li className="templ-li" onClick={this.handleClick("bars")}>
               <div className="li-inner-div">
+              <div className="template-prompt">Use as template</div>
                 <VisualizerItemContainer
                   canvasWidth={400}
                   canvasHeight={250}
                   // toolbox={false}
                   visualizerSettings={defaultBarsSettings}
                   onTemplate={true}
+                  disconnectMusic={this.state.disconnectMusic}
                 />
               </div>
               <h1 className="templ-visualizer-h1">Bars</h1>
             </li>
             <li className="templ-li" onClick={this.handleClick("square")}>
               <div className="li-inner-div">
+              <div className="template-prompt">Use as template</div>
                 <VisualizerItemContainer
                   canvasWidth={400}
                   canvasHeight={250}
                   visualizerSettings={defaultSquareSettings}
                   onTemplate={true}
+                  disconnectMusic={this.state.disconnectMusic}
                 />
               </div>
               <h1 className="templ-visualizer-h1">Square</h1>
@@ -163,12 +187,14 @@ class TemplatesIndex extends React.Component {
 
             <li className="templ-li" onClick={this.handleClick("ring")}>
               <div className="li-inner-div">
+              <div className="template-prompt">Use as template</div>
                 <VisualizerItemContainer
                   canvasWidth={400}
                   canvasHeight={250}
                   // toolbox={false}
                   visualizerSettings={defaultRingSettings}
                   onTemplate={true}
+                  disconnectMusic={this.state.disconnectMusic}
                 />
               </div>
               <h1 className="templ-visualizer-h1">Ring</h1>
