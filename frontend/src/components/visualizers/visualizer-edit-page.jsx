@@ -26,4 +26,4 @@ const VisualizerEdit = (props) => {
   }
 };
 
-export const VisualizerEditContainer = connect(mSTP, null)(VisualizerEdit);
+export const VisualizerEditContainer = connect(mSTP, null)(VisualizerEdit)

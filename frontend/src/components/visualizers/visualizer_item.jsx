@@ -7,18 +7,19 @@ import song from "../../audio_files/bensound-goinghigher.mp3";
 import { CirclePicker } from "react-color";
 
 import { visualizerConstructors } from "../../util/visualizer_constructor_util";
+import { withRouter } from "react-router-dom";
 
-const mSTP = (state) => {
+const mSTP = (state, ownProps) => {
   return {
     currentSong: state.session.song,
   };
 };
+
 class VisualizerItem extends React.Component {
   constructor(props) {
     super(props);
     const visualizerType = props.visualizerSettings.type;
     const { TypeConstructor } = visualizerConstructors[visualizerType];
-
     this.visualizer = new TypeConstructor();
     this.visualizerSettings = props.visualizerSettings;
 
@@ -86,4 +87,4 @@ class VisualizerItem extends React.Component {
   }
 }
 
-export const VisualizerItemContainer = connect(mSTP, null)(VisualizerItem);
+export const VisualizerItemContainer = withRouter(connect(mSTP, null)(VisualizerItem));
