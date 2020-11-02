@@ -25,18 +25,16 @@ Our app pays homage to this conflict between music and visual representation by 
 - Successfully upload a sound file
 - User can see sound files uploaded
 - User can play the sound file uploaded
-- Playing songs with progress bar with continuous play
 
 ### 5. CRUD for Visualizers
 
 - Have template visualizer/Wave forms
 - User can select template visualizers
 - User can save the interactive visualizers they created
-- User can share
 
 ### 6. User Profile Page
 
-- User can follow and like other users
+- User can follow other users
 - User can view user information
 - User can edit user information
 
