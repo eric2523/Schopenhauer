@@ -60,6 +60,7 @@
 .splash-btn {
   z-index: 1;
   margin: 10px 0 10px 0;
+  display: flex;
 }
 
 .carousel-main-div {
@@ -141,4 +142,9 @@
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: nowrap;
+}
+
+#lets-play i {
+  margin-left: 4px;
+  font-size: 0.7rem;
 }

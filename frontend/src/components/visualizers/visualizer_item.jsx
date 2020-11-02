@@ -3,69 +3,34 @@ import { CanvasWithRouter } from "./canvas";
 import { ToolbarItem } from "../toolbar/toolbar-item";
 import { SongToolBar } from "../music_player/song_tool_bar";
 import { connect } from "react-redux";
-import { FrequencyVisualizer } from "./basic_frequency_visualizer";
-import { SphereVisualizer } from "./nate_visualizer_1";
-import { BarVisualizer } from "./eric-visualizer1";
 import song from "../../audio_files/bensound-goinghigher.mp3";
-import { CirclePicker } from "react-color"
+import { CirclePicker } from "react-color";
 
-import { SquareVisualizer } from "./basic_square_visualizer";
-import { RingVisualizer } from "./ring_visualizer";
-
+import { visualizerConstructors } from "../../util/visualizer_constructor_util";
 
 const mSTP = (state) => {
   return {
     currentSong: state.session.song,
-    // id: state.session.song ? state.session.song.id : null
   };
 };
-
-// EXAMPLE
-/* <VisualizerItemContainer visualizerSettings={visualerSettingsFromDB}/> */
-
 class VisualizerItem extends React.Component {
   constructor(props) {
     super(props);
-    switch (props.visualizerSettings.type) {
-      case "frequency":
-        this.visualizer = new FrequencyVisualizer();
-        break;
-      case "sphere":
-        this.visualizer = new SphereVisualizer();
-        break;
-      case "bars":
-        this.visualizer = new BarVisualizer();
-        break;
-      case "square":
-        this.visualizer = new SquareVisualizer();
-        break;
-      case "ring":
-        this.visualizer = new RingVisualizer();
-        break;
-      default:
-        this.visualizer = new SphereVisualizer();
-      break;
-    }
-    this.visualizerSettings = Object.assign({}, this.props.visualizerSettings);
+    const visualizerType = props.visualizerSettings.type;
+    const { TypeConstructor } = visualizerConstructors[visualizerType];
+
+    this.visualizer = new TypeConstructor();
+    this.visualizerSettings = props.visualizerSettings;
+
     this.handleColorChange = this.handleColorChange.bind(this);
   }
 
   handleColorChange = (color, event) => {
-    this.visualizerSettings.generalSettings['color'] = color.hex;
+    this.visualizerSettings.generalSettings["color"] = color.hex;
   };
 
-
   render() {
-    // debugger;
-    // if (
-    //   !this.props.currentSong ||
-    //   !Object.keys(this.props.currentSong).length
-    // ) {
-    //   debugger;
-    //   return null;
-    // }
-
-    let toolbar = null;
+    let toolBar;
     if (this.props.toolbox) {
       let items = [];
       const generalSettings = this.visualizerSettings.generalSettings;
@@ -82,7 +47,7 @@ class VisualizerItem extends React.Component {
           />
         );
       }
-      toolbar = (
+      toolBar = (
         <>
           <div className="toolbar">
             <div className="toolbar-container">
@@ -90,7 +55,7 @@ class VisualizerItem extends React.Component {
               <ul className="toolbar-ul">{items}</ul>
               <SongToolBar />
               <h3 className="toolbar-h3">Color Picker</h3>
-              <CirclePicker onChange={ this.handleColorChange }/>
+              <CirclePicker onChange={this.handleColorChange} />
             </div>
           </div>
         </>
@@ -113,7 +78,7 @@ class VisualizerItem extends React.Component {
                 disconnectMusic={this.props.disconnectMusic}
               />
             </div>
-          <>{toolbar}</>
+            <>{toolBar}</>
           </div>
         </div>
       </div>
