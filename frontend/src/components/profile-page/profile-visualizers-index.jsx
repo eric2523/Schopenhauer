@@ -90,7 +90,7 @@ class ProfileVisualizerIndex extends React.Component {
     return () => {
       const templateVisualizer = this.props.visualizers[i];
       // templateVisualizer.userId = this.props.match.params.id
-      this.props.uploadVisualizer(prepSettings(templateVisualizer, this.props.match.params.id))
+      this.props.uploadVisualizer(prepSettings(templateVisualizer, this.props.currentUserId))
         .then((payload) =>{
           this.props.history.push(`/visualizers/${payload.visualizer._id}`);
         })
