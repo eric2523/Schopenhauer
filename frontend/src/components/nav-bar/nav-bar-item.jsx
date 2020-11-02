@@ -9,7 +9,9 @@ export class NavBarItemTEST extends React.Component {
   }
 
   render() {
-    if (!this.props.loggedIn && this.props.name !== 'about'){
+    if (!this.props.loggedIn && 
+      this.props.name !== 'about' &&
+      this.props.name !== 'home'){
       return (
         <div className="nav-redirect" onClick={this.props.openModal}>
           <NavLink
