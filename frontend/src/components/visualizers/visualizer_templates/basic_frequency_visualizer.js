@@ -1,23 +1,15 @@
-export const defaultFrequencySettings = {
+export const defaultFrequencySettings = Object.freeze({
   type: "frequency",
-  typeSettings: { binCount: 1024 },
-  generalSettings: {
-    //for canvas settings
-
-    // maybe we shouldnt let users change this. gonna mess up the center positioning of visualizer 
-    // centerX: 350,
-    // centerY: 350,
-
+  typeSettings: Object.freeze({ binCount: 1024 }),
+  generalSettings: Object.freeze({
     //for any bar
     barWidth: 1,
-
     //for any circular object
     radius: 0,
-
     // finished controls
     heightAmplifier: 0.5,
-  },
-};
+  }),
+});
 
 export class FrequencyVisualizer {
   animate(canvas, state) {
@@ -28,16 +20,15 @@ export class FrequencyVisualizer {
       let height =
         state.waveformArray[i] * state.generalSettings.heightAmplifier;
       const xStart =
-        (canvas.width / 2) +
-        Math.cos(radians * i) * state.generalSettings.radius;
+        canvas.width / 2 + Math.cos(radians * i) * state.generalSettings.radius;
       const yStart =
-        (canvas.height / 2) +
+        canvas.height / 2 +
         Math.sin(radians * i) * state.generalSettings.radius;
       const xEnd =
-        (canvas.width / 2) +
+        canvas.width / 2 +
         Math.cos(radians * i) * (state.generalSettings.radius + height);
       const yEnd =
-        (canvas.height / 2) +
+        canvas.height / 2 +
         Math.sin(radians * i) * (state.generalSettings.radius + height);
       this.drawBar(
         xStart,

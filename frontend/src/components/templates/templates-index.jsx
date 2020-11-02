@@ -1,100 +1,71 @@
 import React from "react";
-import { VisualizerItemContainer } from "../visualizers/visualizer";
-import { defaultFrequencySettings } from "../visualizers/basic_frequency_visualizer";
-import { defaultSphereSettings } from "../visualizers/nate_visualizer_1";
-import { defaultSquareSettings } from "../visualizers/basic_square_visualizer";
-import { defaultRingSettings } from "../visualizers/ring_visualizer";
-import { defaultBarsSettings } from "../visualizers/eric-visualizer1";
 import { withRouter } from "react-router-dom";
-import { uploadVisualizer } from "../../actions/visualizer_actions";
 import { connect } from "react-redux";
+
+import { uploadVisualizer } from "../../actions/visualizer_actions";
 import { prepSettings } from "../../util/visualizer_api_util";
+import {
+  selectAllVisualizerTypes,
+  visualizerConstructors,
+} from "../../util/visualizer_constructor_util";
+
+import { VisualizerItemContainer } from "../visualizers/visualizer_item";
 
 const mSTP = (state) => ({
   userId: state.session.user.id,
 });
 
 const mDTP = (dispatch) => ({
-  uploadVisualizer: (visualizer) => dispatch(uploadVisualizer(visualizer)),
+  uploadVisualizer: (visualizerSettings) =>
+    dispatch(uploadVisualizer(visualizerSettings)),
 });
 
 class TemplatesIndex extends React.Component {
   constructor(props) {
     super(props);
+    this.allVisualizers = selectAllVisualizerTypes;
+
+    this.state = {
+      itemClassName: "li-inner-div",
+    };
+
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
-    let visualizerItems = document.getElementsByClassName("li-inner-div");
-    for (let i = 0; i < visualizerItems.length; i++) {
-      window.setTimeout(() => {
-        visualizerItems[i].classList.add("li-inner-div-color");
-      }, 250);
-    }
-  }
-
-  componentWillUnmount() {
-    let visualizerItems = document.getElementsByClassName("li-inner-div");
-    for (let i = 0; i < visualizerItems.length; i++) {
-      visualizerItems[i].classList.remove("li-inner-div-color");
-    }
+    setTimeout(() => {
+      this.setState({ itemClassName: "li-inner-div li-inner-div-color" });
+    }, 250);
   }
 
   handleClick(type) {
     return (e) => {
-      switch (type) {
-        case "frequency":
-          this.props
-            .uploadVisualizer(
-              prepSettings(defaultFrequencySettings, this.props.userId)
-            )
-            .then((payload) => {
-              this.props.history.push(`/visualizers/${payload.visualizer._id}`);
-            });
-          break;
-        case "sphere":
-          this.props
-            .uploadVisualizer(
-              prepSettings(defaultSphereSettings, this.props.userId)
-            )
-            .then((payload) =>
-              this.props.history.push(`/visualizers/${payload.visualizer._id}`)
-            );
-          break;
-        case "bars":
-          this.props
-            .uploadVisualizer(
-              prepSettings(defaultBarsSettings, this.props.userId)
-            )
-            .then((payload) =>
-              this.props.history.push(`/visualizers/${payload.visualizer._id}`)
-            );
-          break;
-        case "square":
-          this.props
-            .uploadVisualizer(
-              prepSettings(defaultSquareSettings, this.props.userId)
-            )
-            .then((payload) =>
-              this.props.history.push(`/visualizers/${payload.visualizer._id}`)
-            );
-          break;
-        case "ring":
-          this.props
-            .uploadVisualizer(
-              prepSettings(defaultRingSettings, this.props.userId)
-            )
-            .then((payload) =>
-              this.props.history.push(`/visualizers/${payload.visualizer._id}`)
-            );
-          break;
-        default:
-          break;
-      }
+      const defaultSettings = visualizerConstructors[type].defaultSettings;
+
+      this.props
+        .uploadVisualizer(prepSettings(defaultSettings, this.props.userId))
+        .then((payload) => {
+          this.props.history.push(`/visualizers/${payload.visualizer._id}`);
+        });
     };
   }
 
   render() {
+    const visualizerItems = this.allVisualizers.map((type) => (
+      <li className="templ-li" onClick={this.handleClick(type)} key={type}>
+        <div className={this.state.itemClassName}>
+          <VisualizerItemContainer
+            canvasWidth={400}
+            canvasHeight={250}
+            toolbox={false}
+            visualizerSettings={visualizerConstructors[type].defaultSettings}
+            onTemplate={true}
+          />
+        </div>
+        <h1 className="templ-visualizer-h1">{type}</h1>
+      </li>
+    ));
+
     return (
       <div className="templates">
         <header className="templates-header">
@@ -111,69 +82,7 @@ class TemplatesIndex extends React.Component {
           </div>
         </header>
         <div className="default-templates">
-          <ul>
-            <li className="templ-li" onClick={this.handleClick("frequency")}>
-              <div className="li-inner-div">
-                <VisualizerItemContainer
-                  canvasWidth={400}
-                  canvasHeight={250}
-                  // toolbox={false}
-                  visualizerSettings={defaultFrequencySettings}
-                  onTemplate={true}
-                />
-              </div>
-              <h1 className="templ-visualizer-h1">Frequency</h1>
-            </li>
-
-            <li className="templ-li" onClick={this.handleClick("sphere")}>
-              <div className="li-inner-div">
-                <VisualizerItemContainer
-                  canvasWidth={400}
-                  canvasHeight={250}
-                  // toolbox={false}
-                  visualizerSettings={defaultSphereSettings}
-                  onTemplate={true}
-                />
-              </div>
-              <h1 className="templ-visualizer-h1">Sphere</h1>
-            </li>
-            <li className="templ-li" onClick={this.handleClick("bars")}>
-              <div className="li-inner-div">
-                <VisualizerItemContainer
-                  canvasWidth={400}
-                  canvasHeight={250}
-                  // toolbox={false}
-                  visualizerSettings={defaultBarsSettings}
-                  onTemplate={true}
-                />
-              </div>
-              <h1 className="templ-visualizer-h1">Bars</h1>
-            </li>
-            <li className="templ-li" onClick={this.handleClick("square")}>
-              <div className="li-inner-div">
-                <VisualizerItemContainer
-                  canvasWidth={400}
-                  canvasHeight={250}
-                  visualizerSettings={defaultSquareSettings}
-                  onTemplate={true}
-                />
-              </div>
-              <h1 className="templ-visualizer-h1">Square</h1>
-            </li>
-
-            <li className="templ-li" onClick={this.handleClick("ring")}>
-              <div className="li-inner-div">
-                <VisualizerItemContainer
-                  canvasWidth={400}
-                  canvasHeight={250}
-                  // toolbox={false}
-                  visualizerSettings={defaultRingSettings}
-                  onTemplate={true}
-                />
-              </div>
-              <h1 className="templ-visualizer-h1">Ring</h1>
-            </li>
-          </ul>
+          <ul>{visualizerItems}</ul>
         </div>
       </div>
     );

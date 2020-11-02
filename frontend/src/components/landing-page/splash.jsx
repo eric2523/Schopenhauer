@@ -167,8 +167,8 @@ export class Splash extends React.Component {
             id="lets-play"
             onClick={this.togglePlay}
           >
-            <div>LET'S DANCE</div>
-            <div>{buttonText}</div>
+            LET'S DANCE
+            {buttonText}
           </button>
         </div>
       </div>

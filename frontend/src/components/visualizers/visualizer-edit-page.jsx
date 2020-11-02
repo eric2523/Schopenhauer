@@ -1,29 +1,28 @@
 import React from "react";
-import { VisualizerItemContainer } from "./visualizer";
+import { VisualizerItemContainer } from "./visualizer_item";
 import { connect } from "react-redux";
 
 const mSTP = (state, ownProps) => {
   return {
-    defaultSettings: state.entities.defaultSettings,
     visualizerSettings: state.entities.visualizers[ownProps.match.params.id],
   };
 };
 
 const VisualizerEdit = (props) => {
   const visualizerSettings = props.visualizerSettings;
-  const width = window.innerWidth
-  const height = window.innerHeight
+  const width = window.innerWidth;
+  const height = window.innerHeight;
   if (visualizerSettings) {
     return (
       <VisualizerItemContainer
-        toolbox={true}
         canvasWidth={width}
         canvasHeight={height}
+        toolbox={true}
         visualizerSettings={visualizerSettings}
       />
     );
   } else {
-    return null
+    return null;
   }
 };
 
