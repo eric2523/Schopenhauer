@@ -7,6 +7,8 @@ import {
 } from "../../actions/visualizer_actions";
 import { withRouter } from 'react-router-dom';
 import { ProfileVisualizerItem } from "./profile-visualizer-item";
+import { uploadVisualizer } from "../../actions/visualizer_actions";
+import { prepSettings } from "../../util/visualizer_api_util";
 
 const mSTP = (state, ownProps) => {
   return {
@@ -22,6 +24,7 @@ const mDTP = (dispatch, ownProps) => {
     fetchUserVisualizer: () => dispatch(fetchUserVisualizer(ownProps.userId)),
     deleteVisualizer: (visualizerId) =>
       dispatch(deleteVisualizer(visualizerId)),
+    uploadVisualizer: (visualizer) => dispatch(uploadVisualizer(visualizer))
   };
 };
 
@@ -38,6 +41,7 @@ class ProfileVisualizerIndex extends React.Component {
     this.handleHover = this.handleHover.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.handleTemplate = this.handleTemplate.bind(this);
   }
 
   handleClick(i) {
@@ -82,6 +86,17 @@ class ProfileVisualizerIndex extends React.Component {
     }
   }
 
+  handleTemplate(i){
+    return () => {
+      const templateVisualizer = this.props.visualizers[i];
+      // templateVisualizer.userId = this.props.match.params.id
+      this.props.uploadVisualizer(prepSettings(templateVisualizer, this.props.match.params.id))
+        .then((payload) =>{
+          this.props.history.push(`/visualizers/${payload.visualizer._id}`);
+        })
+    }
+  }
+
   render() {
     const usersVisualizers = this.props.visualizers.length
       ? this.props.visualizers.map((visualizer, i) => {
@@ -110,8 +125,18 @@ class ProfileVisualizerIndex extends React.Component {
                 />
               </div>
               <div className="vis-item-meta">
-                <div className="visualizer-title">
-                  {visualizer.name ? visualizer.name : "Untitled"}
+                <div>
+                  <div className="visualizer-title">
+                    {visualizer.name ? visualizer.name : "Untitled"}
+                  </div>
+                  <div>
+                  <button
+                        onClick={this.handleTemplate(i)}
+                        className="template-btn"
+                        >
+                        <i className="fas fa-palette"></i>
+                      </button>
+                  </div>
                 </div>
                 {this.props.self ? (
                   <div className="vis-item-buttons">

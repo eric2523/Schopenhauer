@@ -93,7 +93,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .hover-canvas {
@@ -112,6 +112,11 @@ i.edit.icon{
   font-size: 15px;
   cursor: pointer;
   margin-left: 10px;
+}
+
+i.fas.fa-palette{
+  font-size: 15px;
+  cursor: pointer;
 }
 
 .item-overlay{
@@ -175,3 +180,13 @@ i.edit.icon{
   padding-right: 10px;
 }
 
+.vis-item-meta > div{
+  display: flex;
+  align-items: center;
+}
+
+.template-btn{
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 15px;
+}
