@@ -22,6 +22,10 @@
   /* transition: background-color 600ms ease-in-out; */
 }
 
+.nav-redirect{
+  display: flex;
+}
+
 .session-btns {
   padding: 8px;
   text-transform: uppercase;

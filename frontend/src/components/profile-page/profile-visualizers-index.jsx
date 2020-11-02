@@ -133,6 +133,9 @@ class ProfileVisualizerIndex extends React.Component {
                   <button
                         onClick={this.handleTemplate(i)}
                         className="template-btn"
+                        data-tooltip="Use as template" 
+                        data-position="top center"
+                        data-inverted=""
                         >
                         <i className="fas fa-palette"></i>
                       </button>
@@ -143,12 +146,19 @@ class ProfileVisualizerIndex extends React.Component {
                     <button
                       onClick={this.handleDelete(visualizer._id)}
                       className="delete-btn"
+                      data-tooltip="Delete" 
+                      data-position="top center"
+                      data-inverted=""
                     >
                       <i className="trash icon"></i>
                     </button>
+                    {/* <div className="tooltip">Delete</div> */}
                     <button
                     onClick={this.handleEdit(visualizer._id)}
                     className="edit-btn"
+                    data-tooltip="Edit" 
+                    data-position="top center"
+                    data-inverted=""
                   >
                     <i className="edit icon"></i>
                   </button>

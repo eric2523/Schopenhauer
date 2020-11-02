@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { ConnectedFloatingDotsVisualizer } from "../visualizers/visualizer_templates/floating_particles_with_connection";
 import song from "../../audio_files/bensound-goinghigher.mp3";
 import { BeatDetection } from "../visualizers/beat_detection";
+import { openModal } from "../../actions/modal_actions";
+import { connect } from "react-redux";
 export class Splash extends React.Component {
   constructor(props) {
     super(props);
@@ -32,6 +34,7 @@ export class Splash extends React.Component {
     this.togglePlay = this.togglePlay.bind(this);
     this.updateFrequencyData = this.updateFrequencyData.bind(this);
     this.updateVisualizer = this.updateVisualizer.bind(this);
+    this.checkAuth = this.checkAuth.bind(this);
   }
 
   componentDidMount() {
@@ -125,6 +128,12 @@ export class Splash extends React.Component {
     this.setState({ rafId: requestAnimationFrame(this.tick) });
   }
 
+  checkAuth(){
+    if (!this.props.loggedIn){
+      this.props.openModal();
+    }
+  }
+
   render() {
     if (this.state.source && this.state.analyser) {
       //this needs to be hook up to a speaker
@@ -159,9 +168,11 @@ export class Splash extends React.Component {
           </div>
         </div>
         <div className="splash-btn">
-          <Link to="/templates">
-            <button className="ui primary button">GET STARTED NOW</button>
-          </Link>
+          <div onClick={this.checkAuth}>
+            <Link to="/templates">
+              <button className="ui primary button">GET STARTED NOW</button>
+            </Link>
+          </div>
           <button
             className="ui primary button"
             id="lets-play"
@@ -175,3 +186,17 @@ export class Splash extends React.Component {
     );
   }
 }
+
+const mSTP = (state) => {
+  return {
+    loggedIn: Object.keys(state.session.user).length
+  }
+}
+
+const mDTP = (dispatch) => {
+  return {
+    openModal: () => dispatch(openModal('login'))
+  }
+}
+
+export const SplashContainer = connect(mSTP, mDTP)(Splash);
