@@ -93,7 +93,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .hover-canvas {
@@ -104,6 +104,17 @@
 
 i.trash.icon{
   /* color: #313030; */
+  font-size: 15px;
+  cursor: pointer;
+}
+
+i.edit.icon{
+  font-size: 15px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+i.fas.fa-palette{
   font-size: 15px;
   cursor: pointer;
 }
@@ -161,9 +172,21 @@ i.trash.icon{
 .vis-item-meta{
   display: flex;
   width: 100%;
-  justify-content: flex-start;
+  justify-content: space-between;
   font-weight: 100;
   letter-spacing: 0.08rem;
   font-size: 20px;
   padding-left: 10px;
+  padding-right: 10px;
+}
+
+.vis-item-meta > div{
+  display: flex;
+  align-items: center;
+}
+
+.template-btn{
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 15px;
 }
