@@ -25,8 +25,8 @@ class Canvas extends React.Component {
       audioContext: null,
       source: null,
       analyser: null,
-      frequencyArray: new Uint8Array(binCount),
-      waveformArray: new Uint8Array(binCount),
+      frequencyArray: new Uint8Array(binCount).fill(128),
+      waveformArray: new Uint8Array(binCount).fill(128),
       binCount,
       rafId: null,
       songId: null,
@@ -38,7 +38,13 @@ class Canvas extends React.Component {
     this.updateWaveformData = this.updateWaveformData.bind(this);
     this.updateAllData = this.updateAllData.bind(this);
   }
-
+  componentDidMount() {
+    if (this.props.onTemplate) {
+      setTimeout(() => this.animation(this.canvas.current), 250);
+    } else {
+      this.animation(this.canvas.current);
+    }
+  }
   componentDidUpdate(prevProps) {
     if (this.props.song !== prevProps.song) {
       this.setState(
