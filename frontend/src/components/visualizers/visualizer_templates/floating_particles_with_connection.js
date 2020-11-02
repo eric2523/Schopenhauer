@@ -6,7 +6,7 @@ export class ConnectedFloatingDotsVisualizer {
     this.particleArray = [];
     this.scaleConstant = (1 / 1757548) * canvas.width * canvas.height;
     this.repulseRadius = Math.max(100 * this.scaleConstant, 30);
-    this.influenceRadius = Math.max(110 * this.scaleConstant, 40);
+    this.influenceRadius = Math.max(200 * this.scaleConstant, 40);
     const velScale = 0.3 * this.scaleConstant;
     const numParticles = Math.min(150 * this.scaleConstant, 200);
     for (let i = 0; i < numParticles; i++) {
@@ -40,7 +40,7 @@ export class ConnectedFloatingDotsVisualizer {
           if (state.beatDetection.detected) {
             particle.dancing = true;
           }
-          const opacity = 1 - (dist / this.influenceRadius) * 0.5;
+          const opacity = 1 - (dist / this.influenceRadius) * 0.3;
           const pitchColor = detectPitchColor(state.frequencyArray).join(",");
           this.color = `rgba(${pitchColor}, ${opacity})`;
           ctx.strokeStyle = this.color;
