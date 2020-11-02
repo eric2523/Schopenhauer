@@ -5,7 +5,7 @@ import {
   fetchUserVisualizer,
   deleteVisualizer,
 } from "../../actions/visualizer_actions";
-
+import { withRouter } from 'react-router-dom';
 import { ProfileVisualizerItem } from "./profile-visualizer-item";
 
 const mSTP = (state, ownProps) => {
@@ -140,7 +140,7 @@ class ProfileVisualizerIndex extends React.Component {
   }
 }
 
-export const ProfileVisualizerIndexContainer = connect(
+export const ProfileVisualizerIndexContainer = withRouter(connect(
   mSTP,
   mDTP
-)(ProfileVisualizerIndex);
+)(ProfileVisualizerIndex));
