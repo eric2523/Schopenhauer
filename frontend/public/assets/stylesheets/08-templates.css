@@ -28,6 +28,7 @@
 
 .li-inner-div-color {
   background: black;
+  position: relative;
 }
 
 .slick-list {
@@ -79,4 +80,31 @@
   text-transform: uppercase;
   font-weight: 100;
   letter-spacing: 0.08rem;
+}
+
+.template-audio{
+  display: flex;
+  cursor: pointer;
+  padding-top: 20px;
+  padding-left: 20px;
+  width: 30px;
+}
+
+.template-audio:hover{
+  opacity: 0.7;
+}
+
+.template-prompt{
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  z-index: 9;
+  font-weight: 700;
+  font-size: 2rem;
+  opacity: 0.4
+}
+
+.li-inner-div-color:hover .template-prompt{
+  display: block;
 }

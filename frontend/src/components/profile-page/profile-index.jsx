@@ -38,12 +38,14 @@ class ProfileIndex extends React.Component {
   }
 
   initializeCanvas(){
-    const width = isNaN(window.innerWidth)
-      ? window.clientWidth
-      : window.innerWidth;
-    const height = isNaN(window.innerHeight)
-      ? window.clientHeight
-      : window.innerHeight;
+    const width = window.innerWidth || window.clientWidth
+    const height = window.innerHeight || window.clientHeight
+    // const width = isNaN(window.innerWidth)
+    //   ? window.clientWidth
+    //   : window.innerWidth;
+    // const height = isNaN(window.innerHeight)
+    //   ? window.clientHeight
+      // : window.innerHeight;
     this.canvas.current.height = height * .3;
     this.canvas.current.width = width;
     this.setState(

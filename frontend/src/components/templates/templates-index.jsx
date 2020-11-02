@@ -26,10 +26,12 @@ class TemplatesIndex extends React.Component {
     this.allVisualizers = selectAllVisualizerTypes;
 
     this.state = {
+            disconnectMusic: true
       itemClassName: "li-inner-div",
     };
 
     this.handleClick = this.handleClick.bind(this);
+    this.toggleMusic = this.toggleMusic.bind(this);
   }
 
   componentDidMount() {
@@ -50,6 +52,10 @@ class TemplatesIndex extends React.Component {
     };
   }
 
+  toggleMusic(){
+    this.setState({disconnectMusic: !this.state.disconnectMusic})
+  }
+
   render() {
     const visualizerItems = this.allVisualizers.map((type) => (
       <li className="templ-li" onClick={this.handleClick(type)} key={type}>
@@ -60,6 +66,7 @@ class TemplatesIndex extends React.Component {
             toolbox={false}
             visualizerSettings={visualizerConstructors[type].defaultSettings}
             onTemplate={true}
+            disconnectMusic={this.state.disconnectMusic}
           />
         </div>
         <h1 className="templ-visualizer-h1">{type}</h1>
@@ -82,7 +89,17 @@ class TemplatesIndex extends React.Component {
           </div>
         </header>
         <div className="default-templates">
+                    <div 
+            className="template-audio" 
+            onClick={this.toggleMusic}>
+            {!this.state.disconnectMusic ?
+              <i className="big volume up icon"></i> :
+              <i className="big volume off icon"></i>
+            } 
+          </div>
+
           <ul>{visualizerItems}</ul>
+
         </div>
       </div>
     );
