@@ -11,7 +11,7 @@ class Canvas extends React.Component {
     this.canvas = React.createRef();
     this.audio = new Audio();
     this.audio.crossOrigin = "anonymous";
-    this.audio.src = this.props.song ? this.props.song.songUrl : song;
+    this.audio.src = this.props.song.songUrl ? this.props.song.songUrl : song;
     this.state = {
       //needed
       typeSettings: props.visualizerSettings.typeSettings,

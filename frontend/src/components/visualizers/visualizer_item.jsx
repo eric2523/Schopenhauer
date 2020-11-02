@@ -3,7 +3,7 @@ import { CanvasWithRouter } from "./canvas";
 import { ToolbarItem } from "../toolbar/toolbar-item";
 import { SongToolBar } from "../music_player/song_tool_bar";
 import { connect } from "react-redux";
-
+import song from "../../audio_files/bensound-goinghigher.mp3";
 import { CirclePicker } from "react-color";
 
 import { visualizerConstructors } from "../../util/visualizer_constructor_util";
@@ -11,7 +11,6 @@ import { visualizerConstructors } from "../../util/visualizer_constructor_util";
 const mSTP = (state) => {
   return {
     currentSong: state.session.song,
-    // id: state.session.song ? state.session.song.id : null
   };
 };
 class VisualizerItem extends React.Component {
@@ -31,14 +30,6 @@ class VisualizerItem extends React.Component {
   };
 
   render() {
-    // if (
-    //   !this.props.currentSong ||
-    //   !Object.keys(this.props.currentSong).length
-    // ) {
-    //   debugger;
-    //   return null;
-    // }
-
     let toolBar;
     if (this.props.toolbox) {
       let items = [];
@@ -80,7 +71,7 @@ class VisualizerItem extends React.Component {
                 canvasHeight={this.props.canvasHeight}
                 visualizer={this.visualizer}
                 visualizerSettings={this.visualizerSettings}
-                song={this.props.currentSong}
+                song={this.props.currentSong ? this.props.currentSong : song}
                 onHover={this.props.onHover}
                 onTemplate={this.props.onTemplate}
                 connectMusic={this.props.connectMusic}

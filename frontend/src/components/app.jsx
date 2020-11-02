@@ -31,7 +31,11 @@ export const App = () => {
           path="/visualizers/:id"
           component={VisualizerEditContainer}
         />
-        <Route exact path="/profile/:id" component={ProfilePageContainer} />
+        <ProtectedRoute
+          exact
+          path="/profile/:id"
+          component={ProfilePageContainer}
+        />
         <Route exact path="/about" component={AboutPage} />
         <Route path="/" component={LandingPageIndex} />
         <Redirect to="/" />
