@@ -9,13 +9,15 @@ export class NavBarItemTEST extends React.Component {
   }
 
   render() {
-    if (!this.props.loggedIn && this.props.name !== 'about'){
+    if (!this.props.loggedIn && 
+      this.props.name !== 'about' &&
+      this.props.name !== 'home'){
       return (
         <div className="nav-redirect" onClick={this.props.openModal}>
           <NavLink
             className="nav-link-li"
             activeClassName="active-blue"
-            to={this.props.path}
+            exact to={this.props.path}
           >
             <li className="navbar-item-li">{this.props.name}</li>
           </NavLink>
@@ -26,7 +28,7 @@ export class NavBarItemTEST extends React.Component {
       <NavLink
         className="nav-link-li"
         activeClassName="active-blue"
-        to={this.props.path}
+        exact to={this.props.path}
       >
         <li className="navbar-item-li">{this.props.name}</li>
       </NavLink>
