@@ -25,7 +25,15 @@ const mDTP = (dispatch) => {
 class NavBarIndexComponent extends React.Component {
   constructor(props) {
     super(props);
+    // this.handleLogout = this.handleLogout.bind(this);
   }
+
+   //still throws errors but functional for now. Need to find way to handle
+   //this operation async
+  // handleLogout(){
+  //   window.location.href = '/';
+  //   this.props.logout();
+  // }
 
   render() {
     let navPaths = mainNavPaths();

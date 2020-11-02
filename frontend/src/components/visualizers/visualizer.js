@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { FrequencyVisualizer } from "./basic_frequency_visualizer";
 import { SphereVisualizer } from "./nate_visualizer_1";
 import { BarVisualizer } from "./eric-visualizer1";
-
+import song from "../../audio_files/bensound-goinghigher.mp3";
 import { CirclePicker } from "react-color"
 
 import { SquareVisualizer } from "./basic_square_visualizer";
@@ -106,7 +106,7 @@ class VisualizerItem extends React.Component {
                 canvasHeight={this.props.canvasHeight}
                 visualizer={this.visualizer}
                 visualizerSettings={this.visualizerSettings}
-                song={this.props.currentSong}
+                song={this.props.currentSong ? this.props.currentSong : song}
                 onHover={this.props.onHover}
                 onTemplate={this.props.onTemplate}
                 connectMusic={this.props.connectMusic}
