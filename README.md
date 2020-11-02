@@ -61,7 +61,6 @@ Our app pays homage to this conflict between music and visual representation by 
 - Node
 - Express
 - MongoDB
-- p5
 
 ### Frontend
 
@@ -72,17 +71,17 @@ Our app pays homage to this conflict between music and visual representation by 
 
 ## Group Members and Work Breakdown
 
-Eric Xian - Front End (Visualizers Comments and like)
-Hal Parker - Back End (User and Sound File)
-Nathan Chau - Front End (User and Sound File)
-Yuehan Huang - Back End/Lead (Visualizers Comments and like)
+Eric Xian - Front End
+Hal Parker - Back End
+Nathan Chau - Front End
+Yuehan Huang - Back End/Lead
 
 ### Day 1
 
 User Backend/Frontend Auth / demo user--Hal
 User Frontend/Splash/Modal Auth ---Nathan
 Visualizer page sketelton frontend. --- Eric
-Visualizer backend. with wavefunction conversion to data and data analysis ---Yuehan
+Sound analysis algorithms. with wavefunction conversion to data and data analysis ---Yuehan
 
 ### Day 2
 
