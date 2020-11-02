@@ -17,7 +17,7 @@ export class NavBarItemTEST extends React.Component {
           <NavLink
             className="nav-link-li"
             activeClassName="active-blue"
-            to={this.props.path}
+            exact to={this.props.path}
           >
             <li className="navbar-item-li">{this.props.name}</li>
           </NavLink>
@@ -28,7 +28,7 @@ export class NavBarItemTEST extends React.Component {
       <NavLink
         className="nav-link-li"
         activeClassName="active-blue"
-        to={this.props.path}
+        exact to={this.props.path}
       >
         <li className="navbar-item-li">{this.props.name}</li>
       </NavLink>
