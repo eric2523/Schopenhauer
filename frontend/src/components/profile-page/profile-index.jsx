@@ -92,6 +92,7 @@ class ProfileIndex extends React.Component {
           />
         </div>
         <ProfileVisualizerIndex 
+          currentUserId={this.props.currentUser.id}
           self={self}
           userId={this.props.user.id}
         />
