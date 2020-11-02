@@ -26,7 +26,7 @@ class TemplatesIndex extends React.Component {
     this.allVisualizers = selectAllVisualizerTypes;
 
     this.state = {
-            disconnectMusic: true
+      disconnectMusic: true,
       itemClassName: "li-inner-div",
     };
 
