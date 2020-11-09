@@ -39,7 +39,7 @@ export const SessionReducer = (state = initialState, action) => {
     case RECEIVE_USER_LOGOUT:
       return {
         isAuthenticated: false,
-        user: undefined,
+        user: {}, 
       };
     default:
       return state;

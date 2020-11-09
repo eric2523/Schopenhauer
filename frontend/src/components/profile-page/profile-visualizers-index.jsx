@@ -5,8 +5,10 @@ import {
   fetchUserVisualizer,
   deleteVisualizer,
 } from "../../actions/visualizer_actions";
-
+import { withRouter } from 'react-router-dom';
 import { ProfileVisualizerItem } from "./profile-visualizer-item";
+import { uploadVisualizer } from "../../actions/visualizer_actions";
+import { prepSettings } from "../../util/visualizer_api_util";
 
 const mSTP = (state, ownProps) => {
   return {
@@ -22,6 +24,7 @@ const mDTP = (dispatch, ownProps) => {
     fetchUserVisualizer: () => dispatch(fetchUserVisualizer(ownProps.userId)),
     deleteVisualizer: (visualizerId) =>
       dispatch(deleteVisualizer(visualizerId)),
+    uploadVisualizer: (visualizer) => dispatch(uploadVisualizer(visualizer))
   };
 };
 
@@ -37,6 +40,8 @@ class ProfileVisualizerIndex extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleHover = this.handleHover.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.handleTemplate = this.handleTemplate.bind(this);
   }
 
   handleClick(i) {
@@ -73,29 +78,24 @@ class ProfileVisualizerIndex extends React.Component {
 
   componentDidMount() {
     this.props.fetchUserVisualizer();
-    // let visualizerItems = this.items
-    //   for (let i = 0; i < visualizerItems.length; i++) {
-    //     window.setTimeout(() => {
-    //       visualizerItems[i].current.classList.add("li-inner-div-color")
-    //     }, 250)
-    //   }
   }
 
-  // componentWillUnmount(){
-  //   let visualizerItems = this.items
-  //   for (let i = 0; i < visualizerItems.length; i++) {
-  //     visualizerItems[i].current.classList.remove("li-inner-div-color")
-  //   }
-  // }
+  handleEdit(id){
+    return () => {
+      this.props.history.push(`/visualizers/${id}`)
+    }
+  }
 
-  // componentDidUpdate(){
-  //   let visualizerItems = this.items
-  //     for (let i = 0; i < visualizerItems.length; i++) {
-  //       window.setTimeout(() => {
-  //         visualizerItems[i].current.classList.add("li-inner-div-color")
-  //       }, 250)
-  //     }
-  // }
+  handleTemplate(i){
+    return () => {
+      const templateVisualizer = this.props.visualizers[i];
+      // templateVisualizer.userId = this.props.match.params.id
+      this.props.uploadVisualizer(prepSettings(templateVisualizer, this.props.currentUserId))
+        .then((payload) =>{
+          this.props.history.push(`/visualizers/${payload.visualizer._id}`);
+        })
+    }
+  }
 
   render() {
     const usersVisualizers = this.props.visualizers.length
@@ -125,16 +125,44 @@ class ProfileVisualizerIndex extends React.Component {
                 />
               </div>
               <div className="vis-item-meta">
-                <div className="visualizer-title">
-                  {visualizer.name ? visualizer.name : "Untitled"}
+                <div>
+                  <div className="visualizer-title">
+                    {visualizer.name ? visualizer.name : "Untitled"}
+                  </div>
+                  <div>
+                  <button
+                        onClick={this.handleTemplate(i)}
+                        className="template-btn"
+                        data-tooltip="Use as template" 
+                        data-position="top center"
+                        data-inverted=""
+                        >
+                        <i className="fas fa-palette"></i>
+                      </button>
+                  </div>
                 </div>
                 {this.props.self ? (
-                  <button
-                    onClick={this.handleDelete(visualizer._id)}
-                    className="delete-btn"
+                  <div className="vis-item-buttons">
+                    <button
+                      onClick={this.handleDelete(visualizer._id)}
+                      className="delete-btn"
+                      data-tooltip="Delete" 
+                      data-position="top center"
+                      data-inverted=""
+                    >
+                      <i className="trash icon"></i>
+                    </button>
+                    {/* <div className="tooltip">Delete</div> */}
+                    <button
+                    onClick={this.handleEdit(visualizer._id)}
+                    className="edit-btn"
+                    data-tooltip="Edit" 
+                    data-position="top center"
+                    data-inverted=""
                   >
-                    <i className="trash icon"></i>
+                    <i className="edit icon"></i>
                   </button>
+                </div>
                 ) : (
                   ""
                 )}
@@ -147,7 +175,7 @@ class ProfileVisualizerIndex extends React.Component {
   }
 }
 
-export const ProfileVisualizerIndexContainer = connect(
+export const ProfileVisualizerIndexContainer = withRouter(connect(
   mSTP,
   mDTP
-)(ProfileVisualizerIndex);
+)(ProfileVisualizerIndex));

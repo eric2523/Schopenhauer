@@ -26,6 +26,7 @@ class UserAuthModalComponent extends React.Component {
     super(props);
     this.state = {
       email: "",
+      username: "",
       password: "",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -82,6 +83,7 @@ class UserAuthModalComponent extends React.Component {
     this.props.openModal("login");
     this.setState({
       email: "",
+      username: "",
       password: "",
     });
   }
@@ -91,6 +93,7 @@ class UserAuthModalComponent extends React.Component {
     this.props.openModal("signup");
     this.setState({
       email: "",
+      username: "",
       password: "",
     });
   }
@@ -100,6 +103,7 @@ class UserAuthModalComponent extends React.Component {
     this.props.closeModal();
     this.setState({
       email: "",
+      username: "",
       password: "",
     });
   }
@@ -132,6 +136,14 @@ class UserAuthModalComponent extends React.Component {
                 value={this.state.email}
                 placeholder="Email"
               ></input>
+              {this.props.modal === "signup" ?
+              <input
+                type="text"
+                onChange={this.handleInput("username")}
+                value={this.state.username}
+                placeholder="Username"
+              ></input>
+              : ''}
               <input
                 type="password"
                 onChange={this.handleInput("password")}
