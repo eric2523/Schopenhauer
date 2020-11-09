@@ -69,12 +69,12 @@ class VisualizerItem extends React.Component {
             <div className="toolbar-container">
               <h3 className="toolbar-h3">Settings</h3>
               <ul className="toolbar-ul">{items}</ul>
-              <SongToolBar />
+              <button onClick={this.handleSave} className="ui button save-btn">
+                {this.state.saved ? "saved" : "save settings"}
+              </button>
               <h3 className="toolbar-h3">Color Picker</h3>
               <CirclePicker onChange={this.handleColorChange} />
-              <button onClick={this.handleSave} className="ui button">
-                {this.state.saved ? "saved" : "unsaved"}
-              </button>
+              <SongToolBar />
             </div>
           </div>
         </>
