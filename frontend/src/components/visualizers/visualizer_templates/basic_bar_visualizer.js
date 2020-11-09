@@ -16,10 +16,11 @@ export class BarVisualizer {
     const ctx = canvas.getContext("2d");
     let waveformArray = state.frequencyArray;
     let barWidth = state.generalSettings.barWidth;
-    const colors = ["red", "blue", "green"];
+    // const colors = ["red", "blue", "green"];
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < canvas.width; i += 15) {
-      let color = colors[Math.floor(Math.random() * colors.length)];
+
+      let color = state.generalSettings.color
       const barHeight =
         -waveformArray[i] * state.generalSettings.heightAmplifier;
       const xStart = i * 3;
