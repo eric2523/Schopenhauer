@@ -1,0 +1,38 @@
+.user-index-container{ 
+  display: flex; 
+  flex-direction: column; 
+}
+
+.user-index-title{
+  font-size: 36px;
+  padding-left: 10px;
+}
+
+.user-list{
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+}
+
+.user-item{ 
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  align-items: center;
+  border-radius: 6px;
+  min-height: 58px;
+}
+
+.user-item:hover{
+  background-color: #6d6d6d;
+}
+
+.user-item div{
+  display: flex;
+  flex-direction: column;
+}
+
+.user-item div div:last-child{
+  font-size: .8rem;
+}

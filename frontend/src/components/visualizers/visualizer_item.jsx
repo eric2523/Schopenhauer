@@ -5,7 +5,7 @@ import { SongToolBar } from "../music_player/song_tool_bar";
 import { connect } from "react-redux";
 import song from "../../audio_files/bensound-goinghigher.mp3";
 import { CirclePicker } from "react-color";
-
+import { updateVisualizer, deleteVisualizer } from "../../actions/visualizer_actions";
 import { visualizerConstructors } from "../../util/visualizer_constructor_util";
 
 const mSTP = (state) => {
@@ -13,6 +13,13 @@ const mSTP = (state) => {
     currentSong: state.session.song,
   };
 };
+
+const mDTP = (dispatch, ownProps) => {
+  return {
+    updateVisualizer: () => dispatch(updateVisualizer(ownProps.visualizer)),
+    deleteVisualizer: () => dispatch(deleteVisualizer(ownProps.visualizer._id))
+  }
+}
 class VisualizerItem extends React.Component {
   constructor(props) {
     super(props);
@@ -23,11 +30,16 @@ class VisualizerItem extends React.Component {
     this.visualizerSettings = props.visualizerSettings;
 
     this.handleColorChange = this.handleColorChange.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
 
   handleColorChange = (color, event) => {
     this.visualizerSettings.generalSettings["color"] = color.hex;
   };
+
+  handleSave = () => {
+    this.props.updateVisualizer();
+  }
 
   render() {
     let toolBar;
@@ -56,6 +68,12 @@ class VisualizerItem extends React.Component {
               <SongToolBar />
               <h3 className="toolbar-h3">Color Picker</h3>
               <CirclePicker onChange={this.handleColorChange} />
+              <button 
+              className="ui button"
+              onClick={this.handleSave} 
+              >
+                Save
+              </button>
             </div>
           </div>
         </>
@@ -86,4 +104,4 @@ class VisualizerItem extends React.Component {
   }
 }
 
-export const VisualizerItemContainer = connect(mSTP, null)(VisualizerItem);
+export const VisualizerItemContainer = connect(mSTP, mDTP)(VisualizerItem);

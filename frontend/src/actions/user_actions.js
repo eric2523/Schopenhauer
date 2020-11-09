@@ -1,4 +1,5 @@
 import * as UserAPIUtil from '../util/user_api_util'
+import { fetchUserVisualizer } from './visualizer_actions';
 
 export const RECEIVE_USER = "RECEIVE_USER";
 export const RECEIVE_ALL_USERS = "RECEIVE_ALL_USERS";
@@ -78,4 +79,9 @@ export const getUser = (id) => (dispatch) => {
       user => dispatch(receiveUser(user.data)),
       err => dispatch(receiveUserError(err))
     )
+}
+
+export const getUserAndVisualizers = (id) => (dispatch) => {
+  dispatch(getUser(id));
+  return fetchUserVisualizer(id)(dispatch);
 }
