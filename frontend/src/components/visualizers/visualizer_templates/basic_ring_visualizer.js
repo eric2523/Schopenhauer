@@ -2,9 +2,6 @@ export const defaultRingSettings = Object.freeze({
   type: "ring",
   typeSettings: Object.freeze({ binCount: 1024 }),
   generalSettings: Object.freeze({
-    redFactor: 1,
-    greenFactor: 0,
-    blueFactor: 0,
     outerRadius: 0,
     radiusMultiplier: 0,
   }),
@@ -18,11 +15,9 @@ export class RingVisualizer {
     let centerY = canvas.height / 2;
 
     let {
-      redFactor,
-      greenFactor,
-      blueFactor,
       outerRadius,
       radiusMultiplier,
+      color
     } = state.generalSettings;
 
     // adjustable in theory : width, height, centerX, centerY
@@ -41,9 +36,7 @@ export class RingVisualizer {
       let startX = circleX + r * Math.cos(theta + Math.PI);
       let startY = circleY + r * Math.sin(theta + Math.PI);
       ctx.beginPath();
-      ctx.strokeStyle = `rgb(${r * redFactor},${r * greenFactor}, ${
-        r * blueFactor
-      })`;
+      ctx.strokeStyle = color;
       ctx.moveTo(startX, startY);
       ctx.lineTo(circleX, circleY);
       ctx.closePath();
