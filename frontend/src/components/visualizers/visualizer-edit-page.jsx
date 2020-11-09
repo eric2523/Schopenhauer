@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { openModal, closeModal } from "../../actions/modal_actions";
 import { updateVisualizer } from "../../actions/visualizer_actions";
 import { prepSettings } from "../../util/visualizer_api_util";
+import { Prompt } from "react-router-dom";
+
 
 const mSTP = (state, ownProps) => {
   return {
@@ -26,11 +28,15 @@ class VisualizerEdit extends React.Component {
     this.handleSave = this.handleSave.bind(this);
   }
 
-  componentWillUnmount() {
-    if (!this.state.saved) {
-      this.props.openModal("edit-alert");
-    }
-  }
+  // componentWillUnmount() {
+  //   if (!this.state.saved) {
+  //     debugger
+  //     <Prompt message={() => {
+  //       this.props.openModal("edit-alert");
+  //     }}/>
+  //     // <Redirect to={} />
+  //   }
+  // }
 
   handleSave(e) {
     this.setState({ saved: true });
@@ -43,6 +49,8 @@ class VisualizerEdit extends React.Component {
     const height = window.innerHeight;
     if (visualizerSettings) {
       return (
+        <>
+        <Prompt when={!this.state.saved} message={this.handleBlock}/>
         <VisualizerItemContainer
           canvasWidth={width}
           canvasHeight={height}
@@ -50,6 +58,7 @@ class VisualizerEdit extends React.Component {
           visualizerSettings={visualizerSettings}
           handleSave={this.handleSave}
         />
+        </>
       );
     } else {
       return null;
