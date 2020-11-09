@@ -28,7 +28,7 @@ export const App = () => {
           path="/templates"
           component={TemplatesIndexContainer}
         />
-        <Route
+        <ProtectedRoute
           exact
           path="/visualizers/:id"
           component={VisualizerEditContainer}

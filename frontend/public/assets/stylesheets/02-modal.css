@@ -6,7 +6,7 @@
   left: 0;
   background: rgba(141, 140, 140, 0.8);
   z-index: 99;
-  overflow-y: initial;
+  /* overflow-y: initial; */
 }
 
 .modal-child {

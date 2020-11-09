@@ -71,6 +71,11 @@
 
 .profile-stats div{
   margin-right: 20px;
+  cursor: pointer;
+}
+
+.profile-stats div:first-child{
+  cursor: default;
 }
 
 .profile-stats div:last-child{
