@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateVisualizer, deleteVisualizer } from '../../actions/visualizer_actions';
+// import { updateVisualizer, deleteVisualizer } from '../../actions/visualizer_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
 
 const mSTP = (state) => {
