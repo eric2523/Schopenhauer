@@ -6,7 +6,6 @@ import { updateVisualizer } from "../../actions/visualizer_actions";
 import { prepSettings } from "../../util/visualizer_api_util";
 import { Prompt } from "react-router-dom";
 
-
 const mSTP = (state, ownProps) => {
   return {
     visualizerSettings: state.entities.visualizers[ownProps.match.params.id],
@@ -28,16 +27,6 @@ class VisualizerEdit extends React.Component {
     this.handleSave = this.handleSave.bind(this);
   }
 
-  // componentWillUnmount() {
-  //   if (!this.state.saved) {
-  //     debugger
-  //     <Prompt message={() => {
-  //       this.props.openModal("edit-alert");
-  //     }}/>
-  //     // <Redirect to={} />
-  //   }
-  // }
-
   handleSave(e) {
     this.setState({ saved: true });
     this.props.updateVisualizer(prepSettings(this.props.visualizerSettings))
@@ -50,7 +39,10 @@ class VisualizerEdit extends React.Component {
     if (visualizerSettings) {
       return (
         <>
-        <Prompt when={!this.state.saved} message={this.handleBlock}/>
+        <Prompt 
+          when={!this.state.saved}
+          message={location => "You have unsaved work are you sure you want to leave?"}
+        />
         <VisualizerItemContainer
           canvasWidth={width}
           canvasHeight={height}
