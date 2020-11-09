@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import song from "../../audio_files/bensound-goinghigher.mp3";
 import { CirclePicker } from "react-color";
 import { visualizerConstructors } from "../../util/visualizer_constructor_util";
+import { Prompt } from "react-router-dom";
 
 const mSTP = (state) => {
   return {
@@ -16,7 +17,7 @@ const mSTP = (state) => {
 class VisualizerItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { saved: true }
+    this.state = { saved: true };
     const visualizerType = props.visualizerSettings.type;
     const { TypeConstructor } = visualizerConstructors[visualizerType];
     this.visualizer = new TypeConstructor();
@@ -30,16 +31,18 @@ class VisualizerItem extends React.Component {
     this.visualizerSettings.generalSettings["color"] = color.hex;
   };
 
-  handleChange(setting){
+  handleChange(setting) {
     return (e) => {
-      this.visualizerSettings.generalSettings[setting] = parseInt(e.target.value);
-      this.setState({ saved: false })
-    }
+      this.visualizerSettings.generalSettings[setting] = parseInt(
+        e.target.value
+      );
+      this.setState({ saved: false });
+    };
   }
 
-  handleSave(e){
-    this.props.handleSave(e)
-    this.setState({ saved: true })
+  handleSave(e) {
+    this.props.handleSave(e);
+    this.setState({ saved: true });
   }
 
   render() {
@@ -77,9 +80,14 @@ class VisualizerItem extends React.Component {
         </>
       );
     }
-    debugger;
     return (
       <div className="viz-outer-div">
+        <Prompt
+          when={!this.state.saved}
+          message={(location) =>
+            "You have unsaved work are you sure you want to leave?"
+          }
+        />
         <div className="visualizer">
           <div className="canvas-main-div">
             <div className={this.props.onHover ? "hover-canvas" : "canvas-div"}>
