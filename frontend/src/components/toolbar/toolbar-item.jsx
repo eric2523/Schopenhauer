@@ -22,8 +22,8 @@ export const ToolbarItem = (props) => {
 
   return (
     <div className="toolbar-item-container">
-      <h1>{parsedString}</h1>
       <div className="ui transparent input toolbar-input-container">
+      <span className="toolbar-item-title">{parsedString}</span>
         {props.setting.name !== "color" ? (
           <input
             onChange={props.handleChange(props.setting.name)}
