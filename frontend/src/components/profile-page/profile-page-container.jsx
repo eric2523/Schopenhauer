@@ -67,7 +67,7 @@ class ProfilePage extends React.Component {
 
   componentDidUpdate(prevProps){
     if(prevProps.match.params.id !== this.props.match.params.id){
-      this.setState({modal: null});
+      this.closeModal();
     }
   }
 
@@ -84,11 +84,13 @@ class ProfilePage extends React.Component {
   openModal(type){
     return () => {
       this.setState({modal: type});
+      document.body.classList.add('modal-open');
     }
   }
 
   closeModal(){
     this.setState({modal: null});
+    document.body.classList.remove('modal-open');
   }
 
   render() {
