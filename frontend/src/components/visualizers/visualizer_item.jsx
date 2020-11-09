@@ -55,8 +55,7 @@ class VisualizerItem extends React.Component {
               <SongToolBar />
               <h3 className="toolbar-h3">Color Picker</h3>
               <CirclePicker onChange={this.handleColorChange} />
-              <h3>Save</h3>
-              <button onClick={this.props.handleSave}>Save</button>
+              <button onClick={this.props.handleSave} className="ui button">Save</button>
             </div>
           </div>
         </>
