@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { followUser, unfollowUser } from "../../actions/user_actions";
 
-// const mSTP = (state, ownProps) => {
-//   return {
-//     isFollowing: ownProps.followers.includes(ownProps.currentUser.id)
-//   }
-// }
+const mSTP = (state, ownProps) => {
+  return {
+    isFollowing: ownProps.followers.includes(ownProps.currentUser.id)
+  }
+}
 
 const mDTP = (dispatch, ownProps) => {
   return {
@@ -19,26 +19,20 @@ const mDTP = (dispatch, ownProps) => {
 class ProfileBioComponent extends React.Component {
   constructor(props){
     super(props)
-    this.state = {
-      isFollowing: this.props.followers.includes(this.props.currentUser.id)
-    }
     this.toggleFollow = this.toggleFollow.bind(this);
   }
 
+
   toggleFollow(){
-    if(this.state.isFollowing){
-      this.props.unfollow().then(
-        this.setState({isFollowing: false})
-      );
+    if(this.props.isFollowing){
+      this.props.unfollow()
     } else {
-      this.props.follow().then(
-        this.setState({isFollowing: true})
-      );
+      this.props.follow()
     }
   }
 
   render(){
-    const buttonText = this.state.isFollowing ?
+    const buttonText = this.props.isFollowing ?
     "Unfollow" : "Follow";
     // const handle = 
     //   this.props.user.username ? 
@@ -64,8 +58,8 @@ class ProfileBioComponent extends React.Component {
             </div>
           <div className="profile-stats">
             <div>Visualizers: &nbsp; {this.props.count}</div>
-            <div>Followers: &nbsp; {this.props.followers.length}</div>
-            <div>Following: &nbsp; {this.props.follows.length}</div>
+            <div onClick={this.props.openModal('followers')}>Followers: &nbsp; {this.props.followers.length}</div>
+            <div onClick={this.props.openModal('follows')}>Following: &nbsp; {this.props.follows.length}</div>
           </div>
         </div>
       </div>     
@@ -73,4 +67,4 @@ class ProfileBioComponent extends React.Component {
   }
 }
 
-export const ProfileBio = withRouter(connect(null, mDTP)(ProfileBioComponent));
+export const ProfileBio = withRouter(connect(mSTP, mDTP)(ProfileBioComponent));

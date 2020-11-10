@@ -52,8 +52,8 @@ class TemplatesIndex extends React.Component {
     };
   }
 
-  toggleMusic(){
-    this.setState({disconnectMusic: !this.state.disconnectMusic})
+  toggleMusic() {
+    this.setState({ disconnectMusic: !this.state.disconnectMusic });
   }
 
   render() {
@@ -90,17 +90,15 @@ class TemplatesIndex extends React.Component {
           </div>
         </header>
         <div className="default-templates">
-                    <div 
-            className="template-audio" 
-            onClick={this.toggleMusic}>
-            {!this.state.disconnectMusic ?
-              <i className="big volume up icon"></i> :
+          <div className="template-audio" onClick={this.toggleMusic}>
+            {!this.state.disconnectMusic ? (
+              <i className="big volume up icon"></i>
+            ) : (
               <i className="big volume off icon"></i>
-            } 
+            )}
           </div>
 
           <ul>{visualizerItems}</ul>
-
         </div>
       </div>
     );
