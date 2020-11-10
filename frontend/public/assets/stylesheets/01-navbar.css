@@ -20,6 +20,11 @@
   display: flex;
   align-items: center;
   margin: 0 10px 0 10px;
+  color: #fff;
+}
+
+#nav-github-link:hover{
+  color: rgb(160, 159, 159);
 }
 
 .navbar-item-li {
