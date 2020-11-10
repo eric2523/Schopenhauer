@@ -134,6 +134,7 @@ class ProfilePage extends React.Component {
         <ProfileVisualizerIndexContainer
           self={self}
           userId={this.props.user.id}
+          currentUser={this.props.currentUser}
         />
       </div>
       </>
