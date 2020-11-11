@@ -10,7 +10,6 @@ const parseString = (str) => {
       startIdx = i;
     }
     if (i === str.length - 1){
-      debugger
       words.push(str.slice(startIdx, i + 1))
     }
   }
