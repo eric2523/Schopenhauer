@@ -42,7 +42,6 @@ router.patch(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const filter = { _id: req.body._id };
-    debugger;
     const update = {
       name: req.body.name,
       typeSettings: req.body.typeSettings,
