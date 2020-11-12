@@ -84,6 +84,7 @@
   padding-top: 5px;
   padding-bottom: 5px;
   width: 100%;
+  align-items: center;
 }
 
 .toolbar-item-container:last-of-type div {
@@ -100,4 +101,24 @@
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   color: #41bfef;
+}
+
+.toolbar-container .ui.save-btn {
+  text-transform: uppercase;
+  width: 100%;
+  margin: 15px 0 5px 0;
+}
+
+.toolbar-item-title {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+}
+
+.toolbar-input-container {
+  display: flex;
+}
+
+.ui.input > input {
+  text-align: right;
 }

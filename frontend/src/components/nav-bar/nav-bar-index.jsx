@@ -45,9 +45,19 @@ class NavBarIndexComponent extends React.Component {
     let navListItems = [];
     for (const keys in navPaths) {
       let { name, path } = navPaths[keys];
-
       navListItems.push(<NavBarItem key={name} name={name} path={path} />);
     }
+
+    let repoIcon = 
+    <a 
+      id="nav-github-link"
+      key="nav-github-link"
+      href="https://github.com/eric2523/Schopenhauer" 
+      target="_blank">
+      <i id="nav-github-icon" className="fab fa-github"></i>
+    </a>
+
+    navListItems.splice(2, 0, repoIcon);
 
     let btn = null;
     if (!this.props.loggedIn) {

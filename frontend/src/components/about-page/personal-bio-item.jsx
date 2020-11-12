@@ -7,7 +7,7 @@ export const PersonalBioItem = (props) => {
       <div className="profile-pic-container">
         <div className={`profile-pic-icon prof-pic-${props.idx}`}></div>
       </div>
-      <a href={props.userInfo.gitHub}>
+      <a className="about-github-icon" href={props.userInfo.gitHub}>
         <i className="fab fa-github"></i>
       </a>
     </li>

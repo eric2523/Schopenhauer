@@ -35,6 +35,7 @@ class ProfileVisualizerIndex extends React.Component {
       disconnectMusic: null,
       startPlaying: null,
       hovering: null,
+      loading: true,
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -78,7 +79,9 @@ class ProfileVisualizerIndex extends React.Component {
 
   componentDidMount() {
     this.props.fetchUserVisualizer();
+    this.setState({loading: false});
   }
+
 
   handleEdit(id){
     return () => {
@@ -90,7 +93,7 @@ class ProfileVisualizerIndex extends React.Component {
     return () => {
       const templateVisualizer = this.props.visualizers[i];
       // templateVisualizer.userId = this.props.match.params.id
-      this.props.uploadVisualizer(prepSettings(templateVisualizer, this.props.currentUserId))
+      this.props.uploadVisualizer(prepSettings(templateVisualizer, this.props.currentUser.id))
         .then((payload) =>{
           this.props.history.push(`/visualizers/${payload.visualizer._id}`);
         })
@@ -118,7 +121,7 @@ class ProfileVisualizerIndex extends React.Component {
                   disconnectMusic={
                     this.state.disconnectMusic === i ? false : true
                   }
-                  onHover={true}
+                  onHover={this.state.loading ? "loading" : true}
                   key={visualizer._id}
                   visualizer={visualizer}
                   deleteVisualizer={this.props.deleteVisualizer}

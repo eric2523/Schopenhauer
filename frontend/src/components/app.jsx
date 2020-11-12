@@ -11,6 +11,7 @@ import { ProfilePageContainer } from "./profile-page/profile-page-container";
 import { TemplatesIndexContainer } from "./templates/templates-index";
 import { VisualizerEditContainer } from "./visualizers/visualizer-edit-page";
 import { AboutPage } from "./about-page/about-page";
+import { EditAlertModalContainer } from "./templates/edit-alert-modal";
 
 export const App = () => {
   return (
@@ -20,13 +21,14 @@ export const App = () => {
       </header>
       <SongUploadModal />
       <UserAuthModal />
+      <EditAlertModalContainer />
       <Switch>
         <ProtectedRoute
           exact
           path="/templates"
           component={TemplatesIndexContainer}
         />
-        <Route
+        <ProtectedRoute
           exact
           path="/visualizers/:id"
           component={VisualizerEditContainer}

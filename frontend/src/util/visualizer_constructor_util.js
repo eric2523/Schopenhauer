@@ -15,9 +15,9 @@ import {
   SphereVisualizer,
 } from "../components/visualizers/visualizer_templates/basic_sphere_visualizer";
 import {
-  defaultSquareSettings,
-  SquareVisualizer,
-} from "../components/visualizers/visualizer_templates/basic_square_visualizer";
+  defaultVortexSettings,
+  VortexVisualizer,
+} from "../components/visualizers/visualizer_templates/basic_vortex_visualizer";
 
 export const visualizerConstructors = {
   frequency: {
@@ -33,9 +33,9 @@ export const visualizerConstructors = {
     defaultSettings: defaultBarsSettings,
     TypeConstructor: BarVisualizer,
   },
-  square: {
-    defaultSettings: defaultSquareSettings,
-    TypeConstructor: SquareVisualizer,
+  vortex: {
+    defaultSettings: defaultVortexSettings,
+    TypeConstructor: VortexVisualizer,
   },
   ring: {
     defaultSettings: defaultRingSettings,

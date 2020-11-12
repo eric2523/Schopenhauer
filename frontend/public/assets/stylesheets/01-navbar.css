@@ -1,13 +1,30 @@
 
-.nav-bar-ul {
-  display: flex;
-}
 
 .nav-bar-div {
   display: flex;
   justify-content: space-between;
   background: #171717;
   padding: 10px 0 10px 0;
+}
+
+.nav-bar-div > * {
+  width: 33%;
+}
+
+.nav-bar-ul {
+  display: flex;
+  width: auto; 
+}
+
+#nav-github-link{
+  display: flex;
+  align-items: center;
+  margin: 0 10px 0 10px;
+  color: #fff;
+}
+
+#nav-github-link:hover{
+  color: rgb(160, 159, 159);
 }
 
 .navbar-item-li {
@@ -66,7 +83,7 @@
 
 .login-signup-btn-div {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   margin: 0 15px 0 15px;
 }
@@ -79,4 +96,9 @@
 
 .active-blue li {
   color: #41bfef;
+}
+
+#nav-github-icon{
+  margin: 0 0;
+  font-size: 40px;
 }
