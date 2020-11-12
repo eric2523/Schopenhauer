@@ -35,7 +35,7 @@ class QueueItemComponent extends React.Component {
               : "song-item"
           }
         >
-          {this.props.song.title}
+          {this.props.song.artist} -- {this.props.song.title}
         </div>
       </li>
     );

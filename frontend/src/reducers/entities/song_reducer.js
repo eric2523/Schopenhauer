@@ -4,6 +4,10 @@ import {
   RECEIVE_USER_SONGS
 } from "../../actions/song_actions";
 
+import {
+  RECEIVE_USER_LOGOUT,
+} from "../../actions/session_actions";
+
 const _nullSong = {};
 
 export const SongReducer = (state = _nullSong, action) => {
@@ -13,6 +17,8 @@ export const SongReducer = (state = _nullSong, action) => {
     case RECEIVE_CURRENT_SONG:
       if(action.song._id){ 
         newState[action.song._id] = action.song;
+      } else if (action.song.id){
+        newState[action.song.id] = action.song;
       }
       return newState;
     case RECEIVE_USER_SONGS:
@@ -23,6 +29,8 @@ export const SongReducer = (state = _nullSong, action) => {
       }
       return newState;
     case CLEAR_SONG:
+      return _nullSong;
+    case RECEIVE_USER_LOGOUT:
       return _nullSong;
     default:
       return state;
