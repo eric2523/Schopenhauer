@@ -88,11 +88,15 @@ class Canvas extends React.Component {
       });
     }
     if (!this.state.play) {
-      this.audio.play();
-      let rafId = requestAnimationFrame(this.tick);
-      this.setState({
-        rafId,
-        play: true,
+      this.audio.play().then(() => {
+        let rafId = requestAnimationFrame(this.tick);
+        this.setState({
+          rafId,
+          play: true,
+        });
+      }).catch((err)=> {
+        this.setState({play: true});
+        console.log(err)
       });
     } else {
       this.audio.pause();
@@ -148,7 +152,10 @@ class Canvas extends React.Component {
 
     if (this.props.onHover || this.props.onTemplate) {
       return (
-        <div onMouseEnter={this.togglePlay} onMouseLeave={this.togglePlay}>
+        <div 
+        onMouseEnter={this.props.onTemplate ? this.togglePlay : null} 
+        onMouseLeave={this.state.play ? this.togglePlay : null}
+        onClick={this.props.onHover ? this.togglePlay : null}>
           <canvas
             ref={this.canvas}
             height={this.props.canvasHeight}

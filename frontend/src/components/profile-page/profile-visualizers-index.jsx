@@ -35,6 +35,7 @@ class ProfileVisualizerIndex extends React.Component {
       disconnectMusic: null,
       startPlaying: null,
       hovering: null,
+      loading: true,
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -78,7 +79,9 @@ class ProfileVisualizerIndex extends React.Component {
 
   componentDidMount() {
     this.props.fetchUserVisualizer();
+    this.setState({loading: false});
   }
+
 
   handleEdit(id){
     return () => {
@@ -118,7 +121,7 @@ class ProfileVisualizerIndex extends React.Component {
                   disconnectMusic={
                     this.state.disconnectMusic === i ? false : true
                   }
-                  onHover={true}
+                  onHover={this.state.loading ? "loading" : true}
                   key={visualizer._id}
                   visualizer={visualizer}
                   deleteVisualizer={this.props.deleteVisualizer}
