@@ -34,6 +34,7 @@ router.post("/uploadSongDB", (req, res) => {
   const newSong = new Song({
     userId: req.body.userId,
     title: req.body.title,
+    artist: req.body.artist,
     fileName: req.body.fileName,
     songUrl: req.body.songUrl,
   });
@@ -42,6 +43,7 @@ router.post("/uploadSongDB", (req, res) => {
       id: song.id,
       userId: song.userId,
       title: song.title,
+      artist: song.artist,
       fileName: song.fileName,
       songUrl: song.songUrl,
     })}

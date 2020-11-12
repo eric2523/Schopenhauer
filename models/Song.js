@@ -13,6 +13,9 @@ const SongSchema = new Schema({
   title: {
     type: String,
   },
+  artist: {
+    type: String,
+  },
   songUrl: {
     type: String,
     required: true,
