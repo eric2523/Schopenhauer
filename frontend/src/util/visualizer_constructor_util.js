@@ -44,3 +44,4 @@ export const visualizerConstructors = {
 };
 
 export const selectAllVisualizerTypes = Object.keys(visualizerConstructors);
+
