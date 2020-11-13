@@ -3,6 +3,7 @@
 [![react-redux-shield](https://img.shields.io/badge/React--Redux-%5E7.2.1-informational)](https://reactjs.org/)
 [![express-shield](https://img.shields.io/badge/Express.js-%5E4.17.1-green)](https://expressjs.com/)
 [![mongoose-shield](https://img.shields.io/badge/Mongoose-%5E5.10.10-orange)](https://mongoosejs.com/)
+[![node-shield](https://img.shields.io/badge/node-v10.13.0-green)](https://github.com/nodejs)
 ## Background and Overview
 
 The philosopher Arthur Schopenhauer held that the “world” consists of lawfully repeating patterns of “representations” beneath which surges an unrepresentable, violent “will” which cannot be captured by law or representation. Against this metaphysical background, he accorded music a special status in comparison with the other arts. Whereas other forms of art sought to elevate by means of idealizing from representations to yet more general representations, music sought to express this will directly “in itself” without representing it.
