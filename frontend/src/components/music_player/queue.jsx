@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { receiveCurrentSong } from '../../actions/song_actions';
+import { receiveCurrentSong, receiveUserSongs } from '../../actions/song_actions';
 import { QueueItem } from './queue_item';
 
 const mSTP = (state) => {
@@ -13,7 +13,8 @@ const mSTP = (state) => {
 
 const mDTP = (dispatch) => {
   return {
-    receiveCurrentSong: (song) => dispatch(receiveCurrentSong(song))
+    receiveCurrentSong: (song) => dispatch(receiveCurrentSong(song)),
+    receiveUserSongs: (userId) => dispatch(receiveUserSongs(userId))
   }
 }
 
@@ -23,6 +24,10 @@ class QueueComponent extends React.Component{
     this.state ={
       currentSong: this.props.currentSong
     }
+  }
+
+  componentDidMount() {
+    this.props.receiveUserSongs(this.props.user.id);
   }
 
   // componentDidMount(){
