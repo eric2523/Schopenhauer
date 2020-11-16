@@ -102,7 +102,7 @@ class TemplatesIndex extends React.Component {
         <div className={this.state.itemClassName}>
           <VisualizerItemContainer
             canvasWidth={400}
-            canvasHeight={250}
+            canvasHeight={300}
             toolbox={false}
             visualizerSettings={visualizerConstructors[type].defaultSettings}
             onTemplate={true}
@@ -131,13 +131,13 @@ class TemplatesIndex extends React.Component {
           </div>
         </header>
         <div className="default-templates">
-          <div className="template-audio" onClick={this.toggleMusic}>
+          {/* <div className="template-audio" onClick={this.toggleMusic}>
             {!this.state.disconnectMusic ? (
               <i className="big volume up icon"></i>
             ) : (
               <i className="big volume off icon"></i>
             )}
-          </div>
+          </div> */}
 
           <ul>{visualizerItems}</ul>
         </div>
