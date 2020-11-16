@@ -28,8 +28,15 @@ class TemplatesIndex extends React.Component {
     this.state = {
       disconnectMusic: true,
       itemClassName: "li-inner-div",
+      titles: [
+        "Pick your starting point.",
+        "Create something new.",
+        "Explore the possibilities.",
+      ],
+      titleCount: 0,
     };
-
+    this.templTitle = null;
+    this.titleInterval = null;
     this.handleClick = this.handleClick.bind(this);
     this.toggleMusic = this.toggleMusic.bind(this);
   }
@@ -38,6 +45,34 @@ class TemplatesIndex extends React.Component {
     setTimeout(() => {
       this.setState({ itemClassName: "li-inner-div li-inner-div-color" });
     }, 250);
+
+    this.templTitle = document.getElementsByClassName("templ-header-title")[0];
+    let stateChange = null;
+
+    this.titleInterval = window.setInterval(() => {
+      this.templTitle.classList.add("low-opacity");
+      if (this.state.titleCount === this.state.titles.length - 1) {
+        stateChange = () => {
+          this.setState({
+            titleCount: 0,
+          });
+        };
+      } else {
+        stateChange = () => {
+          this.setState({
+            titleCount: this.state.titleCount + 1,
+          });
+        };
+      }
+
+      window.setTimeout(() => {
+        stateChange();
+      }, 900);
+    }, 4750);
+  }
+
+  componentWillUnmount() {
+    window.clearInterval(this.titleInterval);
   }
 
   handleClick(type) {
@@ -57,6 +92,10 @@ class TemplatesIndex extends React.Component {
   }
 
   render() {
+    if (this.templTitle !== null) {
+      this.templTitle.classList.remove("low-opacity");
+    }
+
     const visualizerItems = this.allVisualizers.map((type) => (
       <li className="templ-li" onClick={this.handleClick(type)} key={type}>
         <div className="template-prompt">Use as template</div>
@@ -78,7 +117,9 @@ class TemplatesIndex extends React.Component {
       <div className="templates">
         <header className="templates-header">
           <div className="templ-header-left">
-            <h1>Pick your starting point.</h1>
+            <h1 className="low-opacity templ-header-title">
+              {this.state.titles[this.state.titleCount]}
+            </h1>
           </div>
           <div className="templ-header-right">
             <h2>
