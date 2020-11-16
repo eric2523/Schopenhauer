@@ -3,6 +3,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../../models/User");
+const Song = require("../../models/Song");
 
 // Users has four routes /signin, /signup, /follow, and /unfollow
 
@@ -41,6 +42,15 @@ router.post("/signup", (req, res) => {
           newUser
             .save()
             .then((user) => {
+              
+              const newDefaultSong = new Song({
+                userId: user.id,
+                title: "Bensounds -- Going Higher",
+                fileName: "bensound-goinghigher.mp3",
+                songUrl: "https://schopenhauer-pro.s3-us-west-2.amazonaws.com/1604098109951-bensound-goinghigher.mp3",
+              });
+              newDefaultSong.save()
+              
               const payload = {
                 username: user.username, 
                 id: user.id, 
