@@ -1,4 +1,8 @@
-
+.nav-bar-head {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
 
 .nav-bar-div {
   display: flex;
