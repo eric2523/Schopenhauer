@@ -3,9 +3,9 @@ export const defaultBarsSettings = Object.freeze({
   typeSettings: Object.freeze({ binCount: 1024 }),
   generalSettings: Object.freeze({
     //for any bar
-    barWidth: 10,
+    barWidth: 40,
     //for any circular object
-    radius: 0,
+
     // finished controls
     heightAmplifier: 0.5,
   }),
@@ -19,12 +19,11 @@ export class BarVisualizer {
     // const colors = ["red", "blue", "green"];
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < canvas.width; i += 15) {
-
-      let color = state.generalSettings.color
+      let color = state.generalSettings.color || "gold";
       const barHeight =
-        -waveformArray[i] * state.generalSettings.heightAmplifier;
+        -waveformArray[i] * state.generalSettings.heightAmplifier + 2;
       const xStart = i * 3;
-      const yStart = canvas.height / 2;
+      const yStart = canvas.height - canvas.height / 10;
       this.createBlocks(ctx, barHeight, xStart, yStart, barWidth, color);
     }
   }

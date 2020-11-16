@@ -2,10 +2,10 @@ import {
   RECEIVE_CURRENT_USER,
   RECEIVE_USER_LOGOUT,
 } from "../actions/session_actions";
-import { 
-  RECEIVE_CURRENT_SONG, 
+import {
+  RECEIVE_CURRENT_SONG,
   CLEAR_SONG,
-  RECEIVE_USER_SONGS 
+  RECEIVE_USER_SONGS,
 } from "../actions/song_actions";
 
 const initialState = {
@@ -25,7 +25,7 @@ export const SessionReducer = (state = initialState, action) => {
         user: action.currentUser,
       };
     case RECEIVE_USER_SONGS:
-      if(action.songs.data){
+      if (action.songs.data) {
         let firstSong = Object.values(action.songs.data)[0];
         newState.song = firstSong;
       }

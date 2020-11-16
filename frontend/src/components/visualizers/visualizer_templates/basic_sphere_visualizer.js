@@ -81,7 +81,7 @@ class SphereParticle {
           state.generalSettings.heightAmplifier
         : state.frequencyArray[i] * 0.003;
 
-    if (state.generalSettings.color) {
+    if (state.generalSettings.color !== undefined) {
       // let colorHex = state.generalSettings.color;
       // let colorInt = parseInt(colorHex.slice(1), 16) + (100*i);
       // this.color = '#' + colorInt.toString(16);

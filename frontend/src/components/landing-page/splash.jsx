@@ -128,8 +128,8 @@ export class Splash extends React.Component {
     this.setState({ rafId: requestAnimationFrame(this.tick) });
   }
 
-  checkAuth(){
-    if (!this.props.loggedIn){
+  checkAuth() {
+    if (!this.props.loggedIn) {
       this.props.openModal();
     }
   }
@@ -189,14 +189,14 @@ export class Splash extends React.Component {
 
 const mSTP = (state) => {
   return {
-    loggedIn: Object.keys(state.session.user).length
-  }
-}
+    loggedIn: Object.keys(state.session.user).length,
+  };
+};
 
 const mDTP = (dispatch) => {
   return {
-    openModal: () => dispatch(openModal('login'))
-  }
-}
+    openModal: () => dispatch(openModal("login")),
+  };
+};
 
 export const SplashContainer = connect(mSTP, mDTP)(Splash);
