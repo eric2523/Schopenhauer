@@ -16,7 +16,7 @@ import { EditAlertModalContainer } from "./templates/edit-alert-modal";
 export const App = () => {
   return (
     <div className="main-div">
-      <header>
+      <header className="nav-bar-head">
         <NavBarIndex />
       </header>
       <SongUploadModal />
