@@ -8,7 +8,8 @@
   display: flex;
   justify-content: space-between;
   background: #171717;
-  padding: 10px 0 10px 0;
+  /* padding: 10px 0 10px 0; */
+  height: 60px;
   box-shadow: 0px -1px 3px 0.5px black;
 }
 /* 
@@ -19,6 +20,7 @@
 .nav-bar-ul {
   display: flex;
   width: auto; 
+  height: 100%;
 }
 
 #nav-github-link{
@@ -29,7 +31,7 @@
 }
 
 #nav-github-link:hover{
-  color: rgb(160, 159, 159);
+  color: #41bfef;
 }
 
 .navbar-item-li {
@@ -75,6 +77,8 @@
   transition: background-color 300ms ease-in-out;
   margin: 0 10px 0 10px;
   border-radius: 5px;
+  display: flex;
+  padding: 0 4px;
 }
 
 .nav-link-li:hover {
@@ -107,7 +111,7 @@
 
 .active-blue li {
   color: #41bfef;
-  border-bottom: 1px solid #41bfef;
+  border-bottom: 3px solid #41bfef;
 }
 
 .nav-link-li.active-blue:hover{
@@ -149,6 +153,7 @@
 .session-btns:hover{
   background-color: #186aa8;
 }
+
 
 #log-in{
   background-color: #9c9b9b;
