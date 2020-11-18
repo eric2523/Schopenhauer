@@ -89,7 +89,7 @@ class NavBarIndexComponent extends React.Component {
           <Link to="/">
             <div className="small-icon"></div>
           </Link>
-          <Link to="/">
+          <Link className="nav-left-title" to="/">
             SCHOPENHAUER
           </Link>
         </div>
