@@ -74,7 +74,7 @@
   width: 40%;
 }
 
-.templ-header-left h1 {
+.templ-header-left h1, .templates-header.full h1 {
   font-size: 45px;
   transition: all 900ms ease-in-out;
 }
