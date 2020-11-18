@@ -90,7 +90,7 @@
   display: flex;
 }
 
-.fa-github {
+.fa-github, .fa-linkedin {
   font-size: 30px;
   margin: 10px;
   transition: all 300ms ease-in-out;
@@ -103,4 +103,10 @@
 
 .about-github-icon {
   color: #fff;
+}
+
+.profile-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
