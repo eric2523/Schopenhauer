@@ -12,6 +12,7 @@ import { TemplatesIndexContainer } from "./templates/templates-index";
 import { VisualizerEditContainer } from "./visualizers/visualizer-edit-page";
 import { AboutPage } from "./about-page/about-page";
 import { EditAlertModalContainer } from "./templates/edit-alert-modal";
+import { Footer } from "./footer/footer";
 
 export const App = () => {
   return (
@@ -42,6 +43,7 @@ export const App = () => {
         <Route path="/" component={LandingPageIndex} />
         <Redirect to="/" />
       </Switch>
+      <Route path={["/about", "/templates", "/profile"]} component={Footer} />
     </div>
   );
 };

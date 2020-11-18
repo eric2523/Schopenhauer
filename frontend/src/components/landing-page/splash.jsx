@@ -40,7 +40,7 @@ export class Splash extends React.Component {
   componentDidMount() {
     window.addEventListener("resize", this.updateVisualizer);
     this.bound = this.canvas.current.getBoundingClientRect();
-    this.canvas.current.height = window.innerHeight - this.bound.top;
+    this.canvas.current.height = window.innerHeight - this.bound.top
     this.canvas.current.width = window.innerWidth - this.bound.left;
     this.setState(
       {
