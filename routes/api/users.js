@@ -55,8 +55,6 @@ router.post("/signup", (req, res) => {
                 username: user.username, 
                 id: user.id, 
                 email: user.email, 
-                followers: user.followers,
-                follows: user.follows
               };
 
               jwt.sign(
@@ -67,7 +65,8 @@ router.post("/signup", (req, res) => {
                   res.json({
                     success: true,
                     token: "Bearer " + token,
-                    username: user.username
+                    username: user.username,
+                    visualizers: user.visualizers
                   });
                 }
               );
@@ -102,9 +101,7 @@ router.post("/login", (req, res) => {
         const payload = { 
           username: user.username,
           id: user.id, 
-          email: user.email,
-          followers: user.followers,
-          follows: user.follows 
+          email: user.email, 
         };
 
         jwt.sign(
@@ -115,7 +112,8 @@ router.post("/login", (req, res) => {
             res.json({
               success: true,
               token: "Bearer " + token,
-              username: user.username
+              username: user.username,
+              visualizers: user.visualizers
             });
           }
         );
@@ -249,7 +247,8 @@ router.get("/", (req, res) => {
       id: user.id, 
       email: user.email,
       followers: user.followers,
-      follows: user.follows 
+      follows: user.follows,
+      visualizers: user.visualizers 
     };
     return res.json(payload);
   })
