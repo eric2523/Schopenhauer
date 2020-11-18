@@ -59,7 +59,7 @@ class NavBarIndexComponent extends React.Component {
     </a>
 
     // navListItems.splice(2, 0, repoIcon);
-    navListItems.unshift(repoIcon);
+    // navListItems.unshift(repoIcon);
 
     let btn = null;
     if (!this.props.loggedIn) {
