@@ -20,6 +20,7 @@ class ProfileBioComponent extends React.Component {
   constructor(props){
     super(props)
     this.toggleFollow = this.toggleFollow.bind(this);
+    this.editProfPic = this.editProfPic.bind(this);
   }
 
 
@@ -29,6 +30,10 @@ class ProfileBioComponent extends React.Component {
     } else {
       this.props.follow()
     }
+  }
+
+  editProfPic(){
+
   }
 
   render(){
@@ -41,6 +46,9 @@ class ProfileBioComponent extends React.Component {
     return(
       <div className="profile-bio">
         <i className="fas fa-user"></i>
+        <div className="edit-photo">
+          <i className="fas fa-camera"></i>
+        </div>
         <div className="profile-bio-right">
           <div className="profile-title">
             <div>
