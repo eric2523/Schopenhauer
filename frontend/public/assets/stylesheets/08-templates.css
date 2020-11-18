@@ -7,7 +7,8 @@
 }
 
 .templates {
-  height: 100vh;
+  /* height: 100vh; */
+  padding-bottom: 30px;
 }
 
 .templ-li {
@@ -56,6 +57,7 @@
   padding: 0 15px 30px 15px;
   background: #171717;
   height: 35%;
+  min-height: 300px;
 }
 
 .templ-header-right {
