@@ -59,7 +59,7 @@ class NavBarIndexComponent extends React.Component {
     </a>
 
     // navListItems.splice(2, 0, repoIcon);
-    navListItems.unshift(repoIcon);
+    // navListItems.unshift(repoIcon);
 
     let btn = null;
     if (!this.props.loggedIn) {
@@ -89,7 +89,7 @@ class NavBarIndexComponent extends React.Component {
           <Link to="/">
             <div className="small-icon"></div>
           </Link>
-          <Link to="/">
+          <Link className="nav-left-title" to="/">
             SCHOPENHAUER
           </Link>
         </div>

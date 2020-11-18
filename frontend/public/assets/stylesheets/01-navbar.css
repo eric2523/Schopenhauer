@@ -19,29 +19,29 @@
 
 .nav-bar-ul {
   display: flex;
-  width: auto; 
+  width: auto;
   height: 100%;
 }
 
-#nav-github-link{
+#nav-github-link {
   display: flex;
   align-items: center;
   margin: 0 10px 0 10px;
   color: #fff;
 }
 
-#nav-github-link:hover{
+#nav-github-link:hover {
   color: #41bfef;
 }
 
 .navbar-item-li {
-  font-family: 'Cabin', sans-serif;
+  font-family: "Cabin", sans-serif;
   padding: 10px;
   /* text-transform: uppercase; */
   text-transform: capitalize;
   /* font-size: 13px; */
   font-size: 16px;
-  /* letter-spacing: 4px; */
+  letter-spacing: 0.07rem;
   font-weight: 400;
   /* width: 100px; */
   display: flex;
@@ -50,7 +50,7 @@
   /* transition: background-color 600ms ease-in-out; */
 }
 
-.nav-redirect{
+.nav-redirect {
   display: flex;
 }
 
@@ -74,15 +74,19 @@
 }
 
 .nav-link-li {
-  transition: background-color 300ms ease-in-out;
   margin: 0 10px 0 10px;
-  border-radius: 5px;
   display: flex;
   padding: 0 4px;
+  border-bottom: 3px solid transparent;
 }
 
-.nav-link-li:hover {
-  background: rgba(93, 93, 93, 0.5);
+.nav-link-li li {
+  transition: color 300ms ease-in-out;
+}
+
+.nav-link-li:hover li {
+  color: #41bfef;
+  border-bottom: 3px solid #41bfef;
 }
 
 .small-icon {
@@ -106,7 +110,7 @@
   margin: 0 15px 0 15px;
   font-size: 13px;
   font-weight: 100;
-  font-family: 'Cabin', sans-serif;
+  font-family: "Cabin", sans-serif;
 }
 
 .active-blue li {
@@ -114,16 +118,16 @@
   border-bottom: 3px solid #41bfef;
 }
 
-.nav-link-li.active-blue:hover{
+.nav-link-li.active-blue:hover {
   background: none;
 }
 
-#nav-github-icon{
+#nav-github-icon {
   margin: 0 0;
   font-size: 40px;
 }
 
-.nav-bar-left{
+.nav-bar-left {
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -131,34 +135,37 @@
   margin-right: 10px;
 }
 
-.nav-bar-left a{
-  font-family: 'Cabin', sans-serif;
+.nav-bar-left a {
+  font-family: "Cabin", sans-serif;
 }
 
-.nav-bar-right{
+.nav-bar-right {
   display: flex;
   align-items: center;
 }
 
-.nav-bar-ul #nav-github-icon{
+.nav-bar-ul #nav-github-icon {
   width: 25px;
   height: 25px;
   margin-right: 10px;
 }
 
-#sign-up{
+#sign-up {
   margin-right: 10px;
 }
 
-.session-btns:hover{
+.session-btns:hover {
   background-color: #186aa8;
 }
 
-
-#log-in{
+#log-in {
   background-color: #9c9b9b;
 }
 
-#log-in:hover{
+#log-in:hover {
   background-color: #797676;
+}
+
+.nav-left-title {
+  transition: color 300ms ease-in-out;
 }
