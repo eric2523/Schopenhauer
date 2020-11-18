@@ -33,7 +33,7 @@ class Discover extends React.Component{
             Discover other Creators
           </h1>
         </header>
-        <div className='seperator'>Some corny catchphrase</div>
+        <div className='seperator'>All Users</div>
         <ul className="discover-list">
           {userList}
         </ul>
