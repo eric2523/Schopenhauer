@@ -7,11 +7,12 @@
   align-items: center;
   padding: 15px 20px;
   background-color: #000000;
+  justify-content: space-between;
 }
 
 .profile-pic-icon.small{
-  width: 40px;
-  height: 40px;
+  width: 25px;
+  height: 25px;
   margin-right: 20px;
   filter: grayscale(100%);
 }
@@ -44,4 +45,8 @@
   height: 25px;
   width: 25px;
   cursor: default;
+}
+
+.footer-items {
+  display: flex;
 }
