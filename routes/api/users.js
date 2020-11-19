@@ -115,7 +115,8 @@ router.post("/login", (req, res) => {
             res.json({
               success: true,
               token: "Bearer " + token,
-              username: user.username
+              username: user.username,
+              photoUrl: user.photoUrl
             });
           }
         );
@@ -248,6 +249,7 @@ router.get("/", (req, res) => {
       username: user.username,
       id: user.id, 
       email: user.email,
+      photoUrl: user.photoUrl,
       followers: user.followers,
       follows: user.follows 
     };
