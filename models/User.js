@@ -16,7 +16,10 @@ const UserSchema = new Schema(
       default: "Anonymous Dreamer"
     },
     followers: [{type: mongoose.Types.ObjectId, ref: 'User'}],
-    follows: [{type: mongoose.Types.ObjectId, ref: 'User'}]
+    follows: [{type: mongoose.Types.ObjectId, ref: 'User'}],
+    photoUrl: {
+      type: String,
+    },
   },
   {
     timestamps: true,

@@ -40,8 +40,10 @@ export class ProfileVisualizerItem extends React.Component {
         connectMusic={this.props.connectMusic}
         startPlaying={this.props.startPlaying}
         visualizerSettings={this.props.visualizer}
-        canvasWidth={this.state.width}
-        canvasHeight={this.state.width}
+        // canvasWidth={this.state.width}
+        // canvasHeight={this.state.width}
+        canvasWidth={533}
+        canvasHeight={400}
         onHover={this.props.onHover}
         disconnectMusic={this.props.disconnectMusic}
       />
