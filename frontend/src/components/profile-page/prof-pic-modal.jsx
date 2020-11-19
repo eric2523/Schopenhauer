@@ -16,7 +16,7 @@ class UploadPhotoModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      imageUrl: "",
+      imageUrl: this.props.user.photoUrl ? this.props.user.photoUrl : '',
       imageFile: null,
     }
 
