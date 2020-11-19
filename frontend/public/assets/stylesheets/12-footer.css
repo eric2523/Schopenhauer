@@ -7,11 +7,12 @@
   align-items: center;
   padding: 15px 20px;
   background-color: #000000;
+  justify-content: space-between;
 }
 
 .profile-pic-icon.small{
-  width: 40px;
-  height: 40px;
+  width: 25px;
+  height: 25px;
   margin-right: 20px;
   filter: grayscale(100%);
 }
@@ -37,11 +38,15 @@
 }
 
 .footer-container a #nav-github-icon{
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .footer-container .small-icon{
   height: 25px;
   width: 25px;
   cursor: default;
+}
+
+.footer-items {
+  display: flex;
 }

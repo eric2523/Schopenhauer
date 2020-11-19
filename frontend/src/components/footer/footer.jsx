@@ -10,15 +10,17 @@ export const Footer = () => {
   return (
     <ul className="footer-container">
       <div className="small-icon"></div>
-      <div id="footer-text">SCHOPENHAUER</div>
-      <a 
-        id="nav-github-link"
-        key="nav-github-link"
-        href="https://github.com/eric2523/Schopenhauer" 
-        target="_blank">
-        <i id="nav-github-icon" className="fab fa-github"></i>
-      </a>
-      { items }
+      {/* <div id="footer-text">SCHOPENHAUER</div> */}
+      <div className="footer-items">
+        <a 
+          id="nav-github-link"
+          key="nav-github-link"
+          href="https://github.com/eric2523/Schopenhauer" 
+          target="_blank">
+          <i id="nav-github-icon" className="fab fa-github"></i>
+        </a>
+        { items }
+      </div>
     </ul>
   )
 }
