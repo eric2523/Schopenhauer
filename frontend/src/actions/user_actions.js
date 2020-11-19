@@ -85,3 +85,20 @@ export const getUserAndVisualizers = (id) => (dispatch) => {
   dispatch(getUser(id));
   return fetchUserVisualizer(id)(dispatch);
 }
+
+export const updatePhoto = (imageFile, metaData) => (dispatch) => {
+  return UserAPIUtil.uploadPhoto(imageFile)
+    .then((payload) => {
+      const DBEntry = {
+        photoUrl: payload.data.photoUrl
+      };
+      return UserAPIUtil.uploadPhotoDB(
+        Object.assign({}, DBEntry, metaData)
+      ).then(
+        (user) => dispatch(receiveUser(user)),
+        (err) => dispatch(receiveUserError(err))
+      )
+    },
+    (err) => dispatch(receiveUserError(err))  
+  )
+}

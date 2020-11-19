@@ -19,3 +19,15 @@ export const getFollows = (followerId) => {
 export const getFollowers = (userId) => {
   return axios.get(`/api/users/followers/?userId=${userId}`)
 }
+
+export const uploadPhoto = (photo) => {
+  return axios.post("/api/users/uploadPhoto", photo, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    }
+  });
+}
+
+export const uploadPhotoDB = (payload) => {
+  return axios.patch("/api/users/update/", payload) //NEED TO COME BACK WITH CORRECT ROUTE
+}

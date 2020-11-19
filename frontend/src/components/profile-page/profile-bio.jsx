@@ -20,7 +20,7 @@ class ProfileBioComponent extends React.Component {
   constructor(props){
     super(props)
     this.toggleFollow = this.toggleFollow.bind(this);
-    this.editProfPic = this.editProfPic.bind(this);
+    this.handleUpload = this.handleUpload.bind(this);
   }
 
 
@@ -32,7 +32,7 @@ class ProfileBioComponent extends React.Component {
     }
   }
 
-  editProfPic(){
+  handleUpload(){
 
   }
 
@@ -45,10 +45,23 @@ class ProfileBioComponent extends React.Component {
     //   this.props.user.email
     return(
       <div className="profile-bio">
-        <i className="fas fa-user"></i>
-        <div className="edit-photo">
+        {this.props.user.photoUrl ? 
+          <div classname='img-container'>
+            <img 
+              alt="Profile"
+              src={this.props.user.photoUrl} 
+              className="prof-photo"
+            >
+            </img>
+          </div>
+          //default user icon 
+        : <i className="fas fa-user"></i>} 
+        {this.props.self ? 
+        <div 
+          onClick={this.props.openModal('photo')}
+          className="edit-photo">
           <i className="fas fa-camera"></i>
-        </div>
+        </div> : null}
         <div className="profile-bio-right">
           <div className="profile-title">
             <div>

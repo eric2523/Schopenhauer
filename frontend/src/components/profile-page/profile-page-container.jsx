@@ -8,6 +8,7 @@ import { BeatDetection } from "../visualizers/beat_detection";
 import { getUser } from "../../actions/user_actions";
 import { UserIndex } from "./user-index";
 import { UserModal } from './user-modal';
+import { UploadPhotoModalContainer } from './prof-pic-modal';
 
 class ProfilePage extends React.Component {
   constructor(props) {
@@ -112,6 +113,11 @@ class ProfilePage extends React.Component {
       modal = <UserModal
         users={this.props.user.follows}
         title={'Following'}
+        closeModal={this.closeModal}
+      />;
+    } else if (this.state.modal === 'photo'){
+      modal = <UploadPhotoModalContainer
+        user={this.props.user}
         closeModal={this.closeModal}
       />;
     }
