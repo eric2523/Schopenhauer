@@ -25,7 +25,6 @@ class Discover extends React.Component{
       this.props.users.map((user, i) => {
         return <DiscoverItemContainer key={i} user={user} />
       }) : [];
-    console.log(userList);
     return (
       <div className="discover-page">
         <header className="templates-header full">

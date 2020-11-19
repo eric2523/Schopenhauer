@@ -7,7 +7,7 @@ import { followUser, unfollowUser } from "../../actions/user_actions";
 const mSTP = (state, ownProps) => {
   return {
     currentUserId: state.session.user.id,
-    isFollowing: state.session.user.follows.includes(ownProps.user.id)
+    isFollowing: ownProps.user.followers.includes(state.session.user.id)
   }
 }
 
