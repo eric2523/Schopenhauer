@@ -161,7 +161,7 @@ i.fas.fa-palette{
   padding-bottom: 80px;
   display: flex; 
   flex-wrap: wrap;
-  justify-content: center;
+  /* justify-content: center; */
   background-color: #313030;
   z-index: 2;
   width: 100%;
@@ -170,20 +170,26 @@ i.fas.fa-palette{
 .vis-item{ 
   padding-right: 30px;
   padding-left: 30px;
-  padding-bottom: 30px;
+  padding-bottom: 80px;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 
 
 .vis-item-meta{
   display: flex;
-  width: 100%;
+  width: 533px; 
   justify-content: space-between;
   font-weight: 100;
   letter-spacing: 0.08rem;
   font-size: 20px;
   padding-left: 10px;
   padding-right: 10px;
+  align-self: center;
 }
 
 .vis-item-meta > div{
@@ -216,3 +222,16 @@ i.fas.fa-palette{
 .edit-photo:hover{
   filter: brightness(70%);
 }
+/* .vis-item .li-inner-div-color{
+  width: 25vw;
+} */
+/* 
+.vis-item:nth-child(odd){
+  align-items: flex-end;
+  padding-right: 50px;
+}
+
+.vis-item:nth-child(even){
+  align-items: flex-start;
+  padding-left: 50px;
+} */

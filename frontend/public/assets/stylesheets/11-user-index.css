@@ -4,7 +4,11 @@
 }
 
 .user-index-title{
-  font-size: 36px;
+  font-family: 'Cabin', sans-serif;
+  text-transform: uppercase;
+  color: #41bfef;
+  letter-spacing: 0.25rem;
+  font-size: 35px;
   padding-left: 30px;
   padding-bottom: 10px;
   margin-bottom: 0;
@@ -15,7 +19,7 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 10px;
-  max-height: 30vh;
+  max-height: 40vh;
   overflow-y: auto;
   /* padding-right: 20px;
   padding-left: 20px; */
@@ -23,8 +27,8 @@
 
 .user-item{ 
   display: flex;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 23px;
+  padding-bottom: 23px;
   /* padding-left: 10px; */
   padding-left: 30px;
   align-items: center;

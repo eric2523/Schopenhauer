@@ -8,48 +8,55 @@
   display: flex;
   justify-content: space-between;
   background: #171717;
-  padding: 10px 0 10px 0;
+  /* padding: 10px 0 10px 0; */
+  height: 60px;
+  box-shadow: 0px -1px 3px 0.5px black;
 }
-
+/* 
 .nav-bar-div > * {
   width: 33%;
-}
+} */
 
 .nav-bar-ul {
   display: flex;
-  width: auto; 
+  width: auto;
+  height: 100%;
 }
 
-#nav-github-link{
+#nav-github-link {
   display: flex;
   align-items: center;
   margin: 0 10px 0 10px;
   color: #fff;
 }
 
-#nav-github-link:hover{
-  color: rgb(160, 159, 159);
+#nav-github-link:hover {
+  color: #41bfef;
 }
 
 .navbar-item-li {
-  padding: 8px;
-  text-transform: uppercase;
-  font-size: 13px;
-  font-weight: 100;
-  width: 100px;
+  font-family: "Cabin", sans-serif;
+  padding: 10px;
+  /* text-transform: uppercase; */
+  text-transform: capitalize;
+  /* font-size: 13px; */
+  font-size: 16px;
+  letter-spacing: 0.07rem;
+  font-weight: 400;
+  /* width: 100px; */
   display: flex;
   justify-content: center;
   align-items: center;
   /* transition: background-color 600ms ease-in-out; */
 }
 
-.nav-redirect{
+.nav-redirect {
   display: flex;
 }
 
 .session-btns {
   padding: 8px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   font-size: 13px;
   font-weight: 100;
   width: 100px;
@@ -59,6 +66,7 @@
   cursor: pointer;
   border-radius: 5px;
   transition: background-color 300ms ease-in-out;
+  background-color: #2185d0;
 }
 
 .session-btns:hover {
@@ -66,13 +74,19 @@
 }
 
 .nav-link-li {
-  transition: background-color 300ms ease-in-out;
   margin: 0 10px 0 10px;
-  border-radius: 5px;
+  display: flex;
+  padding: 0 4px;
+  border-bottom: 3px solid transparent;
 }
 
-.nav-link-li:hover {
-  background: rgba(93, 93, 93, 0.5);
+.nav-link-li li {
+  transition: color 300ms ease-in-out;
+}
+
+.nav-link-li:hover li {
+  color: #41bfef;
+  border-bottom: 3px solid #41bfef;
 }
 
 .small-icon {
@@ -96,13 +110,62 @@
   margin: 0 15px 0 15px;
   font-size: 13px;
   font-weight: 100;
+  font-family: "Cabin", sans-serif;
 }
 
 .active-blue li {
   color: #41bfef;
+  border-bottom: 3px solid #41bfef;
 }
 
-#nav-github-icon{
+.nav-link-li.active-blue:hover {
+  background: none;
+}
+
+#nav-github-icon {
   margin: 0 0;
   font-size: 40px;
+}
+
+.nav-bar-left {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 4px;
+  margin-right: 10px;
+}
+
+.nav-bar-left a {
+  font-family: "Cabin", sans-serif;
+}
+
+.nav-bar-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-bar-ul #nav-github-icon {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+
+#sign-up {
+  margin-right: 10px;
+}
+
+.session-btns:hover {
+  background-color: #186aa8;
+}
+
+#log-in {
+  background-color: #9c9b9b;
+}
+
+#log-in:hover {
+  background-color: #797676;
+}
+
+.nav-left-title {
+  transition: color 300ms ease-in-out;
 }

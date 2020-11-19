@@ -1,8 +1,8 @@
 export const mainNavPaths = () => ({
-  home: {
-    name: "home",
-    path: "/"
-  },
+  // home: {
+  //   name: "home",
+  //   path: "/"
+  // },
   about: {
     name: "about",
     path: "/about",

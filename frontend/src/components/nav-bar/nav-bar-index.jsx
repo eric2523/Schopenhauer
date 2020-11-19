@@ -44,6 +44,7 @@ class NavBarIndexComponent extends React.Component {
     }
     let navListItems = [];
     for (const keys in navPaths) {
+      if(!this.props.loggedIn && keys === 'profile') break;
       let { name, path } = navPaths[keys];
       navListItems.push(<NavBarItem key={name} name={name} path={path} />);
     }
@@ -57,16 +58,17 @@ class NavBarIndexComponent extends React.Component {
       <i id="nav-github-icon" className="fab fa-github"></i>
     </a>
 
-    navListItems.splice(2, 0, repoIcon);
+    // navListItems.splice(2, 0, repoIcon);
+    // navListItems.unshift(repoIcon);
 
     let btn = null;
     if (!this.props.loggedIn) {
       btn = (
         <div className="login-signup-btn-div">
-          <button className="session-btns" onClick={this.props.openSignup}>
+          <button id="sign-up" className="session-btns" onClick={this.props.openSignup}>
             <span className="btn-ctx">Sign Up</span>
           </button>
-          <button className="session-btns" onClick={this.props.openLogin}>
+          <button id="log-in" className="session-btns" onClick={this.props.openLogin}>
             <span className="btn-ctx">Log in</span>
           </button>
         </div>
@@ -83,11 +85,18 @@ class NavBarIndexComponent extends React.Component {
 
     return (
       <div className="nav-bar-div">
-        <Link to="/">
-          <div className="small-icon"></div>
-        </Link>
-        <ul className="nav-bar-ul">{navListItems}</ul>
-        {btn}
+        <div className="nav-bar-left">
+          <Link to="/">
+            <div className="small-icon"></div>
+          </Link>
+          <Link className="nav-left-title" to="/">
+            SCHOPENHAUER
+          </Link>
+        </div>
+        <div className="nav-bar-right">
+          <ul className="nav-bar-ul">{navListItems}</ul>
+          {btn}
+        </div>
       </div>
     );
   }
