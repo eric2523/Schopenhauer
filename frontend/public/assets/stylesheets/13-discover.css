@@ -26,18 +26,60 @@
 
 .discover-item-container{
   display: flex;
-  width: 40%;
+  width: 45%;
   justify-content: space-between;
-  padding: 10px 10px;
+  padding: 20px 16px;
   background-color: #000000;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 15px;
+  align-items: center;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.473);
+}
+
+.discover-item-left{
+  display: flex;
   align-items: center;
 }
 
+.discover-item-left > div{
+  display: flex;
+  flex-direction: column; 
+  padding: 0 15px;
+}
+
+.photo-link{
+  height: 60px; 
+  width: 60px;
+}
+
+.photo-link .fa-user{
+  font-size: 60px;
+}
+
+.photo-link img{
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.discover-item-left > div a{
+  font-weight: 500; 
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.discover-item-left > div a:hover{
+  opacity: 0.8;
+}
+
+.discover-item-left > div > div{
+  font-size: 14px;
+}
+
 .discover-item-container:nth-child(odd){
-  margin-right: 20%;
+  margin-right: 10%;
 }
 
 .discover-item-container button{
@@ -46,8 +88,12 @@
 
 .seperator{
   width: 50%;
-  padding-bottom: 20px;
-  border-bottom: 2px solid white;
+  /* padding-bottom: 20px; */
+  padding: 20px 16px;
+  /* border-bottom: 2px solid white; */
+  background-color: black;
+  border-radius: 8px;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.473);
   display: block;
   margin-top: 20px;
   font-size: 24px;

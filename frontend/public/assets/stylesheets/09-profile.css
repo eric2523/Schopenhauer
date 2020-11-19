@@ -126,6 +126,8 @@ i.fas.fa-palette{
 
 .item-overlay{
   position:relative;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.473);
+  border-radius: 6px;
 }
 
 .item-overlay:hover{

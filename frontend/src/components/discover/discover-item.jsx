@@ -39,13 +39,16 @@ class DiscoverItem extends React.Component {
     return (
       <li className="discover-item-container">
         <div className="discover-item-left">
-          <Link to={`/profile/${this.props.user.id}`}>
-            <i className="fas fa-user"></i>
+          <Link className="photo-link" to={`/profile/${this.props.user.id}`}>
+            {this.props.user.photoUrl ? 
+            <img alt='Preview' src={this.props.user.photoUrl}></img>
+          : <i className="fas fa-user"></i>}
           </Link>
           <div>
             <Link to={`/profile/${this.props.user.id}`}>
               <div>{this.props.user.username}</div>
             </Link>
+            <div>Visualizers: &nbsp; </div>
             <div>Followers: &nbsp; {this.props.user.followers.length}</div>
           </div>
         </div>
