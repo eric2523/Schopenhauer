@@ -74,8 +74,16 @@
   cursor: pointer;
 }
 
+.profile-stats div:hover{
+  opacity: 0.8;
+}
+
 .profile-stats div:first-child{
   cursor: default;
+}
+
+.profile-stats div:first-child:hover{
+  opacity: 1;
 }
 
 .profile-stats div:last-child{
