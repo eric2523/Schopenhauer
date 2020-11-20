@@ -44,7 +44,7 @@ class NavBarIndexComponent extends React.Component {
     }
     let navListItems = [];
     for (const keys in navPaths) {
-      if(!this.props.loggedIn && keys === 'profile') break;
+      if(!this.props.loggedIn && (keys === 'profile' || keys === 'discover')) break;
       let { name, path } = navPaths[keys];
       navListItems.push(<NavBarItem key={name} name={name} path={path} />);
     }
