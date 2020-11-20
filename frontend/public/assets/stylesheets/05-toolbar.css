@@ -122,3 +122,12 @@
 .ui.input > input {
   text-align: right;
 }
+
+.ui.transparent.input.toolbar-input-container input[type=text]{
+  padding-right: 20px !important;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  margin-left: 10px;
+} 
