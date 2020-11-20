@@ -55,8 +55,6 @@ router.post("/signup", (req, res) => {
                 username: user.username, 
                 id: user.id, 
                 email: user.email, 
-                followers: user.followers,
-                follows: user.follows
               };
 
               jwt.sign(
@@ -67,7 +65,8 @@ router.post("/signup", (req, res) => {
                   res.json({
                     success: true,
                     token: "Bearer " + token,
-                    username: user.username
+                    username: user.username,
+                    visualizers: user.visualizers
                   });
                 }
               );
@@ -104,7 +103,8 @@ router.post("/login", (req, res) => {
           id: user.id, 
           email: user.email,
           followers: user.followers,
-          follows: user.follows 
+          follows: user.follows,
+          photoUrl: user.photoUrl,
         };
 
         jwt.sign(
@@ -116,6 +116,7 @@ router.post("/login", (req, res) => {
               success: true,
               token: "Bearer " + token,
               username: user.username,
+              visualizers: user.visualizers,
               photoUrl: user.photoUrl
             });
           }
@@ -251,10 +252,81 @@ router.get("/", (req, res) => {
       email: user.email,
       photoUrl: user.photoUrl,
       followers: user.followers,
-      follows: user.follows 
+      follows: user.follows,
+      visualizers: user.visualizers 
     };
     return res.json(payload);
   })
 });
+
+// user index backend route
+
+router.get("/index",
+  passport.authenticate("jwt", {session: false}),
+  (req, res) => {
+    User.find({}, function (err, users) {
+      if (err) {
+        errors.users = "Bad database query!";
+        return res.status(400).json(errors);
+      }
+      let usersInfo = users.map((user) => {
+        return {
+          username: user.username,
+          id: user.id,
+          followerCount: user.followers.length,
+          followCount: user.follows.length,
+          visualizerCount: user.visualizers.length,
+          photoUrl: user.photoUrl
+        }
+      });
+      return res.json(usersInfo);
+    });
+  }
+);
+
+// photo uploading capability
+
+const upload = require("./photo_upload_aws");
+const singleUpload = upload.single("image");
+
+router.post(
+  "/uploadPhoto",
+  passport.authenticate("jwt", { session: false}), 
+  singleUpload,
+  (req, res) => {
+    singleUpload(req, res, function (err) {
+      if (err) {
+        return res.status(422).json({errors: err.message});
+      }
+      return res.json({
+        photoUrl: req.file.location
+      });
+    });
+  }
+);
+
+router.post(
+  "/uploadPhotoDB",
+  (req, res) => {
+    console.log("Request to update photo for " + req.body.userId + " with " + req.body.photoUrl);
+    User.findById(req.body.userId, function (err, user) {
+      if (err) {
+        errors.user = "No user with queried id";
+        return res.status(400).json(errors);
+      }
+      user.photoUrl = req.body.photoUrl;
+      user.save().then((user) => {
+        res.json({
+          username: user.username,
+          id: user.id, 
+          email: user.email,
+          photoUrl: user.photoUrl,
+          followers: user.followers,
+          follows: user.follows 
+        });
+      });
+    });
+  }
+);
 
 module.exports = router;

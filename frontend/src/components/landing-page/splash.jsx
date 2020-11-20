@@ -38,6 +38,10 @@ export class Splash extends React.Component {
   }
 
   componentDidMount() {
+    this.playBtn = document.getElementById("lets-play");
+    this.buttonGlow = setInterval(() => {
+      this.playBtn.classList.toggle('brighten')
+    }, 1500)
     window.addEventListener("resize", this.updateVisualizer);
     this.bound = this.canvas.current.getBoundingClientRect();
     this.canvas.current.height = window.innerHeight - this.bound.top
@@ -65,6 +69,7 @@ export class Splash extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateVisualizer);
+    clearInterval(this.buttonGlow);
     this.audio.pause();
     cancelAnimationFrame(this.state.rafId);
     this.setState({
@@ -104,11 +109,15 @@ export class Splash extends React.Component {
     }
     if (!this.state.play) {
       this.audio.play();
+      clearInterval(this.buttonGlow);
       this.setState({
         play: true,
       });
     } else {
       this.audio.pause();
+      this.buttonGlow = setInterval(() => {
+        this.playBtn.classList.toggle('brighten')
+      }, 1500)
       this.setState({
         play: false,
       });
@@ -149,8 +158,10 @@ export class Splash extends React.Component {
     }
     const buttonText = !this.state.play ? (
       <i className="play icon white-audio-icon"></i>
+      // <i className="icon fas fa-play-circle"></i>
     ) : (
       <i className="pause icon white-audio-icon"></i>
+      // <i className="icon fas fa-pause-circle"></i>
     );
     return (
       <div className="splash-outer-div">
@@ -174,11 +185,10 @@ export class Splash extends React.Component {
             </Link>
           </div>
           <button
-            className="ui primary button"
-            id="lets-play"
-            onClick={this.togglePlay}
-          >
-            LET'S DANCE
+          className="ui primary button"
+          id="lets-play"
+          onClick={this.togglePlay}
+          > LETS DANCE
             {buttonText}
           </button>
         </div>
