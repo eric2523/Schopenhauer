@@ -16,6 +16,17 @@ router.post(
       songId: req.body.songId,
     });
     newVisualizer.save().then((visualizer) => {
+      // update User embedding
+      User.findById(visualizer.userId, function (err, userOwner) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        console.log("Visualizer belongs to " + userOwner.username);
+        userOwner.visualizers.push(visualizer._id)
+        userOwner.save()
+      });
+
       return res.json({
         _id: visualizer._id,
         name: visualizer.name,
@@ -58,9 +69,21 @@ router.delete(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Visualizer.findByIdAndDelete(req.query.id)
-      .then(() => res.status(200).json("success!"))
-      .catch((err) => res.status(404).json(err));
+    // Remove from user's list of visualizers
+      Visualizer.findById(req.query.id, function(err, visualizer) {
+        User.findById(visualizer.userId, function(err, userOwner) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          userOwner.visualizers.pull({_id: visualizer._id});
+          userOwner.save().then(() => {
+            Visualizer.findByIdAndDelete(req.query.id)
+            .then(() => res.status(200).json("success!"))
+            .catch((err) => res.status(404).json(err));
+          });
+        })
+      });
   }
 );
 
