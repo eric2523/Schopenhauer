@@ -33,14 +33,14 @@ class ProfilePage extends React.Component {
   }
 
   componentDidMount() {
-    console.log('component mounted')
+    // console.log('component mounted')
     window.addEventListener("resize", this.updateVisualizer);
-    if (!this.props.user) {
-      console.log("no user");
-      this.props.getUser().then(this.initializeCanvas)//then(() => {setTimeout(this.initializeCanvas, 1000)});
-    } else {
-      this.initializeCanvas();
-    }
+    // if (!this.props.user) {
+    //   console.log("no user");
+    this.props.getUser().then(this.initializeCanvas)//then(() => {setTimeout(this.initializeCanvas, 1000)});
+    // } else {
+    //   this.initializeCanvas();
+    // }
   }
 
   updateVisualizer() {
@@ -130,7 +130,7 @@ class ProfilePage extends React.Component {
       />;
     }
     return (
-      <>
+      <div>
       {modal}
       <div className="profile-index">
         <canvas className="header-bg" ref={this.canvas}></canvas>
@@ -138,8 +138,8 @@ class ProfilePage extends React.Component {
           <ProfileBio
             user={this.props.user}
             photoUrl={this.props.user.photoUrl}
-            followers={this.props.user.followers}
-            follows={this.props.user.follows}
+            followers={this.props.user.followers ? this.props.user.followers : []}
+            follows={this.props.user.follows ? this.props.user.follows : []}
             count={this.props.visualizers.length}
             self={self}
             currentUser={this.props.currentUser}
@@ -152,7 +152,7 @@ class ProfilePage extends React.Component {
           currentUser={this.props.currentUser}
         />
       </div>
-      </>
+      </div>
     );
   }
 }

@@ -31,3 +31,7 @@ export const uploadPhoto = (photoForm) => {
 export const uploadPhotoDB = (payload) => {
   return axios.post("/api/users/uploadPhotoDB", payload) //NEED TO COME BACK WITH CORRECT ROUTE
 }
+
+export const getAllUsers = () => {
+  return axios.get("/api/users/index");
+}

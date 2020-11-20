@@ -46,22 +46,25 @@ class ProfileBioComponent extends React.Component {
               alt="Profile"
               src={this.props.photoUrl} 
               className="prof-photo"
-            >
+              >
             </img>
           </div>
           //default user icon 
-        : <i className="fas fa-user"></i>} 
-        {this.props.self ? 
-        <div 
+          : <div><i className="fas fa-user"></i></div>} 
+        <div>
+          {this.props.self ? 
+          <div 
           onClick={this.props.openModal('photo')}
           className="edit-photo">
-          <i className="fas fa-camera"></i>
-        </div> : null}
+            <i className="fas fa-camera"></i>
+          </div> : null}
+        </div>
         <div className="profile-bio-right">
           <div className="profile-title">
             <div>
               {this.props.user.username}
             </div>
+            <div>
             {!this.props.self ? 
             <button 
             id="follow-btn"
@@ -71,6 +74,7 @@ class ProfileBioComponent extends React.Component {
               {buttonText}
             </button>
             : null}
+            </div>
             </div>
           <div className="profile-stats">
             <div>Visualizers: &nbsp; {this.props.count}</div>
