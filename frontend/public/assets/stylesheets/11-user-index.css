@@ -36,6 +36,27 @@
   min-height: 58px;
 }
 
+.user-item .user.icon{
+  font-size: 30px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center
+}
+
+.user-item .img-container{
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
+}
+
+.img-container img{
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+
 .user-item:hover{
   background-color: #6d6d6d;
 }

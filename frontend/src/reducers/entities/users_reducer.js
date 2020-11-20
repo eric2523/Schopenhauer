@@ -22,7 +22,13 @@ export const usersReducer = (state = {}, action) => {
       }
       return newState;
     case RECEIVE_ALL_USERS:
-      return action.users
+      action.users.forEach((user) => {
+        // if (!newState[user.id]){
+          if (user.visualizerCount > 0) console.log(user.visualizerCount)
+          newState[user.id] = Object.assign({}, newState[user.id], user);
+        // }
+      })
+      return newState;
     case RECEIVE_FOLLOWS:
       newState[action.followerId].follows = action.follows.data;
       return newState;

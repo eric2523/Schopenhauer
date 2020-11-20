@@ -37,7 +37,11 @@ class UserItem extends React.Component {
     return (
       <Link to={`/profile/${this.props.userId}`}>
       <li className="user-item">
-        <i className="fas fa-user"></i>
+        {this.props.user.photoUrl ?
+          <div className="img-container">
+            <img alt='Preview' src={this.props.user.photoUrl}></img>
+          </div>
+          : <i className="user icon"></i>}
         <div>
           <div>{this.props.user.username}</div>
           <div>Visualizers: &nbsp; {this.props.visualizers.length}</div>

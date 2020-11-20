@@ -7,7 +7,7 @@ import { followUser, unfollowUser } from "../../actions/user_actions";
 const mSTP = (state, ownProps) => {
   return {
     currentUserId: state.session.user.id,
-    isFollowing: state.session.user.follows.includes(ownProps.user.id)
+    isFollowing: state.entities.users[state.session.user.id].follows.includes(ownProps.user.id)
   }
 }
 
@@ -39,14 +39,21 @@ class DiscoverItem extends React.Component {
     return (
       <li className="discover-item-container">
         <div className="discover-item-left">
-          <Link to={`/profile/${this.props.user.id}`}>
-            <i className="fas fa-user"></i>
+          <Link className="photo-link" to={`/profile/${this.props.user.id}`}>
+            {this.props.user.photoUrl ? 
+            <img alt='Preview' src={this.props.user.photoUrl}></img>
+          : <i className="fas fa-user"></i>}
           </Link>
           <div>
             <Link to={`/profile/${this.props.user.id}`}>
               <div>{this.props.user.username}</div>
             </Link>
-            <div>Followers: &nbsp; {this.props.user.followers.length}</div>
+            <div>Visualizers: &nbsp; {
+            this.props.user.visualizers ? 
+            this.props.user.visualizers.length : 
+            this.props.user.visualizerCount }</div>
+            <div>Followers: &nbsp; {
+            this.props.followerCount }</div>
           </div>
         </div>
         {this.props.currentUserId !== this.props.user.id ? 

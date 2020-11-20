@@ -38,6 +38,8 @@ const receiveUserError = (err) => ({
 })
 
 export const followUser = (followerId, followedId) => (dispatch) => {
+  console.log(followerId)
+  console.log(followedId)
   const payload = {
     followerId: followerId,
     followedId: followedId
@@ -101,4 +103,12 @@ export const updatePhoto = (imageFile, metaData) => (dispatch) => {
     },
     (err) => dispatch(receiveUserError(err))  
   )
+}
+
+export const getAllUsers = () => dispatch => {
+  return UserAPIUtil.getAllUsers()
+    .then(
+      users => dispatch(receiveAllUsers(users.data)),
+      err => dispatch(receiveUserError(err))
+    );
 }
