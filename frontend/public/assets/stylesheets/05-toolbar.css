@@ -58,6 +58,7 @@
 .play,
 .pause {
   color: black;
+  cursor: pointer;
 }
 
 .toolbar {
