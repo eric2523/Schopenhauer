@@ -158,8 +158,10 @@ export class Splash extends React.Component {
     }
     const buttonText = !this.state.play ? (
       <i className="play icon white-audio-icon"></i>
+      // <i className="icon fas fa-play-circle"></i>
     ) : (
       <i className="pause icon white-audio-icon"></i>
+      // <i className="icon fas fa-pause-circle"></i>
     );
     return (
       <div className="splash-outer-div">
@@ -182,14 +184,14 @@ export class Splash extends React.Component {
               <button className="ui primary button">GET STARTED NOW</button>
             </Link>
           </div>
-        </div>
-        <button
-          // className="ui primary button"
+          <button
+          className="ui primary button"
           id="lets-play"
           onClick={this.togglePlay}
-        >
-          {buttonText}
-        </button>
+          > LETS DANCE
+            {buttonText}
+          </button>
+        </div>
       </div>
     );
   }
