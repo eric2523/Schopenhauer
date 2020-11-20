@@ -256,6 +256,31 @@ router.get("/", (req, res) => {
   })
 });
 
+// user index backend route
+
+router.get("/index",
+  passport.authenticate("jwt", {session: false}),
+  (req, res) => {
+    User.find({}, function (err, users) {
+      if (err) {
+        errors.users = "Bad database query!";
+        return res.status(400).json(errors);
+      }
+      let usersInfo = users.map((user) => {
+        return {
+          username: user.username,
+          id: user.id,
+          followerCount: user.followers.length,
+          followCount: user.follows.length,
+          visualizerCount: user.visualizers.length,
+          photoUrl: user.photoUrl
+        }
+      });
+      return res.json(usersInfo);
+    });
+  }
+);
+
 // photo uploading capability
 
 const upload = require("./photo_upload_aws");
