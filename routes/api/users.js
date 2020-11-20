@@ -283,21 +283,4 @@ router.get("/index",
   }
 );
 
-// router.patch(
-//   "/",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     const filter = { _id: req.body._id };
-//     const update = {
-//       name: req.body.name,
-//       typeSettings: req.body.typeSettings,
-//       generalSettings: req.body.generalSettings,
-//       songId: req.body.songId,
-//     };
-//     Visualizer.findOneAndUpdate(filter, update, { new: true })
-//       .then((visualizer) => res.json(visualizer))
-//       .catch((err) => res.status(422).json(err));
-//   }
-// );
-
 module.exports = router;
