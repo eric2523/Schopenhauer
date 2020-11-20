@@ -20,8 +20,8 @@ export const getFollowers = (userId) => {
   return axios.get(`/api/users/followers/?userId=${userId}`)
 }
 
-export const uploadPhoto = (photo) => {
-  return axios.post("/api/users/uploadPhoto", photo, {
+export const uploadPhoto = (photoForm) => {
+  return axios.post("/api/users/uploadPhoto", photoForm, {
     headers: {
       "Content-Type": "multipart/form-data",
     }
@@ -29,5 +29,5 @@ export const uploadPhoto = (photo) => {
 }
 
 export const uploadPhotoDB = (payload) => {
-  return axios.patch("/api/users/update/", payload) //NEED TO COME BACK WITH CORRECT ROUTE
+  return axios.post("/api/users/uploadPhotoDB", payload) //NEED TO COME BACK WITH CORRECT ROUTE
 }

@@ -33,10 +33,11 @@ class ProfilePage extends React.Component {
   }
 
   componentDidMount() {
+    console.log('component mounted')
     window.addEventListener("resize", this.updateVisualizer);
     if (!this.props.user) {
       console.log("no user");
-      this.props.getUser().then(this.initializeCanvas);
+      this.props.getUser().then(this.initializeCanvas)//then(() => {setTimeout(this.initializeCanvas, 1000)});
     } else {
       this.initializeCanvas();
     }
@@ -61,7 +62,7 @@ class ProfilePage extends React.Component {
   }
 
   componentWillUnmount() {
-    this.setState({modal: null})
+    this.setState({modal: null, visualizer: null})
     window.removeEventListener("resize", this.updateVisualizer);
     cancelAnimationFrame(this.state.rafId);
   }
@@ -69,12 +70,18 @@ class ProfilePage extends React.Component {
   componentDidUpdate(prevProps){
     if(prevProps.match.params.id !== this.props.match.params.id){
       this.closeModal();
+      cancelAnimationFrame(this.state.rafId);
+      this.setState({modal: null, visualizer: null, rafId: null},
+        () => this.props.getUser().then(this.initializeCanvas)
+      )
     }
   }
+
 
   animation(canvas) {
     this.state.visualizer.animate(canvas, this.state);
   }
+
   tick() {
     this.animation(this.canvas.current);
     this.setState({ rafId: requestAnimationFrame(this.tick) });
@@ -96,7 +103,7 @@ class ProfilePage extends React.Component {
 
   render() {
     if (!this.props.user) {
-      return null;
+      return null//<canvas className="header-bg" ref={this.canvas}></canvas>
     }
 
     const self = this.props.user.id === this.props.currentUser.id;
@@ -119,6 +126,7 @@ class ProfilePage extends React.Component {
       modal = <UploadPhotoModalContainer
         user={this.props.user}
         closeModal={this.closeModal}
+        getUser={this.props.getUser}
       />;
     }
     return (
@@ -129,6 +137,7 @@ class ProfilePage extends React.Component {
         <div className="profile-header">
           <ProfileBio
             user={this.props.user}
+            photoUrl={this.props.user.photoUrl}
             followers={this.props.user.followers}
             follows={this.props.user.follows}
             count={this.props.visualizers.length}

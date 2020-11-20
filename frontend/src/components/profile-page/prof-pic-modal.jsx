@@ -42,12 +42,12 @@ class UploadPhotoModal extends React.Component {
   handleSubmit(e) {
     const formData = new FormData();
     const metaData = {
-      id: this.props.user.id,
+      userId: this.props.user.id,
     };
     if (this.state.imageFile) {
-      formData.append("photo", this.state.imageFile);
+      formData.append("image", this.state.imageFile);
     }
-    this.props.uploadPhoto(formData, metaData).then(this.handleCloseModal);
+    this.props.updatePhoto(formData, metaData).then(this.handleModalClose);
   }
 
   handleModalClose() {

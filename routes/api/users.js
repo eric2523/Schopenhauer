@@ -104,7 +104,8 @@ router.post("/login", (req, res) => {
           id: user.id, 
           email: user.email,
           followers: user.followers,
-          follows: user.follows 
+          follows: user.follows,
+          photoUrl: user.photoUrl,
         };
 
         jwt.sign(

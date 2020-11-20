@@ -20,9 +20,7 @@ class ProfileBioComponent extends React.Component {
   constructor(props){
     super(props)
     this.toggleFollow = this.toggleFollow.bind(this);
-    this.handleUpload = this.handleUpload.bind(this);
   }
-
 
   toggleFollow(){
     if(this.props.isFollowing){
@@ -32,24 +30,21 @@ class ProfileBioComponent extends React.Component {
     }
   }
 
-  handleUpload(){
-
-  }
-
   render(){
     const buttonText = this.props.isFollowing ?
     "Unfollow" : "Follow";
+    console.log(this.props.photoUrl);
     // const handle = 
     //   this.props.user.username ? 
     //   this.props.user.username : 
     //   this.props.user.email
     return(
       <div className="profile-bio">
-        {this.props.user.photoUrl ? 
-          <div classname='img-container'>
+        {this.props.photoUrl ? 
+          <div className='img-container'>
             <img 
               alt="Profile"
-              src={this.props.user.photoUrl} 
+              src={this.props.photoUrl} 
               className="prof-photo"
             >
             </img>

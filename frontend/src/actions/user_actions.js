@@ -95,7 +95,7 @@ export const updatePhoto = (imageFile, metaData) => (dispatch) => {
       return UserAPIUtil.uploadPhotoDB(
         Object.assign({}, DBEntry, metaData)
       ).then(
-        (user) => dispatch(receiveUser(user)),
+        (user) => dispatch(receiveUser(user.data)),
         (err) => dispatch(receiveUserError(err))
       )
     },
