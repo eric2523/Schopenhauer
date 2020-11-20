@@ -157,7 +157,7 @@ class UserAuthModalComponent extends React.Component {
               >
                 {this.props.modal === "login" ? "Login" : "Sign Up"}
               </button>
-              <button onClick={this.handleDemo} className="ui button">
+              <button id="demo-btn" onClick={this.handleDemo} className="ui button">
                 Demo User
               </button>
             </form>
