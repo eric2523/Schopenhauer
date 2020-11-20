@@ -113,7 +113,8 @@ router.post("/login", (req, res) => {
               success: true,
               token: "Bearer " + token,
               username: user.username,
-              visualizers: user.visualizers
+              visualizers: user.visualizers,
+              photoUrl: user.photoUrl
             });
           }
         );
@@ -246,6 +247,7 @@ router.get("/", (req, res) => {
       username: user.username,
       id: user.id, 
       email: user.email,
+      photoUrl: user.photoUrl,
       followers: user.followers,
       follows: user.follows,
       visualizers: user.visualizers 
@@ -253,5 +255,50 @@ router.get("/", (req, res) => {
     return res.json(payload);
   })
 });
+
+// photo uploading capability
+
+const upload = require("./photo_upload_aws");
+const singleUpload = upload.single("image");
+
+router.post(
+  "/uploadPhoto",
+  passport.authenticate("jwt", { session: false}), 
+  singleUpload,
+  (req, res) => {
+    singleUpload(req, res, function (err) {
+      if (err) {
+        return res.status(422).json({errors: err.message});
+      }
+      return res.json({
+        photoUrl: req.file.location
+      });
+    });
+  }
+);
+
+router.post(
+  "/uploadPhotoDB",
+  (req, res) => {
+    console.log("Request to update photo for " + req.body.userId + " with " + req.body.photoUrl);
+    User.findById(req.body.userId, function (err, user) {
+      if (err) {
+        errors.user = "No user with queried id";
+        return res.status(400).json(errors);
+      }
+      user.photoUrl = req.body.photoUrl;
+      user.save().then((user) => {
+        res.json({
+          username: user.username,
+          id: user.id, 
+          email: user.email,
+          photoUrl: user.photoUrl,
+          followers: user.followers,
+          follows: user.follows 
+        });
+      });
+    });
+  }
+);
 
 module.exports = router;

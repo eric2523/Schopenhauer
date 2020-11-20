@@ -11,7 +11,7 @@
 }
 
 .about-info-1 {
-  height: 100vh;
+  min-height: 900px;
   width: 100%;
   background: #131313;
 }
@@ -40,6 +40,8 @@
   display: flex;
   flex-direction: column;
   margin: 20px 0 30px 0;
+  padding: 0 10%;
+  text-align: justify;
 }
 
 .info-1-head-p {
@@ -52,8 +54,8 @@
 }
 
 .profile-pic-icon {
-  width: 12vw;
-  height: 12vw;
+  width: 7vw;
+  height: 7vw;
   background-position: center;
   background-size: cover;
   border-radius: 50%;
@@ -90,7 +92,7 @@
   display: flex;
 }
 
-.fa-github {
+.fa-github, .fa-linkedin {
   font-size: 30px;
   margin: 10px;
   transition: all 300ms ease-in-out;
@@ -103,4 +105,10 @@
 
 .about-github-icon {
   color: #fff;
+}
+
+.profile-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

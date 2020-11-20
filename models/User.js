@@ -17,7 +17,10 @@ const UserSchema = new Schema(
     },
     followers: [{type: mongoose.Types.ObjectId, ref: 'User'}],
     follows: [{type: mongoose.Types.ObjectId, ref: 'User'}],
-    visualizers: [{type: mongoose.Types.ObjectId, ref: 'Visualizer'}]
+    visualizers: [{type: mongoose.Types.ObjectId, ref: 'Visualizer'}],
+    photoUrl: {
+      type: String,
+    },
   },
   {
     timestamps: true,
