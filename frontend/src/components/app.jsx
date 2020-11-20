@@ -13,6 +13,7 @@ import { VisualizerEditContainer } from "./visualizers/visualizer-edit-page";
 import { AboutPage } from "./about-page/about-page";
 import { EditAlertModalContainer } from "./templates/edit-alert-modal";
 import { Footer } from "./footer/footer";
+import { DiscoverContainer } from "./discover/discover-index"
 
 export const App = () => {
   return (
@@ -38,6 +39,11 @@ export const App = () => {
           exact
           path="/profile/:id"
           component={ProfilePageContainer}
+        />
+        <ProtectedRoute
+          exact
+          path="/discover"
+          component={DiscoverContainer}
         />
         <Route exact path="/about" component={AboutPage} />
         <Route path="/" component={LandingPageIndex} />

@@ -11,6 +11,10 @@ export const mainNavPaths = () => ({
     name: "templates",
     path: "/templates",
   },
+  discover: {
+    name: "discover",
+    path: "/discover"
+  },
   profile: {
     name: "profile",
     path: "/profile",
