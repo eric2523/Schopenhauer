@@ -100,3 +100,8 @@ form.ui.form button[type="submit"] {
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 0px;
 }
+
+#demo-btn{
+  background-color: #2185d0;
+  color: white;
+}

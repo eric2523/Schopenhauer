@@ -38,6 +38,10 @@ export class Splash extends React.Component {
   }
 
   componentDidMount() {
+    this.playBtn = document.getElementById("lets-play");
+    this.buttonGlow = setInterval(() => {
+      this.playBtn.classList.toggle('brighten')
+    }, 1500)
     window.addEventListener("resize", this.updateVisualizer);
     this.bound = this.canvas.current.getBoundingClientRect();
     this.canvas.current.height = window.innerHeight - this.bound.top
@@ -65,6 +69,7 @@ export class Splash extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateVisualizer);
+    clearInterval(this.buttonGlow);
     this.audio.pause();
     cancelAnimationFrame(this.state.rafId);
     this.setState({
@@ -104,11 +109,15 @@ export class Splash extends React.Component {
     }
     if (!this.state.play) {
       this.audio.play();
+      clearInterval(this.buttonGlow);
       this.setState({
         play: true,
       });
     } else {
       this.audio.pause();
+      this.buttonGlow = setInterval(() => {
+        this.playBtn.classList.toggle('brighten')
+      }, 1500)
       this.setState({
         play: false,
       });
@@ -173,15 +182,14 @@ export class Splash extends React.Component {
               <button className="ui primary button">GET STARTED NOW</button>
             </Link>
           </div>
-          <button
-            className="ui primary button"
-            id="lets-play"
-            onClick={this.togglePlay}
-          >
-            LET'S DANCE
-            {buttonText}
-          </button>
         </div>
+        <button
+          // className="ui primary button"
+          id="lets-play"
+          onClick={this.togglePlay}
+        >
+          {buttonText}
+        </button>
       </div>
     );
   }
