@@ -257,4 +257,47 @@ router.get("/", (req, res) => {
   })
 });
 
+
+// user index backend route
+
+router.get("/index",
+  passport.authenticate("jwt", {session: false}),
+  (req, res) => {
+    User.find({}, function (err, users) {
+      if (err) {
+        errors.users = "Bad database query!";
+        return res.status(400).json(errors);
+      }
+      let usersInfo = users.map((user) => {
+        return {
+          username: user.username,
+          id: user.id,
+          followerCount: user.followers.length,
+          followCount: user.follows.length,
+          // visualizerCount: user.visualizers.length,
+          photoUrl: user.photoUrl
+        }
+      });
+      return res.json(usersInfo);
+    });
+  }
+);
+
+// router.patch(
+//   "/",
+//   passport.authenticate("jwt", { session: false }),
+//   (req, res) => {
+//     const filter = { _id: req.body._id };
+//     const update = {
+//       name: req.body.name,
+//       typeSettings: req.body.typeSettings,
+//       generalSettings: req.body.generalSettings,
+//       songId: req.body.songId,
+//     };
+//     Visualizer.findOneAndUpdate(filter, update, { new: true })
+//       .then((visualizer) => res.json(visualizer))
+//       .catch((err) => res.status(422).json(err));
+//   }
+// );
+
 module.exports = router;
