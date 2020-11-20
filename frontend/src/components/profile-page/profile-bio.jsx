@@ -41,24 +41,23 @@ class ProfileBioComponent extends React.Component {
     return(
       <div className="profile-bio">
         {this.props.photoUrl ? 
-          <div className='img-container'>
-            <img 
-              alt="Profile"
-              src={this.props.photoUrl} 
-              className="prof-photo"
-              >
-            </img>
-          </div>
-          //default user icon 
-          : <div><i className="fas fa-user"></i></div>} 
-        <div>
-          {this.props.self ? 
-          <div 
-          onClick={this.props.openModal('photo')}
-          className="edit-photo">
-            <i className="fas fa-camera"></i>
-          </div> : null}
+        <div className='img-container'>
+          <img 
+            alt="Profile"
+            src={this.props.photoUrl} 
+            className="prof-photo"
+            >
+          </img>
         </div>
+        // : <i className="fas fa-user"></i>} 
+        : <i className="user icon"></i> } 
+          {/* //default user icon  */}
+        {this.props.self ? 
+        <div 
+        onClick={this.props.openModal('photo')}
+        className="edit-photo">
+          <i className="fas fa-camera"></i>
+        </div> : null}
         <div className="profile-bio-right">
           <div className="profile-title">
             <div>

@@ -44,9 +44,11 @@
   align-items: flex-start;
 }
 
-.profile-bio .fa-user{
+.profile-bio .user.icon{
   font-size: 50px;
   margin-right: 30px;
+  display: flex;
+  align-items: center;
 }
 
 .profile-bio .img-container{
