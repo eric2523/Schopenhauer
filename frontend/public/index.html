@@ -20,8 +20,11 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500&display=swap"
       rel="stylesheet"
     />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cabin:wght@700&display=swap"
+      rel="stylesheet"
+    />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -104,11 +107,31 @@
       rel="stylesheet"
       href="%PUBLIC_URL%/assets/stylesheets/13-discover.css"
     />
-    <meta property='og:title' content='Schopenhauer'/>
-    <meta property='og:image' content='//raw.githubusercontent.com/eric2523/Schopenhauer/main/frontend/public/assets/images/schopen_splash_bigger.PNG'/>
-    <meta property='og:description' content='Schopenhauer is a full-stack web app for users to create and share music visualizers for their favorite songs'/>
-    <meta property='og:url' content='//schopenhauer.herokuapp.com/#/'/>
+    <meta property="og:title" content="Schopenhauer" />
+    <meta
+      property="og:image"
+      content="//raw.githubusercontent.com/eric2523/Schopenhauer/main/frontend/public/assets/images/schopen_splash_bigger.PNG"
+    />
+    <meta
+      property="og:description"
+      content="Schopenhauer is a full-stack web app for users to create and share music visualizers for their favorite songs"
+    />
+    <meta property="og:url" content="//schopenhauer.herokuapp.com/#/" />
 
+    <!-- Global site tag (gtag.js) - Google Analytics Yuehan -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-K9P0HHNW98"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-K9P0HHNW98");
+    </script>
     <title>Schopenhauer</title>
   </head>
   <body>
