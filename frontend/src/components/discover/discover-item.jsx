@@ -2,12 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { followUser, unfollowUser } from "../../actions/user_actions";
-
+import {isFollowing} from "../../reducers/selectors/follow_selectors";
 
 const mSTP = (state, ownProps) => {
+  let currentUserId = state.session.user.id;
+  let followedId = ownProps.user.id;
   return {
-    currentUserId: state.session.user.id,
-    isFollowing: state.entities.users[state.session.user.id].follows.includes(ownProps.user.id)
+    currentUserId: currentUserId,
+    isFollowing: isFollowing(state, currentUserId, followedId)
   }
 }
 
