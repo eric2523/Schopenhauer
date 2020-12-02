@@ -34,7 +34,7 @@ class Discover extends React.Component{
         let followerCount = user.followers ? //follower count extracted at this level to force rerender upon following 
         user.followers.length : 
         user.followerCount
-        if(user.id === '5f9c4f68fea31e545fc79683') console.log(user)
+        // if(user.id === '5f9c4f68fea31e545fc79683') console.log(user)
         return <DiscoverItemContainer key={i} user={user} followerCount={followerCount}/>
       }) : [];
     return (

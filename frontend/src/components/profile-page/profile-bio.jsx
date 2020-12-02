@@ -33,7 +33,7 @@ class ProfileBioComponent extends React.Component {
   render(){
     const buttonText = this.props.isFollowing ?
     "Unfollow" : "Follow";
-    console.log(this.props.photoUrl);
+    // console.log(this.props.photoUrl);
     // const handle = 
     //   this.props.user.username ? 
     //   this.props.user.username : 

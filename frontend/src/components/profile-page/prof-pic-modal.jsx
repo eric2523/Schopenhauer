@@ -51,7 +51,7 @@ class UploadPhotoModal extends React.Component {
   }
 
   handleModalClose() {
-    console.log('modal closed')
+    // console.log('modal closed')
     this.setState({
       imageUrl: "",
       imageFile: null,

@@ -35,7 +35,7 @@ export const clearErrors = () => {
 export const signup = (user) => (dispatch) =>
   APIUtil.signup(user)
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       const { token } = res.data;
       localStorage.setItem("jwtToken", token);
       APIUtil.setAuthToken(token);
@@ -49,7 +49,7 @@ export const signup = (user) => (dispatch) =>
 export const login = (user) => (dispatch, getState) =>
   APIUtil.login(user)
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       const { token } = res.data;
       localStorage.setItem("jwtToken", token);
       APIUtil.setAuthToken(token);

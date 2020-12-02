@@ -144,14 +144,14 @@ router.post("/follow", (req, res) => {
       console.log(errors); 
       return res.status(400).json(errors);
     }
-    console.log(follower)
+    // console.log(follower)
     User.findById(followedId, function (err, followed) {
       if (err) {
         errors.follow = "No such user to follow";
         console.log(errors);
         return res.status(400).json(errors);
       }
-      console.log(followed);
+      // console.log(followed);
       if (followed.followers.includes(followerId)) {
         errors.follow = "User already follows that user";
         return res.status(400).json(errors);
@@ -182,14 +182,14 @@ router.post("/unfollow", (req, res) => {
       console.log(errors); 
       return res.status(400).json(errors);
     }
-    console.log(follower)
+    // console.log(follower)
     User.findById(followedId, function (err, followed) {
       if (err) {
         errors.follow = "No such followed id";
         console.log(errors);
         return res.status(400).json(errors);
       }
-      console.log(followed);
+      // console.log(followed);
       if (!followed.followers.includes(followerId)) {
         errors.follow = "User does not follow that user";
         return res.status(400).json(errors);
@@ -219,7 +219,7 @@ router.get("/follows", (req, res) => {
       console.log(errors); 
       return res.status(400).json(errors);
     }
-    console.log(follower)
+    // console.log(follower)
       return res.json(follower.follows);
   }); 
 });

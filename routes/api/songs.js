@@ -20,7 +20,7 @@ router.post(
       if (err) {
         return res.status(422).json({ errors: err.message });
       }
-      console.log(req.body.userId);
+      // console.log(req.body.userId);
       return res.json({
         songUrl: req.file.location,
         userId: req.userId,

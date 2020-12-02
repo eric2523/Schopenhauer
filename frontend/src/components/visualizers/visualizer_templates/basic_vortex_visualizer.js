@@ -18,7 +18,7 @@ export class VortexVisualizer {
     let radius = outerRadius + 200;
     let h = hexToHSL(String(color))[0];
     let dr = radius / 1024;
-    console.log();
+    // console.log();
 
     
     let ctx = canvas.getContext("2d");
