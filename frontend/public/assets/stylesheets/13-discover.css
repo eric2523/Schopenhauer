@@ -1,4 +1,4 @@
-.discover-page{
+.discover-page {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -7,7 +7,7 @@
   min-height: 100vh;
 }
 
-.discover-list{
+.discover-list {
   /* max-width: 400px; */
   width: 50%;
   padding-top: 15px;
@@ -15,7 +15,7 @@
   flex-wrap: wrap;
 }
 
-.templates-header.full{
+.templates-header.full {
   width: 100%;
   height: 20%;
   min-height: 200px;
@@ -24,7 +24,7 @@
   padding-left: 20%;
 }
 
-.discover-item-container{
+.discover-item-container {
   display: flex;
   width: 45%;
   justify-content: space-between;
@@ -36,58 +36,71 @@
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.473);
 }
 
-.discover-item-left{
+.discover-item-left {
   display: flex;
   align-items: center;
+  max-width: 80%;
 }
 
-.discover-item-left > div{
+.discover-item-right {
   display: flex;
-  flex-direction: column; 
+  justify-content: center;
+  max-width: 20%;
+  /* padding-right:5px; */
+}
+
+.discover-item-left > div {
+  display: flex;
+  flex-direction: column;
   padding: 0 15px;
+  max-width: 80%;
 }
 
-.photo-link{
-  height: 60px; 
+.photo-link {
+  height: 60px;
   width: 60px;
+  min-width: 60px;
+
 }
 
-.photo-link .fa-user{
+.photo-link .fa-user {
   font-size: 60px;
 }
 
-.photo-link img{
+.photo-link img {
   height: 100%;
   width: 100%;
   border-radius: 100%;
   object-fit: cover;
 }
 
-.discover-item-left > div a{
-  font-weight: 500; 
-  font-size: 20px;
+.discover-item-left > div a {
+  font-weight: 500;
+  font-size: 18px;
   margin-bottom: 10px;
   color: white;
 }
 
-.discover-item-left > div a:hover{
+
+.discover-item-left > div a:hover {
   opacity: 0.8;
 }
 
-.discover-item-left > div > div{
-  font-size: 14px;
+.discover-item-left > div > div {
+  font-size: 12px;
 }
 
-.discover-item-container:nth-child(odd){
+.discover-item-container:nth-child(odd) {
   margin-right: 10%;
 }
 
-.discover-item-container button{
-  height: 30px;
-  width: 78px;
+.discover-item-container button {
+  max-height: 30px;
+  max-width: 78px;
+  font-size: 12px !important;
 }
 
-.seperator{
+.seperator {
   width: 50%;
   /* padding-bottom: 20px; */
   padding: 20px 16px;
@@ -99,6 +112,6 @@
   margin-top: 20px;
   font-size: 24px;
   font-weight: 600;
-  font-family: 'Cabin', sans-serif;
+  font-family: "Cabin", sans-serif;
   letter-spacing: 2px;
 }

@@ -38,8 +38,8 @@ const receiveUserError = (err) => ({
 })
 
 export const followUser = (followerId, followedId) => (dispatch) => {
-  console.log(followerId)
-  console.log(followedId)
+  // console.log(followerId)
+  // console.log(followedId)
   const payload = {
     followerId: followerId,
     followedId: followedId

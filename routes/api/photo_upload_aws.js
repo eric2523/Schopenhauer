@@ -11,7 +11,7 @@ const s3 = new AWS.S3({
 });
 
 const fileFilter = (req, file, cb) => {
-  console.log(file.mimetype);
+  // console.log(file.mimetype);
   if (file.mimetype === "image/jpeg" || file.mimetype === "image/gif" || file.mimetype === "image/png") cb(null, true);
   else cb(new Error("Invalid file type, only jpeg, gift, or png allowed!"), false);
 };

@@ -24,7 +24,7 @@ export const usersReducer = (state = {}, action) => {
     case RECEIVE_ALL_USERS:
       action.users.forEach((user) => {
         // if (!newState[user.id]){
-          if (user.visualizerCount > 0) console.log(user.visualizerCount)
+          // if (user.visualizerCount > 0) console.log(user.visualizerCount)
           newState[user.id] = Object.assign({}, newState[user.id], user);
         // }
       })
